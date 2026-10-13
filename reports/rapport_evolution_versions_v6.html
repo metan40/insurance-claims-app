@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rapport d'évolution — Insurance Claims App V6</title>
+<style>
+:root{color-scheme:light;--ink:#202938;--muted:#5e6878;--line:#d8dee8;--soft:#f4f6f9;--accent:#254d73}
+body{font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:var(--ink);max-width:940px;margin:40px auto;padding:0 24px;background:#fff}
+h1,h2,h3{line-height:1.25;color:var(--accent)}h1{font-size:2rem;margin-bottom:.25rem}h2{margin-top:2rem;border-bottom:1px solid var(--line);padding-bottom:.4rem}p,li{font-size:1rem}.subtitle{color:var(--muted);margin-top:0}.panel{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:20px 0}.tag{display:inline-block;border:1px solid var(--line);border-radius:5px;padding:2px 8px;font-size:.9rem}table{width:100%;border-collapse:collapse;margin:1rem 0}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}th{background:var(--soft)}code{background:var(--soft);padding:2px 4px;border-radius:3px}.note{color:var(--muted);font-size:.92rem}
+</style>
+</head>
+<body>
+<h1>Rapport d'évolution du projet</h1>
+<p class="subtitle">Insurance Claims App — version 6 · Document de suivi destiné à expliquer les décisions techniques et les validations.</p>
+<div class="panel"><strong>État actuel :</strong> 17 tests automatisés réussis et compilation syntaxique réussie. Les tests de bout en bout avec les vrais modèles et Ollama restent à effectuer. Le projet n'est donc pas encore déclaré validé.</div>
+<h2>1. Objectif</h2>
+<p>Je développe une mini-application RAG qui recherche des documents d'assurance et formule une réponse en français à partir des documents récupérés. Le pipeline combine une recherche initiale par embeddings, un reclassement par CrossEncoder et une génération de réponse par Ollama. Je distingue les métriques de classement des documents de la validation de la réponse produite.</p>
+<h2>2. Démarche de développement</h2>
+<p>Pour chaque amélioration, je pars d'un constat, je formule une hypothèse, je réalise un changement ciblé et je vérifie le comportement avec des tests adaptés. Je sépare les tests unitaires simulés des essais qui nécessitent les modèles réels. Un test unitaire réussi valide un comportement dans un scénario contrôlé ; il ne prouve pas que la réponse à une question d'assurance est factuellement correcte.</p>
+<h2>3. Évolution des versions</h2>
+<h3>Version 3 — validation et gestion des erreurs</h3>
+<p>La base de travail comprend la validation des questions et une gestion plus explicite des erreurs de génération. Les tests couvrent notamment les limites de longueur et plusieurs réponses Ollama non exploitables.</p>
+<h3>Version 4 — traçabilité des sources et séparation des scores</h3>
+<p>La V4 ajoute des identifiants de source comme <code>[S1]</code> dans le contexte transmis au modèle. L'API expose séparément le score du reranker et la similarité des embeddings, tout en conservant le champ historique <code>score</code> pour la compatibilité.</p>
+<h3>Version 5 — contrôle formel des citations et chemins robustes</h3>
+<p>La V5 ajoute un contrôle des identifiants cités dans la réponse et calcule les chemins de données et d'interface à partir du dossier du projet. Le contrôle distingue les identifiants reconnus, les identifiants inconnus et les sources disponibles mais non citées.</p>
+<h3>Version 6 — rendre le contrôle plus lisible</h3>
+<p>La vérification a montré que l'API calculait les sources disponibles mais non citées, mais que l'interface ne les affichait pas. J'ai donc complété l'affichage pour rendre visibles les trois catégories. J'ai également précisé que le score brut du CrossEncoder n'est pas une probabilité et que la similarité cosinus sert à présélectionner les documents sans prouver la véracité d'une réponse. L'API inclut désormais un champ <code>score_explanation</code> qui décrit ces deux scores.</p>
+<h2>4. Résultats disponibles pour le retrieval</h2>
+<p>Le jeu d'évaluation existant contient 201 questions. Les résultats déjà mesurés sont les suivants :</p>
+<table><thead><tr><th>Métrique</th><th>TF-IDF</th><th>Embeddings</th></tr></thead><tbody>
+<tr><td>Recall@1</td><td>29,85 %</td><td>37,81 %</td></tr>
+<tr><td>Recall@5</td><td>62,19 %</td><td>67,16 %</td></tr>
+<tr><td>MRR</td><td>0,4352</td><td>0,5051</td></tr>
+</tbody></table>
+<p>La cible attendue est présente dans le Top-20 initial pour 167 questions sur 201 (83,08 %), et absente pour 34 questions (16,92 %). Après reranking, le Hit Rate@5 rapporté est de 76,12 % et le MRR de 0,6331.</p>
+<p class="note">Ces mesures évaluent le classement des documents. Elles ne démontrent pas que les réponses générées sont correctes ni que les citations justifient les affirmations.</p>
+<h2>5. Vérifications de la V6</h2>
+<ul>
+<li>17 tests automatisés réussis après les changements.</li>
+<li>Compilation syntaxique des fichiers Python réussie.</li>
+<li>Les tests utilisent des doubles pour les modèles d'embeddings, le CrossEncoder et Ollama.</li>
+</ul>
+<p>Ces résultats vérifient des comportements isolés. Ils ne constituent pas une validation de bout en bout avec les modèles réels.</p>
+<h2>6. Limites et prochaine campagne de tests</h2>
+<p>L'audit des citations vérifie la forme des identifiants, pas la justification factuelle des phrases. Les scores de classement ne sont pas des probabilités. La campagne de validation devra inclure des questions dont la réponse est présente dans le corpus, des questions hors corpus, des questions nécessitant plusieurs documents, la vérification manuelle des citations, les erreurs d'Ollama, les limites de saisie, l'affichage des scores et le lancement depuis un autre répertoire.</p>
+<h2>7. Décision actuelle</h2>
+<p>La V6 améliore la transparence de l'interface et de l'API sans changer les modèles ni la stratégie de classement. La prochaine étape consiste à exécuter la campagne de bout en bout avec les vrais modèles, à enregistrer les résultats observés, à corriger les problèmes importants, puis à finaliser le rapport avant le déploiement et le partage avec Keyzan.</p>
+</body></html>

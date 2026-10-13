@@ -1,0 +1,202 @@
+question,expected_document,embedding_rank,optimized_rank
+Qu'est-ce que l'assurance responsabilité civile des enfants,0,1,1
+L’assurance enfant incluse dans l’assurance habitation,1,27,999999
+L’assurance enfant incluse dans l’assurance scolaire,2,2,1
+Les différents degrés de couverture de l'assurance responsabilité civile des enfants,3,11,999999
+Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,4,6,1
+Ce que le contrat ne garantit jamais,5,1,1
+Problème de serrure,6,13,999999
+Que faire en cas de problème de serrure ?,7,27,999999
+"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?",8,1,1
+Propriétaire ou locataire : qui doit payer le serrurier ?,9,18,999999
+Comparatif des renforts et options de la multirisque habitation,10,4,1
+Que faire en cas de dommage électrique ?,11,4,1
+Que faire pendant un dégât des eaux ?,12,1,2
+Quelle assurance pour les bijoux,13,1,3
+Qu’est-ce qu’un objet de valeur ?,14,2,1
+Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,15,2,2
+Indemnisation des bijoux volés ou abimés,16,1,1
+Conseils pour s'assurer contre la perte des bijoux,17,6,1
+Assurance bijoux : les cas particuliers,18,5,5
+Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,19,5,2
+Les exclusions de la garantie dégât des eaux,20,38,999999
+Les dégâts des eaux liés à une catastrophe naturelle,21,1,2
+Les appareils protégés par la garantie Dommages électriques mobilier,22,1,1
+Le renfort Valeur à Neuf Mobilier,23,15,999999
+Exemple renfort Valeur à Neuf Mobilier,24,45,999999
+Le renfort Valeur à Neuf est il inclus,25,1,1
+Artisan rééquipement à neuf,26,4,4
+Exclusion valeur à neuf,27,21,999999
+"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",28,21,999999
+Le contrat habitation est-il obligatoire pour les propriétaires ?,29,75,999999
+Le contrat habitation est-il obligatoire pour les locataires ?,30,39,999999
+Le contrat habitation est-il obligatoire pour les colocataires ?,31,1,1
+Le contrat habitation est-il obligatoire pour un logement de fonction ?,32,33,999999
+Le contrat habitation est-il obligatoire pour une location saisonnière ?,33,1,1
+Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,34,114,999999
+Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,35,28,999999
+Que couvre l’assurance de votre employeur en cas de télétravail,36,2,1
+Le télétravail et votre assurance habitation,37,1,1
+Attestation de télétravail,38,9,1
+Que couvre une assurance inondation ?,39,5,2
+Mon habitation est-elle en zone inondable ?,40,1,1
+Que couvre l’assurance inondation MMA ?,41,1,1
+Quelle est la différence entre inondation et catastrophes naturelles ?,42,2,3
+Comment percevoir les indemnisations en cas d’inondation ?,43,93,999999
+Qu'est-ce que l'assurance locataire,44,5,1
+L’assurance locative est-elle obligatoire ?,45,12,999999
+L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,46,10,1
+La responsabilité civile du locataire,47,25,999999
+La responsabilité du propriétaire envers les locataires,48,1,2
+Les garanties facultatives de l'assurance locative,49,3,1
+Cas où l’assurance locative est facultative,50,1,3
+Assurance location meublée,51,100,999999
+Qu’est-ce qu’une location meublée ?,52,1,1
+Assurance location meublée : comment ça se passe ?,53,7,1
+L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,54,27,999999
+L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,55,63,999999
+Pourquoi souscrire une assurance pour votre habitation meublé ?,56,70,999999
+Locataire : quelle assurance meublée choisir ?,57,15,999999
+Propriétaire : quelle assurance meublée choisir ?,58,13,999999
+À quoi sert l’assurance PNO (Propriétaire non occupant)?,59,1,1
+L’assurance PNO est-elle obligatoire ?,60,116,999999
+Que couvre l’assurance PNO ? (propriétaire non occupant),61,3,2
+Assurance Propriétaire bailleur,62,98,999999
+L'assurance du propriétaire bailleur est-elle obligatoire ?,63,2,2
+Pourquoi s’assurer en tant que propriétaire bailleur ?,64,14,999999
+Assurance propriétaire bailleur : quelles sont les garanties ?,65,70,999999
+Quels sont les principaux risques pour un propriétaire bailleur ?,66,17,999999
+Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,67,5,3
+Qu'est-ce que l'attestation d'assurance ?,68,1,1
+À quoi sert l’attestation d’assurance habitation ?,69,2,1
+Locataire : Comment obtenir une attestation d’assurance habitation ?,70,28,999999
+Propriétaire : comment demander une attestation d’assurance habitation,71,7,6
+Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,72,53,999999
+Comment recevoir son attestation d’assurance habitation MMA ?,73,1,1
+Comment compter le nombre de pièces principales ?,74,2,1
+Pourquoi bien calculer et déclarer le nombre de pièces ?,75,1,1
+Comment est calculé le prix de l’assurance habitation,76,2,2
+Quelles caractéristiques du logement sont prises en compte pour le contrat ?,77,52,999999
+Comment être indemnisé après un dégât des eaux ?,78,15,999999
+Comment souscrire à une assurance habitation ?,79,4,1
+Les documents remis à la souscription de votre assurance habitation MMA,80,14,999999
+Changer d’assurance habitation : quelles sont les informations nécessaires ?,81,12,999999
+Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,82,1,2
+Les assurances proposées par Airbnb sont-elles suffisantes ?,83,11,999999
+L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,84,1,1
+L’Assurance Habitation MMA si vous louez une location par une plateforme,85,26,999999
+Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,86,4,6
+Qu'est-ce que la télésurveillance ?,87,2,1
+Quels sont les avantages de la télésurveillance ?,88,2,1
+L’installation d’une alarme de maison avec télésurveillance avec MMA,89,3,1
+Assurance habitation et télésurveillance : vos avantages MMA,90,1,1
+Que se passe-t-il en cas de déménagement ?,91,2,3
+Vous déménagez et vous êtes/devenez propriétaire,92,17,999999
+Déménagement avec recours à un déménageur,93,2,1
+Faut-il assurer obligatoirement une résidence secondaire ?,94,1,1
+Pourquoi assurer une résidence secondaire ?,95,43,999999
+Quelles sont les garanties MMA conseillées pour votre résidence secondaire,96,1,1
+Comment assurer une résidence secondaire ?,97,1,1
+Comment fonctionne la franchise d’une assurance habitation ?,98,74,999999
+Responsable ou victime du sinistre : les conséquences sur la franchise,99,1,1
+Quelles sont les franchises habitation MMA,100,4,1
+Qu’est-ce qu’un dégât des eaux ?,101,4,1
+Qu'est-ce que la garantie dégat des eaux,102,5,2
+Qu'est-ce que la garantie dommagez éléctriques,103,1,1
+Pourquoi souscrire une garantie Dommages électriques mobilier,104,3,4
+Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,105,1,1
+L'assurance dégât des eaux est-elle obligatoire ?,106,2,2
+Qu'est-ce que la garantie Dépannage électroménager vidéo,107,10,4
+Qu’est-ce que la garantie Dépannage habitation ?,108,89,999999
+Qu’est-ce que la responsabilité civile ?,109,2,1
+Qu’est-ce que l’assurance responsabilité civile ?,110,1,1
+L’assurance responsabilité civile est-elle obligatoire ?,111,6,1
+Que couvre la responsabilité civile de l’assurance habitation ?,112,9,1
+Que ne couvre pas l’assurance responsabilité civile ?,113,8,2
+L’assurance responsabilité civile partielle,114,1,1
+Comment bénéficier de votre assurance responsabilité civile ?,115,4,1
+Les prestations dépannage installations MMA,116,41,999999
+Les mesures à prendre en cas de sinistre habitation,117,29,999999
+Les prestations de l’assurance dépannage des appareils électroménagers MMA,118,64,999999
+Que couvre la garantie dégâts des eaux de l’assurance habitation ?,119,2,1
+Quelle assurance habitation pour les étudiants ?,120,5,6
+Que comprend l'assurance habitation étudiante ?,121,4,1
+Quelle assurance pour un logement étudiant ?,122,1,3
+Quelle assurance habitation étudiant choisir ?,123,4,1
+Une assurance habitation pour les étudiants boursier,124,8,1
+L'assurance responsabilité civile pour les étudiants,125,1,1
+Assurer une chambre étudiante en colocation,126,4,1
+Assurance habitation étudiant MMA : les garanties complémentaires,127,1,1
+Quelle assurance pour les logements en copropriété ?,128,1,1
+Télévision cassée : les garanties de votre assurance habitation MMA,129,3,3
+Assurance responsabilité civile et écran TV cassé,130,1,1
+Des options d’assurance habitation pour faire réparer votre écran TV cassé,131,2,3
+Quelle indemnisation par l'assurance habitation TV cassée MMA ?,132,1,4
+Comment est considéré le garage du point de vue de l’assurance ?,133,1,1
+L’assurance garage ou parking d'un locataire est-elle obligatoire ?,134,1,1
+L’assurance garage auto d’un propriétaire est-elle obligatoire ?,135,2,1
+L’assurance d’une place de stationnement,136,1,1
+Pourquoi assurer un garage auto ?,137,2,1
+Quelle assurance de garage souscrire ?,138,1,1
+Les garanties de votre assurance de garage,139,4,1
+Faut-il assurer une place de parking ?,140,2,2
+Le garage est-il couvert par l'assurance habitation ?,141,1,1
+Comment assurer mes biens pendant mon déménagement ?,142,6,7
+Comment et pourquoi assurer mes biens mis en location ?,143,48,999999
+Comment assurer mes biens professionnels dans mon domicile personnel ?,144,1,1
+L'assurance scolaire est-elle incluse dans l'assurance habitation ?,145,14,999999
+Où s'exercent géographiquement les garanties ?,146,1,1
+Que couvre la garantie renfort évènements climatiques ?,147,3,6
+Que ne couvre pas la garantie renfort évènements climatiques ?,148,1,1
+Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,149,4,1
+Les billets de banque sont-ils couverts ?,150,1,1
+"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",151,1,6
+Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,152,65,999999
+"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?",153,1,1
+Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,154,2,5
+Les panneaux solaires sont-ils couverts ?,155,1,2
+Les éoliennes sont-elles couvertes ?,156,1,1
+Les piscines sont-elles assurées ?,157,2,1
+Les abris en matière plastique sont-ils couverts ?,158,1,1
+"Ma piscine hors sol a été endommagée, suis-je couvert ?",159,3,3
+"Je me suis blessé avec ma tondeuse, suis-je couvert ?",160,29,999999
+Que sont les objets à risque de vol ?,161,1,1
+Quelle est la limite de garantie des biens immobiliers ?,162,1,1
+Quelle est la limite de garantie des dépendances ?,163,1,1
+Quelle est la limite de garantie des clôtures ?,164,1,1
+Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,165,1,1
+Quelle est la limite de garantie des piscines si déclarée ?,166,1,1
+Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,167,1,1
+Quelle est la limite de garantie d'un refoulement des égouts ?,168,1,1
+Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,169,1,1
+Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,170,1,1
+Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,171,1,1
+Quelle est la limite de garantie des surconsommations d’eau,172,1,1
+Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,173,1,1
+"En cas de vol par une personne de ma famille, suis-je couvert ?",174,1,1
+"En cas de vol par mon colocataire, suis-je couvert ?",175,1,1
+"On a volé mes skis dans mon casier, suis-je couvert ?",176,1,1
+"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?",177,4,1
+"On a volé des biens dans un local partagé, suis-je couvert ?",178,2,1
+"On a volé les biens d'un de mes invités, suis-je couvert ?",179,2,1
+"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?",180,6,5
+Qu'est-ce que l'option Revente - évènements personnels ou familiaux,181,1,1
+Qu'est-ce que l'option  Revente - événements extérieurs,182,4,1
+Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,183,9,4
+Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,184,13,999999
+Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,185,4,2
+Est-ce qu'en cas de vol je suis couvert ou pas ?,186,87,999999
+"Ma fosse sceptique a débordé, suis-je couvert ?",187,16,999999
+Est-ce que les dommages dûs à l'humidité sont couverts ?,188,3,2
+"Mon sol en marbre a été endommagé, suis-je couvert ?",189,1,5
+"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",190,15,999999
+Mon aquarium s'est cassé. Suis-je couvert ?,191,1,4
+L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,192,1,1
+Que couvre la garantie déménagement ?,193,4,2
+Je déménage par moi même. Suis-je couvert ?,194,5,1
+"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?",195,1,1
+"Je garde des enfants, suis-je couvert ?",196,2,2
+Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,197,2,1
+Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,198,1,1
+"Je pratique un sport, suis-je couvert ?",199,1,1
+Quelles sont les formules disponibles ?,200,1,1

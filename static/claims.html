@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assistant Assurance — Analyse des sinistres</title>
+<style>
+:root{font-family:Arial,sans-serif;color:#202a35;background:#f4f6f8}*{box-sizing:border-box}body{margin:0}header{background:#17365d;color:white;padding:24px max(20px,calc((100% - 1100px)/2))}header h1{margin:0 0 8px}header a{color:white}main{max-width:1100px;margin:24px auto;padding:0 18px}.notice{padding:14px 16px;border-left:5px solid #b36b00;background:#fff4d8;border-radius:8px;line-height:1.5}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px;margin:20px 0}.card{background:white;padding:18px;border-radius:10px;box-shadow:0 2px 8px #0000000d}.card span{display:block;color:#5c6875;font-size:14px}.card strong{display:block;font-size:27px;color:#17365d;margin-top:8px}.section{background:white;padding:20px;border-radius:10px;margin:18px 0;box-shadow:0 2px 8px #0000000d}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px;border-bottom:1px solid #e2e7ec}th{background:#eef3f8}td{vertical-align:top}.table-wrap{overflow-x:auto}.status{font-weight:bold}.muted{color:#5c6875;font-size:14px;line-height:1.5}.error{padding:12px;background:#ffe5e5;color:#8a0000;border-radius:8px}.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.metric{background:#f4f7fa;padding:14px;border-radius:8px}.metric strong{display:block;font-size:20px;margin-bottom:6px}button{padding:7px 10px;background:#17365d;color:white;border:0;border-radius:6px;cursor:pointer}a{color:#17365d}@media(max-width:600px){header{padding:20px}main{padding:0 12px}.section{padding:14px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Assistant Assurance — Analyse des sinistres</h1>
+<p>Tableau de bord analytique et modèle de démonstration interprétable.</p>
+<a href="/">← Retour à la recherche documentaire RAG</a>
+</header>
+<main>
+<div class="notice"><strong>Prototype de démonstration :</strong> tous les dossiers affichés sont fictifs. Les statistiques et probabilités illustrent une méthode analytique ; elles ne décrivent aucun portefeuille réel et ne doivent jamais décider automatiquement d'une indemnisation.</div>
+<section class="cards" id="summary"><div class="card"><span>Chargement des indicateurs…</span></div></section>
+<section class="section">
+<h2>Lecture du modèle</h2>
+<p class="muted">Le modèle utilise une régression logistique avec variables catégorielles encodées et variables numériques standardisées. L'entraînement exclut les dossiers Pending, car leur décision finale n'est pas connue. Le taux d'acceptation exclut également ces dossiers du dénominateur.</p>
+<div class="metrics" id="model-metrics"><p>Chargement des métriques…</p></div>
+<p class="muted" id="model-warning"></p>
+</section>
+<section class="section">
+<h2>Dossiers de démonstration</h2>
+<p class="muted">L'âge du dossier est calculé à partir de la date de déclaration. Sélectionnez un dossier pour afficher son score exploratoire et les facteurs observables. Le score ne remplace pas l'examen du contrat, des pièces justificatives et des circonstances du sinistre.</p>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Type</th><th>Montant demandé</th><th>Garantie</th><th>Dossier complet</th><th>Statut</th><th>Âge (jours)</th><th>Analyse</th></tr></thead><tbody id="cases-body"><tr><td colspan="8">Chargement des dossiers…</td></tr></tbody></table></div>
+<div id="analysis-result" aria-live="polite"></div>
+</section>
+</main>
+<script>
+const euro = value => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(Number(value||0));
+const percent = value => value === null || value === undefined ? 'Indisponible' : (Number(value)*100).toFixed(1).replace('.',',')+' %';
+function makeCard(label,value){const card=document.createElement('div');card.className='card';const span=document.createElement('span');span.textContent=label;const strong=document.createElement('strong');strong.textContent=value;card.append(span,strong);return card;}
+async function loadSummary(){const response=await fetch('/api/claims/summary');if(!response.ok)throw new Error('Impossible de charger les indicateurs.');const data=await response.json();const root=document.getElementById('summary');root.replaceChildren(makeCard('Dossiers fictifs',data.total_cases),makeCard('Dossiers acceptés',data.accepted_cases),makeCard('Dossiers refusés',data.rejected_cases),makeCard('Dossiers en attente',data.pending_cases),makeCard('Taux d’acceptation (dossiers clos)',percent(data.acceptance_rate)),makeCard('Délai médian de traitement',data.median_closed_processing_days===null?'Indisponible':data.median_closed_processing_days+' jours'));}
+async function loadModel(){const response=await fetch('/api/claims/model');if(!response.ok)throw new Error('Impossible de charger les métriques du modèle.');const data=await response.json();const root=document.getElementById('model-metrics');const values=[['Exactitude équilibrée',percent(data.balanced_accuracy)],['F1-score',percent(data.f1_score)],['ROC AUC',percent(data.roc_auc)],['Dossiers clos utilisés',data.closed_cases_count],['Jeu d’entraînement',data.training_cases_count],['Jeu de test',data.test_cases_count]];root.replaceChildren();for(const [label,value] of values){const item=document.createElement('div');item.className='metric';const strong=document.createElement('strong');strong.textContent=value;const text=document.createElement('span');text.textContent=label;item.append(strong,text);root.append(item);}document.getElementById('model-warning').textContent=data.warning+' Méthode : '+data.evaluation_method+'.';}
+async function showAnalysis(id){const target=document.getElementById('analysis-result');target.textContent='Analyse du dossier '+id+'…';const response=await fetch('/api/claims/'+encodeURIComponent(id)+'/analysis');const data=await response.json();if(!response.ok){target.textContent=data.detail||'Analyse indisponible.';return;}const section=document.createElement('div');section.className='notice';const title=document.createElement('h3');title.textContent='Analyse exploratoire du dossier '+data.claim_id;const summary=document.createElement('p');summary.textContent='Probabilité indicative d’acceptation selon le modèle fictif : '+percent(data.estimated_acceptance_probability)+'. Statut observé : '+data.status+'.';const factors=document.createElement('p');factors.textContent='Facteurs observables : garantie '+data.observed_factors.guarantee_status+' ; dossier complet '+data.observed_factors.claim_file_complete+' ; montant '+euro(data.observed_factors.claim_amount)+' ; sinistres précédents '+data.observed_factors.previous_claims+' ; âge du dossier '+data.observed_factors.claim_age_days+' jours.';const warning=document.createElement('p');warning.textContent=data.warning;section.append(title,summary,factors,warning);target.replaceChildren(section);}
+async function loadCases(){const response=await fetch('/api/claims/cases?limit=120');if(!response.ok)throw new Error('Impossible de charger les dossiers.');const data=await response.json();const body=document.getElementById('cases-body');body.replaceChildren();for(const claim of data.cases){const row=document.createElement('tr');const values=[claim.claim_id,claim.type_sinistre,euro(claim.montant_demande),claim.garantie,claim.dossier_complet,claim.statut,claim.age_sinistre_jours];for(const value of values){const cell=document.createElement('td');cell.textContent=String(value??'');if(value===claim.statut)cell.className='status';row.append(cell);}const action=document.createElement('td');const button=document.createElement('button');button.type='button';button.textContent='Analyser';button.addEventListener('click',()=>showAnalysis(claim.claim_id));action.append(button);row.append(action);body.append(row);}}
+Promise.all([loadSummary(),loadModel(),loadCases()]).catch(error=>{const block=document.createElement('div');block.className='error';block.textContent=error.message;document.querySelector('main').prepend(block);});
+</script>
+</body>
+</html>

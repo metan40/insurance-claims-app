@@ -1,0 +1,202 @@
+﻿question,expected_document,expected_title,embedding_rank,optimized_rank,embedding_top5,optimized_top5,retrieved_in_top20,situation
+Qu'est-ce que l'assurance responsabilité civile des enfants,0,Qu'est-ce que l'assurance responsabilité civile des enfants,1,1.0,True,True,True,Même rang
+L’assurance enfant incluse dans l’assurance habitation,1,L’assurance enfant incluse dans l’assurance habitation,27,,False,False,False,Absent du Top-K
+L’assurance enfant incluse dans l’assurance scolaire,2,L’assurance enfant incluse dans l’assurance scolaire,2,1.0,True,True,True,Amélioration
+Les différents degrés de couverture de l'assurance responsabilité civile des enfants,3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,11,9.0,False,False,True,Amélioration
+Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,6,1.0,False,True,True,Amélioration
+Ce que le contrat ne garantit jamais,5,Ce que le contrat ne garantit jamais,1,1.0,True,True,True,Même rang
+Problème de serrure,6,Problème de serrure,13,10.0,False,False,True,Amélioration
+Que faire en cas de problème de serrure ?,7,Que faire en cas de problème de serrure ?,27,,False,False,False,Absent du Top-K
+"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?",8,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?",1,1.0,True,True,True,Même rang
+Propriétaire ou locataire : qui doit payer le serrurier ?,9,Propriétaire ou locataire : qui doit payer le serrurier ?,18,1.0,False,True,True,Amélioration
+Comparatif des renforts et options de la multirisque habitation,10,Comparatif des renforts et options de la multirisque habitation,4,1.0,True,True,True,Amélioration
+Que faire en cas de dommage électrique ?,11,Que faire en cas de dommage électrique ?,4,1.0,True,True,True,Amélioration
+Que faire pendant un dégât des eaux ?,12,Que faire pendant un dégât des eaux ?,1,2.0,True,True,True,Dégradation
+Quelle assurance pour les bijoux,13,Quelle assurance pour les bijoux,1,3.0,True,True,True,Dégradation
+Qu’est-ce qu’un objet de valeur ?,14,Qu’est-ce qu’un objet de valeur ?,2,1.0,True,True,True,Amélioration
+Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,15,Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,2,2.0,True,True,True,Même rang
+Indemnisation des bijoux volés ou abimés,16,Indemnisation des bijoux volés ou abimés,1,1.0,True,True,True,Même rang
+Conseils pour s'assurer contre la perte des bijoux,17,Conseils pour s'assurer contre la perte des bijoux,6,1.0,False,True,True,Amélioration
+Assurance bijoux : les cas particuliers,18,Assurance bijoux : les cas particuliers,5,5.0,True,True,True,Même rang
+Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,19,Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,5,2.0,True,True,True,Amélioration
+Les exclusions de la garantie dégât des eaux,20,Les exclusions de la garantie dégât des eaux,38,,False,False,False,Absent du Top-K
+Les dégâts des eaux liés à une catastrophe naturelle,21,Les dégâts des eaux liés à une catastrophe naturelle,1,2.0,True,True,True,Dégradation
+Les appareils protégés par la garantie Dommages électriques mobilier,22,Les appareils protégés par la garantie Dommages électriques mobilier,1,1.0,True,True,True,Même rang
+Le renfort Valeur à Neuf Mobilier,23,Le renfort Valeur à Neuf Mobilier,15,2.0,False,True,True,Amélioration
+Exemple renfort Valeur à Neuf Mobilier,24,Exemple renfort Valeur à Neuf Mobilier,45,,False,False,False,Absent du Top-K
+Le renfort Valeur à Neuf est il inclus,25,Le renfort Valeur à Neuf est il inclus,1,1.0,True,True,True,Même rang
+Artisan rééquipement à neuf,26,Artisan rééquipement à neuf,4,4.0,True,True,True,Même rang
+Exclusion valeur à neuf,27,Exclusion valeur à neuf,21,,False,False,False,Absent du Top-K
+"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",21,,False,False,False,Absent du Top-K
+Le contrat habitation est-il obligatoire pour les propriétaires ?,29,Le contrat habitation est-il obligatoire pour les propriétaires ?,75,,False,False,False,Absent du Top-K
+Le contrat habitation est-il obligatoire pour les locataires ?,30,Le contrat habitation est-il obligatoire pour les locataires ?,39,,False,False,False,Absent du Top-K
+Le contrat habitation est-il obligatoire pour les colocataires ?,31,Le contrat habitation est-il obligatoire pour les colocataires ?,1,1.0,True,True,True,Même rang
+Le contrat habitation est-il obligatoire pour un logement de fonction ?,32,Le contrat habitation est-il obligatoire pour un logement de fonction ?,33,,False,False,False,Absent du Top-K
+Le contrat habitation est-il obligatoire pour une location saisonnière ?,33,Le contrat habitation est-il obligatoire pour une location saisonnière ?,1,1.0,True,True,True,Même rang
+Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,114,,False,False,False,Absent du Top-K
+Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,35,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,28,,False,False,False,Absent du Top-K
+Que couvre l’assurance de votre employeur en cas de télétravail,36,Que couvre l’assurance de votre employeur en cas de télétravail,2,1.0,True,True,True,Amélioration
+Le télétravail et votre assurance habitation,37,Le télétravail et votre assurance habitation,1,1.0,True,True,True,Même rang
+Attestation de télétravail,38,Attestation de télétravail,9,1.0,False,True,True,Amélioration
+Que couvre une assurance inondation ?,39,Que couvre une assurance inondation ?,5,2.0,True,True,True,Amélioration
+Mon habitation est-elle en zone inondable ?,40,Mon habitation est-elle en zone inondable ?,1,1.0,True,True,True,Même rang
+Que couvre l’assurance inondation MMA ?,41,Que couvre l’assurance inondation MMA ?,1,1.0,True,True,True,Même rang
+Quelle est la différence entre inondation et catastrophes naturelles ?,42,Quelle est la différence entre inondation et catastrophes naturelles ?,2,3.0,True,True,True,Dégradation
+Comment percevoir les indemnisations en cas d’inondation ?,43,Comment percevoir les indemnisations en cas d’inondation ?,93,,False,False,False,Absent du Top-K
+Qu'est-ce que l'assurance locataire,44,Qu'est-ce que l'assurance locataire,5,1.0,True,True,True,Amélioration
+L’assurance locative est-elle obligatoire ?,45,L’assurance locative est-elle obligatoire ?,12,1.0,False,True,True,Amélioration
+L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,46,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,10,1.0,False,True,True,Amélioration
+La responsabilité civile du locataire,47,La responsabilité civile du locataire,25,,False,False,False,Absent du Top-K
+La responsabilité du propriétaire envers les locataires,48,La responsabilité du propriétaire envers les locataires,1,3.0,True,True,True,Dégradation
+Les garanties facultatives de l'assurance locative,49,Les garanties facultatives de l'assurance locative,3,3.0,True,True,True,Même rang
+Cas où l’assurance locative est facultative,50,Cas où l’assurance locative est facultative,1,4.0,True,True,True,Dégradation
+Assurance location meublée,51,Assurance location meublée,100,,False,False,False,Absent du Top-K
+Qu’est-ce qu’une location meublée ?,52,Qu’est-ce qu’une location meublée ?,1,1.0,True,True,True,Même rang
+Assurance location meublée : comment ça se passe ?,53,Assurance location meublée : comment ça se passe ?,7,1.0,False,True,True,Amélioration
+L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,54,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,27,,False,False,False,Absent du Top-K
+L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,63,,False,False,False,Absent du Top-K
+Pourquoi souscrire une assurance pour votre habitation meublé ?,56,Pourquoi souscrire une assurance pour votre habitation meublé ?,70,,False,False,False,Absent du Top-K
+Locataire : quelle assurance meublée choisir ?,57,Locataire : quelle assurance meublée choisir ?,15,2.0,False,True,True,Amélioration
+Propriétaire : quelle assurance meublée choisir ?,58,Propriétaire : quelle assurance meublée choisir ?,13,3.0,False,True,True,Amélioration
+À quoi sert l’assurance PNO (Propriétaire non occupant)?,59,À quoi sert l’assurance PNO (Propriétaire non occupant)?,1,1.0,True,True,True,Même rang
+L’assurance PNO est-elle obligatoire ?,60,L’assurance PNO est-elle obligatoire ?,116,,False,False,False,Absent du Top-K
+Que couvre l’assurance PNO ? (propriétaire non occupant),61,Que couvre l’assurance PNO ? (propriétaire non occupant),3,2.0,True,True,True,Amélioration
+Assurance Propriétaire bailleur,62,Assurance Propriétaire bailleur,98,,False,False,False,Absent du Top-K
+L'assurance du propriétaire bailleur est-elle obligatoire ?,63,L'assurance du propriétaire bailleur est-elle obligatoire ?,2,2.0,True,True,True,Même rang
+Pourquoi s’assurer en tant que propriétaire bailleur ?,64,Pourquoi s’assurer en tant que propriétaire bailleur ?,14,3.0,False,True,True,Amélioration
+Assurance propriétaire bailleur : quelles sont les garanties ?,65,Assurance propriétaire bailleur : quelles sont les garanties ?,70,,False,False,False,Absent du Top-K
+Quels sont les principaux risques pour un propriétaire bailleur ?,66,Quels sont les principaux risques pour un propriétaire bailleur ?,17,5.0,False,True,True,Amélioration
+Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,67,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,5,3.0,True,True,True,Amélioration
+Qu'est-ce que l'attestation d'assurance ?,68,Qu'est-ce que l'attestation d'assurance ?,1,1.0,True,True,True,Même rang
+À quoi sert l’attestation d’assurance habitation ?,69,À quoi sert l’attestation d’assurance habitation ?,2,1.0,True,True,True,Amélioration
+Locataire : Comment obtenir une attestation d’assurance habitation ?,70,Locataire : Comment obtenir une attestation d’assurance habitation ?,28,,False,False,False,Absent du Top-K
+Propriétaire : comment demander une attestation d’assurance habitation,71,Propriétaire : comment demander une attestation d’assurance habitation,7,7.0,False,False,True,Même rang
+Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,53,,False,False,False,Absent du Top-K
+Comment recevoir son attestation d’assurance habitation MMA ?,73,Comment recevoir son attestation d’assurance habitation MMA ?,1,1.0,True,True,True,Même rang
+Comment compter le nombre de pièces principales ?,74,Comment compter le nombre de pièces principales ?,2,1.0,True,True,True,Amélioration
+Pourquoi bien calculer et déclarer le nombre de pièces ?,75,Pourquoi bien calculer et déclarer le nombre de pièces ?,1,1.0,True,True,True,Même rang
+Comment est calculé le prix de l’assurance habitation,76,Comment est calculé le prix de l’assurance habitation,2,2.0,True,True,True,Même rang
+Quelles caractéristiques du logement sont prises en compte pour le contrat ?,77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,52,,False,False,False,Absent du Top-K
+Comment être indemnisé après un dégât des eaux ?,78,Comment être indemnisé après un dégât des eaux ?,15,5.0,False,True,True,Amélioration
+Comment souscrire à une assurance habitation ?,79,Comment souscrire à une assurance habitation ?,4,1.0,True,True,True,Amélioration
+Les documents remis à la souscription de votre assurance habitation MMA,80,Les documents remis à la souscription de votre assurance habitation MMA,14,1.0,False,True,True,Amélioration
+Changer d’assurance habitation : quelles sont les informations nécessaires ?,81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,12,3.0,False,True,True,Amélioration
+Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,82,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,1,3.0,True,True,True,Dégradation
+Les assurances proposées par Airbnb sont-elles suffisantes ?,83,Les assurances proposées par Airbnb sont-elles suffisantes ?,11,1.0,False,True,True,Amélioration
+L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,84,L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,1,1.0,True,True,True,Même rang
+L’Assurance Habitation MMA si vous louez une location par une plateforme,85,L’Assurance Habitation MMA si vous louez une location par une plateforme,26,,False,False,False,Absent du Top-K
+Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,86,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,4,8.0,True,False,True,Dégradation
+Qu'est-ce que la télésurveillance ?,87,Qu'est-ce que la télésurveillance ?,2,1.0,True,True,True,Amélioration
+Quels sont les avantages de la télésurveillance ?,88,Quels sont les avantages de la télésurveillance ?,2,1.0,True,True,True,Amélioration
+L’installation d’une alarme de maison avec télésurveillance avec MMA,89,L’installation d’une alarme de maison avec télésurveillance avec MMA,3,1.0,True,True,True,Amélioration
+Assurance habitation et télésurveillance : vos avantages MMA,90,Assurance habitation et télésurveillance : vos avantages MMA,1,1.0,True,True,True,Même rang
+Que se passe-t-il en cas de déménagement ?,91,Que se passe-t-il en cas de déménagement ?,2,3.0,True,True,True,Dégradation
+Vous déménagez et vous êtes/devenez propriétaire,92,Vous déménagez et vous êtes/devenez propriétaire,17,12.0,False,False,True,Amélioration
+Déménagement avec recours à un déménageur,93,Déménagement avec recours à un déménageur,2,1.0,True,True,True,Amélioration
+Faut-il assurer obligatoirement une résidence secondaire ?,94,Faut-il assurer obligatoirement une résidence secondaire ?,1,1.0,True,True,True,Même rang
+Pourquoi assurer une résidence secondaire ?,95,Pourquoi assurer une résidence secondaire ?,43,,False,False,False,Absent du Top-K
+Quelles sont les garanties MMA conseillées pour votre résidence secondaire,96,Quelles sont les garanties MMA conseillées pour votre résidence secondaire,1,1.0,True,True,True,Même rang
+Comment assurer une résidence secondaire ?,97,Comment assurer une résidence secondaire ?,1,1.0,True,True,True,Même rang
+Comment fonctionne la franchise d’une assurance habitation ?,98,Comment fonctionne la franchise d’une assurance habitation ?,74,,False,False,False,Absent du Top-K
+Responsable ou victime du sinistre : les conséquences sur la franchise,99,Responsable ou victime du sinistre : les conséquences sur la franchise,1,1.0,True,True,True,Même rang
+Quelles sont les franchises habitation MMA,100,Quelles sont les franchises habitation MMA,4,1.0,True,True,True,Amélioration
+Qu’est-ce qu’un dégât des eaux ?,101,Qu’est-ce qu’un dégât des eaux ?,4,1.0,True,True,True,Amélioration
+Qu'est-ce que la garantie dégat des eaux,102,Qu'est-ce que la garantie dégat des eaux,5,2.0,True,True,True,Amélioration
+Qu'est-ce que la garantie dommagez éléctriques,103,Qu'est-ce que la garantie dommagez éléctriques,1,1.0,True,True,True,Même rang
+Pourquoi souscrire une garantie Dommages électriques mobilier,104,Pourquoi souscrire une garantie Dommages électriques mobilier,3,4.0,True,True,True,Dégradation
+Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,105,Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,1,1.0,True,True,True,Même rang
+L'assurance dégât des eaux est-elle obligatoire ?,106,L'assurance dégât des eaux est-elle obligatoire ?,2,2.0,True,True,True,Même rang
+Qu'est-ce que la garantie Dépannage électroménager vidéo,107,Qu'est-ce que la garantie Dépannage électroménager vidéo,10,4.0,False,True,True,Amélioration
+Qu’est-ce que la garantie Dépannage habitation ?,108,Qu’est-ce que la garantie Dépannage habitation ?,89,,False,False,False,Absent du Top-K
+Qu’est-ce que la responsabilité civile ?,109,Qu’est-ce que la responsabilité civile ?,2,1.0,True,True,True,Amélioration
+Qu’est-ce que l’assurance responsabilité civile ?,110,Qu’est-ce que l’assurance responsabilité civile ?,1,1.0,True,True,True,Même rang
+L’assurance responsabilité civile est-elle obligatoire ?,111,L’assurance responsabilité civile est-elle obligatoire ?,6,1.0,False,True,True,Amélioration
+Que couvre la responsabilité civile de l’assurance habitation ?,112,Que couvre la responsabilité civile de l’assurance habitation ?,9,1.0,False,True,True,Amélioration
+Que ne couvre pas l’assurance responsabilité civile ?,113,Que ne couvre pas l’assurance responsabilité civile ?,8,2.0,False,True,True,Amélioration
+L’assurance responsabilité civile partielle,114,L’assurance responsabilité civile partielle,1,1.0,True,True,True,Même rang
+Comment bénéficier de votre assurance responsabilité civile ?,115,Comment bénéficier de votre assurance responsabilité civile ?,4,1.0,True,True,True,Amélioration
+Les prestations dépannage installations MMA,116,Les prestations dépannage installations MMA,41,,False,False,False,Absent du Top-K
+Les mesures à prendre en cas de sinistre habitation,117,Les mesures à prendre en cas de sinistre habitation,29,,False,False,False,Absent du Top-K
+Les prestations de l’assurance dépannage des appareils électroménagers MMA,118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,64,,False,False,False,Absent du Top-K
+Que couvre la garantie dégâts des eaux de l’assurance habitation ?,119,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,2,1.0,True,True,True,Amélioration
+Quelle assurance habitation pour les étudiants ?,120,Quelle assurance habitation pour les étudiants ?,5,6.0,True,False,True,Dégradation
+Que comprend l'assurance habitation étudiante ?,121,Que comprend l'assurance habitation étudiante ?,4,1.0,True,True,True,Amélioration
+Quelle assurance pour un logement étudiant ?,122,Quelle assurance pour un logement étudiant ?,1,3.0,True,True,True,Dégradation
+Quelle assurance habitation étudiant choisir ?,123,Quelle assurance habitation étudiant choisir ?,4,1.0,True,True,True,Amélioration
+Une assurance habitation pour les étudiants boursier,124,Une assurance habitation pour les étudiants boursier,8,1.0,False,True,True,Amélioration
+L'assurance responsabilité civile pour les étudiants,125,L'assurance responsabilité civile pour les étudiants,1,1.0,True,True,True,Même rang
+Assurer une chambre étudiante en colocation,126,Assurer une chambre étudiante en colocation,4,1.0,True,True,True,Amélioration
+Assurance habitation étudiant MMA : les garanties complémentaires,127,Assurance habitation étudiant MMA : les garanties complémentaires,1,1.0,True,True,True,Même rang
+Quelle assurance pour les logements en copropriété ?,128,Quelle assurance pour les logements en copropriété ?,1,1.0,True,True,True,Même rang
+Télévision cassée : les garanties de votre assurance habitation MMA,129,Télévision cassée : les garanties de votre assurance habitation MMA,3,3.0,True,True,True,Même rang
+Assurance responsabilité civile et écran TV cassé,130,Assurance responsabilité civile et écran TV cassé,1,1.0,True,True,True,Même rang
+Des options d’assurance habitation pour faire réparer votre écran TV cassé,131,Des options d’assurance habitation pour faire réparer votre écran TV cassé,2,3.0,True,True,True,Dégradation
+Quelle indemnisation par l'assurance habitation TV cassée MMA ?,132,Quelle indemnisation par l'assurance habitation TV cassée MMA ?,1,4.0,True,True,True,Dégradation
+Comment est considéré le garage du point de vue de l’assurance ?,133,Comment est considéré le garage du point de vue de l’assurance ?,1,1.0,True,True,True,Même rang
+L’assurance garage ou parking d'un locataire est-elle obligatoire ?,134,L’assurance garage ou parking d'un locataire est-elle obligatoire ?,1,1.0,True,True,True,Même rang
+L’assurance garage auto d’un propriétaire est-elle obligatoire ?,135,L’assurance garage auto d’un propriétaire est-elle obligatoire ?,2,1.0,True,True,True,Amélioration
+L’assurance d’une place de stationnement,136,L’assurance d’une place de stationnement,1,1.0,True,True,True,Même rang
+Pourquoi assurer un garage auto ?,137,Pourquoi assurer un garage auto ?,2,1.0,True,True,True,Amélioration
+Quelle assurance de garage souscrire ?,138,Quelle assurance de garage souscrire ?,1,1.0,True,True,True,Même rang
+Les garanties de votre assurance de garage,139,Les garanties de votre assurance de garage,4,1.0,True,True,True,Amélioration
+Faut-il assurer une place de parking ?,140,Faut-il assurer une place de parking ?,2,2.0,True,True,True,Même rang
+Le garage est-il couvert par l'assurance habitation ?,141,Le garage est-il couvert par l'assurance habitation ?,1,1.0,True,True,True,Même rang
+Comment assurer mes biens pendant mon déménagement ?,142,Comment assurer mes biens pendant mon déménagement ?,6,10.0,False,False,True,Dégradation
+Comment et pourquoi assurer mes biens mis en location ?,143,Comment et pourquoi assurer mes biens mis en location ?,48,,False,False,False,Absent du Top-K
+Comment assurer mes biens professionnels dans mon domicile personnel ?,144,Comment assurer mes biens professionnels dans mon domicile personnel ?,1,1.0,True,True,True,Même rang
+L'assurance scolaire est-elle incluse dans l'assurance habitation ?,145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,14,2.0,False,True,True,Amélioration
+Où s'exercent géographiquement les garanties ?,146,Où s'exercent géographiquement les garanties ?,1,1.0,True,True,True,Même rang
+Que couvre la garantie renfort évènements climatiques ?,147,Que couvre la garantie renfort évènements climatiques ?,3,6.0,True,False,True,Dégradation
+Que ne couvre pas la garantie renfort évènements climatiques ?,148,Que ne couvre pas la garantie renfort évènements climatiques ?,1,1.0,True,True,True,Même rang
+Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,149,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,4,1.0,True,True,True,Amélioration
+Les billets de banque sont-ils couverts ?,150,Les billets de banque sont-ils couverts ?,1,1.0,True,True,True,Même rang
+"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",151,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",1,8.0,True,False,True,Dégradation
+Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,65,,False,False,False,Absent du Top-K
+"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?",153,"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?",1,1.0,True,True,True,Même rang
+Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,154,Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,2,8.0,True,False,True,Dégradation
+Les panneaux solaires sont-ils couverts ?,155,Les panneaux solaires sont-ils couverts ?,1,2.0,True,True,True,Dégradation
+Les éoliennes sont-elles couvertes ?,156,Les éoliennes sont-elles couvertes ?,1,1.0,True,True,True,Même rang
+Les piscines sont-elles assurées ?,157,Les piscines sont-elles assurées ?,2,1.0,True,True,True,Amélioration
+Les abris en matière plastique sont-ils couverts ?,158,Les abris en matière plastique sont-ils couverts ?,1,1.0,True,True,True,Même rang
+"Ma piscine hors sol a été endommagée, suis-je couvert ?",159,"Ma piscine hors sol a été endommagée, suis-je couvert ?",3,7.0,True,False,True,Dégradation
+"Je me suis blessé avec ma tondeuse, suis-je couvert ?",160,"Je me suis blessé avec ma tondeuse, suis-je couvert ?",29,,False,False,False,Absent du Top-K
+Que sont les objets à risque de vol ?,161,Que sont les objets à risque de vol ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des biens immobiliers ?,162,Quelle est la limite de garantie des biens immobiliers ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des dépendances ?,163,Quelle est la limite de garantie des dépendances ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des clôtures ?,164,Quelle est la limite de garantie des clôtures ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,165,Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des piscines si déclarée ?,166,Quelle est la limite de garantie des piscines si déclarée ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,167,Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie d'un refoulement des égouts ?,168,Quelle est la limite de garantie d'un refoulement des égouts ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,169,Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,170,Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,171,Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des surconsommations d’eau,172,Quelle est la limite de garantie des surconsommations d’eau,1,1.0,True,True,True,Même rang
+Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,173,Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,1,1.0,True,True,True,Même rang
+"En cas de vol par une personne de ma famille, suis-je couvert ?",174,"En cas de vol par une personne de ma famille, suis-je couvert ?",1,1.0,True,True,True,Même rang
+"En cas de vol par mon colocataire, suis-je couvert ?",175,"En cas de vol par mon colocataire, suis-je couvert ?",1,1.0,True,True,True,Même rang
+"On a volé mes skis dans mon casier, suis-je couvert ?",176,"On a volé mes skis dans mon casier, suis-je couvert ?",1,1.0,True,True,True,Même rang
+"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?",177,"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?",4,1.0,True,True,True,Amélioration
+"On a volé des biens dans un local partagé, suis-je couvert ?",178,"On a volé des biens dans un local partagé, suis-je couvert ?",2,1.0,True,True,True,Amélioration
+"On a volé les biens d'un de mes invités, suis-je couvert ?",179,"On a volé les biens d'un de mes invités, suis-je couvert ?",2,2.0,True,True,True,Même rang
+"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?",180,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?",6,10.0,False,False,True,Dégradation
+Qu'est-ce que l'option Revente - évènements personnels ou familiaux,181,Qu'est-ce que l'option Revente - évènements personnels ou familiaux,1,1.0,True,True,True,Même rang
+Qu'est-ce que l'option  Revente - événements extérieurs,182,Qu'est-ce que l'option  Revente - événements extérieurs,4,1.0,True,True,True,Amélioration
+Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,183,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,9,5.0,False,True,True,Amélioration
+Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,184,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,13,4.0,False,True,True,Amélioration
+Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,185,Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,4,3.0,True,True,True,Amélioration
+Est-ce qu'en cas de vol je suis couvert ou pas ?,186,Est-ce qu'en cas de vol je suis couvert ou pas ?,87,,False,False,False,Absent du Top-K
+"Ma fosse sceptique a débordé, suis-je couvert ?",187,"Ma fosse sceptique a débordé, suis-je couvert ?",16,1.0,False,True,True,Amélioration
+Est-ce que les dommages dûs à l'humidité sont couverts ?,188,Est-ce que les dommages dûs à l'humidité sont couverts ?,3,2.0,True,True,True,Amélioration
+"Mon sol en marbre a été endommagé, suis-je couvert ?",189,"Mon sol en marbre a été endommagé, suis-je couvert ?",1,8.0,True,False,True,Dégradation
+"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",15,1.0,False,True,True,Amélioration
+Mon aquarium s'est cassé. Suis-je couvert ?,191,Mon aquarium s'est cassé. Suis-je couvert ?,1,6.0,True,False,True,Dégradation
+L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,192,L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,1,1.0,True,True,True,Même rang
+Que couvre la garantie déménagement ?,193,Que couvre la garantie déménagement ?,4,2.0,True,True,True,Amélioration
+Je déménage par moi même. Suis-je couvert ?,194,Je déménage par moi même. Suis-je couvert ?,5,2.0,True,True,True,Amélioration
+"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?",195,"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?",1,1.0,True,True,True,Même rang
+"Je garde des enfants, suis-je couvert ?",196,"Je garde des enfants, suis-je couvert ?",2,2.0,True,True,True,Même rang
+Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,197,Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,2,1.0,True,True,True,Amélioration
+Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,198,Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,1,1.0,True,True,True,Même rang
+"Je pratique un sport, suis-je couvert ?",199,"Je pratique un sport, suis-je couvert ?",1,1.0,True,True,True,Même rang
+Quelles sont les formules disponibles ?,200,Quelles sont les formules disponibles ?,1,1.0,True,True,True,Même rang
