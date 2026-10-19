@@ -1,6 +1,3 @@
-# insurance-claims-app
-#Insurance claims document retrieval and evaluation demo for a Senior Data Scientist portfolio.
-
 title: Insurance Claims Assistance
 emoji: 📄
 colorFrom: blue
