@@ -82,6 +82,7 @@ if not documents or not any(document.strip() for document in documents):
     raise ValueError("Le fichier de données ne contient aucun document exploitable.")
 
 
+
 # ============================================================
 # RECHERCHE TEXTUELLE LEGERE
 # ============================================================
@@ -362,7 +363,7 @@ def readiness():
         ).is_file(),
         "text_search_loaded": (
             document_embeddings is not None
-            and len(document_embeddings) == len(documents)
+            and document_embeddings.shape[0] == len(documents)
             and bool(vectorizer.vocabulary_)
         ),
     }
