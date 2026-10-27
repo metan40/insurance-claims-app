@@ -1,7 +1,7 @@
 FROM python:3.11
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl bash \
+    ca-certificates curl bash zstd \
     && rm -rf /var/lib/apt/lists/*
 
 # Installer le binaire Ollama (le modèle sera téléchargé au démarrage).
