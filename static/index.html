@@ -261,8 +261,18 @@ async function search() {
 
         if (!response.ok) {
 
+            // L'API renvoie un message explicatif dans "detail"
+            // (par exemple 502 si Ollama est indisponible).
+            let detail = "";
+            try {
+                const errorData = await response.json();
+                detail = typeof errorData.detail === "string" ? errorData.detail : "";
+            } catch (parseError) {
+                detail = "";
+            }
+
             throw new Error(
-                "Erreur serveur : " + response.status
+                "Erreur serveur " + response.status + (detail ? " — " + detail : "")
             );
 
         }
@@ -356,10 +366,9 @@ async function search() {
             const metrics = data.pipeline_metrics;
             const timingBlock = document.createElement("div");
             timingBlock.className = "score";
-            timingBlock.textContent = "Durées observées (ms) — embedding : " +
-                Number(metrics.embedding_ms || 0).toFixed(2) +
-                " | recherche : " + Number(metrics.retrieval_ms || 0).toFixed(2) +
-                " | reranking : " + Number(metrics.reranking_ms || 0).toFixed(2) +
+            timingBlock.textContent = "Durées observées (ms) — vectorisation TF-IDF : " +
+                Number(metrics.vectorization_ms || 0).toFixed(2) +
+                " | classement hybride : " + Number(metrics.ranking_ms || 0).toFixed(2) +
                 " | génération : " + Number(metrics.generation_ms || 0).toFixed(2) +
                 " | total : " + Number(metrics.total_ms || 0).toFixed(2) +
                 ". Mesures variables selon la machine et la charge.";
@@ -409,17 +418,10 @@ async function search() {
             score.className = "score";
 
 
-            const rerankerScore = Number(
-                result.reranker_score !== undefined ? result.reranker_score : result.score
-            );
-            const embeddingSimilarity = Number(result.embedding_similarity);
-            score.textContent = "Score brut du reranker (pas une probabilité) : " +
-                (Number.isFinite(rerankerScore) ? rerankerScore.toFixed(4) : "indisponible");
-
-            if (Number.isFinite(embeddingSimilarity)) {
-                score.textContent += " | Similarité cosinus des embeddings : " +
-                    embeddingSimilarity.toFixed(4);
-            }
+            // Similarité cosinus TF-IDF : signal textuel principal du classement.
+            const cosineSimilarity = Number(result.tfidf_cosine_similarity);
+            score.textContent = "Similarité cosinus TF-IDF (pas une probabilité) : " +
+                (Number.isFinite(cosineSimilarity) ? cosineSimilarity.toFixed(4) : "indisponible");
 
             // Le score lexical expose les termes partagés, sans prétendre mesurer
             // une probabilité ni garantir que le document répond à la question.
