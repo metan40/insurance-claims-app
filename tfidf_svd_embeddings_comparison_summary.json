@@ -1,0 +1,72 @@
+{
+  "dataset": "Data/insurance-fr.csv",
+  "n_documents": 201,
+  "query_target_protocol": "Chaque titre de ligne sert de requête et le document de la même ligne est la cible attendue.",
+  "limitations": [
+    "La cible de même ligne est un proxy automatique, pas une annotation humaine de pertinence.",
+    "Les titres sont issus du même corpus; cette évaluation ne représente pas nécessairement des questions utilisateur réelles.",
+    "Les résultats ne mesurent ni la qualité des réponses générées ni la fidélité des citations.",
+    "Les résultats SVD dépendent du nombre de composantes et du corpus; variance expliquée et scores doivent être interprétés ensemble."
+  ],
+  "results": {
+    "TF-IDF": {
+      "questions": 201,
+      "Recall@1_pct": 29.85,
+      "Recall@3_pct": 54.23,
+      "Recall@5_pct": 63.68,
+      "Recall@20_pct": 80.1,
+      "MRR": 0.4428
+    },
+    "TF-IDF+SVD-50": {
+      "questions": 201,
+      "Recall@1_pct": 28.36,
+      "Recall@3_pct": 51.74,
+      "Recall@5_pct": 61.69,
+      "Recall@20_pct": 83.58,
+      "MRR": 0.4344,
+      "explained_variance_ratio_sum_pct": 37.02
+    },
+    "RRF(TF-IDF,SVD-50)": {
+      "questions": 201,
+      "Recall@1_pct": 29.85,
+      "Recall@3_pct": 52.24,
+      "Recall@5_pct": 65.67,
+      "Recall@20_pct": 82.59,
+      "MRR": 0.4465
+    },
+    "TF-IDF+SVD-100": {
+      "questions": 201,
+      "Recall@1_pct": 28.36,
+      "Recall@3_pct": 54.23,
+      "Recall@5_pct": 64.68,
+      "Recall@20_pct": 81.59,
+      "MRR": 0.4463,
+      "explained_variance_ratio_sum_pct": 62.15
+    },
+    "RRF(TF-IDF,SVD-100)": {
+      "questions": 201,
+      "Recall@1_pct": 29.35,
+      "Recall@3_pct": 53.23,
+      "Recall@5_pct": 65.67,
+      "Recall@20_pct": 80.1,
+      "MRR": 0.446
+    },
+    "TF-IDF+SVD-200": {
+      "questions": 201,
+      "Recall@1_pct": 29.85,
+      "Recall@3_pct": 55.22,
+      "Recall@5_pct": 64.18,
+      "Recall@20_pct": 80.1,
+      "MRR": 0.4455,
+      "explained_variance_ratio_sum_pct": 99.98
+    },
+    "RRF(TF-IDF,SVD-200)": {
+      "questions": 201,
+      "Recall@1_pct": 29.85,
+      "Recall@3_pct": 54.73,
+      "Recall@5_pct": 64.18,
+      "Recall@20_pct": 80.1,
+      "MRR": 0.4439
+    }
+  }
+}

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Assistant Assurance</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            color: #222;
+        }
+
+        header {
+            background: #17365d;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+        }
+
+        header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .search-box h2 {
+            margin-top: 0;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 14px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: Arial, sans-serif;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #17365d;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 13px 28px;
+            background: #17365d;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #244a73;
+        }
+
+        button:disabled {
+            background: #999;
+            cursor: wait;
+        }
+
+        #results {
+            margin-top: 30px;
+        }
+
+        .answer {
+            background: white;
+            border-left: 5px solid #17365d;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .answer h2 {
+            margin-top: 0;
+            color: #17365d;
+        }
+
+        .answer-text {
+            line-height: 1.7;
+            font-size: 17px;
+            white-space: pre-line;
+        }
+
+        .sources-title {
+            color: #17365d;
+            margin-top: 30px;
+        }
+
+        .source {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+        }
+
+        .source h3 {
+            margin-top: 0;
+            color: #17365d;
+        }
+
+        .score {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .source-content {
+            line-height: 1.6;
+        }
+
+        .loading {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            color: #666;
+        }
+
+        .error {
+            background: #ffe5e5;
+            color: #a00000;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>Assistant Assurance</h1>
+
+    <p>Recherche documentaire intelligente</p>
+    <p style="margin-top: 12px;"><a href="/claims" style="color: #ffffff; font-weight: bold;">Ouvrir le tableau de bord d'aide à l'analyse des sinistres →</a></p>
+
+</header>
+
+
+<main>
+
+
+    <div class="search-box">
+
+        <h2>Posez votre question</h2>
+
+        <textarea
+            id="question"
+            placeholder="Exemple : Que couvre la responsabilité civile de l'assurance habitation ?">
+        </textarea>
+
+        <button id="searchButton" onclick="search()">
+            Rechercher
+        </button>
+
+    </div>
+
+
+    <div id="results"></div>
+
+
+</main>
+
+
+<script>
+
+
+async function search() {
+
+
+    const question =
+        document.getElementById("question").value.trim();
+
+
+    const results =
+        document.getElementById("results");
+
+
+    const button =
+        document.getElementById("searchButton");
+
+
+    if (!question) {
+
+        results.innerHTML =
+            "<div class='error'>Veuillez saisir une question.</div>";
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.textContent = "Recherche en cours...";
+
+
+    results.innerHTML =
+        "<div class='loading'>Recherche des documents pertinents...</div>";
+
+
+    try {
+
+
+        const response = await fetch("/search", {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                question: question
+
+            })
+
+        });
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Erreur serveur : " + response.status
+            );
+
+        }
+
+
+        const data = await response.json();
+
+
+        if (!data.results || data.results.length === 0) {
+
+            results.innerHTML =
+                "<div class='error'>Aucun résultat trouvé.</div>";
+
+            return;
+
+        }
+
+
+        // ====================================================
+        // REPONSE GENEREE PAR LLAMA
+        // ====================================================
+
+        let answer = data.answer;
+
+
+        if (!answer || !answer.trim()) {
+
+            answer =
+                "Aucune réponse n'a pu être générée.";
+
+        }
+
+
+        answer = answer.trim();
+
+
+        // ====================================================
+        // AFFICHAGE DE LA REPONSE
+        // ====================================================
+
+        const answerBlock = document.createElement("div");
+
+        answerBlock.className = "answer";
+
+
+        const answerTitle = document.createElement("h2");
+
+        answerTitle.textContent = "Réponse";
+
+
+        const answerText = document.createElement("div");
+
+        answerText.className = "answer-text";
+
+        answerText.textContent = answer;
+
+
+        answerBlock.appendChild(answerTitle);
+
+        answerBlock.appendChild(answerText);
+
+
+        results.innerHTML = "";
+
+        results.appendChild(answerBlock);
+
+        // Contrôle formel des identifiants cités ; cela ne valide pas le fond.
+        if (data.citation_audit) {
+            const audit = document.createElement("div");
+            audit.className = "score";
+            const validIds = data.citation_audit.valid_source_ids || [];
+            const unknownIds = data.citation_audit.unknown_source_ids || [];
+            const uncitedIds = data.citation_audit.available_but_uncited_source_ids || [];
+            let auditText = data.citation_audit.citations_found
+                ? "Contrôle des références : sources reconnues " + (validIds.length ? validIds.join(", ") : "aucune")
+                : "Contrôle des références : aucune citation détectée";
+            if (unknownIds.length) {
+                auditText += " ; identifiant(s) inconnu(s) : " + unknownIds.join(", ");
+            }
+            if (uncitedIds.length) {
+                auditText += " ; source(s) disponible(s) mais non citée(s) : " + uncitedIds.join(", ");
+            }
+            auditText += ". Ce contrôle vérifie les identifiants, pas la véracité des affirmations.";
+            audit.textContent = auditText;
+            results.appendChild(audit);
+        }
+
+        // Mesures de durée utiles pour diagnostiquer les performances.
+        // Elles décrivent cette requête et ne constituent pas une garantie de latence.
+        if (data.pipeline_metrics) {
+            const metrics = data.pipeline_metrics;
+            const timingBlock = document.createElement("div");
+            timingBlock.className = "score";
+            timingBlock.textContent = "Durées observées (ms) — embedding : " +
+                Number(metrics.embedding_ms || 0).toFixed(2) +
+                " | recherche : " + Number(metrics.retrieval_ms || 0).toFixed(2) +
+                " | reranking : " + Number(metrics.reranking_ms || 0).toFixed(2) +
+                " | génération : " + Number(metrics.generation_ms || 0).toFixed(2) +
+                " | total : " + Number(metrics.total_ms || 0).toFixed(2) +
+                ". Mesures variables selon la machine et la charge.";
+            results.appendChild(timingBlock);
+        }
+
+        // ====================================================
+        // TITRE DES SOURCES
+        // ====================================================
+
+        const sourcesTitle = document.createElement("h2");
+
+        sourcesTitle.className = "sources-title";
+
+        sourcesTitle.textContent = "Sources";
+
+
+        results.appendChild(sourcesTitle);
+
+
+        // ====================================================
+        // AFFICHAGE DES SOURCES
+        // ====================================================
+
+        data.results.forEach(function(result) {
+
+
+            const source =
+                document.createElement("div");
+
+
+            source.className = "source";
+
+
+            const title =
+                document.createElement("h3");
+
+
+            title.textContent =
+                "[" + (result.source_id || ("S" + result.rank)) + "] " + result.title;
+
+
+            const score =
+                document.createElement("div");
+
+
+            score.className = "score";
+
+
+            const rerankerScore = Number(
+                result.reranker_score !== undefined ? result.reranker_score : result.score
+            );
+            const embeddingSimilarity = Number(result.embedding_similarity);
+            score.textContent = "Score brut du reranker (pas une probabilité) : " +
+                (Number.isFinite(rerankerScore) ? rerankerScore.toFixed(4) : "indisponible");
+
+            if (Number.isFinite(embeddingSimilarity)) {
+                score.textContent += " | Similarité cosinus des embeddings : " +
+                    embeddingSimilarity.toFixed(4);
+            }
+
+            // Le score lexical expose les termes partagés, sans prétendre mesurer
+            // une probabilité ni garantir que le document répond à la question.
+            const lexicalScore = Number(result.lexical_relevance_score);
+            if (Number.isFinite(lexicalScore)) {
+                score.textContent += " | Pertinence lexicale indicative : " +
+                    lexicalScore.toFixed(3);
+            }
+
+            // Le score hybride explique le classement final, sans le présenter
+            // comme une probabilité de pertinence ou comme une preuve factuelle.
+            const hybridRankScore = Number(result.hybrid_rank_score);
+            if (Number.isFinite(hybridRankScore)) {
+                score.textContent += " | Score de fusion des rangs : " +
+                    hybridRankScore.toFixed(5);
+            }
+
+            const content =
+                document.createElement("div");
+
+
+            content.className = "source-content";
+
+
+            content.textContent =
+                result.content;
+
+
+            source.appendChild(title);
+
+            source.appendChild(score);
+
+            source.appendChild(content);
+
+
+            results.appendChild(source);
+
+
+        });
+
+
+    }
+
+
+    catch (error) {
+
+
+        const errorBlock = document.createElement("div");
+        errorBlock.className = "error";
+        errorBlock.textContent = "Une erreur est survenue : " + error.message;
+        results.replaceChildren(errorBlock);
+
+
+        console.error(error);
+
+
+    }
+
+
+    finally {
+
+
+        button.disabled = false;
+
+        button.textContent = "Rechercher";
+
+
+    }
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

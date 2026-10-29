@@ -1,0 +1,41 @@
+﻿question,expected_document,expected_title,tfidf_rank,embedding_rank
+L’assurance enfant incluse dans l’assurance habitation,1,L’assurance enfant incluse dans l’assurance habitation,6,27
+Les différents degrés de couverture de l'assurance responsabilité civile des enfants,3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,39,11
+Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,9,6
+Que faire en cas de problème de serrure ?,7,Que faire en cas de problème de serrure ?,21,27
+Propriétaire ou locataire : qui doit payer le serrurier ?,9,Propriétaire ou locataire : qui doit payer le serrurier ?,8,18
+Les exclusions de la garantie dégât des eaux,20,Les exclusions de la garantie dégât des eaux,101,38
+"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",20,21
+Le contrat habitation est-il obligatoire pour les propriétaires ?,29,Le contrat habitation est-il obligatoire pour les propriétaires ?,31,75
+Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,53,114
+Comment percevoir les indemnisations en cas d’inondation ?,43,Comment percevoir les indemnisations en cas d’inondation ?,86,93
+L’assurance locative est-elle obligatoire ?,45,L’assurance locative est-elle obligatoire ?,17,12
+La responsabilité civile du locataire,47,La responsabilité civile du locataire,45,25
+Assurance location meublée,51,Assurance location meublée,98,100
+Assurance location meublée : comment ça se passe ?,53,Assurance location meublée : comment ça se passe ?,95,7
+L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,14,63
+Pourquoi souscrire une assurance pour votre habitation meublé ?,56,Pourquoi souscrire une assurance pour votre habitation meublé ?,51,70
+Locataire : quelle assurance meublée choisir ?,57,Locataire : quelle assurance meublée choisir ?,23,15
+Propriétaire : quelle assurance meublée choisir ?,58,Propriétaire : quelle assurance meublée choisir ?,11,13
+Assurance propriétaire bailleur : quelles sont les garanties ?,65,Assurance propriétaire bailleur : quelles sont les garanties ?,9,70
+Quels sont les principaux risques pour un propriétaire bailleur ?,66,Quels sont les principaux risques pour un propriétaire bailleur ?,42,17
+Propriétaire : comment demander une attestation d’assurance habitation,71,Propriétaire : comment demander une attestation d’assurance habitation,7,7
+Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,9,53
+Quelles caractéristiques du logement sont prises en compte pour le contrat ?,77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,15,52
+Comment être indemnisé après un dégât des eaux ?,78,Comment être indemnisé après un dégât des eaux ?,6,15
+Les documents remis à la souscription de votre assurance habitation MMA,80,Les documents remis à la souscription de votre assurance habitation MMA,40,14
+Changer d’assurance habitation : quelles sont les informations nécessaires ?,81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,113,12
+L’Assurance Habitation MMA si vous louez une location par une plateforme,85,L’Assurance Habitation MMA si vous louez une location par une plateforme,8,26
+Vous déménagez et vous êtes/devenez propriétaire,92,Vous déménagez et vous êtes/devenez propriétaire,41,17
+Qu'est-ce que la garantie Dépannage électroménager vidéo,107,Qu'est-ce que la garantie Dépannage électroménager vidéo,76,10
+Que couvre la responsabilité civile de l’assurance habitation ?,112,Que couvre la responsabilité civile de l’assurance habitation ?,18,9
+Que ne couvre pas l’assurance responsabilité civile ?,113,Que ne couvre pas l’assurance responsabilité civile ?,12,8
+Les prestations dépannage installations MMA,116,Les prestations dépannage installations MMA,102,41
+Les mesures à prendre en cas de sinistre habitation,117,Les mesures à prendre en cas de sinistre habitation,55,29
+Les prestations de l’assurance dépannage des appareils électroménagers MMA,118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,69,64
+Comment et pourquoi assurer mes biens mis en location ?,143,Comment et pourquoi assurer mes biens mis en location ?,83,48
+L'assurance scolaire est-elle incluse dans l'assurance habitation ?,145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,12,14
+Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,146,65
+Est-ce qu'en cas de vol je suis couvert ou pas ?,186,Est-ce qu'en cas de vol je suis couvert ou pas ?,26,87
+"Ma fosse sceptique a débordé, suis-je couvert ?",187,"Ma fosse sceptique a débordé, suis-je couvert ?",38,16
+"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",6,15

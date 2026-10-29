@@ -1,0 +1,121 @@
+﻿claim_id,type_sinistre,garantie,montant_demande,anciennete_client_mois,nb_sinistres_precedents,canal_declaration,dossier_complet,statut,date_declaration,delai_traitement_jours,jeu_de_donnees
+C00001,Bris de glace,Oui,6969.91,57,0,Téléphone,Oui,Accepted,2025-12-29,22,FICTIF_DEMONSTRATION
+C00002,Bris de glace,Oui,430.06,22,2,Agence,Oui,Accepted,2026-02-23,8,FICTIF_DEMONSTRATION
+C00003,Dégâts des eaux,Oui,1280.28,223,3,Portail web,Oui,Accepted,2026-05-15,35,FICTIF_DEMONSTRATION
+C00004,Incendie,Oui,1070.01,20,0,Portail web,Non,Accepted,2026-06-03,22,FICTIF_DEMONSTRATION
+C00005,Incendie,Oui,1094.51,181,0,Agence,Non,Accepted,2026-02-06,7,FICTIF_DEMONSTRATION
+C00006,Bris de glace,Oui,425.54,8,0,Téléphone,Non,Accepted,2026-02-12,11,FICTIF_DEMONSTRATION
+C00007,Incendie,Oui,2157.77,187,2,Portail web,Oui,Rejected,2026-07-02,14,FICTIF_DEMONSTRATION
+C00008,Bris de glace,Oui,2047.35,189,1,Courtier,Oui,Pending,2026-02-24,,FICTIF_DEMONSTRATION
+C00009,Responsabilité civile,Oui,1343.55,203,0,Téléphone,Non,Accepted,2026-02-23,28,FICTIF_DEMONSTRATION
+C00010,Bris de glace,Oui,14620.33,220,0,Portail web,Oui,Accepted,2026-08-22,16,FICTIF_DEMONSTRATION
+C00011,Bris de glace,Oui,1815.19,103,0,Portail web,Oui,Accepted,2026-09-07,31,FICTIF_DEMONSTRATION
+C00012,Vol,Oui,5976.5,129,1,Agence,Oui,Accepted,2026-10-04,19,FICTIF_DEMONSTRATION
+C00013,Catastrophe naturelle,Oui,1941.18,87,1,Agence,Oui,Accepted,2025-12-30,3,FICTIF_DEMONSTRATION
+C00014,Catastrophe naturelle,À vérifier,1307.48,55,2,Portail web,Oui,Rejected,2026-05-08,19,FICTIF_DEMONSTRATION
+C00015,Vol,Oui,810.24,198,0,Courtier,Oui,Accepted,2026-04-15,34,FICTIF_DEMONSTRATION
+C00016,Catastrophe naturelle,À vérifier,1860.52,69,2,Courtier,Oui,Rejected,2026-03-19,11,FICTIF_DEMONSTRATION
+C00017,Vol,Oui,2251.51,120,0,Téléphone,Non,Accepted,2025-12-28,20,FICTIF_DEMONSTRATION
+C00018,Responsabilité civile,Oui,958.88,44,0,Portail web,Non,Rejected,2025-11-14,9,FICTIF_DEMONSTRATION
+C00019,Catastrophe naturelle,Oui,10265.89,229,2,Téléphone,Oui,Accepted,2026-05-26,15,FICTIF_DEMONSTRATION
+C00020,Catastrophe naturelle,À vérifier,2344.53,221,1,Courtier,Oui,Pending,2026-01-04,,FICTIF_DEMONSTRATION
+C00021,Incendie,Oui,1357.38,199,1,Courtier,Oui,Accepted,2025-12-04,17,FICTIF_DEMONSTRATION
+C00022,Vol,Oui,1877.49,112,3,Téléphone,Non,Rejected,2026-09-14,16,FICTIF_DEMONSTRATION
+C00023,Responsabilité civile,Oui,761.88,200,0,Agence,Oui,Pending,2026-07-22,,FICTIF_DEMONSTRATION
+C00024,Catastrophe naturelle,Oui,2935.44,187,1,Téléphone,Oui,Accepted,2026-09-07,16,FICTIF_DEMONSTRATION
+C00025,Catastrophe naturelle,À vérifier,741.56,167,1,Courtier,Oui,Rejected,2025-10-12,5,FICTIF_DEMONSTRATION
+C00026,Vol,Oui,2320.72,44,1,Portail web,Oui,Accepted,2026-09-07,9,FICTIF_DEMONSTRATION
+C00027,Bris de glace,Oui,454.08,153,0,Agence,Oui,Accepted,2026-07-30,33,FICTIF_DEMONSTRATION
+C00028,Responsabilité civile,Oui,1046.34,69,0,Portail web,Non,Rejected,2026-09-16,11,FICTIF_DEMONSTRATION
+C00029,Dégâts des eaux,Oui,2030.7,240,1,Téléphone,Oui,Accepted,2026-04-18,12,FICTIF_DEMONSTRATION
+C00030,Bris de glace,Oui,2937.18,99,0,Courtier,Oui,Accepted,2026-09-20,23,FICTIF_DEMONSTRATION
+C00031,Vol,Oui,1738.09,8,2,Téléphone,Oui,Rejected,2025-10-25,30,FICTIF_DEMONSTRATION
+C00032,Bris de glace,Oui,590.6,96,1,Téléphone,Oui,Accepted,2026-10-05,10,FICTIF_DEMONSTRATION
+C00033,Dégâts des eaux,Oui,2504.76,144,0,Agence,Oui,Accepted,2026-03-25,18,FICTIF_DEMONSTRATION
+C00034,Responsabilité civile,Oui,3103.43,153,1,Portail web,Oui,Accepted,2026-04-01,9,FICTIF_DEMONSTRATION
+C00035,Incendie,Oui,1058.1,206,1,Téléphone,Oui,Accepted,2025-11-03,25,FICTIF_DEMONSTRATION
+C00036,Vol,Oui,1444.88,47,3,Téléphone,Non,Pending,2026-01-10,,FICTIF_DEMONSTRATION
+C00037,Bris de glace,Oui,5605.59,38,1,Portail web,Oui,Accepted,2026-09-08,29,FICTIF_DEMONSTRATION
+C00038,Catastrophe naturelle,Oui,1478.52,69,2,Portail web,Oui,Accepted,2025-12-29,28,FICTIF_DEMONSTRATION
+C00039,Catastrophe naturelle,À vérifier,1951.96,4,1,Téléphone,Oui,Pending,2026-08-01,,FICTIF_DEMONSTRATION
+C00040,Incendie,Oui,484.0,43,4,Portail web,Non,Pending,2026-05-12,,FICTIF_DEMONSTRATION
+C00041,Catastrophe naturelle,Oui,2419.56,63,0,Agence,Oui,Accepted,2026-09-29,12,FICTIF_DEMONSTRATION
+C00042,Bris de glace,Oui,482.55,49,2,Portail web,Oui,Pending,2026-04-07,,FICTIF_DEMONSTRATION
+C00043,Catastrophe naturelle,Oui,205.05,196,1,Agence,Oui,Accepted,2026-10-01,6,FICTIF_DEMONSTRATION
+C00044,Vol,Oui,2719.41,214,2,Agence,Oui,Rejected,2026-03-06,25,FICTIF_DEMONSTRATION
+C00045,Bris de glace,Oui,3400.69,88,1,Téléphone,Oui,Pending,2025-11-29,,FICTIF_DEMONSTRATION
+C00046,Incendie,Oui,1252.05,78,2,Courtier,Oui,Pending,2026-08-12,,FICTIF_DEMONSTRATION
+C00047,Responsabilité civile,Oui,2872.55,55,0,Téléphone,Oui,Accepted,2025-12-27,10,FICTIF_DEMONSTRATION
+C00048,Catastrophe naturelle,À vérifier,2135.93,228,0,Téléphone,Non,Pending,2026-03-16,,FICTIF_DEMONSTRATION
+C00049,Catastrophe naturelle,Oui,1845.39,132,3,Courtier,Oui,Pending,2026-04-25,,FICTIF_DEMONSTRATION
+C00050,Vol,Oui,2285.89,83,0,Agence,Oui,Accepted,2026-02-17,34,FICTIF_DEMONSTRATION
+C00051,Incendie,Oui,688.07,31,0,Agence,Oui,Rejected,2026-08-09,26,FICTIF_DEMONSTRATION
+C00052,Bris de glace,Oui,878.79,38,0,Portail web,Oui,Accepted,2025-12-21,25,FICTIF_DEMONSTRATION
+C00053,Responsabilité civile,Oui,1897.3,72,0,Portail web,Oui,Accepted,2026-09-19,29,FICTIF_DEMONSTRATION
+C00054,Bris de glace,Oui,1361.44,153,2,Agence,Oui,Rejected,2026-03-09,25,FICTIF_DEMONSTRATION
+C00055,Vol,Oui,936.31,32,0,Agence,Oui,Accepted,2026-09-14,35,FICTIF_DEMONSTRATION
+C00056,Incendie,Oui,2840.07,199,2,Téléphone,Non,Pending,2026-05-13,,FICTIF_DEMONSTRATION
+C00057,Bris de glace,Oui,859.52,38,1,Portail web,Non,Accepted,2026-07-30,29,FICTIF_DEMONSTRATION
+C00058,Vol,Oui,1301.18,96,1,Agence,Oui,Accepted,2026-04-12,33,FICTIF_DEMONSTRATION
+C00059,Responsabilité civile,Oui,26161.78,136,0,Agence,Oui,Pending,2026-04-17,,FICTIF_DEMONSTRATION
+C00060,Bris de glace,Oui,853.72,162,0,Courtier,Oui,Accepted,2026-03-02,8,FICTIF_DEMONSTRATION
+C00061,Bris de glace,Oui,1232.66,38,0,Agence,Oui,Accepted,2026-09-07,12,FICTIF_DEMONSTRATION
+C00062,Catastrophe naturelle,Oui,1696.98,209,0,Agence,Non,Accepted,2026-09-01,25,FICTIF_DEMONSTRATION
+C00063,Vol,Oui,3660.17,204,0,Téléphone,Oui,Accepted,2026-10-02,18,FICTIF_DEMONSTRATION
+C00064,Incendie,Oui,3742.45,165,0,Portail web,Oui,Accepted,2026-06-11,11,FICTIF_DEMONSTRATION
+C00065,Responsabilité civile,Oui,8245.74,113,4,Courtier,Non,Rejected,2026-05-01,16,FICTIF_DEMONSTRATION
+C00066,Responsabilité civile,Oui,279.25,19,1,Téléphone,Non,Rejected,2025-10-26,44,FICTIF_DEMONSTRATION
+C00067,Responsabilité civile,À vérifier,517.59,111,2,Portail web,Oui,Pending,2026-08-25,,FICTIF_DEMONSTRATION
+C00068,Responsabilité civile,Oui,1527.03,234,0,Téléphone,Oui,Rejected,2025-12-03,24,FICTIF_DEMONSTRATION
+C00069,Responsabilité civile,Oui,3762.85,122,2,Téléphone,Non,Accepted,2026-01-16,11,FICTIF_DEMONSTRATION
+C00070,Dégâts des eaux,À vérifier,11172.73,1,0,Portail web,Oui,Rejected,2026-01-16,47,FICTIF_DEMONSTRATION
+C00071,Dégâts des eaux,Oui,2048.5,168,0,Courtier,Non,Rejected,2026-04-27,33,FICTIF_DEMONSTRATION
+C00072,Bris de glace,Oui,3763.74,169,0,Courtier,Oui,Accepted,2026-08-23,30,FICTIF_DEMONSTRATION
+C00073,Vol,Oui,1055.46,66,1,Agence,Oui,Accepted,2026-01-18,26,FICTIF_DEMONSTRATION
+C00074,Dégâts des eaux,Oui,2689.2,63,0,Téléphone,Oui,Rejected,2026-02-28,43,FICTIF_DEMONSTRATION
+C00075,Incendie,Oui,1514.95,120,1,Portail web,Oui,Accepted,2026-06-08,20,FICTIF_DEMONSTRATION
+C00076,Bris de glace,Oui,563.04,117,2,Téléphone,Non,Accepted,2026-04-30,14,FICTIF_DEMONSTRATION
+C00077,Dégâts des eaux,Oui,774.29,165,0,Courtier,Oui,Accepted,2026-03-25,17,FICTIF_DEMONSTRATION
+C00078,Dégâts des eaux,Oui,1859.25,151,0,Portail web,Oui,Accepted,2026-02-26,31,FICTIF_DEMONSTRATION
+C00079,Vol,Oui,963.38,220,1,Agence,Oui,Accepted,2026-02-25,25,FICTIF_DEMONSTRATION
+C00080,Vol,Oui,800.63,32,0,Téléphone,Oui,Accepted,2026-09-04,29,FICTIF_DEMONSTRATION
+C00081,Catastrophe naturelle,Oui,13640.8,136,0,Portail web,Non,Accepted,2026-09-14,29,FICTIF_DEMONSTRATION
+C00082,Bris de glace,Oui,1379.24,206,0,Courtier,Oui,Accepted,2026-06-02,18,FICTIF_DEMONSTRATION
+C00083,Vol,Oui,657.0,70,2,Téléphone,Oui,Accepted,2025-10-18,16,FICTIF_DEMONSTRATION
+C00084,Catastrophe naturelle,Oui,687.18,206,0,Téléphone,Non,Accepted,2026-05-22,23,FICTIF_DEMONSTRATION
+C00085,Incendie,Oui,2089.2,59,0,Téléphone,Oui,Accepted,2026-02-08,24,FICTIF_DEMONSTRATION
+C00086,Incendie,Oui,680.78,204,0,Portail web,Oui,Accepted,2025-11-03,29,FICTIF_DEMONSTRATION
+C00087,Dégâts des eaux,Oui,1433.39,175,0,Portail web,Oui,Accepted,2026-05-30,26,FICTIF_DEMONSTRATION
+C00088,Catastrophe naturelle,À vérifier,3060.16,205,0,Portail web,Non,Accepted,2026-04-18,23,FICTIF_DEMONSTRATION
+C00089,Dégâts des eaux,Oui,753.14,181,0,Courtier,Oui,Accepted,2025-12-17,33,FICTIF_DEMONSTRATION
+C00090,Dégâts des eaux,Oui,784.59,113,1,Portail web,Oui,Accepted,2025-10-15,29,FICTIF_DEMONSTRATION
+C00091,Dégâts des eaux,Oui,452.98,65,1,Agence,Oui,Pending,2026-02-06,,FICTIF_DEMONSTRATION
+C00092,Bris de glace,Oui,5744.66,47,1,Agence,Oui,Accepted,2025-11-23,22,FICTIF_DEMONSTRATION
+C00093,Catastrophe naturelle,À vérifier,931.94,123,0,Courtier,Non,Rejected,2026-06-11,48,FICTIF_DEMONSTRATION
+C00094,Dégâts des eaux,Oui,1496.31,139,0,Agence,Oui,Accepted,2026-06-04,6,FICTIF_DEMONSTRATION
+C00095,Catastrophe naturelle,À vérifier,1124.27,84,1,Portail web,Oui,Pending,2026-03-23,,FICTIF_DEMONSTRATION
+C00096,Responsabilité civile,Oui,9833.05,35,0,Agence,Oui,Accepted,2026-03-15,27,FICTIF_DEMONSTRATION
+C00097,Responsabilité civile,Oui,4088.73,160,0,Téléphone,Oui,Accepted,2025-10-12,17,FICTIF_DEMONSTRATION
+C00098,Responsabilité civile,Oui,2245.65,153,1,Courtier,Oui,Pending,2026-05-17,,FICTIF_DEMONSTRATION
+C00099,Vol,Oui,7637.72,5,4,Agence,Oui,Rejected,2026-04-11,15,FICTIF_DEMONSTRATION
+C00100,Dégâts des eaux,Oui,2376.86,29,1,Agence,Oui,Rejected,2026-08-20,35,FICTIF_DEMONSTRATION
+C00101,Vol,Oui,2260.36,142,0,Agence,Oui,Accepted,2026-07-27,19,FICTIF_DEMONSTRATION
+C00102,Dégâts des eaux,Oui,1165.11,221,1,Téléphone,Oui,Rejected,2026-05-04,15,FICTIF_DEMONSTRATION
+C00103,Catastrophe naturelle,Oui,1079.15,133,1,Téléphone,Oui,Accepted,2025-10-30,17,FICTIF_DEMONSTRATION
+C00104,Bris de glace,Oui,4162.6,16,0,Courtier,Oui,Accepted,2026-04-24,4,FICTIF_DEMONSTRATION
+C00105,Vol,Oui,1990.49,171,0,Courtier,Oui,Pending,2026-04-24,,FICTIF_DEMONSTRATION
+C00106,Bris de glace,À vérifier,2590.41,67,3,Agence,Oui,Rejected,2025-12-02,25,FICTIF_DEMONSTRATION
+C00107,Vol,Oui,520.39,127,0,Agence,Oui,Accepted,2025-11-29,31,FICTIF_DEMONSTRATION
+C00108,Catastrophe naturelle,Oui,6383.48,90,1,Téléphone,Non,Rejected,2026-05-23,36,FICTIF_DEMONSTRATION
+C00109,Vol,Oui,1179.62,24,1,Agence,Oui,Accepted,2026-05-30,33,FICTIF_DEMONSTRATION
+C00110,Catastrophe naturelle,Oui,14254.06,96,2,Agence,Oui,Accepted,2026-03-31,34,FICTIF_DEMONSTRATION
+C00111,Responsabilité civile,Oui,572.3,23,4,Téléphone,Oui,Accepted,2026-01-02,17,FICTIF_DEMONSTRATION
+C00112,Responsabilité civile,Oui,23809.41,232,0,Téléphone,Oui,Rejected,2026-02-18,11,FICTIF_DEMONSTRATION
+C00113,Vol,À vérifier,4187.33,150,0,Courtier,Oui,Rejected,2026-06-28,33,FICTIF_DEMONSTRATION
+C00114,Catastrophe naturelle,Oui,3865.64,181,2,Agence,Oui,Pending,2026-10-04,,FICTIF_DEMONSTRATION
+C00115,Incendie,Oui,549.24,44,0,Téléphone,Oui,Accepted,2026-05-11,27,FICTIF_DEMONSTRATION
+C00116,Bris de glace,Oui,1695.32,209,1,Agence,Oui,Pending,2026-06-28,,FICTIF_DEMONSTRATION
+C00117,Dégâts des eaux,Oui,298.83,227,0,Portail web,Non,Rejected,2026-02-28,23,FICTIF_DEMONSTRATION
+C00118,Incendie,Oui,4106.37,170,1,Portail web,Oui,Accepted,2026-01-24,16,FICTIF_DEMONSTRATION
+C00119,Dégâts des eaux,Oui,1575.16,129,0,Courtier,Non,Rejected,2026-05-21,35,FICTIF_DEMONSTRATION
+C00120,Bris de glace,Oui,875.69,160,1,Agence,Oui,Pending,2026-07-27,,FICTIF_DEMONSTRATION

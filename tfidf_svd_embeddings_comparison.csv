@@ -1,0 +1,1408 @@
+﻿question_index,question,method,expected_rank,recall_at_1,recall_at_3,recall_at_5,recall_at_20,reciprocal_rank
+0,Qu'est-ce que l'assurance responsabilité civile des enfants,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+1,L’assurance enfant incluse dans l’assurance habitation,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+2,L’assurance enfant incluse dans l’assurance scolaire,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,TF-IDF,19,0.0,0.0,0.0,1.0,0.05263157894736842
+4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,TF-IDF,7,0.0,0.0,0.0,1.0,0.14285714285714285
+5,Ce que le contrat ne garantit jamais,TF-IDF,26,0.0,0.0,0.0,0.0,0.038461538461538464
+6,Problème de serrure,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+7,Que faire en cas de problème de serrure ?,TF-IDF,39,0.0,0.0,0.0,0.0,0.02564102564102564
+8,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?",TF-IDF,6,0.0,0.0,0.0,1.0,0.16666666666666666
+9,Propriétaire ou locataire : qui doit payer le serrurier ?,TF-IDF,6,0.0,0.0,0.0,1.0,0.16666666666666666
+10,Comparatif des renforts et options de la multirisque habitation,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+11,Que faire en cas de dommage électrique ?,TF-IDF,178,0.0,0.0,0.0,0.0,0.0056179775280898875
+12,Que faire pendant un dégât des eaux ?,TF-IDF,162,0.0,0.0,0.0,0.0,0.006172839506172839
+13,Quelle assurance pour les bijoux,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+14,Qu’est-ce qu’un objet de valeur ?,TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+15,Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+16,Indemnisation des bijoux volés ou abimés,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+17,Conseils pour s'assurer contre la perte des bijoux,TF-IDF,6,0.0,0.0,0.0,1.0,0.16666666666666666
+18,Assurance bijoux : les cas particuliers,TF-IDF,9,0.0,0.0,0.0,1.0,0.1111111111111111
+19,Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+20,Les exclusions de la garantie dégât des eaux,TF-IDF,85,0.0,0.0,0.0,0.0,0.011764705882352941
+21,Les dégâts des eaux liés à une catastrophe naturelle,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+22,Les appareils protégés par la garantie Dommages électriques mobilier,TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+23,Le renfort Valeur à Neuf Mobilier,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+24,Exemple renfort Valeur à Neuf Mobilier,TF-IDF,6,0.0,0.0,0.0,1.0,0.16666666666666666
+25,Le renfort Valeur à Neuf est il inclus,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+26,Artisan rééquipement à neuf,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+27,Exclusion valeur à neuf,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",TF-IDF,14,0.0,0.0,0.0,1.0,0.07142857142857142
+29,Le contrat habitation est-il obligatoire pour les propriétaires ?,TF-IDF,49,0.0,0.0,0.0,0.0,0.02040816326530612
+30,Le contrat habitation est-il obligatoire pour les locataires ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+31,Le contrat habitation est-il obligatoire pour les colocataires ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+32,Le contrat habitation est-il obligatoire pour un logement de fonction ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+33,Le contrat habitation est-il obligatoire pour une location saisonnière ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,TF-IDF,41,0.0,0.0,0.0,0.0,0.024390243902439025
+35,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,TF-IDF,10,0.0,0.0,0.0,1.0,0.1
+36,Que couvre l’assurance de votre employeur en cas de télétravail,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+37,Le télétravail et votre assurance habitation,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+38,Attestation de télétravail,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+39,Que couvre une assurance inondation ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+40,Mon habitation est-elle en zone inondable ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+41,Que couvre l’assurance inondation MMA ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+42,Quelle est la différence entre inondation et catastrophes naturelles ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+43,Comment percevoir les indemnisations en cas d’inondation ?,TF-IDF,87,0.0,0.0,0.0,0.0,0.011494252873563218
+44,Qu'est-ce que l'assurance locataire,TF-IDF,17,0.0,0.0,0.0,1.0,0.058823529411764705
+45,L’assurance locative est-elle obligatoire ?,TF-IDF,16,0.0,0.0,0.0,1.0,0.0625
+46,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+47,La responsabilité civile du locataire,TF-IDF,33,0.0,0.0,0.0,0.0,0.030303030303030304
+48,La responsabilité du propriétaire envers les locataires,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+49,Les garanties facultatives de l'assurance locative,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+50,Cas où l’assurance locative est facultative,TF-IDF,115,0.0,0.0,0.0,0.0,0.008695652173913044
+51,Assurance location meublée,TF-IDF,97,0.0,0.0,0.0,0.0,0.010309278350515464
+52,Qu’est-ce qu’une location meublée ?,TF-IDF,28,0.0,0.0,0.0,0.0,0.03571428571428571
+53,Assurance location meublée : comment ça se passe ?,TF-IDF,98,0.0,0.0,0.0,0.0,0.01020408163265306
+54,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,TF-IDF,11,0.0,0.0,0.0,1.0,0.09090909090909091
+55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,TF-IDF,37,0.0,0.0,0.0,0.0,0.02702702702702703
+56,Pourquoi souscrire une assurance pour votre habitation meublé ?,TF-IDF,33,0.0,0.0,0.0,0.0,0.030303030303030304
+57,Locataire : quelle assurance meublée choisir ?,TF-IDF,23,0.0,0.0,0.0,0.0,0.043478260869565216
+58,Propriétaire : quelle assurance meublée choisir ?,TF-IDF,12,0.0,0.0,0.0,1.0,0.08333333333333333
+59,À quoi sert l’assurance PNO (Propriétaire non occupant)?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+60,L’assurance PNO est-elle obligatoire ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+61,Que couvre l’assurance PNO ? (propriétaire non occupant),TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+62,Assurance Propriétaire bailleur,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+63,L'assurance du propriétaire bailleur est-elle obligatoire ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+64,Pourquoi s’assurer en tant que propriétaire bailleur ?,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+65,Assurance propriétaire bailleur : quelles sont les garanties ?,TF-IDF,10,0.0,0.0,0.0,1.0,0.1
+66,Quels sont les principaux risques pour un propriétaire bailleur ?,TF-IDF,11,0.0,0.0,0.0,1.0,0.09090909090909091
+67,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,TF-IDF,11,0.0,0.0,0.0,1.0,0.09090909090909091
+68,Qu'est-ce que l'attestation d'assurance ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+69,À quoi sert l’attestation d’assurance habitation ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+70,Locataire : Comment obtenir une attestation d’assurance habitation ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+71,Propriétaire : comment demander une attestation d’assurance habitation,TF-IDF,7,0.0,0.0,0.0,1.0,0.14285714285714285
+72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,TF-IDF,7,0.0,0.0,0.0,1.0,0.14285714285714285
+73,Comment recevoir son attestation d’assurance habitation MMA ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+74,Comment compter le nombre de pièces principales ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+75,Pourquoi bien calculer et déclarer le nombre de pièces ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+76,Comment est calculé le prix de l’assurance habitation,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,TF-IDF,9,0.0,0.0,0.0,1.0,0.1111111111111111
+78,Comment être indemnisé après un dégât des eaux ?,TF-IDF,22,0.0,0.0,0.0,0.0,0.045454545454545456
+79,Comment souscrire à une assurance habitation ?,TF-IDF,58,0.0,0.0,0.0,0.0,0.017241379310344827
+80,Les documents remis à la souscription de votre assurance habitation MMA,TF-IDF,70,0.0,0.0,0.0,0.0,0.014285714285714285
+81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,TF-IDF,73,0.0,0.0,0.0,0.0,0.0136986301369863
+82,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+83,Les assurances proposées par Airbnb sont-elles suffisantes ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+84,L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+85,L’Assurance Habitation MMA si vous louez une location par une plateforme,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+86,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,TF-IDF,35,0.0,0.0,0.0,0.0,0.02857142857142857
+87,Qu'est-ce que la télésurveillance ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+88,Quels sont les avantages de la télésurveillance ?,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+89,L’installation d’une alarme de maison avec télésurveillance avec MMA,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+90,Assurance habitation et télésurveillance : vos avantages MMA,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+91,Que se passe-t-il en cas de déménagement ?,TF-IDF,26,0.0,0.0,0.0,0.0,0.038461538461538464
+92,Vous déménagez et vous êtes/devenez propriétaire,TF-IDF,59,0.0,0.0,0.0,0.0,0.01694915254237288
+93,Déménagement avec recours à un déménageur,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+94,Faut-il assurer obligatoirement une résidence secondaire ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+95,Pourquoi assurer une résidence secondaire ?,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+96,Quelles sont les garanties MMA conseillées pour votre résidence secondaire,TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+97,Comment assurer une résidence secondaire ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+98,Comment fonctionne la franchise d’une assurance habitation ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+99,Responsable ou victime du sinistre : les conséquences sur la franchise,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+100,Quelles sont les franchises habitation MMA,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+101,Qu’est-ce qu’un dégât des eaux ?,TF-IDF,19,0.0,0.0,0.0,1.0,0.05263157894736842
+102,Qu'est-ce que la garantie dégat des eaux,TF-IDF,32,0.0,0.0,0.0,0.0,0.03125
+103,Qu'est-ce que la garantie dommagez éléctriques,TF-IDF,13,0.0,0.0,0.0,1.0,0.07692307692307693
+104,Pourquoi souscrire une garantie Dommages électriques mobilier,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+105,Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+106,L'assurance dégât des eaux est-elle obligatoire ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+107,Qu'est-ce que la garantie Dépannage électroménager vidéo,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+108,Qu’est-ce que la garantie Dépannage habitation ?,TF-IDF,7,0.0,0.0,0.0,1.0,0.14285714285714285
+109,Qu’est-ce que la responsabilité civile ?,TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+110,Qu’est-ce que l’assurance responsabilité civile ?,TF-IDF,14,0.0,0.0,0.0,1.0,0.07142857142857142
+111,L’assurance responsabilité civile est-elle obligatoire ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+112,Que couvre la responsabilité civile de l’assurance habitation ?,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+113,Que ne couvre pas l’assurance responsabilité civile ?,TF-IDF,17,0.0,0.0,0.0,1.0,0.058823529411764705
+114,L’assurance responsabilité civile partielle,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+115,Comment bénéficier de votre assurance responsabilité civile ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+116,Les prestations dépannage installations MMA,TF-IDF,124,0.0,0.0,0.0,0.0,0.008064516129032258
+117,Les mesures à prendre en cas de sinistre habitation,TF-IDF,64,0.0,0.0,0.0,0.0,0.015625
+118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,TF-IDF,46,0.0,0.0,0.0,0.0,0.021739130434782608
+119,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,TF-IDF,6,0.0,0.0,0.0,1.0,0.16666666666666666
+120,Quelle assurance habitation pour les étudiants ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+121,Que comprend l'assurance habitation étudiante ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+122,Quelle assurance pour un logement étudiant ?,TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+123,Quelle assurance habitation étudiant choisir ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+124,Une assurance habitation pour les étudiants boursier,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+125,L'assurance responsabilité civile pour les étudiants,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+126,Assurer une chambre étudiante en colocation,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+127,Assurance habitation étudiant MMA : les garanties complémentaires,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+128,Quelle assurance pour les logements en copropriété ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+129,Télévision cassée : les garanties de votre assurance habitation MMA,TF-IDF,64,0.0,0.0,0.0,0.0,0.015625
+130,Assurance responsabilité civile et écran TV cassé,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+131,Des options d’assurance habitation pour faire réparer votre écran TV cassé,TF-IDF,93,0.0,0.0,0.0,0.0,0.010752688172043012
+132,Quelle indemnisation par l'assurance habitation TV cassée MMA ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+133,Comment est considéré le garage du point de vue de l’assurance ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+134,L’assurance garage ou parking d'un locataire est-elle obligatoire ?,TF-IDF,6,0.0,0.0,0.0,1.0,0.16666666666666666
+135,L’assurance garage auto d’un propriétaire est-elle obligatoire ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+136,L’assurance d’une place de stationnement,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+137,Pourquoi assurer un garage auto ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+138,Quelle assurance de garage souscrire ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+139,Les garanties de votre assurance de garage,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+140,Faut-il assurer une place de parking ?,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+141,Le garage est-il couvert par l'assurance habitation ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+142,Comment assurer mes biens pendant mon déménagement ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+143,Comment et pourquoi assurer mes biens mis en location ?,TF-IDF,75,0.0,0.0,0.0,0.0,0.013333333333333334
+144,Comment assurer mes biens professionnels dans mon domicile personnel ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,TF-IDF,11,0.0,0.0,0.0,1.0,0.09090909090909091
+146,Où s'exercent géographiquement les garanties ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+147,Que couvre la garantie renfort évènements climatiques ?,TF-IDF,52,0.0,0.0,0.0,0.0,0.019230769230769232
+148,Que ne couvre pas la garantie renfort évènements climatiques ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+149,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,TF-IDF,6,0.0,0.0,0.0,1.0,0.16666666666666666
+150,Les billets de banque sont-ils couverts ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+151,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",TF-IDF,11,0.0,0.0,0.0,1.0,0.09090909090909091
+152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,TF-IDF,168,0.0,0.0,0.0,0.0,0.005952380952380952
+153,"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?",TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+154,Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+155,Les panneaux solaires sont-ils couverts ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+156,Les éoliennes sont-elles couvertes ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+157,Les piscines sont-elles assurées ?,TF-IDF,29,0.0,0.0,0.0,0.0,0.034482758620689655
+158,Les abris en matière plastique sont-ils couverts ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+159,"Ma piscine hors sol a été endommagée, suis-je couvert ?",TF-IDF,169,0.0,0.0,0.0,0.0,0.005917159763313609
+160,"Je me suis blessé avec ma tondeuse, suis-je couvert ?",TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+161,Que sont les objets à risque de vol ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+162,Quelle est la limite de garantie des biens immobiliers ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+163,Quelle est la limite de garantie des dépendances ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+164,Quelle est la limite de garantie des clôtures ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+165,Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+166,Quelle est la limite de garantie des piscines si déclarée ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+167,Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+168,Quelle est la limite de garantie d'un refoulement des égouts ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+169,Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+170,Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+171,Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+172,Quelle est la limite de garantie des surconsommations d’eau,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+173,Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+174,"En cas de vol par une personne de ma famille, suis-je couvert ?",TF-IDF,146,0.0,0.0,0.0,0.0,0.00684931506849315
+175,"En cas de vol par mon colocataire, suis-je couvert ?",TF-IDF,120,0.0,0.0,0.0,0.0,0.008333333333333333
+176,"On a volé mes skis dans mon casier, suis-je couvert ?",TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+177,"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?",TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+178,"On a volé des biens dans un local partagé, suis-je couvert ?",TF-IDF,18,0.0,0.0,0.0,1.0,0.05555555555555555
+179,"On a volé les biens d'un de mes invités, suis-je couvert ?",TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+180,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?",TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+181,Qu'est-ce que l'option Revente - évènements personnels ou familiaux,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+182,Qu'est-ce que l'option  Revente - événements extérieurs,TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+183,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+184,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,TF-IDF,9,0.0,0.0,0.0,1.0,0.1111111111111111
+185,Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,TF-IDF,5,0.0,0.0,1.0,1.0,0.2
+186,Est-ce qu'en cas de vol je suis couvert ou pas ?,TF-IDF,46,0.0,0.0,0.0,0.0,0.021739130434782608
+187,"Ma fosse sceptique a débordé, suis-je couvert ?",TF-IDF,190,0.0,0.0,0.0,0.0,0.005263157894736842
+188,Est-ce que les dommages dûs à l'humidité sont couverts ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+189,"Mon sol en marbre a été endommagé, suis-je couvert ?",TF-IDF,197,0.0,0.0,0.0,0.0,0.005076142131979695
+190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",TF-IDF,9,0.0,0.0,0.0,1.0,0.1111111111111111
+191,Mon aquarium s'est cassé. Suis-je couvert ?,TF-IDF,196,0.0,0.0,0.0,0.0,0.00510204081632653
+192,L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+193,Que couvre la garantie déménagement ?,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+194,Je déménage par moi même. Suis-je couvert ?,TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+195,"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?",TF-IDF,3,0.0,1.0,1.0,1.0,0.3333333333333333
+196,"Je garde des enfants, suis-je couvert ?",TF-IDF,2,0.0,1.0,1.0,1.0,0.5
+197,Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+198,Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,TF-IDF,1,1.0,1.0,1.0,1.0,1.0
+199,"Je pratique un sport, suis-je couvert ?",TF-IDF,7,0.0,0.0,0.0,1.0,0.14285714285714285
+200,Quelles sont les formules disponibles ?,TF-IDF,4,0.0,0.0,1.0,1.0,0.25
+0,Qu'est-ce que l'assurance responsabilité civile des enfants,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+1,L’assurance enfant incluse dans l’assurance habitation,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+2,L’assurance enfant incluse dans l’assurance scolaire,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,TF-IDF+SVD-50,8,0.0,0.0,0.0,1.0,0.125
+4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,TF-IDF+SVD-50,7,0.0,0.0,0.0,1.0,0.14285714285714285
+5,Ce que le contrat ne garantit jamais,TF-IDF+SVD-50,12,0.0,0.0,0.0,1.0,0.08333333333333333
+6,Problème de serrure,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+7,Que faire en cas de problème de serrure ?,TF-IDF+SVD-50,11,0.0,0.0,0.0,1.0,0.09090909090909091
+8,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?",TF-IDF+SVD-50,8,0.0,0.0,0.0,1.0,0.125
+9,Propriétaire ou locataire : qui doit payer le serrurier ?,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+10,Comparatif des renforts et options de la multirisque habitation,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+11,Que faire en cas de dommage électrique ?,TF-IDF+SVD-50,164,0.0,0.0,0.0,0.0,0.006097560975609756
+12,Que faire pendant un dégât des eaux ?,TF-IDF+SVD-50,179,0.0,0.0,0.0,0.0,0.00558659217877095
+13,Quelle assurance pour les bijoux,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+14,Qu’est-ce qu’un objet de valeur ?,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+15,Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+16,Indemnisation des bijoux volés ou abimés,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+17,Conseils pour s'assurer contre la perte des bijoux,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+18,Assurance bijoux : les cas particuliers,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+19,Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,TF-IDF+SVD-50,6,0.0,0.0,0.0,1.0,0.16666666666666666
+20,Les exclusions de la garantie dégât des eaux,TF-IDF+SVD-50,23,0.0,0.0,0.0,0.0,0.043478260869565216
+21,Les dégâts des eaux liés à une catastrophe naturelle,TF-IDF+SVD-50,5,0.0,0.0,1.0,1.0,0.2
+22,Les appareils protégés par la garantie Dommages électriques mobilier,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+23,Le renfort Valeur à Neuf Mobilier,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+24,Exemple renfort Valeur à Neuf Mobilier,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+25,Le renfort Valeur à Neuf est il inclus,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+26,Artisan rééquipement à neuf,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+27,Exclusion valeur à neuf,TF-IDF+SVD-50,8,0.0,0.0,0.0,1.0,0.125
+28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",TF-IDF+SVD-50,6,0.0,0.0,0.0,1.0,0.16666666666666666
+29,Le contrat habitation est-il obligatoire pour les propriétaires ?,TF-IDF+SVD-50,31,0.0,0.0,0.0,0.0,0.03225806451612903
+30,Le contrat habitation est-il obligatoire pour les locataires ?,TF-IDF+SVD-50,47,0.0,0.0,0.0,0.0,0.02127659574468085
+31,Le contrat habitation est-il obligatoire pour les colocataires ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+32,Le contrat habitation est-il obligatoire pour un logement de fonction ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+33,Le contrat habitation est-il obligatoire pour une location saisonnière ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,TF-IDF+SVD-50,27,0.0,0.0,0.0,0.0,0.037037037037037035
+35,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,TF-IDF+SVD-50,8,0.0,0.0,0.0,1.0,0.125
+36,Que couvre l’assurance de votre employeur en cas de télétravail,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+37,Le télétravail et votre assurance habitation,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+38,Attestation de télétravail,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+39,Que couvre une assurance inondation ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+40,Mon habitation est-elle en zone inondable ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+41,Que couvre l’assurance inondation MMA ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+42,Quelle est la différence entre inondation et catastrophes naturelles ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+43,Comment percevoir les indemnisations en cas d’inondation ?,TF-IDF+SVD-50,108,0.0,0.0,0.0,0.0,0.009259259259259259
+44,Qu'est-ce que l'assurance locataire,TF-IDF+SVD-50,48,0.0,0.0,0.0,0.0,0.020833333333333332
+45,L’assurance locative est-elle obligatoire ?,TF-IDF+SVD-50,13,0.0,0.0,0.0,1.0,0.07692307692307693
+46,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+47,La responsabilité civile du locataire,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+48,La responsabilité du propriétaire envers les locataires,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+49,Les garanties facultatives de l'assurance locative,TF-IDF+SVD-50,15,0.0,0.0,0.0,1.0,0.06666666666666667
+50,Cas où l’assurance locative est facultative,TF-IDF+SVD-50,22,0.0,0.0,0.0,0.0,0.045454545454545456
+51,Assurance location meublée,TF-IDF+SVD-50,6,0.0,0.0,0.0,1.0,0.16666666666666666
+52,Qu’est-ce qu’une location meublée ?,TF-IDF+SVD-50,69,0.0,0.0,0.0,0.0,0.014492753623188406
+53,Assurance location meublée : comment ça se passe ?,TF-IDF+SVD-50,10,0.0,0.0,0.0,1.0,0.1
+54,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,TF-IDF+SVD-50,18,0.0,0.0,0.0,1.0,0.05555555555555555
+55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,TF-IDF+SVD-50,57,0.0,0.0,0.0,0.0,0.017543859649122806
+56,Pourquoi souscrire une assurance pour votre habitation meublé ?,TF-IDF+SVD-50,16,0.0,0.0,0.0,1.0,0.0625
+57,Locataire : quelle assurance meublée choisir ?,TF-IDF+SVD-50,54,0.0,0.0,0.0,0.0,0.018518518518518517
+58,Propriétaire : quelle assurance meublée choisir ?,TF-IDF+SVD-50,9,0.0,0.0,0.0,1.0,0.1111111111111111
+59,À quoi sert l’assurance PNO (Propriétaire non occupant)?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+60,L’assurance PNO est-elle obligatoire ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+61,Que couvre l’assurance PNO ? (propriétaire non occupant),TF-IDF+SVD-50,11,0.0,0.0,0.0,1.0,0.09090909090909091
+62,Assurance Propriétaire bailleur,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+63,L'assurance du propriétaire bailleur est-elle obligatoire ?,TF-IDF+SVD-50,7,0.0,0.0,0.0,1.0,0.14285714285714285
+64,Pourquoi s’assurer en tant que propriétaire bailleur ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+65,Assurance propriétaire bailleur : quelles sont les garanties ?,TF-IDF+SVD-50,13,0.0,0.0,0.0,1.0,0.07692307692307693
+66,Quels sont les principaux risques pour un propriétaire bailleur ?,TF-IDF+SVD-50,16,0.0,0.0,0.0,1.0,0.0625
+67,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,TF-IDF+SVD-50,9,0.0,0.0,0.0,1.0,0.1111111111111111
+68,Qu'est-ce que l'attestation d'assurance ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+69,À quoi sert l’attestation d’assurance habitation ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+70,Locataire : Comment obtenir une attestation d’assurance habitation ?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+71,Propriétaire : comment demander une attestation d’assurance habitation,TF-IDF+SVD-50,12,0.0,0.0,0.0,1.0,0.08333333333333333
+72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,TF-IDF+SVD-50,9,0.0,0.0,0.0,1.0,0.1111111111111111
+73,Comment recevoir son attestation d’assurance habitation MMA ?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+74,Comment compter le nombre de pièces principales ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+75,Pourquoi bien calculer et déclarer le nombre de pièces ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+76,Comment est calculé le prix de l’assurance habitation,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+78,Comment être indemnisé après un dégât des eaux ?,TF-IDF+SVD-50,23,0.0,0.0,0.0,0.0,0.043478260869565216
+79,Comment souscrire à une assurance habitation ?,TF-IDF+SVD-50,41,0.0,0.0,0.0,0.0,0.024390243902439025
+80,Les documents remis à la souscription de votre assurance habitation MMA,TF-IDF+SVD-50,67,0.0,0.0,0.0,0.0,0.014925373134328358
+81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,TF-IDF+SVD-50,97,0.0,0.0,0.0,0.0,0.010309278350515464
+82,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,TF-IDF+SVD-50,5,0.0,0.0,1.0,1.0,0.2
+83,Les assurances proposées par Airbnb sont-elles suffisantes ?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+84,L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+85,L’Assurance Habitation MMA si vous louez une location par une plateforme,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+86,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+87,Qu'est-ce que la télésurveillance ?,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+88,Quels sont les avantages de la télésurveillance ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+89,L’installation d’une alarme de maison avec télésurveillance avec MMA,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+90,Assurance habitation et télésurveillance : vos avantages MMA,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+91,Que se passe-t-il en cas de déménagement ?,TF-IDF+SVD-50,35,0.0,0.0,0.0,0.0,0.02857142857142857
+92,Vous déménagez et vous êtes/devenez propriétaire,TF-IDF+SVD-50,41,0.0,0.0,0.0,0.0,0.024390243902439025
+93,Déménagement avec recours à un déménageur,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+94,Faut-il assurer obligatoirement une résidence secondaire ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+95,Pourquoi assurer une résidence secondaire ?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+96,Quelles sont les garanties MMA conseillées pour votre résidence secondaire,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+97,Comment assurer une résidence secondaire ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+98,Comment fonctionne la franchise d’une assurance habitation ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+99,Responsable ou victime du sinistre : les conséquences sur la franchise,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+100,Quelles sont les franchises habitation MMA,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+101,Qu’est-ce qu’un dégât des eaux ?,TF-IDF+SVD-50,8,0.0,0.0,0.0,1.0,0.125
+102,Qu'est-ce que la garantie dégat des eaux,TF-IDF+SVD-50,12,0.0,0.0,0.0,1.0,0.08333333333333333
+103,Qu'est-ce que la garantie dommagez éléctriques,TF-IDF+SVD-50,10,0.0,0.0,0.0,1.0,0.1
+104,Pourquoi souscrire une garantie Dommages électriques mobilier,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+105,Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,TF-IDF+SVD-50,6,0.0,0.0,0.0,1.0,0.16666666666666666
+106,L'assurance dégât des eaux est-elle obligatoire ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+107,Qu'est-ce que la garantie Dépannage électroménager vidéo,TF-IDF+SVD-50,6,0.0,0.0,0.0,1.0,0.16666666666666666
+108,Qu’est-ce que la garantie Dépannage habitation ?,TF-IDF+SVD-50,5,0.0,0.0,1.0,1.0,0.2
+109,Qu’est-ce que la responsabilité civile ?,TF-IDF+SVD-50,12,0.0,0.0,0.0,1.0,0.08333333333333333
+110,Qu’est-ce que l’assurance responsabilité civile ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+111,L’assurance responsabilité civile est-elle obligatoire ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+112,Que couvre la responsabilité civile de l’assurance habitation ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+113,Que ne couvre pas l’assurance responsabilité civile ?,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+114,L’assurance responsabilité civile partielle,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+115,Comment bénéficier de votre assurance responsabilité civile ?,TF-IDF+SVD-50,5,0.0,0.0,1.0,1.0,0.2
+116,Les prestations dépannage installations MMA,TF-IDF+SVD-50,21,0.0,0.0,0.0,0.0,0.047619047619047616
+117,Les mesures à prendre en cas de sinistre habitation,TF-IDF+SVD-50,162,0.0,0.0,0.0,0.0,0.006172839506172839
+118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,TF-IDF+SVD-50,15,0.0,0.0,0.0,1.0,0.06666666666666667
+119,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+120,Quelle assurance habitation pour les étudiants ?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+121,Que comprend l'assurance habitation étudiante ?,TF-IDF+SVD-50,11,0.0,0.0,0.0,1.0,0.09090909090909091
+122,Quelle assurance pour un logement étudiant ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+123,Quelle assurance habitation étudiant choisir ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+124,Une assurance habitation pour les étudiants boursier,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+125,L'assurance responsabilité civile pour les étudiants,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+126,Assurer une chambre étudiante en colocation,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+127,Assurance habitation étudiant MMA : les garanties complémentaires,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+128,Quelle assurance pour les logements en copropriété ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+129,Télévision cassée : les garanties de votre assurance habitation MMA,TF-IDF+SVD-50,57,0.0,0.0,0.0,0.0,0.017543859649122806
+130,Assurance responsabilité civile et écran TV cassé,TF-IDF+SVD-50,12,0.0,0.0,0.0,1.0,0.08333333333333333
+131,Des options d’assurance habitation pour faire réparer votre écran TV cassé,TF-IDF+SVD-50,95,0.0,0.0,0.0,0.0,0.010526315789473684
+132,Quelle indemnisation par l'assurance habitation TV cassée MMA ?,TF-IDF+SVD-50,7,0.0,0.0,0.0,1.0,0.14285714285714285
+133,Comment est considéré le garage du point de vue de l’assurance ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+134,L’assurance garage ou parking d'un locataire est-elle obligatoire ?,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+135,L’assurance garage auto d’un propriétaire est-elle obligatoire ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+136,L’assurance d’une place de stationnement,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+137,Pourquoi assurer un garage auto ?,TF-IDF+SVD-50,5,0.0,0.0,1.0,1.0,0.2
+138,Quelle assurance de garage souscrire ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+139,Les garanties de votre assurance de garage,TF-IDF+SVD-50,7,0.0,0.0,0.0,1.0,0.14285714285714285
+140,Faut-il assurer une place de parking ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+141,Le garage est-il couvert par l'assurance habitation ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+142,Comment assurer mes biens pendant mon déménagement ?,TF-IDF+SVD-50,5,0.0,0.0,1.0,1.0,0.2
+143,Comment et pourquoi assurer mes biens mis en location ?,TF-IDF+SVD-50,57,0.0,0.0,0.0,0.0,0.017543859649122806
+144,Comment assurer mes biens professionnels dans mon domicile personnel ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,TF-IDF+SVD-50,10,0.0,0.0,0.0,1.0,0.1
+146,Où s'exercent géographiquement les garanties ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+147,Que couvre la garantie renfort évènements climatiques ?,TF-IDF+SVD-50,8,0.0,0.0,0.0,1.0,0.125
+148,Que ne couvre pas la garantie renfort évènements climatiques ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+149,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+150,Les billets de banque sont-ils couverts ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+151,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,TF-IDF+SVD-50,193,0.0,0.0,0.0,0.0,0.0051813471502590676
+153,"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?",TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+154,Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+155,Les panneaux solaires sont-ils couverts ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+156,Les éoliennes sont-elles couvertes ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+157,Les piscines sont-elles assurées ?,TF-IDF+SVD-50,13,0.0,0.0,0.0,1.0,0.07692307692307693
+158,Les abris en matière plastique sont-ils couverts ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+159,"Ma piscine hors sol a été endommagée, suis-je couvert ?",TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+160,"Je me suis blessé avec ma tondeuse, suis-je couvert ?",TF-IDF+SVD-50,27,0.0,0.0,0.0,0.0,0.037037037037037035
+161,Que sont les objets à risque de vol ?,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+162,Quelle est la limite de garantie des biens immobiliers ?,TF-IDF+SVD-50,9,0.0,0.0,0.0,1.0,0.1111111111111111
+163,Quelle est la limite de garantie des dépendances ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+164,Quelle est la limite de garantie des clôtures ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+165,Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+166,Quelle est la limite de garantie des piscines si déclarée ?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+167,Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+168,Quelle est la limite de garantie d'un refoulement des égouts ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+169,Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+170,Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+171,Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+172,Quelle est la limite de garantie des surconsommations d’eau,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+173,Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+174,"En cas de vol par une personne de ma famille, suis-je couvert ?",TF-IDF+SVD-50,112,0.0,0.0,0.0,0.0,0.008928571428571428
+175,"En cas de vol par mon colocataire, suis-je couvert ?",TF-IDF+SVD-50,128,0.0,0.0,0.0,0.0,0.0078125
+176,"On a volé mes skis dans mon casier, suis-je couvert ?",TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+177,"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?",TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+178,"On a volé des biens dans un local partagé, suis-je couvert ?",TF-IDF+SVD-50,35,0.0,0.0,0.0,0.0,0.02857142857142857
+179,"On a volé les biens d'un de mes invités, suis-je couvert ?",TF-IDF+SVD-50,12,0.0,0.0,0.0,1.0,0.08333333333333333
+180,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?",TF-IDF+SVD-50,6,0.0,0.0,0.0,1.0,0.16666666666666666
+181,Qu'est-ce que l'option Revente - évènements personnels ou familiaux,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+182,Qu'est-ce que l'option  Revente - événements extérieurs,TF-IDF+SVD-50,4,0.0,0.0,1.0,1.0,0.25
+183,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+184,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,TF-IDF+SVD-50,2,0.0,1.0,1.0,1.0,0.5
+185,Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,TF-IDF+SVD-50,7,0.0,0.0,0.0,1.0,0.14285714285714285
+186,Est-ce qu'en cas de vol je suis couvert ou pas ?,TF-IDF+SVD-50,31,0.0,0.0,0.0,0.0,0.03225806451612903
+187,"Ma fosse sceptique a débordé, suis-je couvert ?",TF-IDF+SVD-50,86,0.0,0.0,0.0,0.0,0.011627906976744186
+188,Est-ce que les dommages dûs à l'humidité sont couverts ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+189,"Mon sol en marbre a été endommagé, suis-je couvert ?",TF-IDF+SVD-50,133,0.0,0.0,0.0,0.0,0.007518796992481203
+190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",TF-IDF+SVD-50,5,0.0,0.0,1.0,1.0,0.2
+191,Mon aquarium s'est cassé. Suis-je couvert ?,TF-IDF+SVD-50,185,0.0,0.0,0.0,0.0,0.005405405405405406
+192,L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,TF-IDF+SVD-50,11,0.0,0.0,0.0,1.0,0.09090909090909091
+193,Que couvre la garantie déménagement ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+194,Je déménage par moi même. Suis-je couvert ?,TF-IDF+SVD-50,6,0.0,0.0,0.0,1.0,0.16666666666666666
+195,"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?",TF-IDF+SVD-50,5,0.0,0.0,1.0,1.0,0.2
+196,"Je garde des enfants, suis-je couvert ?",TF-IDF+SVD-50,3,0.0,1.0,1.0,1.0,0.3333333333333333
+197,Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+198,Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,TF-IDF+SVD-50,1,1.0,1.0,1.0,1.0,1.0
+199,"Je pratique un sport, suis-je couvert ?",TF-IDF+SVD-50,13,0.0,0.0,0.0,1.0,0.07692307692307693
+200,Quelles sont les formules disponibles ?,TF-IDF+SVD-50,29,0.0,0.0,0.0,0.0,0.034482758620689655
+0,Qu'est-ce que l'assurance responsabilité civile des enfants,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+1,L’assurance enfant incluse dans l’assurance habitation,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+2,L’assurance enfant incluse dans l’assurance scolaire,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,"RRF(TF-IDF,SVD-50)",14,0.0,0.0,0.0,1.0,0.07142857142857142
+4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+5,Ce que le contrat ne garantit jamais,"RRF(TF-IDF,SVD-50)",12,0.0,0.0,0.0,1.0,0.08333333333333333
+6,Problème de serrure,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+7,Que faire en cas de problème de serrure ?,"RRF(TF-IDF,SVD-50)",22,0.0,0.0,0.0,0.0,0.045454545454545456
+8,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?","RRF(TF-IDF,SVD-50)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+9,Propriétaire ou locataire : qui doit payer le serrurier ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+10,Comparatif des renforts et options de la multirisque habitation,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+11,Que faire en cas de dommage électrique ?,"RRF(TF-IDF,SVD-50)",176,0.0,0.0,0.0,0.0,0.005681818181818182
+12,Que faire pendant un dégât des eaux ?,"RRF(TF-IDF,SVD-50)",178,0.0,0.0,0.0,0.0,0.0056179775280898875
+13,Quelle assurance pour les bijoux,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+14,Qu’est-ce qu’un objet de valeur ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+15,Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+16,Indemnisation des bijoux volés ou abimés,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+17,Conseils pour s'assurer contre la perte des bijoux,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+18,Assurance bijoux : les cas particuliers,"RRF(TF-IDF,SVD-50)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+19,Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+20,Les exclusions de la garantie dégât des eaux,"RRF(TF-IDF,SVD-50)",44,0.0,0.0,0.0,0.0,0.022727272727272728
+21,Les dégâts des eaux liés à une catastrophe naturelle,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+22,Les appareils protégés par la garantie Dommages électriques mobilier,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+23,Le renfort Valeur à Neuf Mobilier,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+24,Exemple renfort Valeur à Neuf Mobilier,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+25,Le renfort Valeur à Neuf est il inclus,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+26,Artisan rééquipement à neuf,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+27,Exclusion valeur à neuf,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?","RRF(TF-IDF,SVD-50)",9,0.0,0.0,0.0,1.0,0.1111111111111111
+29,Le contrat habitation est-il obligatoire pour les propriétaires ?,"RRF(TF-IDF,SVD-50)",37,0.0,0.0,0.0,0.0,0.02702702702702703
+30,Le contrat habitation est-il obligatoire pour les locataires ?,"RRF(TF-IDF,SVD-50)",13,0.0,0.0,0.0,1.0,0.07692307692307693
+31,Le contrat habitation est-il obligatoire pour les colocataires ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+32,Le contrat habitation est-il obligatoire pour un logement de fonction ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+33,Le contrat habitation est-il obligatoire pour une location saisonnière ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,"RRF(TF-IDF,SVD-50)",33,0.0,0.0,0.0,0.0,0.030303030303030304
+35,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,"RRF(TF-IDF,SVD-50)",8,0.0,0.0,0.0,1.0,0.125
+36,Que couvre l’assurance de votre employeur en cas de télétravail,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+37,Le télétravail et votre assurance habitation,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+38,Attestation de télétravail,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+39,Que couvre une assurance inondation ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+40,Mon habitation est-elle en zone inondable ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+41,Que couvre l’assurance inondation MMA ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+42,Quelle est la différence entre inondation et catastrophes naturelles ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+43,Comment percevoir les indemnisations en cas d’inondation ?,"RRF(TF-IDF,SVD-50)",101,0.0,0.0,0.0,0.0,0.009900990099009901
+44,Qu'est-ce que l'assurance locataire,"RRF(TF-IDF,SVD-50)",28,0.0,0.0,0.0,0.0,0.03571428571428571
+45,L’assurance locative est-elle obligatoire ?,"RRF(TF-IDF,SVD-50)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+46,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+47,La responsabilité civile du locataire,"RRF(TF-IDF,SVD-50)",18,0.0,0.0,0.0,1.0,0.05555555555555555
+48,La responsabilité du propriétaire envers les locataires,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+49,Les garanties facultatives de l'assurance locative,"RRF(TF-IDF,SVD-50)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+50,Cas où l’assurance locative est facultative,"RRF(TF-IDF,SVD-50)",49,0.0,0.0,0.0,0.0,0.02040816326530612
+51,Assurance location meublée,"RRF(TF-IDF,SVD-50)",29,0.0,0.0,0.0,0.0,0.034482758620689655
+52,Qu’est-ce qu’une location meublée ?,"RRF(TF-IDF,SVD-50)",39,0.0,0.0,0.0,0.0,0.02564102564102564
+53,Assurance location meublée : comment ça se passe ?,"RRF(TF-IDF,SVD-50)",30,0.0,0.0,0.0,0.0,0.03333333333333333
+54,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,"RRF(TF-IDF,SVD-50)",14,0.0,0.0,0.0,1.0,0.07142857142857142
+55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,"RRF(TF-IDF,SVD-50)",46,0.0,0.0,0.0,0.0,0.021739130434782608
+56,Pourquoi souscrire une assurance pour votre habitation meublé ?,"RRF(TF-IDF,SVD-50)",21,0.0,0.0,0.0,0.0,0.047619047619047616
+57,Locataire : quelle assurance meublée choisir ?,"RRF(TF-IDF,SVD-50)",31,0.0,0.0,0.0,0.0,0.03225806451612903
+58,Propriétaire : quelle assurance meublée choisir ?,"RRF(TF-IDF,SVD-50)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+59,À quoi sert l’assurance PNO (Propriétaire non occupant)?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+60,L’assurance PNO est-elle obligatoire ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+61,Que couvre l’assurance PNO ? (propriétaire non occupant),"RRF(TF-IDF,SVD-50)",9,0.0,0.0,0.0,1.0,0.1111111111111111
+62,Assurance Propriétaire bailleur,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+63,L'assurance du propriétaire bailleur est-elle obligatoire ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+64,Pourquoi s’assurer en tant que propriétaire bailleur ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+65,Assurance propriétaire bailleur : quelles sont les garanties ?,"RRF(TF-IDF,SVD-50)",10,0.0,0.0,0.0,1.0,0.1
+66,Quels sont les principaux risques pour un propriétaire bailleur ?,"RRF(TF-IDF,SVD-50)",13,0.0,0.0,0.0,1.0,0.07692307692307693
+67,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,"RRF(TF-IDF,SVD-50)",10,0.0,0.0,0.0,1.0,0.1
+68,Qu'est-ce que l'attestation d'assurance ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+69,À quoi sert l’attestation d’assurance habitation ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+70,Locataire : Comment obtenir une attestation d’assurance habitation ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+71,Propriétaire : comment demander une attestation d’assurance habitation,"RRF(TF-IDF,SVD-50)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,"RRF(TF-IDF,SVD-50)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+73,Comment recevoir son attestation d’assurance habitation MMA ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+74,Comment compter le nombre de pièces principales ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+75,Pourquoi bien calculer et déclarer le nombre de pièces ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+76,Comment est calculé le prix de l’assurance habitation,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+78,Comment être indemnisé après un dégât des eaux ?,"RRF(TF-IDF,SVD-50)",21,0.0,0.0,0.0,0.0,0.047619047619047616
+79,Comment souscrire à une assurance habitation ?,"RRF(TF-IDF,SVD-50)",48,0.0,0.0,0.0,0.0,0.020833333333333332
+80,Les documents remis à la souscription de votre assurance habitation MMA,"RRF(TF-IDF,SVD-50)",71,0.0,0.0,0.0,0.0,0.014084507042253521
+81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,"RRF(TF-IDF,SVD-50)",96,0.0,0.0,0.0,0.0,0.010416666666666666
+82,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+83,Les assurances proposées par Airbnb sont-elles suffisantes ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+84,L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+85,L’Assurance Habitation MMA si vous louez une location par une plateforme,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+86,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,"RRF(TF-IDF,SVD-50)",12,0.0,0.0,0.0,1.0,0.08333333333333333
+87,Qu'est-ce que la télésurveillance ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+88,Quels sont les avantages de la télésurveillance ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+89,L’installation d’une alarme de maison avec télésurveillance avec MMA,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+90,Assurance habitation et télésurveillance : vos avantages MMA,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+91,Que se passe-t-il en cas de déménagement ?,"RRF(TF-IDF,SVD-50)",28,0.0,0.0,0.0,0.0,0.03571428571428571
+92,Vous déménagez et vous êtes/devenez propriétaire,"RRF(TF-IDF,SVD-50)",49,0.0,0.0,0.0,0.0,0.02040816326530612
+93,Déménagement avec recours à un déménageur,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+94,Faut-il assurer obligatoirement une résidence secondaire ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+95,Pourquoi assurer une résidence secondaire ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+96,Quelles sont les garanties MMA conseillées pour votre résidence secondaire,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+97,Comment assurer une résidence secondaire ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+98,Comment fonctionne la franchise d’une assurance habitation ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+99,Responsable ou victime du sinistre : les conséquences sur la franchise,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+100,Quelles sont les franchises habitation MMA,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+101,Qu’est-ce qu’un dégât des eaux ?,"RRF(TF-IDF,SVD-50)",13,0.0,0.0,0.0,1.0,0.07692307692307693
+102,Qu'est-ce que la garantie dégat des eaux,"RRF(TF-IDF,SVD-50)",19,0.0,0.0,0.0,1.0,0.05263157894736842
+103,Qu'est-ce que la garantie dommagez éléctriques,"RRF(TF-IDF,SVD-50)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+104,Pourquoi souscrire une garantie Dommages électriques mobilier,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+105,Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+106,L'assurance dégât des eaux est-elle obligatoire ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+107,Qu'est-ce que la garantie Dépannage électroménager vidéo,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+108,Qu’est-ce que la garantie Dépannage habitation ?,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+109,Qu’est-ce que la responsabilité civile ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+110,Qu’est-ce que l’assurance responsabilité civile ?,"RRF(TF-IDF,SVD-50)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+111,L’assurance responsabilité civile est-elle obligatoire ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+112,Que couvre la responsabilité civile de l’assurance habitation ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+113,Que ne couvre pas l’assurance responsabilité civile ?,"RRF(TF-IDF,SVD-50)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+114,L’assurance responsabilité civile partielle,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+115,Comment bénéficier de votre assurance responsabilité civile ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+116,Les prestations dépannage installations MMA,"RRF(TF-IDF,SVD-50)",49,0.0,0.0,0.0,0.0,0.02040816326530612
+117,Les mesures à prendre en cas de sinistre habitation,"RRF(TF-IDF,SVD-50)",97,0.0,0.0,0.0,0.0,0.010309278350515464
+118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,"RRF(TF-IDF,SVD-50)",27,0.0,0.0,0.0,0.0,0.037037037037037035
+119,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+120,Quelle assurance habitation pour les étudiants ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+121,Que comprend l'assurance habitation étudiante ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+122,Quelle assurance pour un logement étudiant ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+123,Quelle assurance habitation étudiant choisir ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+124,Une assurance habitation pour les étudiants boursier,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+125,L'assurance responsabilité civile pour les étudiants,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+126,Assurer une chambre étudiante en colocation,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+127,Assurance habitation étudiant MMA : les garanties complémentaires,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+128,Quelle assurance pour les logements en copropriété ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+129,Télévision cassée : les garanties de votre assurance habitation MMA,"RRF(TF-IDF,SVD-50)",61,0.0,0.0,0.0,0.0,0.01639344262295082
+130,Assurance responsabilité civile et écran TV cassé,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+131,Des options d’assurance habitation pour faire réparer votre écran TV cassé,"RRF(TF-IDF,SVD-50)",101,0.0,0.0,0.0,0.0,0.009900990099009901
+132,Quelle indemnisation par l'assurance habitation TV cassée MMA ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+133,Comment est considéré le garage du point de vue de l’assurance ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+134,L’assurance garage ou parking d'un locataire est-elle obligatoire ?,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+135,L’assurance garage auto d’un propriétaire est-elle obligatoire ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+136,L’assurance d’une place de stationnement,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+137,Pourquoi assurer un garage auto ?,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+138,Quelle assurance de garage souscrire ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+139,Les garanties de votre assurance de garage,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+140,Faut-il assurer une place de parking ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+141,Le garage est-il couvert par l'assurance habitation ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+142,Comment assurer mes biens pendant mon déménagement ?,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+143,Comment et pourquoi assurer mes biens mis en location ?,"RRF(TF-IDF,SVD-50)",70,0.0,0.0,0.0,0.0,0.014285714285714285
+144,Comment assurer mes biens professionnels dans mon domicile personnel ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,"RRF(TF-IDF,SVD-50)",10,0.0,0.0,0.0,1.0,0.1
+146,Où s'exercent géographiquement les garanties ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+147,Que couvre la garantie renfort évènements climatiques ?,"RRF(TF-IDF,SVD-50)",19,0.0,0.0,0.0,1.0,0.05263157894736842
+148,Que ne couvre pas la garantie renfort évènements climatiques ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+149,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+150,Les billets de banque sont-ils couverts ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+151,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?","RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,"RRF(TF-IDF,SVD-50)",192,0.0,0.0,0.0,0.0,0.005208333333333333
+153,"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?","RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+154,Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+155,Les panneaux solaires sont-ils couverts ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+156,Les éoliennes sont-elles couvertes ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+157,Les piscines sont-elles assurées ?,"RRF(TF-IDF,SVD-50)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+158,Les abris en matière plastique sont-ils couverts ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+159,"Ma piscine hors sol a été endommagée, suis-je couvert ?","RRF(TF-IDF,SVD-50)",34,0.0,0.0,0.0,0.0,0.029411764705882353
+160,"Je me suis blessé avec ma tondeuse, suis-je couvert ?","RRF(TF-IDF,SVD-50)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+161,Que sont les objets à risque de vol ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+162,Quelle est la limite de garantie des biens immobiliers ?,"RRF(TF-IDF,SVD-50)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+163,Quelle est la limite de garantie des dépendances ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+164,Quelle est la limite de garantie des clôtures ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+165,Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+166,Quelle est la limite de garantie des piscines si déclarée ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+167,Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+168,Quelle est la limite de garantie d'un refoulement des égouts ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+169,Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+170,Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+171,Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+172,Quelle est la limite de garantie des surconsommations d’eau,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+173,Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+174,"En cas de vol par une personne de ma famille, suis-je couvert ?","RRF(TF-IDF,SVD-50)",133,0.0,0.0,0.0,0.0,0.007518796992481203
+175,"En cas de vol par mon colocataire, suis-je couvert ?","RRF(TF-IDF,SVD-50)",129,0.0,0.0,0.0,0.0,0.007751937984496124
+176,"On a volé mes skis dans mon casier, suis-je couvert ?","RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+177,"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?","RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+178,"On a volé des biens dans un local partagé, suis-je couvert ?","RRF(TF-IDF,SVD-50)",20,0.0,0.0,0.0,1.0,0.05
+179,"On a volé les biens d'un de mes invités, suis-je couvert ?","RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+180,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?","RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+181,Qu'est-ce que l'option Revente - évènements personnels ou familiaux,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+182,Qu'est-ce que l'option  Revente - événements extérieurs,"RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+183,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+184,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+185,Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,"RRF(TF-IDF,SVD-50)",5,0.0,0.0,1.0,1.0,0.2
+186,Est-ce qu'en cas de vol je suis couvert ou pas ?,"RRF(TF-IDF,SVD-50)",38,0.0,0.0,0.0,0.0,0.02631578947368421
+187,"Ma fosse sceptique a débordé, suis-je couvert ?","RRF(TF-IDF,SVD-50)",141,0.0,0.0,0.0,0.0,0.0070921985815602835
+188,Est-ce que les dommages dûs à l'humidité sont couverts ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+189,"Mon sol en marbre a été endommagé, suis-je couvert ?","RRF(TF-IDF,SVD-50)",173,0.0,0.0,0.0,0.0,0.005780346820809248
+190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?","RRF(TF-IDF,SVD-50)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+191,Mon aquarium s'est cassé. Suis-je couvert ?,"RRF(TF-IDF,SVD-50)",201,0.0,0.0,0.0,0.0,0.004975124378109453
+192,L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,"RRF(TF-IDF,SVD-50)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+193,Que couvre la garantie déménagement ?,"RRF(TF-IDF,SVD-50)",2,0.0,1.0,1.0,1.0,0.5
+194,Je déménage par moi même. Suis-je couvert ?,"RRF(TF-IDF,SVD-50)",4,0.0,0.0,1.0,1.0,0.25
+195,"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?","RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+196,"Je garde des enfants, suis-je couvert ?","RRF(TF-IDF,SVD-50)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+197,Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+198,Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,"RRF(TF-IDF,SVD-50)",1,1.0,1.0,1.0,1.0,1.0
+199,"Je pratique un sport, suis-je couvert ?","RRF(TF-IDF,SVD-50)",8,0.0,0.0,0.0,1.0,0.125
+200,Quelles sont les formules disponibles ?,"RRF(TF-IDF,SVD-50)",10,0.0,0.0,0.0,1.0,0.1
+0,Qu'est-ce que l'assurance responsabilité civile des enfants,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+1,L’assurance enfant incluse dans l’assurance habitation,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+2,L’assurance enfant incluse dans l’assurance scolaire,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,TF-IDF+SVD-100,7,0.0,0.0,0.0,1.0,0.14285714285714285
+4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,TF-IDF+SVD-100,6,0.0,0.0,0.0,1.0,0.16666666666666666
+5,Ce que le contrat ne garantit jamais,TF-IDF+SVD-100,31,0.0,0.0,0.0,0.0,0.03225806451612903
+6,Problème de serrure,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+7,Que faire en cas de problème de serrure ?,TF-IDF+SVD-100,12,0.0,0.0,0.0,1.0,0.08333333333333333
+8,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?",TF-IDF+SVD-100,9,0.0,0.0,0.0,1.0,0.1111111111111111
+9,Propriétaire ou locataire : qui doit payer le serrurier ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+10,Comparatif des renforts et options de la multirisque habitation,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+11,Que faire en cas de dommage électrique ?,TF-IDF+SVD-100,195,0.0,0.0,0.0,0.0,0.005128205128205128
+12,Que faire pendant un dégât des eaux ?,TF-IDF+SVD-100,184,0.0,0.0,0.0,0.0,0.005434782608695652
+13,Quelle assurance pour les bijoux,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+14,Qu’est-ce qu’un objet de valeur ?,TF-IDF+SVD-100,6,0.0,0.0,0.0,1.0,0.16666666666666666
+15,Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+16,Indemnisation des bijoux volés ou abimés,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+17,Conseils pour s'assurer contre la perte des bijoux,TF-IDF+SVD-100,7,0.0,0.0,0.0,1.0,0.14285714285714285
+18,Assurance bijoux : les cas particuliers,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+19,Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+20,Les exclusions de la garantie dégât des eaux,TF-IDF+SVD-100,22,0.0,0.0,0.0,0.0,0.045454545454545456
+21,Les dégâts des eaux liés à une catastrophe naturelle,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+22,Les appareils protégés par la garantie Dommages électriques mobilier,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+23,Le renfort Valeur à Neuf Mobilier,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+24,Exemple renfort Valeur à Neuf Mobilier,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+25,Le renfort Valeur à Neuf est il inclus,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+26,Artisan rééquipement à neuf,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+27,Exclusion valeur à neuf,TF-IDF+SVD-100,6,0.0,0.0,0.0,1.0,0.16666666666666666
+28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",TF-IDF+SVD-100,17,0.0,0.0,0.0,1.0,0.058823529411764705
+29,Le contrat habitation est-il obligatoire pour les propriétaires ?,TF-IDF+SVD-100,34,0.0,0.0,0.0,0.0,0.029411764705882353
+30,Le contrat habitation est-il obligatoire pour les locataires ?,TF-IDF+SVD-100,9,0.0,0.0,0.0,1.0,0.1111111111111111
+31,Le contrat habitation est-il obligatoire pour les colocataires ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+32,Le contrat habitation est-il obligatoire pour un logement de fonction ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+33,Le contrat habitation est-il obligatoire pour une location saisonnière ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,TF-IDF+SVD-100,43,0.0,0.0,0.0,0.0,0.023255813953488372
+35,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,TF-IDF+SVD-100,16,0.0,0.0,0.0,1.0,0.0625
+36,Que couvre l’assurance de votre employeur en cas de télétravail,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+37,Le télétravail et votre assurance habitation,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+38,Attestation de télétravail,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+39,Que couvre une assurance inondation ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+40,Mon habitation est-elle en zone inondable ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+41,Que couvre l’assurance inondation MMA ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+42,Quelle est la différence entre inondation et catastrophes naturelles ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+43,Comment percevoir les indemnisations en cas d’inondation ?,TF-IDF+SVD-100,105,0.0,0.0,0.0,0.0,0.009523809523809525
+44,Qu'est-ce que l'assurance locataire,TF-IDF+SVD-100,17,0.0,0.0,0.0,1.0,0.058823529411764705
+45,L’assurance locative est-elle obligatoire ?,TF-IDF+SVD-100,20,0.0,0.0,0.0,1.0,0.05
+46,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+47,La responsabilité civile du locataire,TF-IDF+SVD-100,24,0.0,0.0,0.0,0.0,0.041666666666666664
+48,La responsabilité du propriétaire envers les locataires,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+49,Les garanties facultatives de l'assurance locative,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+50,Cas où l’assurance locative est facultative,TF-IDF+SVD-100,38,0.0,0.0,0.0,0.0,0.02631578947368421
+51,Assurance location meublée,TF-IDF+SVD-100,47,0.0,0.0,0.0,0.0,0.02127659574468085
+52,Qu’est-ce qu’une location meublée ?,TF-IDF+SVD-100,120,0.0,0.0,0.0,0.0,0.008333333333333333
+53,Assurance location meublée : comment ça se passe ?,TF-IDF+SVD-100,27,0.0,0.0,0.0,0.0,0.037037037037037035
+54,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,TF-IDF+SVD-100,7,0.0,0.0,0.0,1.0,0.14285714285714285
+55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,TF-IDF+SVD-100,38,0.0,0.0,0.0,0.0,0.02631578947368421
+56,Pourquoi souscrire une assurance pour votre habitation meublé ?,TF-IDF+SVD-100,22,0.0,0.0,0.0,0.0,0.045454545454545456
+57,Locataire : quelle assurance meublée choisir ?,TF-IDF+SVD-100,50,0.0,0.0,0.0,0.0,0.02
+58,Propriétaire : quelle assurance meublée choisir ?,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+59,À quoi sert l’assurance PNO (Propriétaire non occupant)?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+60,L’assurance PNO est-elle obligatoire ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+61,Que couvre l’assurance PNO ? (propriétaire non occupant),TF-IDF+SVD-100,6,0.0,0.0,0.0,1.0,0.16666666666666666
+62,Assurance Propriétaire bailleur,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+63,L'assurance du propriétaire bailleur est-elle obligatoire ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+64,Pourquoi s’assurer en tant que propriétaire bailleur ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+65,Assurance propriétaire bailleur : quelles sont les garanties ?,TF-IDF+SVD-100,9,0.0,0.0,0.0,1.0,0.1111111111111111
+66,Quels sont les principaux risques pour un propriétaire bailleur ?,TF-IDF+SVD-100,14,0.0,0.0,0.0,1.0,0.07142857142857142
+67,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,TF-IDF+SVD-100,7,0.0,0.0,0.0,1.0,0.14285714285714285
+68,Qu'est-ce que l'attestation d'assurance ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+69,À quoi sert l’attestation d’assurance habitation ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+70,Locataire : Comment obtenir une attestation d’assurance habitation ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+71,Propriétaire : comment demander une attestation d’assurance habitation,TF-IDF+SVD-100,8,0.0,0.0,0.0,1.0,0.125
+72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,TF-IDF+SVD-100,10,0.0,0.0,0.0,1.0,0.1
+73,Comment recevoir son attestation d’assurance habitation MMA ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+74,Comment compter le nombre de pièces principales ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+75,Pourquoi bien calculer et déclarer le nombre de pièces ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+76,Comment est calculé le prix de l’assurance habitation,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+78,Comment être indemnisé après un dégât des eaux ?,TF-IDF+SVD-100,21,0.0,0.0,0.0,0.0,0.047619047619047616
+79,Comment souscrire à une assurance habitation ?,TF-IDF+SVD-100,54,0.0,0.0,0.0,0.0,0.018518518518518517
+80,Les documents remis à la souscription de votre assurance habitation MMA,TF-IDF+SVD-100,52,0.0,0.0,0.0,0.0,0.019230769230769232
+81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,TF-IDF+SVD-100,153,0.0,0.0,0.0,0.0,0.006535947712418301
+82,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+83,Les assurances proposées par Airbnb sont-elles suffisantes ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+84,L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+85,L’Assurance Habitation MMA si vous louez une location par une plateforme,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+86,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,TF-IDF+SVD-100,24,0.0,0.0,0.0,0.0,0.041666666666666664
+87,Qu'est-ce que la télésurveillance ?,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+88,Quels sont les avantages de la télésurveillance ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+89,L’installation d’une alarme de maison avec télésurveillance avec MMA,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+90,Assurance habitation et télésurveillance : vos avantages MMA,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+91,Que se passe-t-il en cas de déménagement ?,TF-IDF+SVD-100,27,0.0,0.0,0.0,0.0,0.037037037037037035
+92,Vous déménagez et vous êtes/devenez propriétaire,TF-IDF+SVD-100,27,0.0,0.0,0.0,0.0,0.037037037037037035
+93,Déménagement avec recours à un déménageur,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+94,Faut-il assurer obligatoirement une résidence secondaire ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+95,Pourquoi assurer une résidence secondaire ?,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+96,Quelles sont les garanties MMA conseillées pour votre résidence secondaire,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+97,Comment assurer une résidence secondaire ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+98,Comment fonctionne la franchise d’une assurance habitation ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+99,Responsable ou victime du sinistre : les conséquences sur la franchise,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+100,Quelles sont les franchises habitation MMA,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+101,Qu’est-ce qu’un dégât des eaux ?,TF-IDF+SVD-100,16,0.0,0.0,0.0,1.0,0.0625
+102,Qu'est-ce que la garantie dégat des eaux,TF-IDF+SVD-100,27,0.0,0.0,0.0,0.0,0.037037037037037035
+103,Qu'est-ce que la garantie dommagez éléctriques,TF-IDF+SVD-100,16,0.0,0.0,0.0,1.0,0.0625
+104,Pourquoi souscrire une garantie Dommages électriques mobilier,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+105,Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+106,L'assurance dégât des eaux est-elle obligatoire ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+107,Qu'est-ce que la garantie Dépannage électroménager vidéo,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+108,Qu’est-ce que la garantie Dépannage habitation ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+109,Qu’est-ce que la responsabilité civile ?,TF-IDF+SVD-100,7,0.0,0.0,0.0,1.0,0.14285714285714285
+110,Qu’est-ce que l’assurance responsabilité civile ?,TF-IDF+SVD-100,6,0.0,0.0,0.0,1.0,0.16666666666666666
+111,L’assurance responsabilité civile est-elle obligatoire ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+112,Que couvre la responsabilité civile de l’assurance habitation ?,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+113,Que ne couvre pas l’assurance responsabilité civile ?,TF-IDF+SVD-100,12,0.0,0.0,0.0,1.0,0.08333333333333333
+114,L’assurance responsabilité civile partielle,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+115,Comment bénéficier de votre assurance responsabilité civile ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+116,Les prestations dépannage installations MMA,TF-IDF+SVD-100,28,0.0,0.0,0.0,0.0,0.03571428571428571
+117,Les mesures à prendre en cas de sinistre habitation,TF-IDF+SVD-100,90,0.0,0.0,0.0,0.0,0.011111111111111112
+118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,TF-IDF+SVD-100,32,0.0,0.0,0.0,0.0,0.03125
+119,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+120,Quelle assurance habitation pour les étudiants ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+121,Que comprend l'assurance habitation étudiante ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+122,Quelle assurance pour un logement étudiant ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+123,Quelle assurance habitation étudiant choisir ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+124,Une assurance habitation pour les étudiants boursier,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+125,L'assurance responsabilité civile pour les étudiants,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+126,Assurer une chambre étudiante en colocation,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+127,Assurance habitation étudiant MMA : les garanties complémentaires,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+128,Quelle assurance pour les logements en copropriété ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+129,Télévision cassée : les garanties de votre assurance habitation MMA,TF-IDF+SVD-100,71,0.0,0.0,0.0,0.0,0.014084507042253521
+130,Assurance responsabilité civile et écran TV cassé,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+131,Des options d’assurance habitation pour faire réparer votre écran TV cassé,TF-IDF+SVD-100,53,0.0,0.0,0.0,0.0,0.018867924528301886
+132,Quelle indemnisation par l'assurance habitation TV cassée MMA ?,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+133,Comment est considéré le garage du point de vue de l’assurance ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+134,L’assurance garage ou parking d'un locataire est-elle obligatoire ?,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+135,L’assurance garage auto d’un propriétaire est-elle obligatoire ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+136,L’assurance d’une place de stationnement,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+137,Pourquoi assurer un garage auto ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+138,Quelle assurance de garage souscrire ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+139,Les garanties de votre assurance de garage,TF-IDF+SVD-100,7,0.0,0.0,0.0,1.0,0.14285714285714285
+140,Faut-il assurer une place de parking ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+141,Le garage est-il couvert par l'assurance habitation ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+142,Comment assurer mes biens pendant mon déménagement ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+143,Comment et pourquoi assurer mes biens mis en location ?,TF-IDF+SVD-100,53,0.0,0.0,0.0,0.0,0.018867924528301886
+144,Comment assurer mes biens professionnels dans mon domicile personnel ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,TF-IDF+SVD-100,10,0.0,0.0,0.0,1.0,0.1
+146,Où s'exercent géographiquement les garanties ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+147,Que couvre la garantie renfort évènements climatiques ?,TF-IDF+SVD-100,19,0.0,0.0,0.0,1.0,0.05263157894736842
+148,Que ne couvre pas la garantie renfort évènements climatiques ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+149,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+150,Les billets de banque sont-ils couverts ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+151,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,TF-IDF+SVD-100,185,0.0,0.0,0.0,0.0,0.005405405405405406
+153,"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?",TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+154,Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+155,Les panneaux solaires sont-ils couverts ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+156,Les éoliennes sont-elles couvertes ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+157,Les piscines sont-elles assurées ?,TF-IDF+SVD-100,60,0.0,0.0,0.0,0.0,0.016666666666666666
+158,Les abris en matière plastique sont-ils couverts ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+159,"Ma piscine hors sol a été endommagée, suis-je couvert ?",TF-IDF+SVD-100,7,0.0,0.0,0.0,1.0,0.14285714285714285
+160,"Je me suis blessé avec ma tondeuse, suis-je couvert ?",TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+161,Que sont les objets à risque de vol ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+162,Quelle est la limite de garantie des biens immobiliers ?,TF-IDF+SVD-100,6,0.0,0.0,0.0,1.0,0.16666666666666666
+163,Quelle est la limite de garantie des dépendances ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+164,Quelle est la limite de garantie des clôtures ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+165,Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+166,Quelle est la limite de garantie des piscines si déclarée ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+167,Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+168,Quelle est la limite de garantie d'un refoulement des égouts ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+169,Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+170,Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+171,Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+172,Quelle est la limite de garantie des surconsommations d’eau,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+173,Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+174,"En cas de vol par une personne de ma famille, suis-je couvert ?",TF-IDF+SVD-100,125,0.0,0.0,0.0,0.0,0.008
+175,"En cas de vol par mon colocataire, suis-je couvert ?",TF-IDF+SVD-100,171,0.0,0.0,0.0,0.0,0.005847953216374269
+176,"On a volé mes skis dans mon casier, suis-je couvert ?",TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+177,"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?",TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+178,"On a volé des biens dans un local partagé, suis-je couvert ?",TF-IDF+SVD-100,19,0.0,0.0,0.0,1.0,0.05263157894736842
+179,"On a volé les biens d'un de mes invités, suis-je couvert ?",TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+180,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?",TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+181,Qu'est-ce que l'option Revente - évènements personnels ou familiaux,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+182,Qu'est-ce que l'option  Revente - événements extérieurs,TF-IDF+SVD-100,4,0.0,0.0,1.0,1.0,0.25
+183,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+184,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+185,Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,TF-IDF+SVD-100,6,0.0,0.0,0.0,1.0,0.16666666666666666
+186,Est-ce qu'en cas de vol je suis couvert ou pas ?,TF-IDF+SVD-100,66,0.0,0.0,0.0,0.0,0.015151515151515152
+187,"Ma fosse sceptique a débordé, suis-je couvert ?",TF-IDF+SVD-100,155,0.0,0.0,0.0,0.0,0.0064516129032258064
+188,Est-ce que les dommages dûs à l'humidité sont couverts ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+189,"Mon sol en marbre a été endommagé, suis-je couvert ?",TF-IDF+SVD-100,113,0.0,0.0,0.0,0.0,0.008849557522123894
+190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+191,Mon aquarium s'est cassé. Suis-je couvert ?,TF-IDF+SVD-100,185,0.0,0.0,0.0,0.0,0.005405405405405406
+192,L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,TF-IDF+SVD-100,8,0.0,0.0,0.0,1.0,0.125
+193,Que couvre la garantie déménagement ?,TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+194,Je déménage par moi même. Suis-je couvert ?,TF-IDF+SVD-100,5,0.0,0.0,1.0,1.0,0.2
+195,"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?",TF-IDF+SVD-100,3,0.0,1.0,1.0,1.0,0.3333333333333333
+196,"Je garde des enfants, suis-je couvert ?",TF-IDF+SVD-100,2,0.0,1.0,1.0,1.0,0.5
+197,Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+198,Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,TF-IDF+SVD-100,1,1.0,1.0,1.0,1.0,1.0
+199,"Je pratique un sport, suis-je couvert ?",TF-IDF+SVD-100,7,0.0,0.0,0.0,1.0,0.14285714285714285
+200,Quelles sont les formules disponibles ?,TF-IDF+SVD-100,16,0.0,0.0,0.0,1.0,0.0625
+0,Qu'est-ce que l'assurance responsabilité civile des enfants,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+1,L’assurance enfant incluse dans l’assurance habitation,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+2,L’assurance enfant incluse dans l’assurance scolaire,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,"RRF(TF-IDF,SVD-100)",13,0.0,0.0,0.0,1.0,0.07692307692307693
+4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,"RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+5,Ce que le contrat ne garantit jamais,"RRF(TF-IDF,SVD-100)",26,0.0,0.0,0.0,0.0,0.038461538461538464
+6,Problème de serrure,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+7,Que faire en cas de problème de serrure ?,"RRF(TF-IDF,SVD-100)",22,0.0,0.0,0.0,0.0,0.045454545454545456
+8,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?","RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+9,Propriétaire ou locataire : qui doit payer le serrurier ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+10,Comparatif des renforts et options de la multirisque habitation,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+11,Que faire en cas de dommage électrique ?,"RRF(TF-IDF,SVD-100)",193,0.0,0.0,0.0,0.0,0.0051813471502590676
+12,Que faire pendant un dégât des eaux ?,"RRF(TF-IDF,SVD-100)",178,0.0,0.0,0.0,0.0,0.0056179775280898875
+13,Quelle assurance pour les bijoux,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+14,Qu’est-ce qu’un objet de valeur ?,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+15,Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+16,Indemnisation des bijoux volés ou abimés,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+17,Conseils pour s'assurer contre la perte des bijoux,"RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+18,Assurance bijoux : les cas particuliers,"RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+19,Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+20,Les exclusions de la garantie dégât des eaux,"RRF(TF-IDF,SVD-100)",43,0.0,0.0,0.0,0.0,0.023255813953488372
+21,Les dégâts des eaux liés à une catastrophe naturelle,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+22,Les appareils protégés par la garantie Dommages électriques mobilier,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+23,Le renfort Valeur à Neuf Mobilier,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+24,Exemple renfort Valeur à Neuf Mobilier,"RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+25,Le renfort Valeur à Neuf est il inclus,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+26,Artisan rééquipement à neuf,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+27,Exclusion valeur à neuf,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?","RRF(TF-IDF,SVD-100)",14,0.0,0.0,0.0,1.0,0.07142857142857142
+29,Le contrat habitation est-il obligatoire pour les propriétaires ?,"RRF(TF-IDF,SVD-100)",40,0.0,0.0,0.0,0.0,0.025
+30,Le contrat habitation est-il obligatoire pour les locataires ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+31,Le contrat habitation est-il obligatoire pour les colocataires ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+32,Le contrat habitation est-il obligatoire pour un logement de fonction ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+33,Le contrat habitation est-il obligatoire pour une location saisonnière ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,"RRF(TF-IDF,SVD-100)",42,0.0,0.0,0.0,0.0,0.023809523809523808
+35,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,"RRF(TF-IDF,SVD-100)",13,0.0,0.0,0.0,1.0,0.07692307692307693
+36,Que couvre l’assurance de votre employeur en cas de télétravail,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+37,Le télétravail et votre assurance habitation,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+38,Attestation de télétravail,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+39,Que couvre une assurance inondation ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+40,Mon habitation est-elle en zone inondable ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+41,Que couvre l’assurance inondation MMA ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+42,Quelle est la différence entre inondation et catastrophes naturelles ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+43,Comment percevoir les indemnisations en cas d’inondation ?,"RRF(TF-IDF,SVD-100)",95,0.0,0.0,0.0,0.0,0.010526315789473684
+44,Qu'est-ce que l'assurance locataire,"RRF(TF-IDF,SVD-100)",15,0.0,0.0,0.0,1.0,0.06666666666666667
+45,L’assurance locative est-elle obligatoire ?,"RRF(TF-IDF,SVD-100)",17,0.0,0.0,0.0,1.0,0.058823529411764705
+46,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+47,La responsabilité civile du locataire,"RRF(TF-IDF,SVD-100)",26,0.0,0.0,0.0,0.0,0.038461538461538464
+48,La responsabilité du propriétaire envers les locataires,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+49,Les garanties facultatives de l'assurance locative,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+50,Cas où l’assurance locative est facultative,"RRF(TF-IDF,SVD-100)",64,0.0,0.0,0.0,0.0,0.015625
+51,Assurance location meublée,"RRF(TF-IDF,SVD-100)",66,0.0,0.0,0.0,0.0,0.015151515151515152
+52,Qu’est-ce qu’une location meublée ?,"RRF(TF-IDF,SVD-100)",49,0.0,0.0,0.0,0.0,0.02040816326530612
+53,Assurance location meublée : comment ça se passe ?,"RRF(TF-IDF,SVD-100)",51,0.0,0.0,0.0,0.0,0.0196078431372549
+54,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,"RRF(TF-IDF,SVD-100)",10,0.0,0.0,0.0,1.0,0.1
+55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,"RRF(TF-IDF,SVD-100)",40,0.0,0.0,0.0,0.0,0.025
+56,Pourquoi souscrire une assurance pour votre habitation meublé ?,"RRF(TF-IDF,SVD-100)",26,0.0,0.0,0.0,0.0,0.038461538461538464
+57,Locataire : quelle assurance meublée choisir ?,"RRF(TF-IDF,SVD-100)",32,0.0,0.0,0.0,0.0,0.03125
+58,Propriétaire : quelle assurance meublée choisir ?,"RRF(TF-IDF,SVD-100)",8,0.0,0.0,0.0,1.0,0.125
+59,À quoi sert l’assurance PNO (Propriétaire non occupant)?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+60,L’assurance PNO est-elle obligatoire ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+61,Que couvre l’assurance PNO ? (propriétaire non occupant),"RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+62,Assurance Propriétaire bailleur,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+63,L'assurance du propriétaire bailleur est-elle obligatoire ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+64,Pourquoi s’assurer en tant que propriétaire bailleur ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+65,Assurance propriétaire bailleur : quelles sont les garanties ?,"RRF(TF-IDF,SVD-100)",10,0.0,0.0,0.0,1.0,0.1
+66,Quels sont les principaux risques pour un propriétaire bailleur ?,"RRF(TF-IDF,SVD-100)",10,0.0,0.0,0.0,1.0,0.1
+67,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,"RRF(TF-IDF,SVD-100)",9,0.0,0.0,0.0,1.0,0.1111111111111111
+68,Qu'est-ce que l'attestation d'assurance ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+69,À quoi sert l’attestation d’assurance habitation ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+70,Locataire : Comment obtenir une attestation d’assurance habitation ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+71,Propriétaire : comment demander une attestation d’assurance habitation,"RRF(TF-IDF,SVD-100)",8,0.0,0.0,0.0,1.0,0.125
+72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,"RRF(TF-IDF,SVD-100)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+73,Comment recevoir son attestation d’assurance habitation MMA ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+74,Comment compter le nombre de pièces principales ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+75,Pourquoi bien calculer et déclarer le nombre de pièces ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+76,Comment est calculé le prix de l’assurance habitation,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+78,Comment être indemnisé après un dégât des eaux ?,"RRF(TF-IDF,SVD-100)",21,0.0,0.0,0.0,0.0,0.047619047619047616
+79,Comment souscrire à une assurance habitation ?,"RRF(TF-IDF,SVD-100)",55,0.0,0.0,0.0,0.0,0.01818181818181818
+80,Les documents remis à la souscription de votre assurance habitation MMA,"RRF(TF-IDF,SVD-100)",62,0.0,0.0,0.0,0.0,0.016129032258064516
+81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,"RRF(TF-IDF,SVD-100)",110,0.0,0.0,0.0,0.0,0.00909090909090909
+82,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+83,Les assurances proposées par Airbnb sont-elles suffisantes ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+84,L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+85,L’Assurance Habitation MMA si vous louez une location par une plateforme,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+86,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,"RRF(TF-IDF,SVD-100)",27,0.0,0.0,0.0,0.0,0.037037037037037035
+87,Qu'est-ce que la télésurveillance ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+88,Quels sont les avantages de la télésurveillance ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+89,L’installation d’une alarme de maison avec télésurveillance avec MMA,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+90,Assurance habitation et télésurveillance : vos avantages MMA,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+91,Que se passe-t-il en cas de déménagement ?,"RRF(TF-IDF,SVD-100)",26,0.0,0.0,0.0,0.0,0.038461538461538464
+92,Vous déménagez et vous êtes/devenez propriétaire,"RRF(TF-IDF,SVD-100)",42,0.0,0.0,0.0,0.0,0.023809523809523808
+93,Déménagement avec recours à un déménageur,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+94,Faut-il assurer obligatoirement une résidence secondaire ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+95,Pourquoi assurer une résidence secondaire ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+96,Quelles sont les garanties MMA conseillées pour votre résidence secondaire,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+97,Comment assurer une résidence secondaire ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+98,Comment fonctionne la franchise d’une assurance habitation ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+99,Responsable ou victime du sinistre : les conséquences sur la franchise,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+100,Quelles sont les franchises habitation MMA,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+101,Qu’est-ce qu’un dégât des eaux ?,"RRF(TF-IDF,SVD-100)",19,0.0,0.0,0.0,1.0,0.05263157894736842
+102,Qu'est-ce que la garantie dégat des eaux,"RRF(TF-IDF,SVD-100)",28,0.0,0.0,0.0,0.0,0.03571428571428571
+103,Qu'est-ce que la garantie dommagez éléctriques,"RRF(TF-IDF,SVD-100)",14,0.0,0.0,0.0,1.0,0.07142857142857142
+104,Pourquoi souscrire une garantie Dommages électriques mobilier,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+105,Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+106,L'assurance dégât des eaux est-elle obligatoire ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+107,Qu'est-ce que la garantie Dépannage électroménager vidéo,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+108,Qu’est-ce que la garantie Dépannage habitation ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+109,Qu’est-ce que la responsabilité civile ?,"RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+110,Qu’est-ce que l’assurance responsabilité civile ?,"RRF(TF-IDF,SVD-100)",9,0.0,0.0,0.0,1.0,0.1111111111111111
+111,L’assurance responsabilité civile est-elle obligatoire ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+112,Que couvre la responsabilité civile de l’assurance habitation ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+113,Que ne couvre pas l’assurance responsabilité civile ?,"RRF(TF-IDF,SVD-100)",14,0.0,0.0,0.0,1.0,0.07142857142857142
+114,L’assurance responsabilité civile partielle,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+115,Comment bénéficier de votre assurance responsabilité civile ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+116,Les prestations dépannage installations MMA,"RRF(TF-IDF,SVD-100)",60,0.0,0.0,0.0,0.0,0.016666666666666666
+117,Les mesures à prendre en cas de sinistre habitation,"RRF(TF-IDF,SVD-100)",74,0.0,0.0,0.0,0.0,0.013513513513513514
+118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,"RRF(TF-IDF,SVD-100)",37,0.0,0.0,0.0,0.0,0.02702702702702703
+119,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+120,Quelle assurance habitation pour les étudiants ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+121,Que comprend l'assurance habitation étudiante ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+122,Quelle assurance pour un logement étudiant ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+123,Quelle assurance habitation étudiant choisir ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+124,Une assurance habitation pour les étudiants boursier,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+125,L'assurance responsabilité civile pour les étudiants,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+126,Assurer une chambre étudiante en colocation,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+127,Assurance habitation étudiant MMA : les garanties complémentaires,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+128,Quelle assurance pour les logements en copropriété ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+129,Télévision cassée : les garanties de votre assurance habitation MMA,"RRF(TF-IDF,SVD-100)",65,0.0,0.0,0.0,0.0,0.015384615384615385
+130,Assurance responsabilité civile et écran TV cassé,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+131,Des options d’assurance habitation pour faire réparer votre écran TV cassé,"RRF(TF-IDF,SVD-100)",70,0.0,0.0,0.0,0.0,0.014285714285714285
+132,Quelle indemnisation par l'assurance habitation TV cassée MMA ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+133,Comment est considéré le garage du point de vue de l’assurance ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+134,L’assurance garage ou parking d'un locataire est-elle obligatoire ?,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+135,L’assurance garage auto d’un propriétaire est-elle obligatoire ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+136,L’assurance d’une place de stationnement,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+137,Pourquoi assurer un garage auto ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+138,Quelle assurance de garage souscrire ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+139,Les garanties de votre assurance de garage,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+140,Faut-il assurer une place de parking ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+141,Le garage est-il couvert par l'assurance habitation ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+142,Comment assurer mes biens pendant mon déménagement ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+143,Comment et pourquoi assurer mes biens mis en location ?,"RRF(TF-IDF,SVD-100)",63,0.0,0.0,0.0,0.0,0.015873015873015872
+144,Comment assurer mes biens professionnels dans mon domicile personnel ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,"RRF(TF-IDF,SVD-100)",10,0.0,0.0,0.0,1.0,0.1
+146,Où s'exercent géographiquement les garanties ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+147,Que couvre la garantie renfort évènements climatiques ?,"RRF(TF-IDF,SVD-100)",31,0.0,0.0,0.0,0.0,0.03225806451612903
+148,Que ne couvre pas la garantie renfort évènements climatiques ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+149,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+150,Les billets de banque sont-ils couverts ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+151,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?","RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,"RRF(TF-IDF,SVD-100)",190,0.0,0.0,0.0,0.0,0.005263157894736842
+153,"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?","RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+154,Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+155,Les panneaux solaires sont-ils couverts ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+156,Les éoliennes sont-elles couvertes ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+157,Les piscines sont-elles assurées ?,"RRF(TF-IDF,SVD-100)",40,0.0,0.0,0.0,0.0,0.025
+158,Les abris en matière plastique sont-ils couverts ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+159,"Ma piscine hors sol a été endommagée, suis-je couvert ?","RRF(TF-IDF,SVD-100)",42,0.0,0.0,0.0,0.0,0.023809523809523808
+160,"Je me suis blessé avec ma tondeuse, suis-je couvert ?","RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+161,Que sont les objets à risque de vol ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+162,Quelle est la limite de garantie des biens immobiliers ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+163,Quelle est la limite de garantie des dépendances ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+164,Quelle est la limite de garantie des clôtures ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+165,Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+166,Quelle est la limite de garantie des piscines si déclarée ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+167,Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+168,Quelle est la limite de garantie d'un refoulement des égouts ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+169,Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+170,Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+171,Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+172,Quelle est la limite de garantie des surconsommations d’eau,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+173,Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+174,"En cas de vol par une personne de ma famille, suis-je couvert ?","RRF(TF-IDF,SVD-100)",142,0.0,0.0,0.0,0.0,0.007042253521126761
+175,"En cas de vol par mon colocataire, suis-je couvert ?","RRF(TF-IDF,SVD-100)",149,0.0,0.0,0.0,0.0,0.006711409395973154
+176,"On a volé mes skis dans mon casier, suis-je couvert ?","RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+177,"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?","RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+178,"On a volé des biens dans un local partagé, suis-je couvert ?","RRF(TF-IDF,SVD-100)",17,0.0,0.0,0.0,1.0,0.058823529411764705
+179,"On a volé les biens d'un de mes invités, suis-je couvert ?","RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+180,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?","RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+181,Qu'est-ce que l'option Revente - évènements personnels ou familiaux,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+182,Qu'est-ce que l'option  Revente - événements extérieurs,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+183,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,"RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+184,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+185,Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,"RRF(TF-IDF,SVD-100)",5,0.0,0.0,1.0,1.0,0.2
+186,Est-ce qu'en cas de vol je suis couvert ou pas ?,"RRF(TF-IDF,SVD-100)",55,0.0,0.0,0.0,0.0,0.01818181818181818
+187,"Ma fosse sceptique a débordé, suis-je couvert ?","RRF(TF-IDF,SVD-100)",194,0.0,0.0,0.0,0.0,0.005154639175257732
+188,Est-ce que les dommages dûs à l'humidité sont couverts ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+189,"Mon sol en marbre a été endommagé, suis-je couvert ?","RRF(TF-IDF,SVD-100)",158,0.0,0.0,0.0,0.0,0.006329113924050633
+190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?","RRF(TF-IDF,SVD-100)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+191,Mon aquarium s'est cassé. Suis-je couvert ?,"RRF(TF-IDF,SVD-100)",199,0.0,0.0,0.0,0.0,0.005025125628140704
+192,L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,"RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+193,Que couvre la garantie déménagement ?,"RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+194,Je déménage par moi même. Suis-je couvert ?,"RRF(TF-IDF,SVD-100)",4,0.0,0.0,1.0,1.0,0.25
+195,"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?","RRF(TF-IDF,SVD-100)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+196,"Je garde des enfants, suis-je couvert ?","RRF(TF-IDF,SVD-100)",2,0.0,1.0,1.0,1.0,0.5
+197,Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+198,Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,"RRF(TF-IDF,SVD-100)",1,1.0,1.0,1.0,1.0,1.0
+199,"Je pratique un sport, suis-je couvert ?","RRF(TF-IDF,SVD-100)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+200,Quelles sont les formules disponibles ?,"RRF(TF-IDF,SVD-100)",8,0.0,0.0,0.0,1.0,0.125
+0,Qu'est-ce que l'assurance responsabilité civile des enfants,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+1,L’assurance enfant incluse dans l’assurance habitation,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+2,L’assurance enfant incluse dans l’assurance scolaire,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,TF-IDF+SVD-200,19,0.0,0.0,0.0,1.0,0.05263157894736842
+4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,TF-IDF+SVD-200,7,0.0,0.0,0.0,1.0,0.14285714285714285
+5,Ce que le contrat ne garantit jamais,TF-IDF+SVD-200,26,0.0,0.0,0.0,0.0,0.038461538461538464
+6,Problème de serrure,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+7,Que faire en cas de problème de serrure ?,TF-IDF+SVD-200,39,0.0,0.0,0.0,0.0,0.02564102564102564
+8,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?",TF-IDF+SVD-200,6,0.0,0.0,0.0,1.0,0.16666666666666666
+9,Propriétaire ou locataire : qui doit payer le serrurier ?,TF-IDF+SVD-200,6,0.0,0.0,0.0,1.0,0.16666666666666666
+10,Comparatif des renforts et options de la multirisque habitation,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+11,Que faire en cas de dommage électrique ?,TF-IDF+SVD-200,178,0.0,0.0,0.0,0.0,0.0056179775280898875
+12,Que faire pendant un dégât des eaux ?,TF-IDF+SVD-200,162,0.0,0.0,0.0,0.0,0.006172839506172839
+13,Quelle assurance pour les bijoux,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+14,Qu’est-ce qu’un objet de valeur ?,TF-IDF+SVD-200,5,0.0,0.0,1.0,1.0,0.2
+15,Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+16,Indemnisation des bijoux volés ou abimés,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+17,Conseils pour s'assurer contre la perte des bijoux,TF-IDF+SVD-200,6,0.0,0.0,0.0,1.0,0.16666666666666666
+18,Assurance bijoux : les cas particuliers,TF-IDF+SVD-200,9,0.0,0.0,0.0,1.0,0.1111111111111111
+19,Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+20,Les exclusions de la garantie dégât des eaux,TF-IDF+SVD-200,85,0.0,0.0,0.0,0.0,0.011764705882352941
+21,Les dégâts des eaux liés à une catastrophe naturelle,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+22,Les appareils protégés par la garantie Dommages électriques mobilier,TF-IDF+SVD-200,5,0.0,0.0,1.0,1.0,0.2
+23,Le renfort Valeur à Neuf Mobilier,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+24,Exemple renfort Valeur à Neuf Mobilier,TF-IDF+SVD-200,6,0.0,0.0,0.0,1.0,0.16666666666666666
+25,Le renfort Valeur à Neuf est il inclus,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+26,Artisan rééquipement à neuf,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+27,Exclusion valeur à neuf,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",TF-IDF+SVD-200,14,0.0,0.0,0.0,1.0,0.07142857142857142
+29,Le contrat habitation est-il obligatoire pour les propriétaires ?,TF-IDF+SVD-200,49,0.0,0.0,0.0,0.0,0.02040816326530612
+30,Le contrat habitation est-il obligatoire pour les locataires ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+31,Le contrat habitation est-il obligatoire pour les colocataires ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+32,Le contrat habitation est-il obligatoire pour un logement de fonction ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+33,Le contrat habitation est-il obligatoire pour une location saisonnière ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,TF-IDF+SVD-200,41,0.0,0.0,0.0,0.0,0.024390243902439025
+35,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,TF-IDF+SVD-200,10,0.0,0.0,0.0,1.0,0.1
+36,Que couvre l’assurance de votre employeur en cas de télétravail,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+37,Le télétravail et votre assurance habitation,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+38,Attestation de télétravail,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+39,Que couvre une assurance inondation ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+40,Mon habitation est-elle en zone inondable ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+41,Que couvre l’assurance inondation MMA ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+42,Quelle est la différence entre inondation et catastrophes naturelles ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+43,Comment percevoir les indemnisations en cas d’inondation ?,TF-IDF+SVD-200,87,0.0,0.0,0.0,0.0,0.011494252873563218
+44,Qu'est-ce que l'assurance locataire,TF-IDF+SVD-200,17,0.0,0.0,0.0,1.0,0.058823529411764705
+45,L’assurance locative est-elle obligatoire ?,TF-IDF+SVD-200,16,0.0,0.0,0.0,1.0,0.0625
+46,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+47,La responsabilité civile du locataire,TF-IDF+SVD-200,33,0.0,0.0,0.0,0.0,0.030303030303030304
+48,La responsabilité du propriétaire envers les locataires,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+49,Les garanties facultatives de l'assurance locative,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+50,Cas où l’assurance locative est facultative,TF-IDF+SVD-200,115,0.0,0.0,0.0,0.0,0.008695652173913044
+51,Assurance location meublée,TF-IDF+SVD-200,97,0.0,0.0,0.0,0.0,0.010309278350515464
+52,Qu’est-ce qu’une location meublée ?,TF-IDF+SVD-200,28,0.0,0.0,0.0,0.0,0.03571428571428571
+53,Assurance location meublée : comment ça se passe ?,TF-IDF+SVD-200,98,0.0,0.0,0.0,0.0,0.01020408163265306
+54,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,TF-IDF+SVD-200,11,0.0,0.0,0.0,1.0,0.09090909090909091
+55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,TF-IDF+SVD-200,37,0.0,0.0,0.0,0.0,0.02702702702702703
+56,Pourquoi souscrire une assurance pour votre habitation meublé ?,TF-IDF+SVD-200,33,0.0,0.0,0.0,0.0,0.030303030303030304
+57,Locataire : quelle assurance meublée choisir ?,TF-IDF+SVD-200,23,0.0,0.0,0.0,0.0,0.043478260869565216
+58,Propriétaire : quelle assurance meublée choisir ?,TF-IDF+SVD-200,12,0.0,0.0,0.0,1.0,0.08333333333333333
+59,À quoi sert l’assurance PNO (Propriétaire non occupant)?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+60,L’assurance PNO est-elle obligatoire ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+61,Que couvre l’assurance PNO ? (propriétaire non occupant),TF-IDF+SVD-200,5,0.0,0.0,1.0,1.0,0.2
+62,Assurance Propriétaire bailleur,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+63,L'assurance du propriétaire bailleur est-elle obligatoire ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+64,Pourquoi s’assurer en tant que propriétaire bailleur ?,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+65,Assurance propriétaire bailleur : quelles sont les garanties ?,TF-IDF+SVD-200,10,0.0,0.0,0.0,1.0,0.1
+66,Quels sont les principaux risques pour un propriétaire bailleur ?,TF-IDF+SVD-200,11,0.0,0.0,0.0,1.0,0.09090909090909091
+67,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,TF-IDF+SVD-200,11,0.0,0.0,0.0,1.0,0.09090909090909091
+68,Qu'est-ce que l'attestation d'assurance ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+69,À quoi sert l’attestation d’assurance habitation ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+70,Locataire : Comment obtenir une attestation d’assurance habitation ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+71,Propriétaire : comment demander une attestation d’assurance habitation,TF-IDF+SVD-200,7,0.0,0.0,0.0,1.0,0.14285714285714285
+72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,TF-IDF+SVD-200,7,0.0,0.0,0.0,1.0,0.14285714285714285
+73,Comment recevoir son attestation d’assurance habitation MMA ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+74,Comment compter le nombre de pièces principales ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+75,Pourquoi bien calculer et déclarer le nombre de pièces ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+76,Comment est calculé le prix de l’assurance habitation,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,TF-IDF+SVD-200,9,0.0,0.0,0.0,1.0,0.1111111111111111
+78,Comment être indemnisé après un dégât des eaux ?,TF-IDF+SVD-200,22,0.0,0.0,0.0,0.0,0.045454545454545456
+79,Comment souscrire à une assurance habitation ?,TF-IDF+SVD-200,58,0.0,0.0,0.0,0.0,0.017241379310344827
+80,Les documents remis à la souscription de votre assurance habitation MMA,TF-IDF+SVD-200,70,0.0,0.0,0.0,0.0,0.014285714285714285
+81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,TF-IDF+SVD-200,73,0.0,0.0,0.0,0.0,0.0136986301369863
+82,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,TF-IDF+SVD-200,5,0.0,0.0,1.0,1.0,0.2
+83,Les assurances proposées par Airbnb sont-elles suffisantes ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+84,L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+85,L’Assurance Habitation MMA si vous louez une location par une plateforme,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+86,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,TF-IDF+SVD-200,35,0.0,0.0,0.0,0.0,0.02857142857142857
+87,Qu'est-ce que la télésurveillance ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+88,Quels sont les avantages de la télésurveillance ?,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+89,L’installation d’une alarme de maison avec télésurveillance avec MMA,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+90,Assurance habitation et télésurveillance : vos avantages MMA,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+91,Que se passe-t-il en cas de déménagement ?,TF-IDF+SVD-200,26,0.0,0.0,0.0,0.0,0.038461538461538464
+92,Vous déménagez et vous êtes/devenez propriétaire,TF-IDF+SVD-200,59,0.0,0.0,0.0,0.0,0.01694915254237288
+93,Déménagement avec recours à un déménageur,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+94,Faut-il assurer obligatoirement une résidence secondaire ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+95,Pourquoi assurer une résidence secondaire ?,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+96,Quelles sont les garanties MMA conseillées pour votre résidence secondaire,TF-IDF+SVD-200,5,0.0,0.0,1.0,1.0,0.2
+97,Comment assurer une résidence secondaire ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+98,Comment fonctionne la franchise d’une assurance habitation ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+99,Responsable ou victime du sinistre : les conséquences sur la franchise,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+100,Quelles sont les franchises habitation MMA,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+101,Qu’est-ce qu’un dégât des eaux ?,TF-IDF+SVD-200,19,0.0,0.0,0.0,1.0,0.05263157894736842
+102,Qu'est-ce que la garantie dégat des eaux,TF-IDF+SVD-200,32,0.0,0.0,0.0,0.0,0.03125
+103,Qu'est-ce que la garantie dommagez éléctriques,TF-IDF+SVD-200,13,0.0,0.0,0.0,1.0,0.07692307692307693
+104,Pourquoi souscrire une garantie Dommages électriques mobilier,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+105,Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+106,L'assurance dégât des eaux est-elle obligatoire ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+107,Qu'est-ce que la garantie Dépannage électroménager vidéo,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+108,Qu’est-ce que la garantie Dépannage habitation ?,TF-IDF+SVD-200,7,0.0,0.0,0.0,1.0,0.14285714285714285
+109,Qu’est-ce que la responsabilité civile ?,TF-IDF+SVD-200,5,0.0,0.0,1.0,1.0,0.2
+110,Qu’est-ce que l’assurance responsabilité civile ?,TF-IDF+SVD-200,14,0.0,0.0,0.0,1.0,0.07142857142857142
+111,L’assurance responsabilité civile est-elle obligatoire ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+112,Que couvre la responsabilité civile de l’assurance habitation ?,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+113,Que ne couvre pas l’assurance responsabilité civile ?,TF-IDF+SVD-200,17,0.0,0.0,0.0,1.0,0.058823529411764705
+114,L’assurance responsabilité civile partielle,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+115,Comment bénéficier de votre assurance responsabilité civile ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+116,Les prestations dépannage installations MMA,TF-IDF+SVD-200,124,0.0,0.0,0.0,0.0,0.008064516129032258
+117,Les mesures à prendre en cas de sinistre habitation,TF-IDF+SVD-200,64,0.0,0.0,0.0,0.0,0.015625
+118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,TF-IDF+SVD-200,46,0.0,0.0,0.0,0.0,0.021739130434782608
+119,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,TF-IDF+SVD-200,6,0.0,0.0,0.0,1.0,0.16666666666666666
+120,Quelle assurance habitation pour les étudiants ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+121,Que comprend l'assurance habitation étudiante ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+122,Quelle assurance pour un logement étudiant ?,TF-IDF+SVD-200,5,0.0,0.0,1.0,1.0,0.2
+123,Quelle assurance habitation étudiant choisir ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+124,Une assurance habitation pour les étudiants boursier,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+125,L'assurance responsabilité civile pour les étudiants,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+126,Assurer une chambre étudiante en colocation,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+127,Assurance habitation étudiant MMA : les garanties complémentaires,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+128,Quelle assurance pour les logements en copropriété ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+129,Télévision cassée : les garanties de votre assurance habitation MMA,TF-IDF+SVD-200,64,0.0,0.0,0.0,0.0,0.015625
+130,Assurance responsabilité civile et écran TV cassé,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+131,Des options d’assurance habitation pour faire réparer votre écran TV cassé,TF-IDF+SVD-200,93,0.0,0.0,0.0,0.0,0.010752688172043012
+132,Quelle indemnisation par l'assurance habitation TV cassée MMA ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+133,Comment est considéré le garage du point de vue de l’assurance ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+134,L’assurance garage ou parking d'un locataire est-elle obligatoire ?,TF-IDF+SVD-200,6,0.0,0.0,0.0,1.0,0.16666666666666666
+135,L’assurance garage auto d’un propriétaire est-elle obligatoire ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+136,L’assurance d’une place de stationnement,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+137,Pourquoi assurer un garage auto ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+138,Quelle assurance de garage souscrire ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+139,Les garanties de votre assurance de garage,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+140,Faut-il assurer une place de parking ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+141,Le garage est-il couvert par l'assurance habitation ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+142,Comment assurer mes biens pendant mon déménagement ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+143,Comment et pourquoi assurer mes biens mis en location ?,TF-IDF+SVD-200,75,0.0,0.0,0.0,0.0,0.013333333333333334
+144,Comment assurer mes biens professionnels dans mon domicile personnel ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,TF-IDF+SVD-200,11,0.0,0.0,0.0,1.0,0.09090909090909091
+146,Où s'exercent géographiquement les garanties ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+147,Que couvre la garantie renfort évènements climatiques ?,TF-IDF+SVD-200,52,0.0,0.0,0.0,0.0,0.019230769230769232
+148,Que ne couvre pas la garantie renfort évènements climatiques ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+149,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,TF-IDF+SVD-200,6,0.0,0.0,0.0,1.0,0.16666666666666666
+150,Les billets de banque sont-ils couverts ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+151,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",TF-IDF+SVD-200,11,0.0,0.0,0.0,1.0,0.09090909090909091
+152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,TF-IDF+SVD-200,147,0.0,0.0,0.0,0.0,0.006802721088435374
+153,"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?",TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+154,Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+155,Les panneaux solaires sont-ils couverts ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+156,Les éoliennes sont-elles couvertes ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+157,Les piscines sont-elles assurées ?,TF-IDF+SVD-200,29,0.0,0.0,0.0,0.0,0.034482758620689655
+158,Les abris en matière plastique sont-ils couverts ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+159,"Ma piscine hors sol a été endommagée, suis-je couvert ?",TF-IDF+SVD-200,74,0.0,0.0,0.0,0.0,0.013513513513513514
+160,"Je me suis blessé avec ma tondeuse, suis-je couvert ?",TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+161,Que sont les objets à risque de vol ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+162,Quelle est la limite de garantie des biens immobiliers ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+163,Quelle est la limite de garantie des dépendances ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+164,Quelle est la limite de garantie des clôtures ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+165,Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+166,Quelle est la limite de garantie des piscines si déclarée ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+167,Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+168,Quelle est la limite de garantie d'un refoulement des égouts ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+169,Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+170,Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+171,Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+172,Quelle est la limite de garantie des surconsommations d’eau,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+173,Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+174,"En cas de vol par une personne de ma famille, suis-je couvert ?",TF-IDF+SVD-200,146,0.0,0.0,0.0,0.0,0.00684931506849315
+175,"En cas de vol par mon colocataire, suis-je couvert ?",TF-IDF+SVD-200,120,0.0,0.0,0.0,0.0,0.008333333333333333
+176,"On a volé mes skis dans mon casier, suis-je couvert ?",TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+177,"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?",TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+178,"On a volé des biens dans un local partagé, suis-je couvert ?",TF-IDF+SVD-200,18,0.0,0.0,0.0,1.0,0.05555555555555555
+179,"On a volé les biens d'un de mes invités, suis-je couvert ?",TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+180,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?",TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+181,Qu'est-ce que l'option Revente - évènements personnels ou familiaux,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+182,Qu'est-ce que l'option  Revente - événements extérieurs,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+183,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+184,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+185,Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,TF-IDF+SVD-200,5,0.0,0.0,1.0,1.0,0.2
+186,Est-ce qu'en cas de vol je suis couvert ou pas ?,TF-IDF+SVD-200,46,0.0,0.0,0.0,0.0,0.021739130434782608
+187,"Ma fosse sceptique a débordé, suis-je couvert ?",TF-IDF+SVD-200,110,0.0,0.0,0.0,0.0,0.00909090909090909
+188,Est-ce que les dommages dûs à l'humidité sont couverts ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+189,"Mon sol en marbre a été endommagé, suis-je couvert ?",TF-IDF+SVD-200,192,0.0,0.0,0.0,0.0,0.005208333333333333
+190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",TF-IDF+SVD-200,9,0.0,0.0,0.0,1.0,0.1111111111111111
+191,Mon aquarium s'est cassé. Suis-je couvert ?,TF-IDF+SVD-200,176,0.0,0.0,0.0,0.0,0.005681818181818182
+192,L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+193,Que couvre la garantie déménagement ?,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+194,Je déménage par moi même. Suis-je couvert ?,TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+195,"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?",TF-IDF+SVD-200,3,0.0,1.0,1.0,1.0,0.3333333333333333
+196,"Je garde des enfants, suis-je couvert ?",TF-IDF+SVD-200,2,0.0,1.0,1.0,1.0,0.5
+197,Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+198,Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,TF-IDF+SVD-200,1,1.0,1.0,1.0,1.0,1.0
+199,"Je pratique un sport, suis-je couvert ?",TF-IDF+SVD-200,7,0.0,0.0,0.0,1.0,0.14285714285714285
+200,Quelles sont les formules disponibles ?,TF-IDF+SVD-200,4,0.0,0.0,1.0,1.0,0.25
+0,Qu'est-ce que l'assurance responsabilité civile des enfants,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+1,L’assurance enfant incluse dans l’assurance habitation,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+2,L’assurance enfant incluse dans l’assurance scolaire,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+3,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,"RRF(TF-IDF,SVD-200)",19,0.0,0.0,0.0,1.0,0.05263157894736842
+4,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,"RRF(TF-IDF,SVD-200)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+5,Ce que le contrat ne garantit jamais,"RRF(TF-IDF,SVD-200)",26,0.0,0.0,0.0,0.0,0.038461538461538464
+6,Problème de serrure,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+7,Que faire en cas de problème de serrure ?,"RRF(TF-IDF,SVD-200)",39,0.0,0.0,0.0,0.0,0.02564102564102564
+8,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?","RRF(TF-IDF,SVD-200)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+9,Propriétaire ou locataire : qui doit payer le serrurier ?,"RRF(TF-IDF,SVD-200)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+10,Comparatif des renforts et options de la multirisque habitation,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+11,Que faire en cas de dommage électrique ?,"RRF(TF-IDF,SVD-200)",178,0.0,0.0,0.0,0.0,0.0056179775280898875
+12,Que faire pendant un dégât des eaux ?,"RRF(TF-IDF,SVD-200)",162,0.0,0.0,0.0,0.0,0.006172839506172839
+13,Quelle assurance pour les bijoux,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+14,Qu’est-ce qu’un objet de valeur ?,"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+15,Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+16,Indemnisation des bijoux volés ou abimés,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+17,Conseils pour s'assurer contre la perte des bijoux,"RRF(TF-IDF,SVD-200)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+18,Assurance bijoux : les cas particuliers,"RRF(TF-IDF,SVD-200)",9,0.0,0.0,0.0,1.0,0.1111111111111111
+19,Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+20,Les exclusions de la garantie dégât des eaux,"RRF(TF-IDF,SVD-200)",85,0.0,0.0,0.0,0.0,0.011764705882352941
+21,Les dégâts des eaux liés à une catastrophe naturelle,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+22,Les appareils protégés par la garantie Dommages électriques mobilier,"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+23,Le renfort Valeur à Neuf Mobilier,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+24,Exemple renfort Valeur à Neuf Mobilier,"RRF(TF-IDF,SVD-200)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+25,Le renfort Valeur à Neuf est il inclus,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+26,Artisan rééquipement à neuf,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+27,Exclusion valeur à neuf,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+28,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?","RRF(TF-IDF,SVD-200)",14,0.0,0.0,0.0,1.0,0.07142857142857142
+29,Le contrat habitation est-il obligatoire pour les propriétaires ?,"RRF(TF-IDF,SVD-200)",49,0.0,0.0,0.0,0.0,0.02040816326530612
+30,Le contrat habitation est-il obligatoire pour les locataires ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+31,Le contrat habitation est-il obligatoire pour les colocataires ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+32,Le contrat habitation est-il obligatoire pour un logement de fonction ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+33,Le contrat habitation est-il obligatoire pour une location saisonnière ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+34,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,"RRF(TF-IDF,SVD-200)",41,0.0,0.0,0.0,0.0,0.024390243902439025
+35,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,"RRF(TF-IDF,SVD-200)",10,0.0,0.0,0.0,1.0,0.1
+36,Que couvre l’assurance de votre employeur en cas de télétravail,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+37,Le télétravail et votre assurance habitation,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+38,Attestation de télétravail,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+39,Que couvre une assurance inondation ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+40,Mon habitation est-elle en zone inondable ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+41,Que couvre l’assurance inondation MMA ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+42,Quelle est la différence entre inondation et catastrophes naturelles ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+43,Comment percevoir les indemnisations en cas d’inondation ?,"RRF(TF-IDF,SVD-200)",87,0.0,0.0,0.0,0.0,0.011494252873563218
+44,Qu'est-ce que l'assurance locataire,"RRF(TF-IDF,SVD-200)",17,0.0,0.0,0.0,1.0,0.058823529411764705
+45,L’assurance locative est-elle obligatoire ?,"RRF(TF-IDF,SVD-200)",16,0.0,0.0,0.0,1.0,0.0625
+46,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+47,La responsabilité civile du locataire,"RRF(TF-IDF,SVD-200)",33,0.0,0.0,0.0,0.0,0.030303030303030304
+48,La responsabilité du propriétaire envers les locataires,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+49,Les garanties facultatives de l'assurance locative,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+50,Cas où l’assurance locative est facultative,"RRF(TF-IDF,SVD-200)",115,0.0,0.0,0.0,0.0,0.008695652173913044
+51,Assurance location meublée,"RRF(TF-IDF,SVD-200)",97,0.0,0.0,0.0,0.0,0.010309278350515464
+52,Qu’est-ce qu’une location meublée ?,"RRF(TF-IDF,SVD-200)",28,0.0,0.0,0.0,0.0,0.03571428571428571
+53,Assurance location meublée : comment ça se passe ?,"RRF(TF-IDF,SVD-200)",98,0.0,0.0,0.0,0.0,0.01020408163265306
+54,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,"RRF(TF-IDF,SVD-200)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+55,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,"RRF(TF-IDF,SVD-200)",37,0.0,0.0,0.0,0.0,0.02702702702702703
+56,Pourquoi souscrire une assurance pour votre habitation meublé ?,"RRF(TF-IDF,SVD-200)",33,0.0,0.0,0.0,0.0,0.030303030303030304
+57,Locataire : quelle assurance meublée choisir ?,"RRF(TF-IDF,SVD-200)",23,0.0,0.0,0.0,0.0,0.043478260869565216
+58,Propriétaire : quelle assurance meublée choisir ?,"RRF(TF-IDF,SVD-200)",12,0.0,0.0,0.0,1.0,0.08333333333333333
+59,À quoi sert l’assurance PNO (Propriétaire non occupant)?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+60,L’assurance PNO est-elle obligatoire ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+61,Que couvre l’assurance PNO ? (propriétaire non occupant),"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+62,Assurance Propriétaire bailleur,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+63,L'assurance du propriétaire bailleur est-elle obligatoire ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+64,Pourquoi s’assurer en tant que propriétaire bailleur ?,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+65,Assurance propriétaire bailleur : quelles sont les garanties ?,"RRF(TF-IDF,SVD-200)",10,0.0,0.0,0.0,1.0,0.1
+66,Quels sont les principaux risques pour un propriétaire bailleur ?,"RRF(TF-IDF,SVD-200)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+67,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,"RRF(TF-IDF,SVD-200)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+68,Qu'est-ce que l'attestation d'assurance ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+69,À quoi sert l’attestation d’assurance habitation ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+70,Locataire : Comment obtenir une attestation d’assurance habitation ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+71,Propriétaire : comment demander une attestation d’assurance habitation,"RRF(TF-IDF,SVD-200)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+72,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,"RRF(TF-IDF,SVD-200)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+73,Comment recevoir son attestation d’assurance habitation MMA ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+74,Comment compter le nombre de pièces principales ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+75,Pourquoi bien calculer et déclarer le nombre de pièces ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+76,Comment est calculé le prix de l’assurance habitation,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+77,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,"RRF(TF-IDF,SVD-200)",9,0.0,0.0,0.0,1.0,0.1111111111111111
+78,Comment être indemnisé après un dégât des eaux ?,"RRF(TF-IDF,SVD-200)",22,0.0,0.0,0.0,0.0,0.045454545454545456
+79,Comment souscrire à une assurance habitation ?,"RRF(TF-IDF,SVD-200)",58,0.0,0.0,0.0,0.0,0.017241379310344827
+80,Les documents remis à la souscription de votre assurance habitation MMA,"RRF(TF-IDF,SVD-200)",70,0.0,0.0,0.0,0.0,0.014285714285714285
+81,Changer d’assurance habitation : quelles sont les informations nécessaires ?,"RRF(TF-IDF,SVD-200)",73,0.0,0.0,0.0,0.0,0.0136986301369863
+82,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+83,Les assurances proposées par Airbnb sont-elles suffisantes ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+84,L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+85,L’Assurance Habitation MMA si vous louez une location par une plateforme,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+86,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,"RRF(TF-IDF,SVD-200)",35,0.0,0.0,0.0,0.0,0.02857142857142857
+87,Qu'est-ce que la télésurveillance ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+88,Quels sont les avantages de la télésurveillance ?,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+89,L’installation d’une alarme de maison avec télésurveillance avec MMA,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+90,Assurance habitation et télésurveillance : vos avantages MMA,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+91,Que se passe-t-il en cas de déménagement ?,"RRF(TF-IDF,SVD-200)",26,0.0,0.0,0.0,0.0,0.038461538461538464
+92,Vous déménagez et vous êtes/devenez propriétaire,"RRF(TF-IDF,SVD-200)",59,0.0,0.0,0.0,0.0,0.01694915254237288
+93,Déménagement avec recours à un déménageur,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+94,Faut-il assurer obligatoirement une résidence secondaire ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+95,Pourquoi assurer une résidence secondaire ?,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+96,Quelles sont les garanties MMA conseillées pour votre résidence secondaire,"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+97,Comment assurer une résidence secondaire ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+98,Comment fonctionne la franchise d’une assurance habitation ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+99,Responsable ou victime du sinistre : les conséquences sur la franchise,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+100,Quelles sont les franchises habitation MMA,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+101,Qu’est-ce qu’un dégât des eaux ?,"RRF(TF-IDF,SVD-200)",19,0.0,0.0,0.0,1.0,0.05263157894736842
+102,Qu'est-ce que la garantie dégat des eaux,"RRF(TF-IDF,SVD-200)",32,0.0,0.0,0.0,0.0,0.03125
+103,Qu'est-ce que la garantie dommagez éléctriques,"RRF(TF-IDF,SVD-200)",13,0.0,0.0,0.0,1.0,0.07692307692307693
+104,Pourquoi souscrire une garantie Dommages électriques mobilier,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+105,Quelles sont les installations prise en charge par la garantie Dépannage MMA ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+106,L'assurance dégât des eaux est-elle obligatoire ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+107,Qu'est-ce que la garantie Dépannage électroménager vidéo,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+108,Qu’est-ce que la garantie Dépannage habitation ?,"RRF(TF-IDF,SVD-200)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+109,Qu’est-ce que la responsabilité civile ?,"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+110,Qu’est-ce que l’assurance responsabilité civile ?,"RRF(TF-IDF,SVD-200)",14,0.0,0.0,0.0,1.0,0.07142857142857142
+111,L’assurance responsabilité civile est-elle obligatoire ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+112,Que couvre la responsabilité civile de l’assurance habitation ?,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+113,Que ne couvre pas l’assurance responsabilité civile ?,"RRF(TF-IDF,SVD-200)",17,0.0,0.0,0.0,1.0,0.058823529411764705
+114,L’assurance responsabilité civile partielle,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+115,Comment bénéficier de votre assurance responsabilité civile ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+116,Les prestations dépannage installations MMA,"RRF(TF-IDF,SVD-200)",124,0.0,0.0,0.0,0.0,0.008064516129032258
+117,Les mesures à prendre en cas de sinistre habitation,"RRF(TF-IDF,SVD-200)",64,0.0,0.0,0.0,0.0,0.015625
+118,Les prestations de l’assurance dépannage des appareils électroménagers MMA,"RRF(TF-IDF,SVD-200)",46,0.0,0.0,0.0,0.0,0.021739130434782608
+119,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,"RRF(TF-IDF,SVD-200)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+120,Quelle assurance habitation pour les étudiants ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+121,Que comprend l'assurance habitation étudiante ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+122,Quelle assurance pour un logement étudiant ?,"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+123,Quelle assurance habitation étudiant choisir ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+124,Une assurance habitation pour les étudiants boursier,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+125,L'assurance responsabilité civile pour les étudiants,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+126,Assurer une chambre étudiante en colocation,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+127,Assurance habitation étudiant MMA : les garanties complémentaires,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+128,Quelle assurance pour les logements en copropriété ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+129,Télévision cassée : les garanties de votre assurance habitation MMA,"RRF(TF-IDF,SVD-200)",64,0.0,0.0,0.0,0.0,0.015625
+130,Assurance responsabilité civile et écran TV cassé,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+131,Des options d’assurance habitation pour faire réparer votre écran TV cassé,"RRF(TF-IDF,SVD-200)",93,0.0,0.0,0.0,0.0,0.010752688172043012
+132,Quelle indemnisation par l'assurance habitation TV cassée MMA ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+133,Comment est considéré le garage du point de vue de l’assurance ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+134,L’assurance garage ou parking d'un locataire est-elle obligatoire ?,"RRF(TF-IDF,SVD-200)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+135,L’assurance garage auto d’un propriétaire est-elle obligatoire ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+136,L’assurance d’une place de stationnement,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+137,Pourquoi assurer un garage auto ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+138,Quelle assurance de garage souscrire ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+139,Les garanties de votre assurance de garage,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+140,Faut-il assurer une place de parking ?,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+141,Le garage est-il couvert par l'assurance habitation ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+142,Comment assurer mes biens pendant mon déménagement ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+143,Comment et pourquoi assurer mes biens mis en location ?,"RRF(TF-IDF,SVD-200)",75,0.0,0.0,0.0,0.0,0.013333333333333334
+144,Comment assurer mes biens professionnels dans mon domicile personnel ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+145,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,"RRF(TF-IDF,SVD-200)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+146,Où s'exercent géographiquement les garanties ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+147,Que couvre la garantie renfort évènements climatiques ?,"RRF(TF-IDF,SVD-200)",52,0.0,0.0,0.0,0.0,0.019230769230769232
+148,Que ne couvre pas la garantie renfort évènements climatiques ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+149,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,"RRF(TF-IDF,SVD-200)",6,0.0,0.0,0.0,1.0,0.16666666666666666
+150,Les billets de banque sont-ils couverts ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+151,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?","RRF(TF-IDF,SVD-200)",11,0.0,0.0,0.0,1.0,0.09090909090909091
+152,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,"RRF(TF-IDF,SVD-200)",151,0.0,0.0,0.0,0.0,0.006622516556291391
+153,"Mes arbres fruitiers ont été endommagés, sont-ils couverts ?","RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+154,Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+155,Les panneaux solaires sont-ils couverts ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+156,Les éoliennes sont-elles couvertes ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+157,Les piscines sont-elles assurées ?,"RRF(TF-IDF,SVD-200)",29,0.0,0.0,0.0,0.0,0.034482758620689655
+158,Les abris en matière plastique sont-ils couverts ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+159,"Ma piscine hors sol a été endommagée, suis-je couvert ?","RRF(TF-IDF,SVD-200)",111,0.0,0.0,0.0,0.0,0.009009009009009009
+160,"Je me suis blessé avec ma tondeuse, suis-je couvert ?","RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+161,Que sont les objets à risque de vol ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+162,Quelle est la limite de garantie des biens immobiliers ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+163,Quelle est la limite de garantie des dépendances ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+164,Quelle est la limite de garantie des clôtures ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+165,Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+166,Quelle est la limite de garantie des piscines si déclarée ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+167,Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+168,Quelle est la limite de garantie d'un refoulement des égouts ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+169,Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+170,Quelle est la limite de garantie des frais de réparation des conduites intérieures ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+171,Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+172,Quelle est la limite de garantie des surconsommations d’eau,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+173,Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+174,"En cas de vol par une personne de ma famille, suis-je couvert ?","RRF(TF-IDF,SVD-200)",146,0.0,0.0,0.0,0.0,0.00684931506849315
+175,"En cas de vol par mon colocataire, suis-je couvert ?","RRF(TF-IDF,SVD-200)",120,0.0,0.0,0.0,0.0,0.008333333333333333
+176,"On a volé mes skis dans mon casier, suis-je couvert ?","RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+177,"On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?","RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+178,"On a volé des biens dans un local partagé, suis-je couvert ?","RRF(TF-IDF,SVD-200)",18,0.0,0.0,0.0,1.0,0.05555555555555555
+179,"On a volé les biens d'un de mes invités, suis-je couvert ?","RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+180,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?","RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+181,Qu'est-ce que l'option Revente - évènements personnels ou familiaux,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+182,Qu'est-ce que l'option  Revente - événements extérieurs,"RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+183,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+184,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+185,Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?,"RRF(TF-IDF,SVD-200)",5,0.0,0.0,1.0,1.0,0.2
+186,Est-ce qu'en cas de vol je suis couvert ou pas ?,"RRF(TF-IDF,SVD-200)",46,0.0,0.0,0.0,0.0,0.021739130434782608
+187,"Ma fosse sceptique a débordé, suis-je couvert ?","RRF(TF-IDF,SVD-200)",166,0.0,0.0,0.0,0.0,0.006024096385542169
+188,Est-ce que les dommages dûs à l'humidité sont couverts ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+189,"Mon sol en marbre a été endommagé, suis-je couvert ?","RRF(TF-IDF,SVD-200)",198,0.0,0.0,0.0,0.0,0.005050505050505051
+190,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?","RRF(TF-IDF,SVD-200)",9,0.0,0.0,0.0,1.0,0.1111111111111111
+191,Mon aquarium s'est cassé. Suis-je couvert ?,"RRF(TF-IDF,SVD-200)",193,0.0,0.0,0.0,0.0,0.0051813471502590676
+192,L'écran de mon téléviseur s'est brisé. Suis-je couvert ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+193,Que couvre la garantie déménagement ?,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
+194,Je déménage par moi même. Suis-je couvert ?,"RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+195,"Je fais garder mes enfants par une baby-sitter, suis-je couvert ?","RRF(TF-IDF,SVD-200)",3,0.0,1.0,1.0,1.0,0.3333333333333333
+196,"Je garde des enfants, suis-je couvert ?","RRF(TF-IDF,SVD-200)",2,0.0,1.0,1.0,1.0,0.5
+197,Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+198,Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?,"RRF(TF-IDF,SVD-200)",1,1.0,1.0,1.0,1.0,1.0
+199,"Je pratique un sport, suis-je couvert ?","RRF(TF-IDF,SVD-200)",7,0.0,0.0,0.0,1.0,0.14285714285714285
+200,Quelles sont les formules disponibles ?,"RRF(TF-IDF,SVD-200)",4,0.0,0.0,1.0,1.0,0.25
