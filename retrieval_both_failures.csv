@@ -1,0 +1,169 @@
+﻿question,expected_document,tfidf_rank,embedding_rank,document_title,document_content,meilleure_methode,tfidf_top5,embeddings_top5
+L’assurance enfant incluse dans l’assurance habitation,1,6,27,L’assurance enfant incluse dans l’assurance habitation,"La responsabilité civile comprise dans l’assurance habitation couvre, dans la plupart des cas, les dommages que vos enfants pourraient causer à autrui : vitre du voisin brisée, casse de l’appareil dentaire d’un ami... En revanche, elle ne prend pas en charge les dommages que votre enfant peut subir comme ses blessures suite à une chute.",TF-IDF,False,False
+Les différents degrés de couverture de l'assurance responsabilité civile des enfants,3,39,11,Les différents degrés de couverture de l'assurance responsabilité civile des enfants,"Quelques exemples pour vous éclairer.
+
+Votre enfant brise par inadvertance une vitre avec un ballon: Avec la responsabilité civile de l’assurance habitation ou de l’assurance scolaire, les frais de remise en état seront pris en charge, déduction fait de l'éventuelle franchise habitation. 
+
+Votre enfant rentre de l’école à vélo et entre en collision avec une voiture stationnée: Avec la responsabilité civile de l’assurance habitation : seule, la réparation de la porte qu’il aura enfoncée sera couverte.
+Avec l’assurance scolaire : les blessures dues à sa chute et la réparation de la porte qu’il aura enfoncée seront couvertes.
+
+Votre enfant est agressé et son vélo est volé ?: Avec l’Assurance Scolaire MMA n°3, vous bénéficiez d’une indemnisation forfaitaire.
+
+Votre enfant est victime d’une agression, d’un racket ou de Cyberharcèlement ? : MMA participe aux frais de consultations d’un psychologue pour l’aider à surmonter ce traumatisme.",Embeddings,False,False
+Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,4,9,6,Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?,"Votre enfant vient de souffler sa 18ème bougie ? Chez MMA, l’assurance responsabilité civile de l’assurance habitation MMA (CG410) vaut pour tous vos enfants, qu’ils soient majeurs ou mineurs, s’ils vivent chez vous de manière permanente ou s’ils sont encore étudiants.",Embeddings,False,False
+Que faire en cas de problème de serrure ?,7,21,27,Que faire en cas de problème de serrure ?,"Avant tout, appelez votre assureur pour connaitre les garanties que vous avez souscrites. La possibilité de vous faire rembourser l’intervention d’un professionnel est généralement proposée sur option.
+Pour en bénéficier, vous devez souscrire une formule comprenant une assurance remboursement serrurier. En général, celle-ci est reliée à la prise en charge des services de dépannage ou de réparation des installations de la maison assurée par le contrat d’assurance habitation.
+
+Si vous êtes couvert pour le dépannage d’urgence, votre assureur vous donne les démarches à suivre et vous met en relation avec le service d‘assistance ou son réseau de professionnels pour l’intervention du serrurier.
+
+Bon à savoir : Si vous appelez un serrurier avant d’avoir prévenu votre assureur, vous risquez de ne pas être indemnisé.",TF-IDF,False,False
+Propriétaire ou locataire : qui doit payer le serrurier ?,9,8,18,Propriétaire ou locataire : qui doit payer le serrurier ?,"Si vous êtes locataire de votre logement, cela dépend de l’origine du problème. En effet, en cas de perte de clés, ou de porte claquée en vous laissant dehors, votre propriétaire ne sera pas concerné. C’est alors à vous d’assumer les frais d’ouverture de la porte ou votre assurance habitation si vous avez souscrit la garantie dépannage serrure.
+
+En revanche, si le problème est lié à la vétusté de l’installation (la serrure, la poignée, les gonds, le bâti), le propriétaire est considéré comme responsable. Dans ce cas, non seulement il devra prendre en charge l’intervention du serrurier, mais il devra aussi financer la réparation ou le remplacement du dispositif de fermeture, pour éviter le renouvellement du problème.",TF-IDF,False,False
+Les exclusions de la garantie dégât des eaux,20,101,38,Les exclusions de la garantie dégât des eaux,"Les dommages dus à un défaut d’entretien caractérisé ou à un manque de réparation indispensable vous incombant et connu de vous ne sont pas assurés, tout comme les conséquences de l’humidité et de la condensation.",Embeddings,False,False
+"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?",28,20,21,"L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?","Propriétaire occupant ou non occupant, locataire, copropriété,  logement vide ou meublé : êtes-vous dans l'obligation de souscrire une assurance habitation ? La réponse n’est pas la même pour tous. MMA répond  simplement à toutes les questions que vous vous posez.",TF-IDF,False,False
+Le contrat habitation est-il obligatoire pour les propriétaires ?,29,31,75,Le contrat habitation est-il obligatoire pour les propriétaires ?,"Propriétaire occupant ou non occupant, vous assurer n’est pas obligatoire mais fortement recommandé notamment pour couvrir les sinistres tels que l’incendie ou un dégât des eaux. Sans assurance, les dégâts causés à vous et aux voisins seraient entièrement à votre charge.
+Et si vous êtes propriétaire bailleur, sachez que certains évènements ne sont pas couverts par l’assurance de votre locataire (risques climatiques, vandalisme...). MMA vous propose donc une assurance spécialement conçue pour vous protéger.",TF-IDF,False,False
+Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,34,53,114,Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?,"Le télétravail s’accélère pour bon nombre d’actifs. En étant davantage présent à la maison, vous augmentez les risques d’accidents domestiques. ",TF-IDF,False,False
+Comment percevoir les indemnisations en cas d’inondation ?,43,86,93,Comment percevoir les indemnisations en cas d’inondation ?,"- Une fois votre maison mise en sécurité, prenez des photos de toutes les pièces qui ont été inondées et des meubles, objets ou revêtements qui ont été détériorés.
+- N’engagez aucuns travaux de nettoyage et de rénovation sans avoir contacté préalablement votre assureur.
+- Contactez votre assureur au plus vite, il vous indiquera les démarches et formalités à accomplir en tenant compte de votre contrat d’assurance habitation.",TF-IDF,False,False
+L’assurance locative est-elle obligatoire ?,45,17,12,L’assurance locative est-elle obligatoire ?,"Si vous êtes locataire d’un logement, que ce soit un appartement, une maison ou un studio, la loi du 6 juillet 1989 vous oblige à souscrire une assurance habitation auprès de l’assureur de votre choix. Mais seule la garantie « risques locatifs » est obligatoire.
+ 
+A noter : votre propriétaire est en droit d’exiger une attestation d’assurance habitation :
+
+- lors de la signature du bail de location,
+- chaque année à la date anniversaire de la signature du bail.
+
+En l’absence de ce justificatif, le bailleur peut renoncer à signer le bail ou le résilier de plein droit.",Embeddings,False,False
+La responsabilité civile du locataire,47,45,25,La responsabilité civile du locataire,"Selon le code civil, toute personne causant un dommage à autrui est obligée de réparer ce dommage. En ce sens, l’assurance responsabilité civile locative couvre les dommages non-intentionnels provoqués par vous-même ou vos enfants mineurs. Pour indemniser la victime, l’assurance se substitue au responsable.",Embeddings,False,False
+Assurance location meublée,51,98,100,Assurance location meublée,"Louer un logement meublé, que ce soit un studio ou un appartement, à l’année ou pour les vacances, s’avère très pratique pour un étudiant par exemple, ou pour se loger en colocation ou durant des travaux. Quelles sont les règles en matière d’assurance habitation meublé pour les propriétaires et les locataires ? Quelles couvertures choisir ?",TF-IDF,False,False
+Assurance location meublée : comment ça se passe ?,53,95,7,Assurance location meublée : comment ça se passe ?,"En matière d’assurance pour votre meublé (appartement, colocation, studio…), locataire et propriétaire ont chacun intérêt, en marge de certaines obligations, à souscrire des garanties étendues couvrant la majeure partie des risques auxquels ils sont exposés au titre de leurs responsabilités. ",Embeddings,False,False
+L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,55,14,63,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?,"Vous êtes propriétaire ? Vous devez souscrire une assurance « propriétaire non occupant » (PNO), qui couvre votre responsabilité civile en qualité de propriétaire.",TF-IDF,False,False
+Pourquoi souscrire une assurance pour votre habitation meublé ?,56,51,70,Pourquoi souscrire une assurance pour votre habitation meublé ?,"Propriétaire et locataire ont l’obligation de réparer les dommages et d’indemniser les victimes d’un sinistre dont ils sont responsables.
+
+Vous êtes locataire ? Une fuite d’eau dans votre logement endommage le plafond de votre voisin ? En l’absence d’assurance location meublée, il vous faudra prendre en charge les réparations et les indemnités, sans limite de montants.
+
+Vous êtes bailleur ? Souscrire une garantie supplémentaire vous permettra de pallier l’insuffisance des assurances de votre locataire et de la copropriété.",TF-IDF,False,False
+Locataire : quelle assurance meublée choisir ?,57,23,15,Locataire : quelle assurance meublée choisir ?,"Vous êtes locataire ? Vous devez souscrire les garanties « risques locatifs » et « responsabilité civile », qui constituent une couverture de base. Mais il est fortement conseillé d’étendre la couverture à d’autres risques, tels que :
+
+- le vol,
+- le dommage électrique mobilier,
+- les biens personnels…
+Découvrez les 3 formules d’assurance habitation MMA !",Embeddings,False,False
+Propriétaire : quelle assurance meublée choisir ?,58,11,13,Propriétaire : quelle assurance meublée choisir ?,"Vous êtes propriétaire ? Vous êtes notamment responsable de la sécurité de votre locataire et des tiers. L’Assurance Habitation propriétaire non-occupant MMA vous offre une couverture étendue et vous protège en cas de dommages non pris en charge par l’assurance du locataire ou celle de la copropriété.
+
+Et si le bien est vacant, votre assurance peut vous couvrir en cas d’incendie, de fuite d’eau ou d’effraction.",TF-IDF,False,False
+Assurance propriétaire bailleur : quelles sont les garanties ?,65,9,70,Assurance propriétaire bailleur : quelles sont les garanties ?,"uelle que soit la formule choisie, vous bénéficiez, en tant que propriétaire bailleur non-occupant, des garanties indispensables pour protéger votre bien de manière optimale.
+
+Pour vous : Responsabilité Civile Propriétaire, Assistance en cas de sinistre.
+Pour votre logement : protection en cas d’Incendie, de Dégâts des eaux, de Vandalisme extérieur ou de Catastrophes naturelles.
+ 
+MMA vous propose également des garanties confort afin de renforcer la protection du logement loué :
+
+- Indemnisation en cas de bris de vitres, de vol ou tentative de vol.
+- Remboursement à neuf des biens matériels équipant le logement en cas de vol ou d’endommagement.
+ 
+Et pour garantir votre sérénité, bénéficiez de garanties optionnelles.
+
+- Pour protéger toutes les installations du bien loué : Bris de véranda, Dommages électriques sur mobilier, mobilier de jardin, piscine, etc.
+- Pour être conseillé sur la gestion de votre bien et sa fiscalité, être accompagné dans vos litiges par les experts MMA : la Protection Juridique Bailleur
+BON À SAVOIR
+L’assurance du logement que vous louez est considérée comme une charge. Si vous ne bénéficiez pas du régime micro foncier, son montant est donc complètement déductible de vos revenus locatifs.",TF-IDF,False,False
+Quels sont les principaux risques pour un propriétaire bailleur ?,66,42,17,Quels sont les principaux risques pour un propriétaire bailleur ?,"Les problèmes les plus fréquents sont les dommages conséquents à des sinistres divers (fuites ; incendie…), les dégradations constatées au moment du départ du locataire et les loyers impayés. Plusieurs garanties liées au contrat d’assurance du propriétaire non-occupant couvrent ces différents cas de figure, comme par exemple la GLI (garantie loyers impayés), qui est une garantie optionnelle, et les garanties dégât des eaux et incendie, incluses dans toutes les formules d’assurance PNO de MMA.",Embeddings,False,False
+Propriétaire : comment demander une attestation d’assurance habitation,71,7,7,Propriétaire : comment demander une attestation d’assurance habitation,"Si vous êtes propriétaire du logement que vous occupez, vous n’avez pas l’obligation de souscrire un contrat d’assurance habitation, sauf si celui-ci fait partie d'une copropriété. Mais nous vous conseillons vivement de prendre certaines garanties pour ne pas avoir à prendre en charge l'indemnisation de tous les préjudices que vous et votre bien pourraient causer. Votre assureur vous adresse l’attestation d’assurance habitation suite à sa souscription et à chaque date de renouvellement.",Égalité,False,False
+Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,72,9,53,Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?,"Parce qu’il peut s’agir d’un simple oubli, notamment au moment du renouvellement du contrat, vous pouvez vous contenter d’informer votre locataire par e-mail ou par téléphone. Si la situation n'évolue pas, vous devrez lui adresser une mise en demeure par courrier recommandé avec accusé de réception. Le modèle de lettre de demande d’attestation d’assurance habitation utilisé devra prévoir plusieurs informations :
+- votre identité (nom, prénom et adresse) ;
+- l'identité du locataire (nom, prénom et adresse) ;
+- l'objet de votre demande ;
+- la mention de l'Article 7 alinéa g de la Loi n° 89-462 du 6 juillet 1989 relatif à l'obligation d'assurance du locataire ;
+- les mesures prises en l'absence de transmission d'une attestation (mise en place d'une procédure de résiliation du bail ou souscription d'une assurance pour le compte du locataire et à ses frais).",TF-IDF,False,False
+Quelles caractéristiques du logement sont prises en compte pour le contrat ?,77,15,52,Quelles caractéristiques du logement sont prises en compte pour le contrat ?,"Plusieurs critères sont pris en compte pour calculer le prix de votre assurance habitation :
+ 
+- La nature de votre logement : en moyenne, l'assurance d'un appartement est moins chère que celle d'une maison
+- L’usage de votre logement : résidence principale ou résidence secondaire (lire : Assurer une résidence secondaire)
+- La superficie : nombre de pièces principales, véranda...
+- La présence de dépendance non attenante, piscine, panneaux photovoltaïques, chauffage au bois...
+- La situation géographique : certaines zones présentent un niveau de risque plus élevé que d'autres, or le niveau de risque entre logiquement dans le calcul du prix de l'assurance habitation. Par exemple, une grande ville ou une commune aisée isolée est davantage exposée au risque de cambriolage ; une ville côtière ou située près d'un fleuve au risque d'inondation, etc.
+
+Le capital mobilier, la valeur de vos biens à assurer influe sur le prix de l’assurance habitation
+Lorsque vous souscrivez une assurance habitation, on vous demande de choisir le montant du capital de votre habitation. C’est-à-dire, la valeur de l’ensemble des biens qui sont dans votre habitation : meubles, électroménager, éléments de décoration, ordinateurs, objets de valeur....
+
+A noter : en cas de sinistre, l’indemnisation de votre capital mobilier sera plafonnée au capital mobilier choisi. N’hésitez pas à demander conseil à votre Agent pour vous aider à le calculer.
+
+Le tarif de l’assurance habitation dépend de vos besoins, du niveau de couverture…
+Le niveau de franchise et les garanties souscrites ont une incidence directe sur le calcul du prix de votre assurance habitation.
+
+- Les garanties : MMA vous permet de choisir les garanties et services vraiment utiles pour vous. Par exemple, selon les formules : la garantie dommages électriques, les bris de vitres et miroirs, le vol hors du domicile, le remboursement des serrures, le rééquipement à neuf...
+- Les franchises : en cas de sinistre, une franchise peut rester à votre charge. MMA vous permet de choisir le montant de cette franchise et vous propose même une assurance habitation sans franchise.",TF-IDF,False,False
+Comment être indemnisé après un dégât des eaux ?,78,6,15,Comment être indemnisé après un dégât des eaux ?,"- Prenez des photos des dégâts, réunissez les factures des biens endommagés.
+- Essuyez et séchez ce qui peut l’être pour limiter les dégradations, ne jetez rien.
+- Un tiers est responsable ou a subi des dommages ? Contactez-le et remplissez ensemble un constat amiable de dégât des eaux.
+- Si vous ne parvenez pas à le joindre ou si vous ignorez la cause du sinistre, mettez-vous en rapport avec le syndic de copropriété qui fera procéder à une recherche de fuite.
+- Prévenez votre assureur MMA par téléphone et envoyez-lui le constat amiable dans un délai maximal de cinq jours ouvrés.",TF-IDF,False,False
+Les documents remis à la souscription de votre assurance habitation MMA,80,40,14,Les documents remis à la souscription de votre assurance habitation MMA,"Si vous avez souscrit en agence, votre Agent MMA vous remet :
+
+- le contrat d'assurance, comprenant les conditions particulières et  les conditions générales,
+- l’attestation d’assurance",Embeddings,False,False
+Changer d’assurance habitation : quelles sont les informations nécessaires ?,81,113,12,Changer d’assurance habitation : quelles sont les informations nécessaires ?,"Vous déménagez, vous avez fait l’acquisition de biens de valeur, vous installez une piscine dans votre jardin… : dès que votre situation change, il est important de prévenir  votre assureur afin qu’il puisse :
+
+- adapter votre contrat d’assurance habitation sur la base de votre nouvelle situation ;
+- et si nécessaire, moduler le montant de votre cotisation.
+
+Sinon c’est prendre le risque de subir une diminution ou une suppression des indemnités qui vous sont dues en cas de sinistre.",Embeddings,False,False
+L’Assurance Habitation MMA si vous louez une location par une plateforme,85,8,26,L’Assurance Habitation MMA si vous louez une location par une plateforme,"Vous êtes voyageur : la garantie villégiature est généralement incluse dans votre assurance habitation. C’est une responsabilité civile  qui couvre les dommages que vous êtes susceptibles de causer à des tiers dans le cadre de votre vie privée sur votre lieu de vacances : dégâts des eaux, incendie, explosion, causés au bâtiment ainsi qu’au mobilier s’y trouvant. Avec MMA, si vous souscrivez la garantie « Responsabilité civile Vie privée », cette garantie villégiature est automatiquement incluse dans votre assurance habitation.
+
+Le plus MMA : Avec l’assurance habitation MMA, les détériorations que vous causez accidentellement aux biens mobiliers et immobiliers (la télévision, le lave-linge...) de votre location de vacances sont pris en charge.",TF-IDF,False,False
+Vous déménagez et vous êtes/devenez propriétaire,92,41,17,Vous déménagez et vous êtes/devenez propriétaire,"Lorsque vous achetez une maison, la loi prévoit que l'assurance de l'ancien propriétaire peut vous être transférée. Si vous ne le souhaitez pas, signalez-le à l'assureur concerné en recommandé AR, dans les trois mois suivant la vente. La résiliation sera immédiate.
+
+Pour les mêmes raisons, si vous vendez votre logement actuel, votre assurance habitation sera transférée à l’acheteur. Mais il est nécessaire de prévenir votre assureur de la cession du bien, toujours par lettre recommandée avec accusé de réception ; sinon, vous continuerez de payer les primes de l’assurance habitation correspondant à votre ancien logement.
+La résiliation de votre contrat d’assurance prendra effet 30 jours après réception du courrier : nous vous conseillons donc de l’envoyer au plus vite après le transfert de propriété.",Embeddings,False,False
+Qu'est-ce que la garantie Dépannage électroménager vidéo,107,76,10,Qu'est-ce que la garantie Dépannage électroménager vidéo,"Un appareil électroménager ou un téléviseur en panne ? Avec le contrat d’assurance Habitation MMA, sur simple appel de votre part, un dépanneur qualifié intervient à votre domicile. Déplacement, diagnostic et main d’œuvre sont pris en charge. Vous ne payez que la pièce à remplacer. Le coût des pièces remplacées est pris en charge lorsque l’appareil a été endommagé par la foudre, un court-circuit, une surtension ou une sous-tension.
+La garantie Dépannage des appareils électroménagers MMA prévoit, en cas de panne d’un des appareils assurés, l’intervention d’un professionnel dans un délai maximal de deux jours. Sont pris en charge le déplacement, le diagnostic et la main d’œuvre. La prestation dépannage est utilisable jusqu’à deux fois par période de 12 mois consécutifs.",Embeddings,False,False
+Que couvre la responsabilité civile de l’assurance habitation ?,112,18,9,Que couvre la responsabilité civile de l’assurance habitation ?,"L'assurance responsabilité civile « chef de famille » couvre les dommages occasionnés par imprudence ou par négligence :
+- par le titulaire de l'assurance habitation, ses enfants mineurs, les parents dont il a la charge s'ils vivent sous son toit, et le plus souvent son conjoint,
+- par ses employés (baby-sitter ou femme de ménage par exemple),
+- par ses animaux ou ceux dont il a la garde,
+- par ses objets ou ceux qu'il a empruntés ou loués.
+
+Bon à savoir : les enfants majeurs célibataires peuvent être couverts par la responsabilité civile de leurs parents même s'ils ne vivent pas à leur domicile. Pour le vérifier, consultez votre contrat d’assurance habitation.
+
+MMA indemnise à votre place les dommages causés à autrui, dont vous êtes responsable lorsque vous échangez, prêtez, empruntez ou louez dans le cadre de votre vie privée :
+- du matériel de bricolage et de jardinage,
+- un appareil électroménager,
+- ou encore du mobilier et matériel de jardin",Embeddings,False,False
+Que ne couvre pas l’assurance responsabilité civile ?,113,12,8,Que ne couvre pas l’assurance responsabilité civile ?,"Ne sont pas couverts par l’assurance RC privée, les dommages que vous pourriez causer :
+- intentionnellement,
+- à vous, à vos proches et à vos possessions,
+- par votre véhicule (qui relèvent de votre assurance auto ou moto),
+- par un animal appartenant à une race dangereuse,
+- dans le cadre de votre travail (couverts par la responsabilité civile professionnelle).",Embeddings,False,False
+Les prestations dépannage installations MMA,116,102,41,Les prestations dépannage installations MMA,"- Intervention d’un réparateur agréé à votre domicile dans un délai maximal de cinq heures suivant votre appel en cas de problème de serrurerie, et au plus tard le lendemain matin dans les autres cas si vous appelez avant 15 heures (Dans la limite de deux interventions dans les 12 mois consécutifs.).
+- Réparation de votre installation après acceptation d’un devis proposé gratuitement par le réparateur. Le déplacement et la main d’œuvre(3) sont pris en charge, vous ne réglez que les éventuelles pièces à remplacer.
+- Prise en charge des pièces de remplacement dans 2 cas :
+La panne porte sur un élément d’un appareil électrique, endommagé par la foudre, un court-circuit, une surtension ou une sous-tension, selon les conditions d’indemnisation prévues au contrat.
+Le remplacement de serrure suite à un vol ou une tentative de vol",Embeddings,False,False
+Les mesures à prendre en cas de sinistre habitation,117,55,29,Les mesures à prendre en cas de sinistre habitation,"- Sans vous mettre en danger, préservez ce qui peut l’être.
+- Essuyez et faites sécher les objets et appareils mouillés, ne jetez rien.
+- Réunissez les photos, factures d’achat ou d’entretien, et toutes les autres preuves de l’existence, de l’état et de l’âge des biens endommagés ou détruits.
+- Contactez votre assureur dans les cinq jours suivant le sinistre.
+- N’engagez aucune réparation sans avoir obtenu son aval.",Embeddings,False,False
+Les prestations de l’assurance dépannage des appareils électroménagers MMA,118,69,64,Les prestations de l’assurance dépannage des appareils électroménagers MMA,"- Intervention d’un réparateur agréé à votre domicile dans les deux jours ouvrés suivant votre appel(Dans la limite de deux interventions dans les 12 mois consécutifs).
+- Réparation de votre appareil : le déplacement et la main d’œuvre sont pris en charge, vous payez uniquement les pièces à remplacer.
+- Prêt d’un appareil de caractéristiques similaires pour certains appareils et selon les disponibilités si la réparation ne peut être effectuée sous trois jours. Si le prêt n’est pas possible, vous bénéficiez sur présentation d’un justificatif d’un dédommagement financier si vous avez engagé des dépenses pour pallier l’absence de cet appareil jusqu’à 60 €.
+
+ 
+Cas Particuliers : Si votre appareil est irréparable au sens des conditions générales de votre contrat
+
+- Le réparateur remonte l’appareil endommagé et l’intervention est prise en charge (déplacement, diagnostic, remontage).
+- Si l’appareil a été endommagé par la foudre, un court-circuit, une surtension ou sous-tension, MMA peut prendre en charge son remplacement par un appareil neuf de qualité et de caractéristiques similaires.",Embeddings,False,False
+Comment et pourquoi assurer mes biens mis en location ?,143,83,48,Comment et pourquoi assurer mes biens mis en location ?,"Tous les sinistres ne sont pas assurés par le locataire. MMA propose dans son contrat Propriétaire Non Occupant des garanties accessibles et efficaces pour vous protéger de manière optimale, allant de l'assurances dommages aux biens immobiliers, à la RC propriétaire, jusqu'à la protection juridique du bailleur.
+Notez que cette assurance est obligatoire lorsque vous êtes copropriétaire non occupant du logement (loi ALUR).
+Pour plus de précisions, vous pouvez contacter une agence proche de chez vous",Embeddings,False,False
+L'assurance scolaire est-elle incluse dans l'assurance habitation ?,145,12,14,L'assurance scolaire est-elle incluse dans l'assurance habitation ?,"La garantie responsabilité civile vie privée est incluse dans votre contrat Habitation MMA.
+
+En complément, votre Agent MMA peut vous offrir les assurances scolaires de vos enfants, si vous êtes titulaire d'un contrat Habitation (formule 1 à 3) en résidence principale avec une Garantie des Accidents de la Vie n°2 en prévoyance pour votre famille",TF-IDF,False,False
+Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,152,146,65,Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?,"Les caravanes, les voiliers, les bateaux et les engins nautiques à moteur ne sont pas couverts par l'assurance habitation",Embeddings,False,False
+Est-ce qu'en cas de vol je suis couvert ou pas ?,186,26,87,Est-ce qu'en cas de vol je suis couvert ou pas ?,"Vous bénéficiez de la garantie vol et vandalisme intérieur dans le cadre des formules n°2 et 3 (voir conditions), mais pas n°1",TF-IDF,False,False
+"Ma fosse sceptique a débordé, suis-je couvert ?",187,38,16,"Ma fosse sceptique a débordé, suis-je couvert ?","Dans le cadre de la garantie dégat des eaux, les dommages dus au débordement de fosses septiques ne sont pas assurés",Embeddings,False,False
+"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?",190,6,15,"J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?","Dans le cadre de la garantie bris de vitre immobilier, les vitres, vitrages, entreposés, en cours de pose, dépose ou de transport ne sont pas assurés",TF-IDF,False,False

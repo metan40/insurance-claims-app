@@ -1,0 +1,2503 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Rapport Retrieval</title>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    color: #222;
+    background: #f7f8fa;
+}
+
+h1 {
+    color: #17365d;
+}
+
+h2 {
+    color: #244a73;
+    margin-top: 40px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    margin-top: 15px;
+}
+
+th {
+    background: #17365d;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+.data-table {
+    font-size: 13px;
+}
+
+.note {
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Rapport d'évaluation du Retrieval</h1>
+
+<p>
+Dataset : <strong>insurance-fr.csv</strong>
+</p>
+
+<p>
+Nombre de questions évaluées : <strong>201</strong>
+</p>
+
+<h2>1. Performances globales</h2>
+
+
+<table>
+<tr>
+    <th>Méthode</th>
+    <th>Recall@1</th>
+    <th>Recall@3</th>
+    <th>Recall@5</th>
+    <th>MRR</th>
+</tr>
+
+<tr>
+    <td>TF-IDF</td>
+    <td>29.85 %</td>
+    <td>52.24 %</td>
+    <td>62.19 %</td>
+    <td>0.4352</td>
+</tr>
+
+<tr>
+    <td>Embeddings</td>
+    <td>37.81 %</td>
+    <td>54.73 %</td>
+    <td>67.16 %</td>
+    <td>0.5051</td>
+</tr>
+</table>
+
+
+<h2>2. Comparaison des résultats</h2>
+
+
+<table>
+<tr>
+    <th>Situation</th>
+    <th>Nombre</th>
+    <th>Pourcentage</th>
+</tr>
+
+<tr>
+    <td>Embeddings meilleur</td>
+    <td>85</td>
+    <td>42.29 %</td>
+</tr>
+
+<tr>
+    <td>TF-IDF meilleur</td>
+    <td>68</td>
+    <td>33.83 %</td>
+</tr>
+
+<tr>
+    <td>Même rang</td>
+    <td>48</td>
+    <td>23.88 %</td>
+</tr>
+
+<tr>
+    <td>Les deux dans le Top-5</td>
+    <td>99</td>
+    <td>49.25 %</td>
+</tr>
+
+<tr>
+    <td>TF-IDF Top-5 uniquement</td>
+    <td>26</td>
+    <td>12.94 %</td>
+</tr>
+
+<tr>
+    <td>Embeddings Top-5 uniquement</td>
+    <td>36</td>
+    <td>17.91 %</td>
+</tr>
+
+<tr>
+    <td>Les deux échouent au Top-5</td>
+    <td>40</td>
+    <td>19.90 %</td>
+</tr>
+</table>
+
+
+<h2>3. Commentaires provisoires</h2>
+
+<div class="note">
+
+
+<h2>Commentaires provisoires</h2>
+
+<p>
+Sur 201 questions évaluées, le retrieval par embeddings obtient un
+Recall@1 de 37.81 %, contre
+29.85 % pour TF-IDF.
+La différence est de +7.96 points.
+</p>
+
+<p>
+En Recall@5, les embeddings obtiennent
+67.16 %, contre
+62.19 % pour TF-IDF,
+soit une différence de +4.98 points.
+</p>
+
+<p>
+Sur les 201 questions, les embeddings placent le document attendu
+plus haut que TF-IDF dans 85 cas.
+TF-IDF obtient un meilleur rang dans 68 cas,
+et les deux méthodes obtiennent le même rang dans 48 cas.
+</p>
+
+<p>
+Dans 40 cas, aucune des deux méthodes ne place le document
+attendu dans le Top-5.
+Ces cas devront être analysés avant de tirer une conclusion sur les
+causes des erreurs.
+</p>
+
+<p>
+<strong>Ces commentaires sont provisoires.</strong>
+Ils devront être révisés à partir de l'analyse détaillée des erreurs.
+</p>
+
+
+</div>
+
+<h2>4. Détail des 201 questions</h2>
+
+<table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>question</th>
+      <th>expected_document</th>
+      <th>tfidf_rank</th>
+      <th>embedding_rank</th>
+      <th>meilleur</th>
+      <th>TF-IDF Top-5</th>
+      <th>Embeddings Top-5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Qu'est-ce que l'assurance responsabilité civile des enfants</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’assurance enfant incluse dans l’assurance habitation</td>
+      <td>1</td>
+      <td>6</td>
+      <td>27</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L’assurance enfant incluse dans l’assurance scolaire</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les différents degrés de couverture de l'assurance responsabilité civile des enfants</td>
+      <td>3</td>
+      <td>39</td>
+      <td>11</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Mon enfant est majeur : est-il toujours couvert par l’assurance responsabilité civile des enfants ?</td>
+      <td>4</td>
+      <td>9</td>
+      <td>6</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Ce que le contrat ne garantit jamais</td>
+      <td>5</td>
+      <td>109</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Problème de serrure</td>
+      <td>6</td>
+      <td>2</td>
+      <td>13</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que faire en cas de problème de serrure ?</td>
+      <td>7</td>
+      <td>21</td>
+      <td>27</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?</td>
+      <td>8</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Propriétaire ou locataire : qui doit payer le serrurier ?</td>
+      <td>9</td>
+      <td>8</td>
+      <td>18</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Comparatif des renforts et options de la multirisque habitation</td>
+      <td>10</td>
+      <td>39</td>
+      <td>4</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Que faire en cas de dommage électrique ?</td>
+      <td>11</td>
+      <td>155</td>
+      <td>4</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Que faire pendant un dégât des eaux ?</td>
+      <td>12</td>
+      <td>161</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle assurance pour les bijoux</td>
+      <td>13</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce qu’un objet de valeur ?</td>
+      <td>14</td>
+      <td>15</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment les bijoux de valeur sont assurés avec le contrat Habitation MMA</td>
+      <td>15</td>
+      <td>2</td>
+      <td>2</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Indemnisation des bijoux volés ou abimés</td>
+      <td>16</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Conseils pour s'assurer contre la perte des bijoux</td>
+      <td>17</td>
+      <td>2</td>
+      <td>6</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Assurance bijoux : les cas particuliers</td>
+      <td>18</td>
+      <td>6</td>
+      <td>5</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quels sont les appareils électroménagers pris en charge par la garantie Dépannage de MMA ?</td>
+      <td>19</td>
+      <td>3</td>
+      <td>5</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les exclusions de la garantie dégât des eaux</td>
+      <td>20</td>
+      <td>101</td>
+      <td>38</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Les dégâts des eaux liés à une catastrophe naturelle</td>
+      <td>21</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les appareils protégés par la garantie Dommages électriques mobilier</td>
+      <td>22</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Le renfort Valeur à Neuf Mobilier</td>
+      <td>23</td>
+      <td>2</td>
+      <td>15</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Exemple renfort Valeur à Neuf Mobilier</td>
+      <td>24</td>
+      <td>5</td>
+      <td>45</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Le renfort Valeur à Neuf est il inclus</td>
+      <td>25</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Artisan rééquipement à neuf</td>
+      <td>26</td>
+      <td>4</td>
+      <td>4</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Exclusion valeur à neuf</td>
+      <td>27</td>
+      <td>4</td>
+      <td>21</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L’assurance habitation est-elle obligatoire ? Propriétaire, locataire : quelles obligations ?</td>
+      <td>28</td>
+      <td>20</td>
+      <td>21</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Le contrat habitation est-il obligatoire pour les propriétaires ?</td>
+      <td>29</td>
+      <td>31</td>
+      <td>75</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Le contrat habitation est-il obligatoire pour les locataires ?</td>
+      <td>30</td>
+      <td>5</td>
+      <td>39</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Le contrat habitation est-il obligatoire pour les colocataires ?</td>
+      <td>31</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Le contrat habitation est-il obligatoire pour un logement de fonction ?</td>
+      <td>32</td>
+      <td>2</td>
+      <td>33</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Le contrat habitation est-il obligatoire pour une location saisonnière ?</td>
+      <td>33</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Dans quelle mesure un salarié en télétravail est-il couvert par l’assurance de l‘entreprise ? Par son assurance habitation ?</td>
+      <td>34</td>
+      <td>53</td>
+      <td>114</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?</td>
+      <td>35</td>
+      <td>2</td>
+      <td>28</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que couvre l’assurance de votre employeur en cas de télétravail</td>
+      <td>36</td>
+      <td>3</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Le télétravail et votre assurance habitation</td>
+      <td>37</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Attestation de télétravail</td>
+      <td>38</td>
+      <td>1</td>
+      <td>9</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que couvre une assurance inondation ?</td>
+      <td>39</td>
+      <td>2</td>
+      <td>5</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Mon habitation est-elle en zone inondable ?</td>
+      <td>40</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Que couvre l’assurance inondation MMA ?</td>
+      <td>41</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la différence entre inondation et catastrophes naturelles ?</td>
+      <td>42</td>
+      <td>6</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment percevoir les indemnisations en cas d’inondation ?</td>
+      <td>43</td>
+      <td>86</td>
+      <td>93</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que l'assurance locataire</td>
+      <td>44</td>
+      <td>3</td>
+      <td>5</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’assurance locative est-elle obligatoire ?</td>
+      <td>45</td>
+      <td>17</td>
+      <td>12</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?</td>
+      <td>46</td>
+      <td>1</td>
+      <td>10</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>La responsabilité civile du locataire</td>
+      <td>47</td>
+      <td>45</td>
+      <td>25</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>La responsabilité du propriétaire envers les locataires</td>
+      <td>48</td>
+      <td>4</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les garanties facultatives de l'assurance locative</td>
+      <td>49</td>
+      <td>2</td>
+      <td>3</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Cas où l’assurance locative est facultative</td>
+      <td>50</td>
+      <td>108</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Assurance location meublée</td>
+      <td>51</td>
+      <td>98</td>
+      <td>100</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce qu’une location meublée ?</td>
+      <td>52</td>
+      <td>25</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Assurance location meublée : comment ça se passe ?</td>
+      <td>53</td>
+      <td>95</td>
+      <td>7</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?</td>
+      <td>54</td>
+      <td>4</td>
+      <td>27</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?</td>
+      <td>55</td>
+      <td>14</td>
+      <td>63</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Pourquoi souscrire une assurance pour votre habitation meublé ?</td>
+      <td>56</td>
+      <td>51</td>
+      <td>70</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Locataire : quelle assurance meublée choisir ?</td>
+      <td>57</td>
+      <td>23</td>
+      <td>15</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Propriétaire : quelle assurance meublée choisir ?</td>
+      <td>58</td>
+      <td>11</td>
+      <td>13</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>À quoi sert l’assurance PNO (Propriétaire non occupant)?</td>
+      <td>59</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’assurance PNO est-elle obligatoire ?</td>
+      <td>60</td>
+      <td>1</td>
+      <td>116</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que couvre l’assurance PNO ? (propriétaire non occupant)</td>
+      <td>61</td>
+      <td>9</td>
+      <td>3</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Assurance Propriétaire bailleur</td>
+      <td>62</td>
+      <td>3</td>
+      <td>98</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L'assurance du propriétaire bailleur est-elle obligatoire ?</td>
+      <td>63</td>
+      <td>3</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Pourquoi s’assurer en tant que propriétaire bailleur ?</td>
+      <td>64</td>
+      <td>3</td>
+      <td>14</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Assurance propriétaire bailleur : quelles sont les garanties ?</td>
+      <td>65</td>
+      <td>9</td>
+      <td>70</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Quels sont les principaux risques pour un propriétaire bailleur ?</td>
+      <td>66</td>
+      <td>42</td>
+      <td>17</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?</td>
+      <td>67</td>
+      <td>9</td>
+      <td>5</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que l'attestation d'assurance ?</td>
+      <td>68</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>À quoi sert l’attestation d’assurance habitation ?</td>
+      <td>69</td>
+      <td>2</td>
+      <td>2</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Locataire : Comment obtenir une attestation d’assurance habitation ?</td>
+      <td>70</td>
+      <td>3</td>
+      <td>28</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Propriétaire : comment demander une attestation d’assurance habitation</td>
+      <td>71</td>
+      <td>7</td>
+      <td>7</td>
+      <td>Égalité</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que faire si vous louez un logement et vous n'avez pas reçu l'attestation d'assurance habitation du locataire ?</td>
+      <td>72</td>
+      <td>9</td>
+      <td>53</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Comment recevoir son attestation d’assurance habitation MMA ?</td>
+      <td>73</td>
+      <td>5</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment compter le nombre de pièces principales ?</td>
+      <td>74</td>
+      <td>1</td>
+      <td>2</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Pourquoi bien calculer et déclarer le nombre de pièces ?</td>
+      <td>75</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment est calculé le prix de l’assurance habitation</td>
+      <td>76</td>
+      <td>1</td>
+      <td>2</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelles caractéristiques du logement sont prises en compte pour le contrat ?</td>
+      <td>77</td>
+      <td>15</td>
+      <td>52</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Comment être indemnisé après un dégât des eaux ?</td>
+      <td>78</td>
+      <td>6</td>
+      <td>15</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Comment souscrire à une assurance habitation ?</td>
+      <td>79</td>
+      <td>34</td>
+      <td>4</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les documents remis à la souscription de votre assurance habitation MMA</td>
+      <td>80</td>
+      <td>40</td>
+      <td>14</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Changer d’assurance habitation : quelles sont les informations nécessaires ?</td>
+      <td>81</td>
+      <td>113</td>
+      <td>12</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Quel contrat d’assurance habitation pour une location saisonnière type Airbnb</td>
+      <td>82</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les assurances proposées par Airbnb sont-elles suffisantes ?</td>
+      <td>83</td>
+      <td>1</td>
+      <td>11</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien</td>
+      <td>84</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’Assurance Habitation MMA si vous louez une location par une plateforme</td>
+      <td>85</td>
+      <td>8</td>
+      <td>26</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?</td>
+      <td>86</td>
+      <td>34</td>
+      <td>4</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que la télésurveillance ?</td>
+      <td>87</td>
+      <td>6</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quels sont les avantages de la télésurveillance ?</td>
+      <td>88</td>
+      <td>2</td>
+      <td>2</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’installation d’une alarme de maison avec télésurveillance avec MMA</td>
+      <td>89</td>
+      <td>1</td>
+      <td>3</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Assurance habitation et télésurveillance : vos avantages MMA</td>
+      <td>90</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Que se passe-t-il en cas de déménagement ?</td>
+      <td>91</td>
+      <td>5</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Vous déménagez et vous êtes/devenez propriétaire</td>
+      <td>92</td>
+      <td>41</td>
+      <td>17</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Déménagement avec recours à un déménageur</td>
+      <td>93</td>
+      <td>1</td>
+      <td>2</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Faut-il assurer obligatoirement une résidence secondaire ?</td>
+      <td>94</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Pourquoi assurer une résidence secondaire ?</td>
+      <td>95</td>
+      <td>4</td>
+      <td>43</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Quelles sont les garanties MMA conseillées pour votre résidence secondaire</td>
+      <td>96</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment assurer une résidence secondaire ?</td>
+      <td>97</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment fonctionne la franchise d’une assurance habitation ?</td>
+      <td>98</td>
+      <td>1</td>
+      <td>74</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Responsable ou victime du sinistre : les conséquences sur la franchise</td>
+      <td>99</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelles sont les franchises habitation MMA</td>
+      <td>100</td>
+      <td>2</td>
+      <td>4</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce qu’un dégât des eaux ?</td>
+      <td>101</td>
+      <td>28</td>
+      <td>4</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que la garantie dégat des eaux</td>
+      <td>102</td>
+      <td>41</td>
+      <td>5</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que la garantie dommagez éléctriques</td>
+      <td>103</td>
+      <td>115</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Pourquoi souscrire une garantie Dommages électriques mobilier</td>
+      <td>104</td>
+      <td>3</td>
+      <td>3</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelles sont les installations prise en charge par la garantie Dépannage MMA ?</td>
+      <td>105</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L'assurance dégât des eaux est-elle obligatoire ?</td>
+      <td>106</td>
+      <td>1</td>
+      <td>2</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que la garantie Dépannage électroménager vidéo</td>
+      <td>107</td>
+      <td>76</td>
+      <td>10</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce que la garantie Dépannage habitation ?</td>
+      <td>108</td>
+      <td>5</td>
+      <td>89</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce que la responsabilité civile ?</td>
+      <td>109</td>
+      <td>31</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce que l’assurance responsabilité civile ?</td>
+      <td>110</td>
+      <td>8</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’assurance responsabilité civile est-elle obligatoire ?</td>
+      <td>111</td>
+      <td>3</td>
+      <td>6</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que couvre la responsabilité civile de l’assurance habitation ?</td>
+      <td>112</td>
+      <td>18</td>
+      <td>9</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que ne couvre pas l’assurance responsabilité civile ?</td>
+      <td>113</td>
+      <td>12</td>
+      <td>8</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L’assurance responsabilité civile partielle</td>
+      <td>114</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment bénéficier de votre assurance responsabilité civile ?</td>
+      <td>115</td>
+      <td>4</td>
+      <td>4</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les prestations dépannage installations MMA</td>
+      <td>116</td>
+      <td>102</td>
+      <td>41</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Les mesures à prendre en cas de sinistre habitation</td>
+      <td>117</td>
+      <td>55</td>
+      <td>29</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Les prestations de l’assurance dépannage des appareils électroménagers MMA</td>
+      <td>118</td>
+      <td>69</td>
+      <td>64</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que couvre la garantie dégâts des eaux de l’assurance habitation ?</td>
+      <td>119</td>
+      <td>13</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle assurance habitation pour les étudiants ?</td>
+      <td>120</td>
+      <td>3</td>
+      <td>5</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Que comprend l'assurance habitation étudiante ?</td>
+      <td>121</td>
+      <td>1</td>
+      <td>4</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle assurance pour un logement étudiant ?</td>
+      <td>122</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle assurance habitation étudiant choisir ?</td>
+      <td>123</td>
+      <td>2</td>
+      <td>4</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Une assurance habitation pour les étudiants boursier</td>
+      <td>124</td>
+      <td>1</td>
+      <td>8</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>L'assurance responsabilité civile pour les étudiants</td>
+      <td>125</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Assurer une chambre étudiante en colocation</td>
+      <td>126</td>
+      <td>1</td>
+      <td>4</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Assurance habitation étudiant MMA : les garanties complémentaires</td>
+      <td>127</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle assurance pour les logements en copropriété ?</td>
+      <td>128</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Télévision cassée : les garanties de votre assurance habitation MMA</td>
+      <td>129</td>
+      <td>76</td>
+      <td>3</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Assurance responsabilité civile et écran TV cassé</td>
+      <td>130</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Des options d’assurance habitation pour faire réparer votre écran TV cassé</td>
+      <td>131</td>
+      <td>117</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle indemnisation par l'assurance habitation TV cassée MMA ?</td>
+      <td>132</td>
+      <td>4</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment est considéré le garage du point de vue de l’assurance ?</td>
+      <td>133</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’assurance garage ou parking d'un locataire est-elle obligatoire ?</td>
+      <td>134</td>
+      <td>4</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’assurance garage auto d’un propriétaire est-elle obligatoire ?</td>
+      <td>135</td>
+      <td>3</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L’assurance d’une place de stationnement</td>
+      <td>136</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Pourquoi assurer un garage auto ?</td>
+      <td>137</td>
+      <td>3</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle assurance de garage souscrire ?</td>
+      <td>138</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les garanties de votre assurance de garage</td>
+      <td>139</td>
+      <td>4</td>
+      <td>4</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Faut-il assurer une place de parking ?</td>
+      <td>140</td>
+      <td>1</td>
+      <td>2</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Le garage est-il couvert par l'assurance habitation ?</td>
+      <td>141</td>
+      <td>5</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Comment assurer mes biens pendant mon déménagement ?</td>
+      <td>142</td>
+      <td>4</td>
+      <td>6</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Comment et pourquoi assurer mes biens mis en location ?</td>
+      <td>143</td>
+      <td>83</td>
+      <td>48</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Comment assurer mes biens professionnels dans mon domicile personnel ?</td>
+      <td>144</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L'assurance scolaire est-elle incluse dans l'assurance habitation ?</td>
+      <td>145</td>
+      <td>12</td>
+      <td>14</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Où s'exercent géographiquement les garanties ?</td>
+      <td>146</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Que couvre la garantie renfort évènements climatiques ?</td>
+      <td>147</td>
+      <td>35</td>
+      <td>3</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Que ne couvre pas la garantie renfort évènements climatiques ?</td>
+      <td>148</td>
+      <td>4</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?</td>
+      <td>149</td>
+      <td>22</td>
+      <td>4</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les billets de banque sont-ils couverts ?</td>
+      <td>150</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?</td>
+      <td>151</td>
+      <td>8</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?</td>
+      <td>152</td>
+      <td>146</td>
+      <td>65</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Mes arbres fruitiers ont été endommagés, sont-ils couverts ?</td>
+      <td>153</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Plusieurs de mes arbres ont été arrachés. Suis-je couvert ?</td>
+      <td>154</td>
+      <td>2</td>
+      <td>2</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les panneaux solaires sont-ils couverts ?</td>
+      <td>155</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les éoliennes sont-elles couvertes ?</td>
+      <td>156</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les piscines sont-elles assurées ?</td>
+      <td>157</td>
+      <td>33</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les abris en matière plastique sont-ils couverts ?</td>
+      <td>158</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Ma piscine hors sol a été endommagée, suis-je couvert ?</td>
+      <td>159</td>
+      <td>90</td>
+      <td>3</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Je me suis blessé avec ma tondeuse, suis-je couvert ?</td>
+      <td>160</td>
+      <td>1</td>
+      <td>29</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Que sont les objets à risque de vol ?</td>
+      <td>161</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des biens immobiliers ?</td>
+      <td>162</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des dépendances ?</td>
+      <td>163</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des clôtures ?</td>
+      <td>164</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des biens couverts au titre du renfort installations extérieures si il a été souscrit ?</td>
+      <td>165</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des piscines si déclarée ?</td>
+      <td>166</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie du contenu des congélateurs et réfrigérateurs ?</td>
+      <td>167</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie d'un refoulement des égouts ?</td>
+      <td>168</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?</td>
+      <td>169</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des frais de réparation des conduites intérieures ?</td>
+      <td>170</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des frais de réparation des conduites intérieures endommagées par le gel au titre du renfort Evènements Climatiques</td>
+      <td>171</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des surconsommations d’eau</td>
+      <td>172</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelle est la limite de garantie des cas de vandalisme à l’extérieur des bâtiments</td>
+      <td>173</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>En cas de vol par une personne de ma famille, suis-je couvert ?</td>
+      <td>174</td>
+      <td>160</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>En cas de vol par mon colocataire, suis-je couvert ?</td>
+      <td>175</td>
+      <td>139</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>On a volé mes skis dans mon casier, suis-je couvert ?</td>
+      <td>176</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>On a volé des objets à risque de vol dans une dépendance de mon habitation principale, suis-je couvert ?</td>
+      <td>177</td>
+      <td>1</td>
+      <td>4</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>On a volé des biens dans un local partagé, suis-je couvert ?</td>
+      <td>178</td>
+      <td>10</td>
+      <td>2</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>On a volé les biens d'un de mes invités, suis-je couvert ?</td>
+      <td>179</td>
+      <td>1</td>
+      <td>2</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>On a volé des biens alors que j'étais chez mois, suis-je vouvert ?</td>
+      <td>180</td>
+      <td>4</td>
+      <td>6</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que l'option Revente - évènements personnels ou familiaux</td>
+      <td>181</td>
+      <td>4</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que l'option&nbsp;&nbsp;Revente - événements extérieurs</td>
+      <td>182</td>
+      <td>4</td>
+      <td>4</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?</td>
+      <td>183</td>
+      <td>3</td>
+      <td>9</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?</td>
+      <td>184</td>
+      <td>2</td>
+      <td>13</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Quels sont les cas où la garantie optionnelle revente ne peut pas s'appliquer ?</td>
+      <td>185</td>
+      <td>1</td>
+      <td>4</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Est-ce qu'en cas de vol je suis couvert ou pas ?</td>
+      <td>186</td>
+      <td>26</td>
+      <td>87</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Ma fosse sceptique a débordé, suis-je couvert ?</td>
+      <td>187</td>
+      <td>38</td>
+      <td>16</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Est-ce que les dommages dûs à l'humidité sont couverts ?</td>
+      <td>188</td>
+      <td>1</td>
+      <td>3</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Mon sol en marbre a été endommagé, suis-je couvert ?</td>
+      <td>189</td>
+      <td>148</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>J'étais en train de changer mes fenêtres, et pendant les travaux une vitre s'est brisée. Suis-je couvert ?</td>
+      <td>190</td>
+      <td>6</td>
+      <td>15</td>
+      <td>TF-IDF</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Mon aquarium s'est cassé. Suis-je couvert ?</td>
+      <td>191</td>
+      <td>132</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>L'écran de mon téléviseur s'est brisé. Suis-je couvert ?</td>
+      <td>192</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Que couvre la garantie déménagement ?</td>
+      <td>193</td>
+      <td>1</td>
+      <td>4</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Je déménage par moi même. Suis-je couvert ?</td>
+      <td>194</td>
+      <td>3</td>
+      <td>5</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Je fais garder mes enfants par une baby-sitter, suis-je couvert ?</td>
+      <td>195</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Je garde des enfants, suis-je couvert ?</td>
+      <td>196</td>
+      <td>1</td>
+      <td>2</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Mon enfant effectue un stage en entreprise. Est-il couvert par la garantie responsabilité civile privée ?</td>
+      <td>197</td>
+      <td>1</td>
+      <td>2</td>
+      <td>TF-IDF</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Les dommages causés par les animaux sont ils couverts par la garantie responsabilité civile privée ?</td>
+      <td>198</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Égalité</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Je pratique un sport, suis-je couvert ?</td>
+      <td>199</td>
+      <td>6</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>Quelles sont les formules disponibles ?</td>
+      <td>200</td>
+      <td>68</td>
+      <td>1</td>
+      <td>Embeddings</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>5. Cas où les méthodes sont en désaccord</h2>
+
+<table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>question</th>
+      <th>expected_document</th>
+      <th>tfidf_rank</th>
+      <th>embedding_rank</th>
+      <th>meilleur</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ce que le contrat ne garantit jamais</td>
+      <td>5</td>
+      <td>109</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Problème de serrure</td>
+      <td>6</td>
+      <td>2</td>
+      <td>13</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?</td>
+      <td>8</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Comparatif des renforts et options de la multirisque habitation</td>
+      <td>10</td>
+      <td>39</td>
+      <td>4</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Que faire en cas de dommage électrique ?</td>
+      <td>11</td>
+      <td>155</td>
+      <td>4</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Que faire pendant un dégât des eaux ?</td>
+      <td>12</td>
+      <td>161</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce qu’un objet de valeur ?</td>
+      <td>14</td>
+      <td>15</td>
+      <td>2</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Conseils pour s'assurer contre la perte des bijoux</td>
+      <td>17</td>
+      <td>2</td>
+      <td>6</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Assurance bijoux : les cas particuliers</td>
+      <td>18</td>
+      <td>6</td>
+      <td>5</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Le renfort Valeur à Neuf Mobilier</td>
+      <td>23</td>
+      <td>2</td>
+      <td>15</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Exemple renfort Valeur à Neuf Mobilier</td>
+      <td>24</td>
+      <td>5</td>
+      <td>45</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Exclusion valeur à neuf</td>
+      <td>27</td>
+      <td>4</td>
+      <td>21</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Le contrat habitation est-il obligatoire pour les locataires ?</td>
+      <td>30</td>
+      <td>5</td>
+      <td>39</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Le contrat habitation est-il obligatoire pour un logement de fonction ?</td>
+      <td>32</td>
+      <td>2</td>
+      <td>33</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?</td>
+      <td>35</td>
+      <td>2</td>
+      <td>28</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Attestation de télétravail</td>
+      <td>38</td>
+      <td>1</td>
+      <td>9</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Quelle est la différence entre inondation et catastrophes naturelles ?</td>
+      <td>42</td>
+      <td>6</td>
+      <td>2</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?</td>
+      <td>46</td>
+      <td>1</td>
+      <td>10</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Cas où l’assurance locative est facultative</td>
+      <td>50</td>
+      <td>108</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce qu’une location meublée ?</td>
+      <td>52</td>
+      <td>25</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?</td>
+      <td>54</td>
+      <td>4</td>
+      <td>27</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>L’assurance PNO est-elle obligatoire ?</td>
+      <td>60</td>
+      <td>1</td>
+      <td>116</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Que couvre l’assurance PNO ? (propriétaire non occupant)</td>
+      <td>61</td>
+      <td>9</td>
+      <td>3</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Assurance Propriétaire bailleur</td>
+      <td>62</td>
+      <td>3</td>
+      <td>98</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Pourquoi s’assurer en tant que propriétaire bailleur ?</td>
+      <td>64</td>
+      <td>3</td>
+      <td>14</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?</td>
+      <td>67</td>
+      <td>9</td>
+      <td>5</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Locataire : Comment obtenir une attestation d’assurance habitation ?</td>
+      <td>70</td>
+      <td>3</td>
+      <td>28</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Comment souscrire à une assurance habitation ?</td>
+      <td>79</td>
+      <td>34</td>
+      <td>4</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Quel contrat d’assurance habitation pour une location saisonnière type Airbnb</td>
+      <td>82</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Les assurances proposées par Airbnb sont-elles suffisantes ?</td>
+      <td>83</td>
+      <td>1</td>
+      <td>11</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?</td>
+      <td>86</td>
+      <td>34</td>
+      <td>4</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que la télésurveillance ?</td>
+      <td>87</td>
+      <td>6</td>
+      <td>2</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Pourquoi assurer une résidence secondaire ?</td>
+      <td>95</td>
+      <td>4</td>
+      <td>43</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Comment fonctionne la franchise d’une assurance habitation ?</td>
+      <td>98</td>
+      <td>1</td>
+      <td>74</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce qu’un dégât des eaux ?</td>
+      <td>101</td>
+      <td>28</td>
+      <td>4</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que la garantie dégat des eaux</td>
+      <td>102</td>
+      <td>41</td>
+      <td>5</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Qu'est-ce que la garantie dommagez éléctriques</td>
+      <td>103</td>
+      <td>115</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce que la garantie Dépannage habitation ?</td>
+      <td>108</td>
+      <td>5</td>
+      <td>89</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce que la responsabilité civile ?</td>
+      <td>109</td>
+      <td>31</td>
+      <td>2</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Qu’est-ce que l’assurance responsabilité civile ?</td>
+      <td>110</td>
+      <td>8</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>L’assurance responsabilité civile est-elle obligatoire ?</td>
+      <td>111</td>
+      <td>3</td>
+      <td>6</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Que couvre la garantie dégâts des eaux de l’assurance habitation ?</td>
+      <td>119</td>
+      <td>13</td>
+      <td>2</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Une assurance habitation pour les étudiants boursier</td>
+      <td>124</td>
+      <td>1</td>
+      <td>8</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Télévision cassée : les garanties de votre assurance habitation MMA</td>
+      <td>129</td>
+      <td>76</td>
+      <td>3</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Des options d’assurance habitation pour faire réparer votre écran TV cassé</td>
+      <td>131</td>
+      <td>117</td>
+      <td>2</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Comment assurer mes biens pendant mon déménagement ?</td>
+      <td>142</td>
+      <td>4</td>
+      <td>6</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Que couvre la garantie renfort évènements climatiques ?</td>
+      <td>147</td>
+      <td>35</td>
+      <td>3</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?</td>
+      <td>149</td>
+      <td>22</td>
+      <td>4</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?</td>
+      <td>151</td>
+      <td>8</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Les piscines sont-elles assurées ?</td>
+      <td>157</td>
+      <td>33</td>
+      <td>2</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Ma piscine hors sol a été endommagée, suis-je couvert ?</td>
+      <td>159</td>
+      <td>90</td>
+      <td>3</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Je me suis blessé avec ma tondeuse, suis-je couvert ?</td>
+      <td>160</td>
+      <td>1</td>
+      <td>29</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>En cas de vol par une personne de ma famille, suis-je couvert ?</td>
+      <td>174</td>
+      <td>160</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>En cas de vol par mon colocataire, suis-je couvert ?</td>
+      <td>175</td>
+      <td>139</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>On a volé des biens dans un local partagé, suis-je couvert ?</td>
+      <td>178</td>
+      <td>10</td>
+      <td>2</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>On a volé des biens alors que j'étais chez mois, suis-je vouvert ?</td>
+      <td>180</td>
+      <td>4</td>
+      <td>6</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?</td>
+      <td>183</td>
+      <td>3</td>
+      <td>9</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?</td>
+      <td>184</td>
+      <td>2</td>
+      <td>13</td>
+      <td>TF-IDF</td>
+    </tr>
+    <tr>
+      <td>Mon sol en marbre a été endommagé, suis-je couvert ?</td>
+      <td>189</td>
+      <td>148</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Mon aquarium s'est cassé. Suis-je couvert ?</td>
+      <td>191</td>
+      <td>132</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Je pratique un sport, suis-je couvert ?</td>
+      <td>199</td>
+      <td>6</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+    <tr>
+      <td>Quelles sont les formules disponibles ?</td>
+      <td>200</td>
+      <td>68</td>
+      <td>1</td>
+      <td>Embeddings</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>6. Révision des commentaires</h2>
+
+<div class="note">
+
+<p>
+Cette section est volontairement destinée à être révisée après analyse
+des erreurs.
+</p>
+
+<p>
+Les résultats numériques sont calculés automatiquement.
+Les interprétations doivent être confrontées aux exemples individuels
+avant d'être considérées comme des conclusions définitives.
+</p>
+
+</div>
+
+</body>
+
+</html>

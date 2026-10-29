@@ -1,0 +1,44 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Évolution du projet RAG — V5</title>
+<style>body{font-family:Arial,sans-serif;max-width:1000px;margin:40px auto;padding:0 22px;line-height:1.6;color:#202124}h1,h2,h3{line-height:1.25}table{border-collapse:collapse;width:100%;margin:16px 0}th,td{border:1px solid #ccc;padding:9px;text-align:left}th{background:#f2f4f7}code{background:#f3f3f3;padding:2px 4px;border-radius:3px}.note{color:#555}</style></head><body>
+<h1>Évolution du projet — démarche et résultats</h1>
+<h2>1. Objectif</h2>
+<p>Je développe une mini-application RAG pour rechercher des documents d&#x27;assurance et produire une réponse en français à partir des documents récupérés. Le projet combine une recherche initiale par embeddings, un reclassement par CrossEncoder et une génération de réponse par Ollama. Je documente séparément les résultats mesurés sur le retrieval et les vérifications qui restent nécessaires sur les réponses générées.</p>
+<h2>2. Démarche suivie</h2>
+<p>Je pars d&#x27;un constat, formule une hypothèse d&#x27;amélioration, applique un changement ciblé, puis vérifie ce changement avec des tests adaptés. Je distingue les tests unitaires simulés des essais de bout en bout exécutés avec les modèles réels. Cette distinction est importante : un test unitaire réussi confirme une règle de code dans le scénario simulé, mais ne prouve pas que la réponse d&#x27;assurance est correcte.</p>
+<h2>3. Évolution de l&#x27;application</h2>
+<h3>Version 3 — validation et gestion des erreurs</h3>
+<p>La base de travail comportait la validation des questions et une gestion plus explicite des erreurs de génération. Les tests unitaires couvraient les limites de longueur et plusieurs réponses Ollama non exploitables.</p>
+<h3>Version 4 — traçabilité des sources et séparation des scores</h3>
+<p>La V4 a ajouté des identifiants de source tels que <code>[S1]</code> aux documents transmis au générateur. L&#x27;API distingue le score du reranker de la similarité des embeddings, tout en conservant le champ historique <code>score</code> pour la compatibilité. Le code contrôle également que la réponse d&#x27;Ollama contient du texte exploitable.</p>
+<h3>Version 5 — contrôle formel des identifiants et chemins robustes</h3>
+<p>La V5 prolonge la traçabilité en inspectant les identifiants cités dans la réponse. Le contrôle distingue les identifiants reconnus, inconnus et les sources disponibles mais non citées. L&#x27;interface affiche ce bilan. J&#x27;ai aussi calculé les chemins du CSV et de la page d&#x27;accueil à partir du dossier du projet, afin que ces accès ne dépendent pas du répertoire courant.</p>
+<p>L&#x27;audit de citations reste volontairement limité : il vérifie la cohérence des identifiants, pas le fond. Une référence <code>[S1]</code> peut être formellement valide tout en ne justifiant pas la phrase qui la précède. La validation sémantique doit donc faire partie des tests manuels.</p>
+<h2>4. Résultats du retrieval disponibles</h2>
+<p>L&#x27;évaluation existante contient 201 questions. Les résultats rapportés sont :</p>
+<table>
+<tr><th>Métrique</th><th>TF-IDF</th><th>Embeddings</th></tr>
+<tr><td>Recall@1</td><td>29,85 %</td><td>37,81 %</td></tr>
+<tr><td>Recall@5</td><td>62,19 %</td><td>67,16 %</td></tr>
+<tr><td>MRR</td><td>0,4352</td><td>0,5051</td></tr>
+</table>
+<p>Pour l&#x27;étape de reranking, la cible attendue se trouve dans le Top-20 initial pour 167 questions sur 201, soit 83,08 %. Pour 34 questions (16,92 %), la cible est absente de cette sélection initiale. Après reranking, le Hit Rate@5 rapporté est de 76,12 % et le MRR de 0,6331.</p>
+<p>Ces mesures évaluent le classement des documents. Elles ne démontrent pas que la génération Ollama répond correctement ni que chaque citation justifie les affirmations formulées.</p>
+<h2>5. Vérifications de la V5</h2>
+<p>La suite de tests automatisés a été exécutée après les changements. Elle utilise des doubles pour les modèles d&#x27;embeddings, le CrossEncoder et Ollama. Elle vérifie la validation de la question, les erreurs de génération et les cas de références valides, inconnues ou absentes. Le résultat de cette exécution est consigné dans le compte rendu de développement ; la campagne de bout en bout avec les modèles réels reste à effectuer.</p>
+<h2>6. Campagne de validation à venir</h2>
+<p>Je considérerai les tests finaux séparément des tests unitaires. La campagne devra inclure :</p>
+<ol>
+<li>une question dont la réponse figure clairement dans le corpus ;</li>
+<li>une question nécessitant de consulter plusieurs documents ;</li>
+<li>une question dont la réponse est absente du corpus ;</li>
+<li>la vérification manuelle que les citations soutiennent réellement les affirmations ;</li>
+<li>une citation manquante ou un identifiant inconnu ;</li>
+<li>une question vide et une question dépassant la longueur maximale ;</li>
+<li>l&#x27;indisponibilité d&#x27;Ollama et une réponse Ollama invalide ;</li>
+<li>le lancement depuis un répertoire autre que la racine du projet ;</li>
+<li>la vérification de l&#x27;interface et de la cohérence des scores affichés.</li>
+</ol>
+<p>Pour chaque scénario, je noterai la question, le résultat attendu, le résultat observé, le statut et la correction éventuelle. Je ne déclarerai pas le projet validé avant d&#x27;avoir exécuté ces scénarios dans l&#x27;environnement cible.</p>
+<h2>7. Décisions et prochaines étapes</h2>
+<p>La V5 améliore la vérifiabilité formelle des citations et réduit la dépendance au répertoire courant. La prochaine étape consiste à vérifier ces comportements sur des réponses réelles, puis à enrichir le rapport avec les observations de la campagne. Après cela, je pourrai stabiliser une version, préparer le déploiement et présenter à Keyzan non seulement le code final, mais aussi le raisonnement, les hypothèses, les mesures et les limites constatées.</p>
+<p class="note">Document de travail — les tests de bout en bout avec les modèles réels et Ollama restent à exécuter.</p></body></html>

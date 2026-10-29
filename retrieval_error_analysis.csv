@@ -1,0 +1,369 @@
+﻿question,expected_document,tfidf_rank,embedding_rank,document_title,document_content,meilleure_methode,tfidf_top5,embeddings_top5
+Ce que le contrat ne garantit jamais,5,109,1,Ce que le contrat ne garantit jamais,"En plus des exclusions prévues, votre contrat ne couvre pas pour :
+• Les garanties dommages :
+- les pertes et les dommages occasionnés par la guerre,
+- les dommages d’origine nucléaire et les dommages causés par toute source de rayonnements ionisants, sauf dommages matériels directs causés aux biens assurés par un attentat ou un acte de terrorisme,
+- les dommages causés par des explosifs volontairement détenus par l’assuré,
+- les dommages survenus au cours de votre participation comme organisateur ou concurrent à des épreuves ou manifestations nécessitant l’autorisation des Pouvoirs Publics,
+- les dommages occasionnés directement ou indirectement par une avalanche, un tremblement de terre, une éruption volcanique, un effondrement, affaissement ou glissement du sol, razde- marée, chutes de pierres et autres cataclysmes sauf s’il s’agit de dommages donnant lieu à la constatation de l’état de catastrophes naturelles par Arrêté interministériel. Dans ce cas, ces dommages sont indemnisés dans les conditions fixées par les textes d’application de la loi n° 82- 600 du 13 juillet 1982.
+• La garantie responsabilité civile :
+- les dommages immatériels causés à autrui lorsque ces dommages ne sont pas consécutifs à des dommages corporels ou matériels garantis,
+- les dommages causés par un assuré à une autre personne ayant la qualité d’assuré. Toutefois, ces dommages sont indemnisés lorsqu’il s’agit de dommages corporels faisant l’objet d’un recours exercé par une personne n’ayant pas la qualité d’assuré et subrogée dans les droits de la victime.
+
+Les membres de la famille, les co-souscripteurs et les colocataires sont considérés comme des tiers pour les dommages corporels causés par :
+- les jouets d’enfants autoportés ou automoteurs dont la vitesse n’excède pas 6km/h
+- les engins de jardinage, y compris autotractés ou autoportés utilisés dans l’enceinte d’une
+propriété privée s’ils sont d’une puissance inférieure à 20 CV
+- les fauteuils automoteurs d’handicapés
+• Les garanties dommages et responsabilité civile
+- les conséquences de vos actes intentionnels ou des actes effectués avec votre complicité et dont le but est de porter atteinte à des personnes ou à des biens (sauf cas de légitime défense).",Embeddings,False,True
+Problème de serrure,6,2,13,Problème de serrure,"Clés perdues, laissées à l’intérieur du logement ou cassée dans la serrure ? Entre les frais de déplacement et la prestation d’ouverture de la porte, l’intervention d’un serrurier coûte chère. L’assurance habitation MMA peut prendre en charge le dépannage de votre serrure.",TF-IDF,True,False
+"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?",8,10,1,"Avec l’assurance habitation MMA, quelle prise en charge en cas de problème de serrure ?","Le contrat d’assurance habitation MMA propose le dépannage des installations de serrurerie. Il couvre toutes les serrures de la maison situées à l’adresse indiquée sur le contrat d’assurance habitation MMA quelle que soit leur ancienneté. Cela inclut, le portail ou la grille de votre maison, la porte de votre garage, mais aussi la porte de communication entre le garage et votre habitation.
+
+Lorsqu’il vous est impossible d’entrer, de sortir ou de refermer une ou plusieurs de ces serrures, l’assurance dépannage serrure vous garantit l’intervention d’un professionnel. Celui-ci se déplace alors dans les 5 heures suivant votre appel, 24 heures sur 24, 7 jours sur 7, y compris pendant un jour férié.",Embeddings,False,True
+Comparatif des renforts et options de la multirisque habitation,10,39,4,Comparatif des renforts et options de la multirisque habitation,"Le tableau comparatif ci-dessous mentionne des garanties supplémentaires, présentes dans nos contrats d’assurance multirisques habitation sous forme de renforts ou d’options.
+
+Elles sont utiles si vous souhaitez assurer des équipements extérieurs tels qu’une piscine amovible, votre mobilier et matériel de jardin ou encore si vous désirez couvrir les frais liés au remplacement ou la réparation de biens mobiliers (garantie Rééquipement à neuf) endommagés à la suite d’un sinistre.
+
+
+| | Formule n°1  | Formule n°2 |  Formule n°3 |
+| --- | ----     | ----        | ------       |
+| Responsabilités Civiles, Défense Pénale et Recours | OUI | OUI | OUI |
+| Incendie, Risques annexes, Explosion ,Tempête | OUI | OUI | OUI |
+| Catastrophes naturelles et technologiques | OUI | OUI | OUI |
+| Dégâts des eaux, Bris de vitre immobilier | OUI | OUI | OUI |
+| Assistance, Relogements Déménagement | OUI | OUI | OUI |
+| Dépannage des installations de l'habitation | OUI | OUI | OUI |
+| Vol et vandalisme intérieur | NON | OUI | OUI |
+| Vandalisme extérieur | NON | OUI | OUI |
+| Bris de vitre mobilier (BDV) | NON | NON | OUI |
+| Dommage électrique mobilier (DEL) | NON | NON | OUI |
+| Remboursement de prêt, Transfert des enfants et gardes des animaux | NON | NON | OUI |
+| Renfort évènements climatiques (gel, grêle, neige, boue, inondation hors Cat-Nat) | OPTION | OPTION | OPTION |
+| Renfort installations extérieurs (mobilier extérieur, végétaux, piscine amovible ...) | OPTION | OPTION | OPTION |
+| Renfort mobilier plus (Dommage électrique mobilier + Gris de vitre mobilier) | OPTION | OPTION | OUI |
+| Renfort vol en tous lieux du matériel de loisirs | NON | OPTION | OPTION |
+| Renfort valeur à neuf mobilier | NON | NON | OPTION |
+| Renfort immobilier et services étendus (Dépannage, valeur à neuf des appareils électriques immobiliers, surconsommation d'eau) | NON | NON | OPTION |
+| Option Protection juridique du Propriétaire | OPTION | OPTION | OPTION |
+| Option Assurance des habitants | OPTION | OPTION | OPTION |
+| Option Location et échange de logement | NON DISPONIBLE | OPTION | OPTION |
+| Option Revente évènement extérieur / personnel | NON DISPONIBLE | NON DISPONIBLE | OPTION |",Embeddings,False,True
+Que faire en cas de dommage électrique ?,11,155,4,Que faire en cas de dommage électrique ?,"- Vérifiez le bon fonctionnement de tous les appareils électriques reliés au secteur au moment du sinistre, répertoriez ceux qui ont subi des dommages.
+- Réunissez tous les éléments susceptibles de prouver leur valeur : factures, certificats de garantie ou encore dossiers de crédit.
+- Prévenez votre assureur et déclarez le sinistre dans les cinq jours ouvrés.
+- N’engagez aucune réparation avant d’avoir obtenu l’accord de votre assurance.",Embeddings,False,True
+Que faire pendant un dégât des eaux ?,12,161,1,Que faire pendant un dégât des eaux ?,"- Si l’eau envahit le logement, coupez l’électricité.
+- Si la fuite provient de chez vous, fermez l’arrivée d’eau principale, contactez un plombier et conservez sa facture.
+- Entreposez à l’abri (par exemple en hauteur) tous les biens susceptibles d’être endommagés si le problème s’aggrave.",Embeddings,False,True
+Qu’est-ce qu’un objet de valeur ?,14,15,2,Qu’est-ce qu’un objet de valeur ?,"En matière d’assurance, certains biens mobiliers peuvent être considérés comme des objets de valeur. Il s’agit notamment :   
+
+- des objets précieux comme les bijoux en or, argent, platine, pierreries, perles fines et orfèvrerie ;
+- des montres dont la valeur unitaire excède 1 600€…
+ 
+A noter : fourrures, bagagerie et sacs de luxe… : ces accessoires constituent eux aussi des objets de valeur si leur prix d’achat unitaire dépasse 1 600€, des meubles anciens d’époque si la valeur unitaire est supérieure à 8000€, les collections.",Embeddings,False,True
+Conseils pour s'assurer contre la perte des bijoux,17,2,6,Conseils pour s'assurer contre la perte des bijoux,"- Faites expertiser vos bijoux par un professionnel pour en connaître la valeur exacte. Puis rapprochez-vous de votre assureur pour définir le contrat d’assurance qui vous permettra d’être bien indemnisé lors d’un dommage ; 
+- Sécurisez votre logement : installez une porte et des serrures renforcées, assurez-vous de la solidité de vos volets et de vos fenêtres, optez pour des solutions de télésurveillance… ; 
+- Conservez vos bijoux de valeur en lieu sûr : selon les cas, il peut être judicieux de vous doter d’un coffre-fort ; 
+- Gardez précieusement vos factures d’achat : elles vous seront demandées en cas de sinistre, pour justifier de l’existence et de la valeur de vos bijoux.",TF-IDF,True,False
+Assurance bijoux : les cas particuliers,18,6,5,Assurance bijoux : les cas particuliers,"Vous êtes victime d’un vol de bijoux dans la rue ?
+Votre assurance habitation MMA couvre vos objets de valeur uniquement s’ils sont abrités au sein de votre habitation principale. Sachant que vos colliers et autres accessoires qui ne sont pas de valeur sont, eux, couverts hors du lieu d’assurance s’ils sont situés dans un bâtiment.
+
+Vous possédez une maison secondaire que vous occupez moins de 90 jours par an ?
+Si vous y gardez des objets de valeurs, la garantie « Vol et tentative de vol » de vos bijoux de votre assurance habitation MMA est limitée aux seules périodes d’occupation du logement.",Embeddings,False,True
+Le renfort Valeur à Neuf Mobilier,23,2,15,Le renfort Valeur à Neuf Mobilier,"A la suite d'un sinistre affectant vos biens mobiliers assurés par votre assurance habitation, seule l’indemnisation « Rééquipement à neuf » permet de remplacer les objets endommagés à l’identique ou de prendre en charge l’intégralité du coût de leur réparation. Avec le renfort Valeur à Neuf mobilier de l’assurance habitation MMA, vos biens mobiliers sont encore mieux couverts.
+Incendie, dégât des eaux ou encore vandalisme… Un sinistre peut causer de graves dommages à vos biens. Avec le Renfort Valeur à Neuf Mobilier, accessible avec l’assurance habitation n°3, l’indemnisation (le remboursement) correspond au montant exact nécessaire pour réparer ou remplacer à l’identique le bien détruit ou endommagé, sans tenir compte de son éventuelle vétusté (hors dommages électriques sur les appareils de 7 ans et plus).
+ 
+Si vous avez souscrit l’Assurance Habitation n°1 ou n°2 ou n°3 sans le renfort valeur à neuf mobilier, vos biens mobiliers sont estimés en valeur de remplacement ou de réparation au jour du sinistre, déduction faite de la vétusté (calculée à dire d’expert selon l’âge et le degré d’usure du bien). Ce coefficient de vétusté s’applique aussi aux frais de main d’œuvre, transport, dépose, pose ou installation. En cas de dommages électriques, la vétusté est contractuelle, soit 12% par an à compter de la date de mise en service de l’appareil avec un plafond de 75%.",TF-IDF,True,False
+Exemple renfort Valeur à Neuf Mobilier,24,5,45,Exemple renfort Valeur à Neuf Mobilier,"Exemple : Votre téléviseur, âgé de quatre ans, est endommagé par un dégât des eaux. La réparation, tous frais compris, se monte à 350 €. Avec le renfort Valeur à Neuf, vous ne payez rien (hors franchise éventuelle prévue au contrat). Sans cette garantie, un  abattement pour vétusté égal à 168€ (4x12 % de 350 €) vous est imputé. Vous percevez seulement 182 €.",TF-IDF,True,False
+Exclusion valeur à neuf,27,4,21,Exclusion valeur à neuf,"Bon à savoir  : Les chèques, espèces, cartes bancaires, titres, autres valeurs similaires et le contenu de votre boîte aux lettres ne sont pas couverts par votre assurance habitation. Ils ne peuvent donc pas faire l’objet d’une indemnisation en valeur à neuf.",TF-IDF,True,False
+Le contrat habitation est-il obligatoire pour les locataires ?,30,5,39,Le contrat habitation est-il obligatoire pour les locataires ?,"Les locataires sont responsables des dégâts qu’ils peuvent causer au logement loué. C’est pourquoi, vous devez obligatoirement souscrire une multirisque habitation comportant une clause « risques locatifs » selon la loi du 6 juillet 1989.  Cette garantie « risques locatifs » permet de couvrir les dommages liés à un incendie, un dégât des eaux et une explosion. 
+Votre propriétaire peut exiger l’attestation d’assurance à la remise des clés et pourra vous la redemander tous les ans pour s’assurer que son bien est bien assuré. Il peut même le préciser dans le contrat de location.
+Attention, si vous ne vous assurez pas, votre propriétaire peut résilier le bail.
+Vous pouvez choisir l’assurance que vous souhaitez et vous garantir pour le minimum légal ou élargir vos garanties pour une protection optimale. Avec MMA, choisissez les garanties qui s’adaptent à vos besoins.",TF-IDF,True,False
+Le contrat habitation est-il obligatoire pour un logement de fonction ?,32,2,33,Le contrat habitation est-il obligatoire pour un logement de fonction ?,"Pour un logement de fonction, vous n’êtes pas obligé de souscrire une assurance habitation mais nous vous le conseillons vivement car en cas de sinistre, vous devrez prendre à votre charge les dégâts causés.",TF-IDF,True,False
+Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,35,2,28,Comment êtes-vous assuré en tant que salarié en télétravail ? Quel rôle joue votre assurance habitation dans cette situation ?,"Cadres légaux du télétravail
+Deux cas de figure peuvent mettre en place le télétravail au sein d’une entreprise :
+- le télétravail peut être encadré par une charte ou un accord collectif (article L1222-9 du Code du travail),
+- ou simple accord entre employeur et salarié.
+Votre employeur peut vous refuser le télétravail à condition de motiver sa décision, notamment si votre présence physique est indispensable, si vos tâches sont incompatibles avec le télétravail ou si votre activité nécessite une certaine confidentialité.
+En revanche, votre employeur ne peut pas vous imposer le télétravail car il repose sur le volontariat, sauf circonstances exceptionnelles (pandémie) et cas de force majeure (catastrophe naturelle, évènement climatique exceptionnelle,…).",TF-IDF,True,False
+Attestation de télétravail,38,1,9,Attestation de télétravail,"Votre employeur a le droit de vous demander une attestation de télétravail pour vérifier que votre espace de télétravail est bien assuré.
+Cette attestation est disponible en contactant directement votre Agent général MMA",TF-IDF,True,False
+Quelle est la différence entre inondation et catastrophes naturelles ?,42,6,2,Quelle est la différence entre inondation et catastrophes naturelles ?,"Lorsque l’intensité de l’inondation et l’étendue des dégâts sont vraiment exceptionnelles, un arrêté interministériel peut déclarer l’état de catastrophe naturelle. Dans ce cas, les dommages subis par les habitants des communes désignées dans l’arrêté sont pris en charge par la garantie « Catastrophe naturelle » du contrat d’assurance habitation. Celle-ci figure obligatoirement dans tous les contrats de cette nature.
+
+Bon à savoir : si l’état de catastrophe naturelle a été déclaré, l’indemnisation sera prise au titre de la garanties catastrophes naturelles.",Embeddings,False,True
+L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,46,1,10,L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?,"Dès votre arrivée dans le logement et durant toute la durée du contrat de location, vous êtes responsable des dommages causés au bien et à l’immeuble. L’assurance locative « risques locatifs », incluse dans tous les contrats d’assurance habitation, couvre les dommages liés à un incendie, un dégât des eaux ou à une explosion.
+
+En revanche, il est important de savoir que cette assurance de base ne couvre pas les dommages dont vous pourriez être victime, ainsi que vos biens et vos équipements.
+
+Pour couvrir ces risques, vous devez souscrire d’autres garanties. L’assurance habitation MMA propose plusieurs formules qui s’adaptent à vos besoins.",TF-IDF,True,False
+Cas où l’assurance locative est facultative,50,108,1,Cas où l’assurance locative est facultative,"Vous échappez à l’obligation d’assurance des risques locatifs si vous êtes locataire :
+
+- d’une location saisonnière,
+- d’un logement de fonction,
+- d’un logement en foyer.
+
+Mais prudence ! Vous n’en restez pas moins responsable des dommages éventuels causés vis-à-vis du propriétaire du bien. La souscription d’une assurance adaptée s’avère donc souhaitable.
+
+Bon à savoir : L’assurance villégiature MMA vous protège des éventuels dommages causés au logement survenus dans une habitation temporaire, tels qu’une maison de vacances ou un appartement loué pour quelques jours.",Embeddings,False,True
+Qu’est-ce qu’une location meublée ?,52,25,1,Qu’est-ce qu’une location meublée ?,"C’est un logement équipé d’éléments indispensables permettant d’y vivre normalement dès l’arrivée dans les lieux.
+
+Le propriétaire d’un meublé doit fournir un logement habitable et paisible. De plus, depuis le 1er septembre 2015, la réglementation précise le mobilier et les équipements (en bon état d’usage) dont un logement meublé doit être pourvu, à savoir :
+
+- une table,
+- des sièges,
+- des luminaires,
+- des étagères de rangement,
+- du matériel d’entretien ménager adapté,
+- une literie avec couverture ou couette,
+- des rideaux ou volets dans les chambres,
+- un réfrigérateur avec congélateur ou compartiment de congélation d’une température maximale de -6°,
+- un four ou micro-ondes,
+- des plaques de cuisson,
+- des ustensiles de cuisine et de la vaisselle en quantité suffisante.
+- Le propriétaire doit tenir un inventaire des équipements et mobiliers mentionnant leur état d’usage, qu’il joindra au contrat de location.",Embeddings,False,True
+L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,54,4,27,L’assurance habitation pour un appartement meublé est-elle obligatoire pour un locataire ?,"La loi Alur du 24 mars 2014 a rendu obligatoire l’assurance d’un logement loué meublé à titre de résidence principale.
+
+Vous êtes locataire ? Vous devez au minium souscrire une garantie « risques locatifs » qui prend en charge les dommages générés par :
+
+- un dégât des eaux,
+- un incendie,
+- ou une explosion.
+S’y ajoute généralement une garantie responsabilité civile , qui couvre les dommages causés aux tiers.
+
+En l’absence de couverture du locataure du bien meublé, le propriétaire peut :
+
+- refuser de signer le bail,
+- le résilier de plein droit,
+- souscrire une assurance pour votre compte, limitée à la couverture de sa responsabilité locative et récupérable auprès vous.",TF-IDF,True,False
+L’assurance PNO est-elle obligatoire ?,60,1,116,L’assurance PNO est-elle obligatoire ?,"Votre bien est en copropriété: 
+Si vous êtes propriétaire d'un logement en copropriété, vous avez l'obligation d'être assuré à minima au titre de votre responsabilité civile.
+
+L’assurance de responsabilité civile habitation vise à couvrir les dommages que votre logement pourrait causer à des tiers, notamment si :
+
+- un dégât des eaux, survenant dans votre appartement, provoque des dommages chez le voisin du dessous,
+- un court-circuit déclenche un incendie qui se propage à l’immeuble voisin,
+- un volet se détache et blesse un passant.
+
+Vous avez deux possibilités pour répondre à cette obligation :
+
+- Souscrire une assurance de responsabilité civile : ce choix ne vous accorde toutefois qu'une protection limitée. De plus, si vous louez votre logement, le locataire devra obligatoirement souscrire une assurance habitation.
+- Souscrire une assurance PNO : en plus de couvrir votre responsabilité civile, ce contrat vous fait bénéficier de garanties additionnelles pour être mieux protégé (incendie, bris de glace, etc.).
+Bien qu’elle ne soit pas obligatoire, l’assurance PNO est donc vivement conseillée pour un bien en copropriété.
+
+Votre logement n’est pas en copropriété:
+Si votre bien n’est pas en copropriété, vous n’avez aucune obligation d’assurance. Toutefois, même si elle n’est pas obligatoire, l’assurance PNO est également recommandée pour vous couvrir contre de nombreux risques :
+
+- une tuile tombe du toit est endommage un véhicule,
+- votre logement prend feu ou est victime d'un dégât des eaux,
+- votre bien est victime d'une catastrophe naturelle (inondation, etc.),
+- votre logement est vandalisé ou victime d'un cambriolage.",TF-IDF,True,False
+Que couvre l’assurance PNO ? (propriétaire non occupant),61,9,3,Que couvre l’assurance PNO ? (propriétaire non occupant),"Pensée pour les propriétaires bailleurs non occupants, l'assurance PNO de MMA vous couvre contre de nombreux risques et vous offre le choix entre deux formules. 
+Découvrez les avantages de notre assurance propriétaire non occupant :
+ 
+- La couverture des principaux risques : quelle que soit la formule souscrite, notre contrat vous protège contre tous les principaux risques auquel est confronté un logement inoccupé par son propriétaire (responsabilité civile, incendie, dégât des eaux, catastrophes naturelles, etc.). Vous bénéficiez également d'une assistance en cas de sinistre.
+- Des garanties complémentaires : en complément, vous pouvez être couvert pour le bris de vitre, le vol et la tentative de vol. Avec la formule n°2 de l'assurance PNO, votre mobilier est également indemnisé en valeur à neuf en cas de sinistre garanti.
+- Des options à la carte : bris de véranda, dommages électriques sur le mobilier, dommages à votre piscine,... notre contrat vous offre le choix entre de nombreuses options. Avec la formule n°2, vous pouvez aussi bénéficier d'une protection juridique étendue pour recouvrir les loyers impayés par vos locataires.",Embeddings,False,True
+Assurance Propriétaire bailleur,62,3,98,Assurance Propriétaire bailleur,"Un propriétaire bailleur non-occupant achète un logement (maison ou appartement) afin de la louer à un tiers via un contrat de bail. Il n’habite donc pas son propre bien, d’où le terme « non-occupant » ou le sigle « PNO ». L’achat immobilier correspond donc à un investissement locatif.
+
+Si vous êtes propriétaire, tous les risques ne sont pas forcément couverts par l'assurance habitation de votre locataire, comme les événements climatiques ou le vandalisme. C’est pourquoi la MMA vous conseille de souscrire une assurance complémentaire en tant que propriétaire bailleur (aussi appelé propriétaire non-occupant ou PNO). MMA vous propose deux formules pour protéger votre bien immobilier.",TF-IDF,True,False
+Pourquoi s’assurer en tant que propriétaire bailleur ?,64,3,14,Pourquoi s’assurer en tant que propriétaire bailleur ?,"l'assurance Responsabilité civile est obligatoire pour le propriétaire d'un logement en copropriété. Mais en dehors de cette obligation légale, il y a plusieurs raisons de signer un contrat d’assurance habitation en tant que propriétaire bailleur, aussi appelé propriétaire non-occupant ou PNO, même dans le cas d'un bien hors copropriété. Les voici :
+
+- Protéger votre bien, en couvrant les dommages qui pourraient ne pas être inclus dans l'assurance habitation du locataire (cambriolage ; vandalisme...). Il est fréquent en effet que le locataire souscrive une assurance habitation à moindre coût, dont les garanties sont limitées. Protéger également votre bien quand le logement est vacant, entre deux locations il reste assurer.
+ 
+- Protéger votre statut, par le biais de l'assurance responsabilité civile du propriétaire. Elle vous protègera en cas, par exemple, d'un trouble de jouissance.",TF-IDF,True,False
+Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,67,9,5,Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?,"Tout locataire doit remettre au propriétaire bailleur une attestation d’assurance habitation : dès la remise des clés ; puis chaque année qui suit. En cas de non-réception de ce document, le propriétaire non-occupant peut envoyer une lettre de mise en demeure au locataire, dans laquelle il l’informe qu’en cas de défaut d’assurance, il souscrira lui-même une assurance habitation pour son compte. Cette assurance peut être souscrite à compter d’un mois suite à l’envoi de la lettre. Le coût mensuel de la cotisation peut alors être répercuté sur le montant du loyer ; cette indemnisation doit être spécifiée sur l’avis d’échéance et sur la quittance. Le propriétaire non-occupant est en droit d’appliquer une majoration de 10% pour couvrir les démarches liées à la souscription de l’assurance habitation.",Embeddings,False,True
+Locataire : Comment obtenir une attestation d’assurance habitation ?,70,3,28,Locataire : Comment obtenir une attestation d’assurance habitation ?,"L'attestation d'assurance habitation locataire vous est remise par votre assureur à la signature du contrat. 
+À chaque anniversaire du contrat et sous réserve que vous soyez à jour de vos cotisations, votre assureur vous adressera généralement une nouvelle attestation par courrier ou par e-mail. Dans le cas contraire, les démarches pour l'obtenir vont varier d'une compagnie d'assurance à l'autre. En règle générale, vous pourrez en faire la demande :
+
+- par téléphone ;
+- par e-mail ;
+- sur votre espace personnel ;
+- en agence ;
+- ou par courrier.",TF-IDF,True,False
+Comment souscrire à une assurance habitation ?,79,34,4,Comment souscrire à une assurance habitation ?,"Contrat assurance habitation : les documents à fournir
+Après avoir choisi les garanties habitation adaptées à vos besoins, vous souhaitez souscrire votre contrat d’assurance habitation. Quels documents devez-vous fournir ?
+
+Pour une souscription en ligne ou en agence, les documents suivants seront nécessaires :
+
+- un Relevé d’Identité Bancaire (RIB) ;
+- une copie de votre pièce d’identité ;
+- selon les cas, si vous êtes locataire, une copie de votre bail et un avis d’imposition ou un justificatif de revenus sur les 6 derniers mois.
+
+Votre assureur vous demandera aussi différentes informations :
+ 
+- votre emplacement géographique ;
+- la nature de votre logement : s’agit-il d’une maison, d’un appartement, d’un mobile home, etc. ? Le cas échéant, êtes-vous situé au rez-de-chaussée ou aux étages supérieurs ? Le bâtiment est-il classé ou inscrit à l’inventaire des monuments historiques ? ;
+- votre statut : êtes-vous locataire, colocataire ou propriétaire ? ;
+- votre usage du logement : votre contrat concernera-t-il votre résidence principale ou secondaire ? Quelle en sera la durée d’occupation ? Prévoyez-vous d’exercer une activité professionnelle dans une ou plusieurs des pièces ? Pensez-vous louer votre habitation ou faire de l’échange de logement ? ;
+- la superficie à couvrir : combien de pièces principales compte votre logement ? Disposez-vous de dépendances (garage, cave…) ?
+- la présence de biens présentant un risque particulier : possédez-vous par exemple des objets précieux : bijoux, fourrure, meuble ancien ? Des infrastructures particulières (véranda, piscine intérieure ou extérieure, chauffage au bois…) ? Des installations domestiques produisant de l’énergie électrique (panneaux photovoltaïques, éolienne…) ?
+
+Tous ces éléments permettront de calculer le montant de votre cotisation, et surtout d’avoir la garantie d’être bien couvert en cas de sinistre.",Embeddings,False,True
+Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,82,10,1,Quel contrat d’assurance habitation pour une location saisonnière type Airbnb,"Propriétaire ou locataire d’un bien saisonnier, devez-vous vous assurer ?
+D’un point de vue légal, rien ne vous oblige à assurer une location de vacances que vous soyez le propriétaire ou le locataire, et cela même en passant par des plateformes comme Airbnb, abritel ou encore homeholidays...
+
+Cependant, pour les propriétaires, vous avez tout intérêt à souscrire au minimum une assurance habitation pour protéger au mieux votre bien et ne pas avoir de mauvaises surprises.
+
+Bon à savoir : Si vous êtes propriétaire en copropriété, vérifiez que le règlement ne vous interdit pas de louer votre logement. De même, si vous êtes locataire et souhaitez sous-louer, votre propriétaire doit au préalable vous donner son accord par écrit.",Embeddings,False,True
+Les assurances proposées par Airbnb sont-elles suffisantes ?,83,1,11,Les assurances proposées par Airbnb sont-elles suffisantes ?,"Les plateformes de location entre particuliers incluent des assurances, pour les propriétaires et pour les voyageurs, mais en cas de sinistre, il n’est pas facile de les activer :
+ 
+- L’assurance hôte couvre les propriétaires et locataires en cas de poursuites engagées par un tiers suite à des préjudices corporels ou des dommages matériels. Cette garantie s’active uniquement dans le cadre d’un séjour conclu sur la plateforme.
+
+- La garantie hôte couvre les propriétaires et locataires en cas de dommages causés au logement ou à leurs biens personnels pendant la durée du séjour du voyageur. Ces dommages sont couverts à hauteur maximale de 800 000 € par exemple sur Airbnb.
+
+Cependant, ces garanties ne couvrent pas tout. Elles ne proposent pas de protection en cas de vol, considéré comme un acte volontaire. Elles excluent les espèces et les titres, les animaux domestiques, la responsabilité individuelle et les parties communes.
+
+Enfin les conditions d’indemnisation sont très limitées. L’assurance de la plateforme n’intervient qu’en dernier recours, si le litige n’a pu être réglé directement avec le locataire.
+
+Si vous êtes propriétaire et hôte sur Airbnb, il est donc essentiel de souscrire une assurance habitation pour compléter la garantie hôte et louer en toute sérénité.
+
+Bon à savoir :
+
+Airbnb ne couvre que les logements dits «admissibles», c’est-à-dire que vous devez avoir l’accord de votre propriétaire si vous souhaitez le sous-louer.",TF-IDF,True,False
+Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,86,34,4,Vous souhaitez une meilleure protection pour votre logement et installer un dispositif de télésurveillance ?,"MMA vous propose des tarifs préférentiels pour une alarme de maison avec télésurveillance en partenariat avec Verisure et des avantages sur votre assurance habitation.
+
+Verisure est un service proposé et réalisé en France continentale et en Corse par Securitas Direct SAS (Société par Actions Simplifiée au capital de 1 085 736 € - Siège social : Avenue Sully Prudhomme - Centrale Parc Bâtiment 1 - 92290 Châtenay Malabry – RCS Nanterre B 345 006 027 - N° de TVA : FR 60 345 006 027. Société titulaire de l’autorisation d’exercer n°AUT-092-2113-02-03-20140361822 délivrée par le Conseil National des Activités Privées de Sécurité le 04/02/2014. Article L. 612-14 du Code de la sécurité intérieure : « L’autorisation d’exercice ne confère aucune prérogative de puissance publique à l’entreprise ou aux personnes qui en bénéficient »).
+
+Un cambriolage a lieu, en moyenne, toutes les 2 minutes en France, soit 2970 000 cambriolages en 2021 (Extrapolation réalisée sur la base des données disponibles dans les Tableaux 4001 TS, Activités des services de Police & Gendarmerie, Data.gouv, 2021.). Pour vous protéger, MMA vous propose des tarifs préférentiels pour une alarme de maison avec télésurveillance en partenariat avec Verisure et des avantages sur votre assurance habitation.",Embeddings,False,True
+Qu'est-ce que la télésurveillance ?,87,6,2,Qu'est-ce que la télésurveillance ?,"Grâce à l’installation de détecteurs (ouverture, mouvement, fumée…) à votre domicile, la télésurveillance vous permet d’être prévenu en cas :
+
+- de tentative d’intrusion,
+- de départ de fumée,
+- de fuite d'eau,
+- voire d’accident domestique.",Embeddings,False,True
+Pourquoi assurer une résidence secondaire ?,95,4,43,Pourquoi assurer une résidence secondaire ?,"Comme votre logement principal, votre maison de vacances est soumise à différents aléas : incendie, dégât des eaux, tempête, catastrophe naturelle… Mais certains risques méritent une attention toute particulière au moment de souscrire une assurance pour votre résidence secondaire.
+
+Les maisons de vacances, parce qu’elles sont inoccupées une partie du temps, sont particulièrement exposées aux vols. C’est ainsi qu'en 2020, 44 000 ménages ont déclaré avoir subi une tentative de cambriolage ou vol sans effraction dans leur résidence secondaire.
+
+Vous devez aussi prendre en considération les effets du gel, qui peuvent notamment provoquer des dommages importants sur les canalisations, les chaudières… d’un logement laissé inhabité en période de grand froid.",TF-IDF,True,False
+Comment fonctionne la franchise d’une assurance habitation ?,98,1,74,Comment fonctionne la franchise d’une assurance habitation ?,"Chez MMA, chaque contrat d'assurance indique dans les conditions particulières la franchise applicable.
+Votre contrat d'assurance peut comporter deux types de franchise :
+
+- La Franchise absolue ou déduite est celle que l'assureur déduit systématiquement de votre indemnisation en cas de sinistre.
+MMA vous rembourse de la valeur des dommages, déduction faite de la franchise.
+Par exemple : si votre contrat comporte une franchise de 150 € mais que le sinistre est évalué à 100 €, vous ne serez pas indemnisé. Par contre, si les dommages s'élèvent à 400 €, nous vous verserons la différence, soit 250 €.
+ 
+- La Franchise relative ou simple est celle qui détermine l’intervention de l’assureur en fonction du montant du sinistre. Si le montant du sinistre est inférieur à celui de la franchise, vous ne serez pas indemnisé mais si le montant du sinistre est supérieur à celui de la franchise, vous serez entièrement indemnisé. L’assureur vous verse une indemnité uniquement si le montant des dommages que vous avez subis dépasse celui de la franchise.
+Par exemple : si votre franchise est fixée à 150 €, vous ne percevrez aucune indemnité si le sinistre est évalué à 100 €. Mais si les dommages s'élèvent à 160 €, vous serez entièrement remboursé !
+Bon à savoir : Il existe également une franchise dite légale, qui reste toujours à la charge de l'assuré. En cas de catastrophe naturelle par exemple, cette franchise est de 380 € par habitation. Elle monte à 1 520 € lorsque les dommages sont liés aux mouvements de terrain dus à la sécheresse ou à la réhydratation des sols.",TF-IDF,True,False
+Qu’est-ce qu’un dégât des eaux ?,101,28,4,Qu’est-ce qu’un dégât des eaux ?,"Les assureurs entendent par dégât des eaux l’ensemble des dommages subis, de façon accidentelle, par les biens mobiliers ou immobiliers de l’assuré du fait de l’eau. Cette garantie figure obligatoirement dans les contrats d’assurance habitation. Fuite d'eau, débordement d’une baignoire, infiltrations d’eau au niveau de la toiture… les causes peuvent être nombreuses.",Embeddings,False,True
+Qu'est-ce que la garantie dégat des eaux,102,41,5,Qu'est-ce que la garantie dégat des eaux,"Fuite d'eau accidentelle, refoulement des égouts, ruptures de canalisations dues au gel: incluse dans votre assurance habitation, la garantie dégâts des eaux prend en charge différents types de sinistres. Pour les éviter, n’oubliez pas d’entretenir et de protéger vos équipements, été comme hiver.",Embeddings,False,True
+Qu'est-ce que la garantie dommagez éléctriques,103,115,1,Qu'est-ce que la garantie dommagez éléctriques,"La garantie Dommages électriques mobilier couvre les appareils reliés au secteur et susceptibles d’être endommagés par une surtension, généralement provoquée par la foudre, une sous-tension, résultant d’une erreur de votre fournisseur d’énergie, ou encore un court-circuit accidentel. Cette assurance contre les dégâts électriques ne s’applique en revanche pas lorsqu’un appareil tombe en panne en raison d’un problème interne, ou lorsque le dysfonctionnement est lié à une grève, à une décision de l’État ou à une suspension de la fourniture d’énergie consécutive au non-paiement d’une facture.",Embeddings,False,True
+Qu’est-ce que la garantie Dépannage habitation ?,108,5,89,Qu’est-ce que la garantie Dépannage habitation ?,"La garantie Dépannage des installations de la maison MMA prévoit, en cas de problème d’électricité, de plomberie, de chauffage ou de serrurerie, l’intervention d’un professionnel agréé au plus tard le lendemain de votre appel. Sont pris en charge le déplacement, le diagnostic et la main d’œuvre (Main d’œuvre prise en charge en intégralité si renfort immobilier et services étendus souscrit. Si non, la prise en charge de la main d’ouvre est limité à 1h d’intervention) si la réparation est possible et moins coûteuse que le prix d’un appareil neuf. La prestation dépannage est utilisable jusqu’à deux fois par période de 12 mois consécutifs. ",TF-IDF,True,False
+Qu’est-ce que la responsabilité civile ?,109,31,2,Qu’est-ce que la responsabilité civile ?,"La responsabilité civile, également désignée par l’acronyme « RC », est le fait de devoir réparer des dommages causés à autrui. Ces dommages peuvent être corporels ou matériels. Leur réparation occasionne des frais plus ou moins élevés selon les cas de figure.",Embeddings,False,True
+Qu’est-ce que l’assurance responsabilité civile ?,110,8,1,Qu’est-ce que l’assurance responsabilité civile ?,"La dénomination correcte est « garantie responsabilité civile ». Il s’agit d’une assurance qui prend en charge, sous certaines conditions, les frais liés à la réparation d’un dommage causé par son souscripteur. La responsabilité civile intervient à l’occasion d’un dommage survenu dans le cadre de la vie de tous les jours.",Embeddings,False,True
+L’assurance responsabilité civile est-elle obligatoire ?,111,3,6,L’assurance responsabilité civile est-elle obligatoire ?,"Nous sommes tous responsables des dommages causés à autrui, de façon intentionnelle ou non, à notre domicile ou en dehors. Réparer ces dommages est une obligation. Mais l’assurance responsabilité civile constitue-t-elle une obligation légale ? La réponse est oui, dans de nombreux cas de figure. Cette obligation d’assurance concerne les locataires d’un logement, les copropriétaires et les propriétaires non-occupants (PNO). Les propriétaires occupants n’habitant pas au sein d’une copropriété n’ont, quant à eux, pas l’obligation de souscrire une assurance responsabilité civile mais s’ils provoquent des dommages entrant dans le champ de la RC vie privée, ils devront alors s’acquitter de la totalité des frais liés à leur réparation.
+
+La garantie Responsabilité Civile est donc soit obligatoire, soit fortement recommandée. Bonne nouvelle : vous en bénéficiez même en souscrivant une assurance habitation pas chère.",TF-IDF,True,False
+Que couvre la garantie dégâts des eaux de l’assurance habitation ?,119,13,2,Que couvre la garantie dégâts des eaux de l’assurance habitation ?,"La garantie dégâts des eaux MMA incluse dans l'assurance habitation, indemnise les dommages matériels subis par les biens assurés en cas de fuites d'eau ou débordements accidentels des appareils à effet d’eau (lave-linge ou lave-vaisselle), appareils sanitaires et installations de chauffage central.
+
+Sont également garantis les dommages causés par :
+
+- les fuites d’eau, ruptures ou débordements de chéneaux, gouttières, descentes d’eaux pluviales, conduites non souterraines ni encastrées,
+- les infiltrations d’eau au travers des toitures, et le refoulement des égouts,
+dégât des eaux consécutif au gel des canalisations, robinets et appareils de chauffages intérieurs,
+un aquarium cassé ou renversé.
+ 
+Les frais de recherche de fuites, d’infiltrations ou d’engorgement d’eau et les frais de réparation de la fuite d’une conduite sont également garantis.",Embeddings,False,True
+Une assurance habitation pour les étudiants boursier,124,1,8,Une assurance habitation pour les étudiants boursier,"Le statut « boursier » d’un étudiant signifie qu’il reçoit une bourse dans le cadre de ses études supérieures. Cette bourse est accordée selon des critères sociaux précis et constitue une aide supplémentaire pour l’étudiant en plus de ce que la famille peut lui offrir.
+Dans le cadre de la location d’un logement étudiant, l’assurance habitation est tout de même obligatoire, que le jeune soit boursier ou non.
+
+En général, la surface à assurer reste relativement petite. Il existe donc des formules basiques pour n’assurer que ce qui est nécessaire et ainsi disposer d’une assurance habitation étudiant boursier très abordable.",TF-IDF,True,False
+Télévision cassée : les garanties de votre assurance habitation MMA,129,76,3,Télévision cassée : les garanties de votre assurance habitation MMA,"MMA propose dans son assurance habitation la prise en charge des frais de réparation ou de remplacement de votre TV endommagée suite :  
+
+- à un dégât des eaux,
+- à un incendie,
+- à une chute directe de la foudre, surtension, sous-tension et court-circuit (Garantie sur option en formules 1 et 2, et en inclusion en formule 3),
+- à un acte de vandalisme (Option disponible en formule 3)",Embeddings,False,True
+Des options d’assurance habitation pour faire réparer votre écran TV cassé,131,117,2,Des options d’assurance habitation pour faire réparer votre écran TV cassé,"Vous pouvez compléter votre assurance habitation MMA à l’aide de garanties supplémentaires pour une meilleure protection et indemnisation de votre télévision.
+
+- La garantie dommages électriques mobilier couvre les appareils reliés au secteur et susceptibles d’être endommagés par la foudre, une surtension, une sous-tension ou un court-circuit : ordinateurs, téléviseurs, téléphones ou encore appareils électroménagers.
+
+- Le renfort valeur à neuf mobilier permet de remplacer les objets endommagés, comme la télévision, à l’identique ou de prendre en charge l’intégralité du coût de leur réparation
+ 
+- Le renfort immobilier et services étendus propose le dépannage de vos appareils électroménagers et vidéo.",Embeddings,False,True
+Comment assurer mes biens pendant mon déménagement ?,142,4,6,Comment assurer mes biens pendant mon déménagement ?,"Si vous possédez un contrat Habitation récent, avec des Conditions Générales 410, vous bénéficiez de 3 mois en double assurance, dans les 2 logements (ancien et nouveau assurés chez nous) avec la garantie déménagement, et 3 000 euros pendant le transport.
+
+En tant que client MMA vous bénéficiez des avantages et services MMA selon votre projet.",TF-IDF,True,False
+Que couvre la garantie renfort évènements climatiques ?,147,35,3,Que couvre la garantie renfort évènements climatiques ?,"Ce qui est garanti: Nous indemnisons les dommages matériels directs subis par les biens assurés, à condition qu’un arrêté de catastrophes naturelles n’ait pas été publié, lorsque ces dommages résultent :
+• de la chute de la grêle,
+• du poids de la neige ou de la glace accumulée sur les toitures, sur les piscines et les dômes assurés ou sur les arbres et entraînant leur chute sur les biens assurés, ou glissant sur ces mêmes biens assurés,
+• de la neige ou de la pluie ayant pénétré dans le bâtiment détérioré par les évènements ci-dessus, lorsque cette intempérie survient dans les 72 heures qui suivent la détérioration du bâtiment,
+• des coulées de boue,
+• d’une inondation provenant :
+- d’un débordement de sources, de cours d’eau, d’étendues d’eau artificielles ou naturelles,
+- de remontées de nappes phréatiques,
+- de ruissellement des eaux pluviales qui s’écoulent à la surface du sol,
+• en cas de gel ayant occasionné un dégât des eaux garanti, nous indemnisons les frais de réparation des conduites, robinets et appareils endommagés y compris les frais de remise en état consécutifs, lorsque ces dommages surviennent dans des bâtiments assurés.
+Les mesures de prévention contre le gel de la garantie dégâts des eaux et leurs sanctions s’appliquent également à cet évènement.",Embeddings,False,True
+Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,149,22,4,Quels sont les biens supplémentaires couverts avec le renfort optionnel installations extérieures ?,"Si vous avez souscrit le RENFORT INSTALLATIONS EXTERIEURES, sont garantis les biens suivants, situés à l’adresse indiquée aux conditions particulières (hors terrain non bâti à une autre adresse) :
+• votre abri de jardin, non ancré, non scellé et non fixé au sol,
+• votre serre non ancrée, non scellée et non fixée au sol,
+• votre terrain de tennis à usage privé et sa clôture,
+• votre mobilier et matériel de jardin destiné à rester dans le jardin,
+• vos installations, (y compris électriques) et aménagements privatifs, extérieurs, à caractère immobilier, non attenants ou non solidaires des bâtiments assurés, ancrés au sol dans des fondations, soubassements ou dés de maçonnerie, ou scellés à un mur et ne constituant pas un bâtiment (tels qu’une terrasse non attenante au bâtiment ou un barbecue maçonné),
+• les piscines amovibles,
+• sauna, spa, jacuzzi et hammam extérieurs et leur équipement, y compris électrique,
+• les murs non solidaires des bâtiments (hors murs de clôture et clôtures non végétales),
+• vos arbres et plantations en sol, s’ils ont été plantés au moins deux ans avant le sinistre,
+• le revêtement de vos allées.",Embeddings,False,True
+"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",151,8,1,"On m'a volé un paquet dans ma boite aux lettre, suis-je couvert ?",Le contenu des boites aux lettres n'est pas assuré,Embeddings,False,True
+Les piscines sont-elles assurées ?,157,33,2,Les piscines sont-elles assurées ?,"La piscine, le matériel servant à son fonctionnement et à l’entretien, le dôme, non déclarés au contrat ne sont pas assurés. La piscine non amovible, le dôme, si vous les avez déclarés au contrat, ainsi que les aménagements immobiliers conçus pour l’utilisation, l’entretien, la protection, la sécurité de la piscine, sont couverts",Embeddings,False,True
+"Ma piscine hors sol a été endommagée, suis-je couvert ?",159,90,3,"Ma piscine hors sol a été endommagée, suis-je couvert ?","Si vous avez souscrit le RENFORT INSTALLATIONS EXTERIEURES, nous garantissons les piscines amovibles",Embeddings,False,True
+"Je me suis blessé avec ma tondeuse, suis-je couvert ?",160,1,29,"Je me suis blessé avec ma tondeuse, suis-je couvert ?","Si vous avez souscrit la garantie optionnelle « Assurance des habitants », nous assurons l’indemnisation des dommages
+corporels lorsque vous utilisez une tondeuse autoportée d’une puissance inférieure à 20 CV. Cette garantie vous assure le versement de prestations en cas de blessures ou de décès (voir le détail des prestations au contrat)",TF-IDF,True,False
+"En cas de vol par une personne de ma famille, suis-je couvert ?",174,160,1,"En cas de vol par une personne de ma famille, suis-je couvert ?","Les vols commis par votre conjoint, vos ascendants, descendants, ou par d’autres personnes
+habitant avec vous ne sont pas assurés",Embeddings,False,True
+"En cas de vol par mon colocataire, suis-je couvert ?",175,139,1,"En cas de vol par mon colocataire, suis-je couvert ?",Les vols commis par les colocataires entre eux ne sont pas assurés,Embeddings,False,True
+"On a volé des biens dans un local partagé, suis-je couvert ?",178,10,2,"On a volé des biens dans un local partagé, suis-je couvert ?",Les biens déposés dans des locaux à usage commun de plusieurs occupants ne sont pas assurés,Embeddings,False,True
+"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?",180,4,6,"On a volé des biens alors que j'étais chez mois, suis-je vouvert ?","Le vol commis par introduction ou maintien clandestin c’est-à-dire vol à votre insu alors que
+vous étiez présents à l’adresse indiquée aux conditions particulières ne sont pas assurés",TF-IDF,True,False
+Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,183,3,9,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÉNEMENT EXTÉRIEUR ne s'applique pas ?,"La garantie ne peut être mise en jeu à la suite :
+• de l’installation d’antennes téléphoniques, d’aérodromes, d’aéroports ou d’héliports, d’éoliennes,
+• de la revente d’une dépendance située à une autre adresse que le bâtiment d’habitation,
+• de la revente de biens immobiliers classés monuments historiques ou inscrits à l’inventaire supplémentaire des monuments historiques et des châteaux et biens assimilés.",TF-IDF,True,False
+Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,184,2,13,Dans quels cas la garantie optionnelle REVENTE SUITE À UN ÉVÈNEMENT PERSONNEL OU FAMILIAL ne s'applique pas ?,"La garantie ne peut être mise en jeu à la suite :
+• d’une tentative de suicide ou d’un suicide,
+• d’un accident aérien, sauf si vous êtes simple passager sur un vol commercial,
+• d’un fait de guerre civile ou étrangère,
+• d’un acte de terrorisme, un sabotage ou un attentat dans la mesure où vous avez pris une part active à l’évènement incriminé ou si vous vous êtes exposé délibérément à ses conséquences,
+• d’un accident imputable à l’ivresse (taux d’alcoolémie excédant celui prévu par le Code de la Route ou par tout autre texte qui y serait substitué) ou à l’usage de stupéfiants, de produits toxiques ou de médicaments, en dehors de toute prescription médicale ou en quantité non prescrite,
+• de la pratique d’un sport à titre d’amateur licencié ou de professionnel, comportant l’utilisation d’un engin à moteur lors d’entraînements, de démonstrations ou de compétitions,
+• de la revente d’une dépendance située à une autre adresse que le bâtiment d’habitation,
+• de la revente de biens immobiliers classés monuments historiques ou inscrits à l’inventaire supplémentaire des monuments historiques et des châteaux et biens assimilés,
+• de la revente d’un mobile-home.",TF-IDF,True,False
+"Mon sol en marbre a été endommagé, suis-je couvert ?",189,148,1,"Mon sol en marbre a été endommagé, suis-je couvert ?","Dans le cadre de la garantie bris de vitre immobilier, le bris des marbres et assimilés n'est pas assuré",Embeddings,False,True
+Mon aquarium s'est cassé. Suis-je couvert ?,191,132,1,Mon aquarium s'est cassé. Suis-je couvert ?,"Dans le cadre de la garantie bris de vitre mobilier, les aquariums de moins de 100 litres et leurs contenus ne sont pas assurés",Embeddings,False,True
+"Je pratique un sport, suis-je couvert ?",199,6,1,"Je pratique un sport, suis-je couvert ?","Dans le cadre de la garantie responsabilité civile privée nous indemnisons à votre place l’ensemble des dommages dont vous êtes responsable dans le cadre de vos activités sportives et de loisirs.
+Ne sont toutefois pas assurés les dommages survenus au cours :
+- des sports aériens, du pilotage d’appareils aériens, et l’aéromodélisme motorisé hors catégorie A non utilisé à des fins de loisir et non utilisé conformément à la réglementation en vigueur,
+- de la chasse ou sur le trajet pour s’y rendre ou en revenir (sauf chasse sous-marine),
+- de toute activité sportive ou physique pratiquée dans le cadre d’un club ou d’un groupement sportif agréé conformément à l’article L. 121-4 du Code du Sport,
+- du pilotage d’un voilier de plus de 5,05 mètres ou d’un bateau ou engin nautique à moteur, nécessitant pour sa conduite, un permis de navigation (nous pouvons vous proposer un contrat spécifique).",Embeddings,False,True
+Quelles sont les formules disponibles ?,200,68,1,Quelles sont les formules disponibles ?,"Il y a trois formules disponibles. Formule 1, 2, et 3. Le tableau comparatif ci-dessous mentionne des garanties supplémentaires, présentes dans nos contrats d’assurance multirisques habitation sous forme de renforts ou d’options: 
+
+| | Formule n°1  | Formule n°2 |  Formule n°3 |
+| --- | ----     | ----        | ------       |
+| Responsabilités Civiles, Défense Pénale et Recours | OUI | OUI | OUI |
+| Incendie, Risques annexes, Explosion ,Tempête | OUI | OUI | OUI |
+| Catastrophes naturelles et technologiques | OUI | OUI | OUI |
+| Dégâts des eaux, Bris de vitre immobilier | OUI | OUI | OUI |
+| Assistance, Relogements Déménagement | OUI | OUI | OUI |
+| Dépannage des installations de l'habitation | OUI | OUI | OUI |
+| Vol et vandalisme intérieur | NON | OUI | OUI |
+| Vandalisme extérieur | NON | OUI | OUI |
+| Bris de vitre mobilier (BDV) | NON | NON | OUI |
+| Dommage électrique mobilier (DEL) | NON | NON | OUI |
+| Remboursement de prêt, Transfert des enfants et gardes des animaux | NON | NON | OUI |
+| Renfort évènements climatiques (gel, grêle, neige, boue, inondation hors Cat-Nat) | OPTION | OPTION | OPTION |
+| Renfort installations extérieurs (mobilier extérieur, végétaux, piscine amovible ...) | OPTION | OPTION | OPTION |
+| Renfort mobilier plus (Dommage électrique mobilier + Gris de vitre mobilier) | OPTION | OPTION | OUI |
+| Renfort vol en tous lieux du matériel de loisirs | NON | OPTION | OPTION |
+| Renfort valeur à neuf mobilier | NON | NON | OPTION |
+| Renfort immobilier et services étendus (Dépannage, valeur à neuf des appareils électriques immobiliers, surconsommation d'eau) | NON | NON | OPTION |
+| Option Protection juridique du Propriétaire | OPTION | OPTION | OPTION |
+| Option Assurance des habitants | OPTION | OPTION | OPTION |
+| Option Location et échange de logement | NON DISPONIBLE | OPTION | OPTION |
+| Option Revente évènement extérieur / personnel | NON DISPONIBLE | NON DISPONIBLE | OPTION |",Embeddings,False,True

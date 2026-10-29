@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rapport d’évolution — Assistant Assurance V7.3.0</title>
+<style>body{font-family:Arial,sans-serif;line-height:1.65;max-width:1000px;margin:36px auto;padding:0 22px;color:#202a35}h1,h2{color:#17365d}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd4dc;padding:10px;text-align:left}th{background:#eef3f8}.note{border-left:4px solid #17365d;padding:12px 16px;background:#f4f7fa}</style>
+</head>
+<body>
+<h1>Rapport d’évolution — Assistant Assurance</h1>
+<p><strong>Version :</strong> 7.3.0</p>
+<h2>Constat</h2>
+<p>Lors du test sur la franchise absolue, le corpus contenait le document de définition attendu, mais les cinq résultats affichés ne le présentaient pas. La recherche sémantique seule n'assurait donc pas une couverture suffisante de cette notion métier.</p>
+<h2>Amélioration apportée</h2>
+<p>La présélection combine maintenant le classement par embeddings avec un classement lexical qui tient compte des termes significatifs, du titre et du contenu. Une fusion de rangs réciproques rassemble ces signaux sans supposer qu'ils partagent la même échelle. Le CrossEncoder continue de classer les candidats finaux.</p>
+<h2>Contrôles</h2>
+<ul><li>La suite de tests automatise la validation de l'API, des citations et des métriques.</li><li>Des tests ciblés vérifient la priorité donnée aux termes exacts de la question.</li><li>Le score lexical est présenté comme un indicateur et non comme une probabilité.</li></ul>
+<h2>Limites</h2>
+<p>La présence des bons mots ne prouve pas qu'un document répond à toute la question. La qualité factuelle doit donc être vérifiée sur les résultats et les passages réellement retournés. Les temps réels de génération restent dépendants du modèle Ollama, du matériel et du nombre d'appels effectués.</p>
+<div class="note"><strong>Prochaine validation :</strong> poser la question sur la franchise absolue, confirmer la présence du document de définition dans les cinq sources et vérifier que les exemples de calcul distinguent correctement franchise absolue et franchise relative.</div>
+</body>
+</html>

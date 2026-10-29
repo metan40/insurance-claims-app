@@ -1,0 +1,1484 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Analyse des erreurs de retrieval
+</title>
+
+<style>
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fa;
+    color: #222;
+    margin: 40px;
+}
+
+h1 {
+    color: #17365d;
+}
+
+h2 {
+    color: #244a73;
+    border-bottom: 2px solid #244a73;
+    padding-bottom: 8px;
+}
+
+h3 {
+    color: #333;
+}
+
+.case {
+    background: white;
+    padding: 25px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.question {
+    background: #eaf2f8;
+    padding: 15px;
+    border-left: 5px solid #3498db;
+}
+
+.expected {
+    background: #fff8dc;
+    padding: 15px;
+    margin-top: 20px;
+    border-left: 5px solid #f1c40f;
+}
+
+.method {
+    margin-top: 25px;
+}
+
+.content {
+    white-space: pre-wrap;
+    background: #fafafa;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+}
+
+th {
+    background: #17365d;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.expected-row {
+    background: #d5f5e3 !important;
+    font-weight: bold;
+}
+
+.note {
+    background: #fff3cd;
+    padding: 15px;
+    border-left: 5px solid #ffc107;
+    margin-bottom: 30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+Analyse détaillée des erreurs de retrieval
+</h1>
+
+<p>
+Dataset :
+<strong>insurance-fr.csv</strong>
+</p>
+
+<p>
+Méthodes comparées :
+<strong>TF-IDF</strong> et
+<strong>Embeddings</strong>
+</p>
+
+<div class="note">
+
+<strong>Objectif :</strong>
+examiner les documents réellement récupérés
+afin de comprendre pourquoi certaines questions
+ne retrouvent pas le document attendu dans le Top-5.
+
+<p>
+Les interprétations ne sont pas encore définitives.
+Elles seront révisées après examen des cas.
+</p>
+
+</div>
+
+
+    <section class="case">
+
+        <h2>Cas 1</h2>
+
+        <div class="question">
+            <h3>Question</h3>
+            <p>Assurance location meublée : comment ça se passe ?</p>
+        </div>
+
+        <div class="expected">
+            <h3>Document attendu</h3>
+
+            <p><strong>Index :</strong> 53</p>
+
+            <p>
+                <strong>Titre :</strong>
+                Assurance location meublée : comment ça se passe ?
+            </p>
+
+            <div class="content">
+                En matière d’assurance pour votre meublé (appartement, colocation, studio…), locataire et propriétaire ont chacun intérêt, en marge de certaines obligations, à souscrire des garanties étendues couvrant la majeure partie des risques auxquels ils sont exposés au titre de leurs responsabilités. 
+            </div>
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 TF-IDF</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>123</td>
+                    <td>0.2430</td>
+
+                    <td>
+                        Quelle assurance habitation étudiant choisir ?
+                    </td>
+
+                    <td>
+                        La réponse à cette question va dépendre du logement étudiant à assurer. En effet, selon les spécificités du logement, certaines assurances sont plus adaptées que d’autres. Chez MMA on distingue différentes assurance habitation étudiant :
+ 
+l’assurance habitation pas chère
+l’assurance habitation colocation
+l’assurance location meublée
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>122</td>
+                    <td>0.2022</td>
+
+                    <td>
+                        Quelle assurance pour un logement étudiant ?
+                    </td>
+
+                    <td>
+                        Studio, chambre, appartement, le lieu de résidence d’un étudiant, tout comme une habitation, doit pouvoir être assuré.
+
+Chez MMA, selon le type de logement étudiant à assurer, différentes assurances et garanties existent. Que ce soit pour assurer une location meublée, ou encore dans le cadre d’une assurance habitation pour colocation, MMA vous accompagne et vous propose l’assurance la plus adaptée à vos besoins.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>56</td>
+                    <td>0.1670</td>
+
+                    <td>
+                        Pourquoi souscrire une assurance pour votre habitation meublé ?
+                    </td>
+
+                    <td>
+                        Propriétaire et locataire ont l’obligation de réparer les dommages et d’indemniser les victimes d’un sinistre dont ils sont responsables.
+
+Vous êtes locataire ? Une fuite d’eau dans votre logement endommage le plafond de votre voisin ? En l’absence d’assurance location meublée, il vous faudra prendre en charge les réparations et les indemnités, sans limite de montants.
+
+Vous êtes bailleur ? Souscrire une garantie supplémentaire vous permettra de pallier l’insuffisance des assurances de votre locataire et de la copropriété.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>121</td>
+                    <td>0.1404</td>
+
+                    <td>
+                        Que comprend l'assurance habitation étudiante ?
+                    </td>
+
+                    <td>
+                        Pour vous aider à respecter vos obligations sans vous ruiner, MMA a conçu une assurance habitation pour les étudiants qui comprend les garanties essentielles à prix mini, à savoir :
+
+- une indemnisation en cas de sinistre provoqué par un incendie, un dégât des eaux,  un bris de vitre immobilier, une catastrophe naturelle ;  
+- mais aussi la garantie responsabilité civile.
+Et en cas de sinistre, vous bénéficiez d’une assistance habitation 24h/24, 7j/7 (avec la prise en charge de vos frais de déplacement, de la mise en place d’un gardiennage…).
+
+Différentes formes de logements sont possibles pour les étudiants : chez l’habitant, logement en résidence étudiante, location meublée…
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>47</td>
+                    <td>0.0998</td>
+
+                    <td>
+                        La responsabilité civile du locataire
+                    </td>
+
+                    <td>
+                        Selon le code civil, toute personne causant un dommage à autrui est obligée de réparer ce dommage. En ce sens, l’assurance responsabilité civile locative couvre les dommages non-intentionnels provoqués par vous-même ou vos enfants mineurs. Pour indemniser la victime, l’assurance se substitue au responsable.
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 Embeddings</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>83</td>
+                    <td>0.7027</td>
+
+                    <td>
+                        Les assurances proposées par Airbnb sont-elles suffisantes ?
+                    </td>
+
+                    <td>
+                        Les plateformes de location entre particuliers incluent des assurances, pour les propriétaires et pour les voyageurs, mais en cas de sinistre, il n’est pas facile de les activer :
+ 
+- L’assurance hôte couvre les propriétaires et locataires en cas de poursuites engagées par un tiers suite à des préjudices corporels ou des dommages matériels. Cette garantie s’active uniquement dans le cadre d’un séjour conclu sur la plateforme.
+
+- La garantie hôte couvre les propriétaires et locataires en cas de dommages causés au logement ou à leurs biens personnels pendant la durée du séjour du voyageur. Ces dommages sont couverts à hauteur maximale de 800 000 € par exemple sur Airbnb.
+
+Cependant, ces garanties ne couvrent pas tout. Elles ne proposent pas de protection en cas de vol, considéré comme un acte volontaire. Elles excluent les espèces et les titres, les animaux domestiques, la responsabilité individuelle et les parties communes.
+
+Enfin les conditions d’indemnisation sont très limitées. L’ass
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>84</td>
+                    <td>0.6488</td>
+
+                    <td>
+                        L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien
+                    </td>
+
+                    <td>
+                        L’Assurance Habitation MMA si vous passez par une plateforme pour louer votre bien
+Vous louez votre bien toute l’année et ne l’occupez pas : pour être sûr qu’il soit bien couvert, assurez votre location avec l’Assurance Habitation Propriétaire Bailleur MMA qui comprend les garanties essentielles comme l’incendie et les dégâts des eaux.
+ 
+Vous louez votre habitation ou résidence secondaire de temps en temps : informez votre assureur de votre activité et choisissez l’option Location et échange de logement de l’assurance habitation MMA pour une couverture complète.
+
+Avec cette garantie, MMA prend en charge :
+ 
+- les dommages matériels causés accidentellement par vos locataires ou vos occupants temporaires à vos biens, 
+- le vol et le vandalisme intérieur commis par vos locataires,
+- les dommages engageant votre Responsabilité civile vie privée dans le cadre de cette activité.
+
+Bon à savoir : Lorsqu’un sinistre garanti rend impossible la mise à disposition de l’hébergement pendant la pério
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>58</td>
+                    <td>0.6382</td>
+
+                    <td>
+                        Propriétaire : quelle assurance meublée choisir ?
+                    </td>
+
+                    <td>
+                        Vous êtes propriétaire ? Vous êtes notamment responsable de la sécurité de votre locataire et des tiers. L’Assurance Habitation propriétaire non-occupant MMA vous offre une couverture étendue et vous protège en cas de dommages non pris en charge par l’assurance du locataire ou celle de la copropriété.
+
+Et si le bien est vacant, votre assurance peut vous couvrir en cas d’incendie, de fuite d’eau ou d’effraction.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>105</td>
+                    <td>0.6315</td>
+
+                    <td>
+                        Quelles sont les installations prise en charge par la garantie Dépannage MMA ?
+                    </td>
+
+                    <td>
+                        La garantie Dépannage des installations de la maison MMA est incluse dans le contrat d’assurance habitation MMA. Elle couvre les installations individuelles et privatives situées dans l’habitation principale et les dépendances assurées à la même adresse :
+
+- la plomberie dans l’habitation et les dépendances à la même adresse ;
+- les circuits électriques entre le disjoncteur et les prises (hors tubes lumineux et ampoules) ;
+- les installations de chauffage ;
+- les installations de serrurerie en cas d’impossibilité d’ouvrir ou de fermer les portes d’entrée, portails, grilles, portes de garage et portes de communication entre le garage et l’habitation.
+ 
+Bon à savoir : La garantie Dépannage des installations de la maison s’applique dès lors que vous constatez un dysfonctionnement interne d’un équipement assuré, sous réserve que l’entretien périodique obligatoire ait bien été effectué et que l’appareil soit réparable. Pour les installations de chauffage, elle n’inclut ni le remplacement du
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>44</td>
+                    <td>0.6310</td>
+
+                    <td>
+                        Qu'est-ce que l'assurance locataire
+                    </td>
+
+                    <td>
+                        L‘assurance locative protège le locataire contre les sinistres et dégâts qui peuvent survenir à tout moment dans un appartement ou une maison. Une fuite d’eau, un incendie, une dégradation involontaire… découvrez les garanties de l’assurance pour locataire MMA. En cas de sinistre dans un logement en location (dégât des eaux, incendie, explosion…), l’assurance habitation locative prend en charge les réparations et rénovations nécessaires, à la place du locataire responsable des dommages.
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+    </section>
+    
+    <section class="case">
+
+        <h2>Cas 2</h2>
+
+        <div class="question">
+            <h3>Question</h3>
+            <p>L’assurance enfant incluse dans l’assurance habitation</p>
+        </div>
+
+        <div class="expected">
+            <h3>Document attendu</h3>
+
+            <p><strong>Index :</strong> 1</p>
+
+            <p>
+                <strong>Titre :</strong>
+                L’assurance enfant incluse dans l’assurance habitation
+            </p>
+
+            <div class="content">
+                La responsabilité civile comprise dans l’assurance habitation couvre, dans la plupart des cas, les dommages que vos enfants pourraient causer à autrui : vitre du voisin brisée, casse de l’appareil dentaire d’un ami... En revanche, elle ne prend pas en charge les dommages que votre enfant peut subir comme ses blessures suite à une chute.
+            </div>
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 TF-IDF</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0.3573</td>
+
+                    <td>
+                        Qu'est-ce que l'assurance responsabilité civile des enfants
+                    </td>
+
+                    <td>
+                        L’assurance responsabilité civile des enfants permet de prendre en charge les dommages corporels et matériels que votre enfant cause à un tiers. Généralement incluse dans votre assurance habitation, cette garantie est également couverte par l’assurance scolaire. Quelle solution choisir pour couvrir au mieux vos enfants ?
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.2870</td>
+
+                    <td>
+                        Les différents degrés de couverture de l'assurance responsabilité civile des enfants
+                    </td>
+
+                    <td>
+                        Quelques exemples pour vous éclairer.
+
+Votre enfant brise par inadvertance une vitre avec un ballon: Avec la responsabilité civile de l’assurance habitation ou de l’assurance scolaire, les frais de remise en état seront pris en charge, déduction fait de l'éventuelle franchise habitation. 
+
+Votre enfant rentre de l’école à vélo et entre en collision avec une voiture stationnée: Avec la responsabilité civile de l’assurance habitation : seule, la réparation de la porte qu’il aura enfoncée sera couverte.
+Avec l’assurance scolaire : les blessures dues à sa chute et la réparation de la porte qu’il aura enfoncée seront couvertes.
+
+Votre enfant est agressé et son vélo est volé ?: Avec l’Assurance Scolaire MMA n°3, vous bénéficiez d’une indemnisation forfaitaire.
+
+Votre enfant est victime d’une agression, d’un racket ou de Cyberharcèlement ? : MMA participe aux frais de consultations d’un psychologue pour l’aider à surmonter ce traumatisme.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>85</td>
+                    <td>0.2238</td>
+
+                    <td>
+                        L’Assurance Habitation MMA si vous louez une location par une plateforme
+                    </td>
+
+                    <td>
+                        Vous êtes voyageur : la garantie villégiature est généralement incluse dans votre assurance habitation. C’est une responsabilité civile  qui couvre les dommages que vous êtes susceptibles de causer à des tiers dans le cadre de votre vie privée sur votre lieu de vacances : dégâts des eaux, incendie, explosion, causés au bâtiment ainsi qu’au mobilier s’y trouvant. Avec MMA, si vous souscrivez la garantie « Responsabilité civile Vie privée », cette garantie villégiature est automatiquement incluse dans votre assurance habitation.
+
+Le plus MMA : Avec l’assurance habitation MMA, les détériorations que vous causez accidentellement aux biens mobiliers et immobiliers (la télévision, le lave-linge...) de votre location de vacances sont pris en charge.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>46</td>
+                    <td>0.1939</td>
+
+                    <td>
+                        L'assurance des risques locatifs est-elle incluse dans l’assurance locative ?
+                    </td>
+
+                    <td>
+                        Dès votre arrivée dans le logement et durant toute la durée du contrat de location, vous êtes responsable des dommages causés au bien et à l’immeuble. L’assurance locative « risques locatifs », incluse dans tous les contrats d’assurance habitation, couvre les dommages liés à un incendie, un dégât des eaux ou à une explosion.
+
+En revanche, il est important de savoir que cette assurance de base ne couvre pas les dommages dont vous pourriez être victime, ainsi que vos biens et vos équipements.
+
+Pour couvrir ces risques, vous devez souscrire d’autres garanties. L’assurance habitation MMA propose plusieurs formules qui s’adaptent à vos besoins.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>104</td>
+                    <td>0.1932</td>
+
+                    <td>
+                        Pourquoi souscrire une garantie Dommages électriques mobilier
+                    </td>
+
+                    <td>
+                        Foudre, surtension et même court-circuit: les incidents d’origine électrique peuvent sérieusement endommager vos ordinateurs, téléviseurs, téléphones ou encore appareils électroménagers. Dans le renfort Mobilier Plus accessible avec l’assurance habitation n°1 et 2 ou incluse dans votre assurance habitation n°3, la garantie Dommages électriques mobilier prend le relais au moindre pépin.
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 Embeddings</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0.7394</td>
+
+                    <td>
+                        Qu'est-ce que l'assurance responsabilité civile des enfants
+                    </td>
+
+                    <td>
+                        L’assurance responsabilité civile des enfants permet de prendre en charge les dommages corporels et matériels que votre enfant cause à un tiers. Généralement incluse dans votre assurance habitation, cette garantie est également couverte par l’assurance scolaire. Quelle solution choisir pour couvrir au mieux vos enfants ?
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>114</td>
+                    <td>0.7124</td>
+
+                    <td>
+                        L’assurance responsabilité civile partielle
+                    </td>
+
+                    <td>
+                        Plusieurs types d'assurances fournissent une responsabilité civile partielle, complémentaire de la garantie procurée par votre assurance multirisques habitation :
+ - l'assurance scolaire, protégeant vos enfants pendant les trajets, les cours et les activités, au sein de l'établissement ou en dehors,
+- une licence délivrée par une fédération, indispensable pour la pratique de certains sports,
+- les garanties neige ou sports d'hiver, incluant les frais de secours et de recherche.
+- les assurances pour les véhicules à moteur,
+- la responsabilité civile professionnelle, obligatoire pour tous les libéraux.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>69</td>
+                    <td>0.6941</td>
+
+                    <td>
+                        À quoi sert l’attestation d’assurance habitation ?
+                    </td>
+
+                    <td>
+                        L'attestation d'assurance habitation prouve à un tiers que vous disposez bien d'un contrat d'assurance habitation. 
+Si vous êtes locataire (hors location saisonnière ou logement de fonction), vous avez en effet l'obligation de souscrire un contrat d'assurance habitation couvrant à minima les risques locatifs, à savoir l'incendie, le dégât des eaux et l'explosion. Lors de la remise des clés et chaque année ensuite, vous devez remettre au propriétaire une attestation d'assurance habitation locataire, préalablement transmise par votre assureur.
+
+Bon à savoir : Si vous avez besoin d’un justificatif de domicile, l’attestation d’assurance habitation, en cours de validité, peut être acceptée comme preuve de votre adresse pour la plupart de vos démarches administratives : demande de passeport ou de carte grise.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>68</td>
+                    <td>0.6854</td>
+
+                    <td>
+                        Qu'est-ce que l'attestation d'assurance ?
+                    </td>
+
+                    <td>
+                        Remise par votre assureur, l'attestation d'assurance habitation est un document qui prouve que vous êtes titulaire d'un contrat d'assurance habitation. Si vous êtes locataire, l’attestation d’assurance habitation sera d’ailleurs exigée par votre bailleur.
+L'attestation d'assurance habitation est un document qui prouve que vous avez souscrit un contrat d'assurance habitation. Remis gratuitement par votre assureur, ce justificatif présente notamment les caractéristiques du contrat :
+
+- la date d’émission de l’attestation ;
+- l'identité de l'assuré ;
+- l'adresse et éventuellement les caractéristiques du logement assuré ;
+- la prise d’effet du contrat ;
+- la dénomination commerciale du contrat ;
+- les coordonnées de l’assureur ;
+- et les principales garanties couvertes (responsabilité civile, incendie, bris de vitre, etc.).
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>91</td>
+                    <td>0.6420</td>
+
+                    <td>
+                        Que se passe-t-il en cas de déménagement ?
+                    </td>
+
+                    <td>
+                        
+Vous déménagez ? Cela aura forcément un impact sur votre assurance habitation.
+
+Transfert de contrat d’assurance habitation sans rupture de garanties, incidence sur votre assurance auto, transport de votre mobilier et de vos biens, demande de résiliation… Découvrez tout ce qu'il faut savoir pour être bien assuré avant, pendant et après votre déménagement.
+
+Transférer votre assurance habitation
+Le mois précédent, informez votre assureur en recommandé avec accusé de réception (AR) de la date de votre déménagement et de l'adresse de votre futur logement.
+Signalez-lui tout changement susceptible d'influer, à la hausse ou à la baisse votre prime d'assurance habitation (nombre de pièces, valeur de vos biens, présence d'une cave, d'un parking d'une véranda,...).
+Notez que le changement d’adresse conséquent au déménagement peut, à lui seul, avoir un impact sur le tarif de l’assurance habitation, dans la mesure où la situation géographique est l’un des facteurs qui le déterminent.
+
+Bon à savoi
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+    </section>
+    
+    <section class="case">
+
+        <h2>Cas 3</h2>
+
+        <div class="question">
+            <h3>Question</h3>
+            <p>Les exclusions de la garantie dégât des eaux</p>
+        </div>
+
+        <div class="expected">
+            <h3>Document attendu</h3>
+
+            <p><strong>Index :</strong> 20</p>
+
+            <p>
+                <strong>Titre :</strong>
+                Les exclusions de la garantie dégât des eaux
+            </p>
+
+            <div class="content">
+                Les dommages dus à un défaut d’entretien caractérisé ou à un manque de réparation indispensable vous incombant et connu de vous ne sont pas assurés, tout comme les conséquences de l’humidité et de la condensation.
+            </div>
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 TF-IDF</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>106</td>
+                    <td>0.2790</td>
+
+                    <td>
+                        L'assurance dégât des eaux est-elle obligatoire ?
+                    </td>
+
+                    <td>
+                        Comme la garantie dégât des eaux est incluse dans tout contrat d'assurance habitation, elle est obligatoire uniquement si vous avez l'obligation légale de souscrire ce type d'assurance.
+
+- Si vous êtes locataire : vous devez faire assurer le logement que vous louez, et l'assurance habitation souscrite inclura nécessairement une garantie en cas de fuite d'eau, d'infiltrations d'eau, de rupture de canalisations...
+- Si vous êtes propriétaire occupant d'un logement en copropriété : vous devez souscrire une assurance RC mais pas obligatoirement une garantie dégât des eaux. C'est cependant fortement conseillé car ce type d'incident n'est pas rare !
+- Si vous êtes propriétaire occupant d'un logement hors copropriété : l'assurance habitation et les garanties qu'elle comporte (dont l'assurance dégât des eaux) est facultative, mais elle reste largement conseillée pour ne pas avoir à faire face à des frais de réparation trop élevés.
+- Si vous êtes propriétaire bailleur, l'assurance habitation de
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>169</td>
+                    <td>0.2204</td>
+
+                    <td>
+                        Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?
+                    </td>
+
+                    <td>
+                        La limite de garantie des frais de recherche de fuites et engorgements est de 7 180 €. Les montants des frais de recherche de fuite de la garantie dégâts des eaux et de la garantie surconsommation d’eau ne se cumulent pas. Hors cas de surconsommation d’eau
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>147</td>
+                    <td>0.2186</td>
+
+                    <td>
+                        Que couvre la garantie renfort évènements climatiques ?
+                    </td>
+
+                    <td>
+                        Ce qui est garanti: Nous indemnisons les dommages matériels directs subis par les biens assurés, à condition qu’un arrêté de catastrophes naturelles n’ait pas été publié, lorsque ces dommages résultent :
+• de la chute de la grêle,
+• du poids de la neige ou de la glace accumulée sur les toitures, sur les piscines et les dômes assurés ou sur les arbres et entraînant leur chute sur les biens assurés, ou glissant sur ces mêmes biens assurés,
+• de la neige ou de la pluie ayant pénétré dans le bâtiment détérioré par les évènements ci-dessus, lorsque cette intempérie survient dans les 72 heures qui suivent la détérioration du bâtiment,
+• des coulées de boue,
+• d’une inondation provenant :
+- d’un débordement de sources, de cours d’eau, d’étendues d’eau artificielles ou naturelles,
+- de remontées de nappes phréatiques,
+- de ruissellement des eaux pluviales qui s’écoulent à la surface du sol,
+• en cas de gel ayant occasionné un dégât des eaux garanti, nous indemnisons les frais de réparation des
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>188</td>
+                    <td>0.2023</td>
+
+                    <td>
+                        Est-ce que les dommages dûs à l'humidité sont couverts ?
+                    </td>
+
+                    <td>
+                        Dans le cadre de la garantie dégat des eaux, les dommages dus à l’humidité ou à la condensation, les dommages causés par des champignons ou des moisissures, ne sont pas assurés
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>119</td>
+                    <td>0.1957</td>
+
+                    <td>
+                        Que couvre la garantie dégâts des eaux de l’assurance habitation ?
+                    </td>
+
+                    <td>
+                        La garantie dégâts des eaux MMA incluse dans l'assurance habitation, indemnise les dommages matériels subis par les biens assurés en cas de fuites d'eau ou débordements accidentels des appareils à effet d’eau (lave-linge ou lave-vaisselle), appareils sanitaires et installations de chauffage central.
+
+Sont également garantis les dommages causés par :
+
+- les fuites d’eau, ruptures ou débordements de chéneaux, gouttières, descentes d’eaux pluviales, conduites non souterraines ni encastrées,
+- les infiltrations d’eau au travers des toitures, et le refoulement des égouts,
+dégât des eaux consécutif au gel des canalisations, robinets et appareils de chauffages intérieurs,
+un aquarium cassé ou renversé.
+ 
+Les frais de recherche de fuites, d’infiltrations ou d’engorgement d’eau et les frais de réparation de la fuite d’une conduite sont également garantis.
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 Embeddings</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>119</td>
+                    <td>0.8022</td>
+
+                    <td>
+                        Que couvre la garantie dégâts des eaux de l’assurance habitation ?
+                    </td>
+
+                    <td>
+                        La garantie dégâts des eaux MMA incluse dans l'assurance habitation, indemnise les dommages matériels subis par les biens assurés en cas de fuites d'eau ou débordements accidentels des appareils à effet d’eau (lave-linge ou lave-vaisselle), appareils sanitaires et installations de chauffage central.
+
+Sont également garantis les dommages causés par :
+
+- les fuites d’eau, ruptures ou débordements de chéneaux, gouttières, descentes d’eaux pluviales, conduites non souterraines ni encastrées,
+- les infiltrations d’eau au travers des toitures, et le refoulement des égouts,
+dégât des eaux consécutif au gel des canalisations, robinets et appareils de chauffages intérieurs,
+un aquarium cassé ou renversé.
+ 
+Les frais de recherche de fuites, d’infiltrations ou d’engorgement d’eau et les frais de réparation de la fuite d’une conduite sont également garantis.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>187</td>
+                    <td>0.7841</td>
+
+                    <td>
+                        Ma fosse sceptique a débordé, suis-je couvert ?
+                    </td>
+
+                    <td>
+                        Dans le cadre de la garantie dégat des eaux, les dommages dus au débordement de fosses septiques ne sont pas assurés
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>169</td>
+                    <td>0.7636</td>
+
+                    <td>
+                        Quelle est la limite de garantie des frais de recherche de fuites et engorgements ?
+                    </td>
+
+                    <td>
+                        La limite de garantie des frais de recherche de fuites et engorgements est de 7 180 €. Les montants des frais de recherche de fuite de la garantie dégâts des eaux et de la garantie surconsommation d’eau ne se cumulent pas. Hors cas de surconsommation d’eau
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>101</td>
+                    <td>0.7616</td>
+
+                    <td>
+                        Qu’est-ce qu’un dégât des eaux ?
+                    </td>
+
+                    <td>
+                        Les assureurs entendent par dégât des eaux l’ensemble des dommages subis, de façon accidentelle, par les biens mobiliers ou immobiliers de l’assuré du fait de l’eau. Cette garantie figure obligatoirement dans les contrats d’assurance habitation. Fuite d'eau, débordement d’une baignoire, infiltrations d’eau au niveau de la toiture… les causes peuvent être nombreuses.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>102</td>
+                    <td>0.7246</td>
+
+                    <td>
+                        Qu'est-ce que la garantie dégat des eaux
+                    </td>
+
+                    <td>
+                        Fuite d'eau accidentelle, refoulement des égouts, ruptures de canalisations dues au gel: incluse dans votre assurance habitation, la garantie dégâts des eaux prend en charge différents types de sinistres. Pour les éviter, n’oubliez pas d’entretenir et de protéger vos équipements, été comme hiver.
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+    </section>
+    
+    <section class="case">
+
+        <h2>Cas 4</h2>
+
+        <div class="question">
+            <h3>Question</h3>
+            <p>Changer d’assurance habitation : quelles sont les informations nécessaires ?</p>
+        </div>
+
+        <div class="expected">
+            <h3>Document attendu</h3>
+
+            <p><strong>Index :</strong> 81</p>
+
+            <p>
+                <strong>Titre :</strong>
+                Changer d’assurance habitation : quelles sont les informations nécessaires ?
+            </p>
+
+            <div class="content">
+                Vous déménagez, vous avez fait l’acquisition de biens de valeur, vous installez une piscine dans votre jardin… : dès que votre situation change, il est important de prévenir  votre assureur afin qu’il puisse :
+
+- adapter votre contrat d’assurance habitation sur la base de votre nouvelle situation ;
+- et si nécessaire, moduler le montant de votre cotisation.
+
+Sinon c’est prendre le risque de subir une diminution ou une suppression des indemnités qui vous sont dues en cas de sinistre.
+            </div>
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 TF-IDF</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>51</td>
+                    <td>0.2819</td>
+
+                    <td>
+                        Assurance location meublée
+                    </td>
+
+                    <td>
+                        Louer un logement meublé, que ce soit un studio ou un appartement, à l’année ou pour les vacances, s’avère très pratique pour un étudiant par exemple, ou pour se loger en colocation ou durant des travaux. Quelles sont les règles en matière d’assurance habitation meublé pour les propriétaires et les locataires ? Quelles couvertures choisir ?
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>44</td>
+                    <td>0.1423</td>
+
+                    <td>
+                        Qu'est-ce que l'assurance locataire
+                    </td>
+
+                    <td>
+                        L‘assurance locative protège le locataire contre les sinistres et dégâts qui peuvent survenir à tout moment dans un appartement ou une maison. Une fuite d’eau, un incendie, une dégradation involontaire… découvrez les garanties de l’assurance pour locataire MMA. En cas de sinistre dans un logement en location (dégât des eaux, incendie, explosion…), l’assurance habitation locative prend en charge les réparations et rénovations nécessaires, à la place du locataire responsable des dommages.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>79</td>
+                    <td>0.1093</td>
+
+                    <td>
+                        Comment souscrire à une assurance habitation ?
+                    </td>
+
+                    <td>
+                        Contrat assurance habitation : les documents à fournir
+Après avoir choisi les garanties habitation adaptées à vos besoins, vous souhaitez souscrire votre contrat d’assurance habitation. Quels documents devez-vous fournir ?
+
+Pour une souscription en ligne ou en agence, les documents suivants seront nécessaires :
+
+- un Relevé d’Identité Bancaire (RIB) ;
+- une copie de votre pièce d’identité ;
+- selon les cas, si vous êtes locataire, une copie de votre bail et un avis d’imposition ou un justificatif de revenus sur les 6 derniers mois.
+
+Votre assureur vous demandera aussi différentes informations :
+ 
+- votre emplacement géographique ;
+- la nature de votre logement : s’agit-il d’une maison, d’un appartement, d’un mobile home, etc. ? Le cas échéant, êtes-vous situé au rez-de-chaussée ou aux étages supérieurs ? Le bâtiment est-il classé ou inscrit à l’inventaire des monuments historiques ? ;
+- votre statut : êtes-vous locataire, colocataire ou propriétaire ? ;
+- votre usage du logement : votr
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>152</td>
+                    <td>0.1053</td>
+
+                    <td>
+                        Mon jet ski a été endommagé suite à une inondation. Suis-je couvert ?
+                    </td>
+
+                    <td>
+                        Les caravanes, les voiliers, les bateaux et les engins nautiques à moteur ne sont pas couverts par l'assurance habitation
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>37</td>
+                    <td>0.1010</td>
+
+                    <td>
+                        Le télétravail et votre assurance habitation
+                    </td>
+
+                    <td>
+                        Bien qu’en télétravail, il existe 2 cas de figure où c’est votre assurance habitation qui intervient en cas de dommages :
+- quand vous utilisez du matériel personnel pour télétravailler, celui-ci n’est alors plus garanti par l’assurance de votre employeur mais par votre propre contrat, en l’occurrence votre assurance multirisque habitation. 
+- et si vos biens personnels sont endommagés par le matériel professionnel pendant le télétravail, c’est aussi votre assurance multirisque habitation qui couvre vos biens(Nos prises en charge sont faites en application des garanties ou options souscrites et des conditions, limites, exclusions de garanties et du montant des franchises qui sont précisés dans les Conditions Générales et les Conditions Particulières du contrat Assurance Habitation MMA CG410).
+Il est donc recommandé de vérifier auprès de votre agent les garanties de votre assurance habitation MMA.
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 Embeddings</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>91</td>
+                    <td>0.7964</td>
+
+                    <td>
+                        Que se passe-t-il en cas de déménagement ?
+                    </td>
+
+                    <td>
+                        
+Vous déménagez ? Cela aura forcément un impact sur votre assurance habitation.
+
+Transfert de contrat d’assurance habitation sans rupture de garanties, incidence sur votre assurance auto, transport de votre mobilier et de vos biens, demande de résiliation… Découvrez tout ce qu'il faut savoir pour être bien assuré avant, pendant et après votre déménagement.
+
+Transférer votre assurance habitation
+Le mois précédent, informez votre assureur en recommandé avec accusé de réception (AR) de la date de votre déménagement et de l'adresse de votre futur logement.
+Signalez-lui tout changement susceptible d'influer, à la hausse ou à la baisse votre prime d'assurance habitation (nombre de pièces, valeur de vos biens, présence d'une cave, d'un parking d'une véranda,...).
+Notez que le changement d’adresse conséquent au déménagement peut, à lui seul, avoir un impact sur le tarif de l’assurance habitation, dans la mesure où la situation géographique est l’un des facteurs qui le déterminent.
+
+Bon à savoi
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>79</td>
+                    <td>0.7700</td>
+
+                    <td>
+                        Comment souscrire à une assurance habitation ?
+                    </td>
+
+                    <td>
+                        Contrat assurance habitation : les documents à fournir
+Après avoir choisi les garanties habitation adaptées à vos besoins, vous souhaitez souscrire votre contrat d’assurance habitation. Quels documents devez-vous fournir ?
+
+Pour une souscription en ligne ou en agence, les documents suivants seront nécessaires :
+
+- un Relevé d’Identité Bancaire (RIB) ;
+- une copie de votre pièce d’identité ;
+- selon les cas, si vous êtes locataire, une copie de votre bail et un avis d’imposition ou un justificatif de revenus sur les 6 derniers mois.
+
+Votre assureur vous demandera aussi différentes informations :
+ 
+- votre emplacement géographique ;
+- la nature de votre logement : s’agit-il d’une maison, d’un appartement, d’un mobile home, etc. ? Le cas échéant, êtes-vous situé au rez-de-chaussée ou aux étages supérieurs ? Le bâtiment est-il classé ou inscrit à l’inventaire des monuments historiques ? ;
+- votre statut : êtes-vous locataire, colocataire ou propriétaire ? ;
+- votre usage du logement : votr
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>97</td>
+                    <td>0.7354</td>
+
+                    <td>
+                        Comment assurer une résidence secondaire ?
+                    </td>
+
+                    <td>
+                        Deux options s'offrent à vous si vous souhaitez assurer un logement (maison ou appartement) secondaire.
+
+Modifier votre assurance habitation principale : il s'agit d'étendre la couverture actuelle pour qu'elle protège également une résidence secondaire. Cette solution est adaptée si les deux logements présentent des caractéristiques proches en termes d'évaluation des risques.
+
+Souscrire une assurance habitation spécifique : dans ce cas, vous signez un autre contrat d'assurance, parallèle à celui qui concerne votre logement principal. Cette solution permet une meilleure prise en compte des spécificités de la résidence secondaire.
+
+Prenez conseil auprès d'un agent MMA pour déterminer quel est le meilleur moyen d’assurer votre résidence secondaire.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>69</td>
+                    <td>0.7251</td>
+
+                    <td>
+                        À quoi sert l’attestation d’assurance habitation ?
+                    </td>
+
+                    <td>
+                        L'attestation d'assurance habitation prouve à un tiers que vous disposez bien d'un contrat d'assurance habitation. 
+Si vous êtes locataire (hors location saisonnière ou logement de fonction), vous avez en effet l'obligation de souscrire un contrat d'assurance habitation couvrant à minima les risques locatifs, à savoir l'incendie, le dégât des eaux et l'explosion. Lors de la remise des clés et chaque année ensuite, vous devez remettre au propriétaire une attestation d'assurance habitation locataire, préalablement transmise par votre assureur.
+
+Bon à savoir : Si vous avez besoin d’un justificatif de domicile, l’attestation d’assurance habitation, en cours de validité, peut être acceptée comme preuve de votre adresse pour la plupart de vos démarches administratives : demande de passeport ou de carte grise.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>67</td>
+                    <td>0.7019</td>
+
+                    <td>
+                        Que peut faire un propriétaire non occupant ou PNO si son locataire n'est pas assuré ?
+                    </td>
+
+                    <td>
+                        Tout locataire doit remettre au propriétaire bailleur une attestation d’assurance habitation : dès la remise des clés ; puis chaque année qui suit. En cas de non-réception de ce document, le propriétaire non-occupant peut envoyer une lettre de mise en demeure au locataire, dans laquelle il l’informe qu’en cas de défaut d’assurance, il souscrira lui-même une assurance habitation pour son compte. Cette assurance peut être souscrite à compter d’un mois suite à l’envoi de la lettre. Le coût mensuel de la cotisation peut alors être répercuté sur le montant du loyer ; cette indemnisation doit être spécifiée sur l’avis d’échéance et sur la quittance. Le propriétaire non-occupant est en droit d’appliquer une majoration de 10% pour couvrir les démarches liées à la souscription de l’assurance habitation.
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+    </section>
+    
+    <section class="case">
+
+        <h2>Cas 5</h2>
+
+        <div class="question">
+            <h3>Question</h3>
+            <p>Que couvre la responsabilité civile de l’assurance habitation ?</p>
+        </div>
+
+        <div class="expected">
+            <h3>Document attendu</h3>
+
+            <p><strong>Index :</strong> 112</p>
+
+            <p>
+                <strong>Titre :</strong>
+                Que couvre la responsabilité civile de l’assurance habitation ?
+            </p>
+
+            <div class="content">
+                L'assurance responsabilité civile « chef de famille » couvre les dommages occasionnés par imprudence ou par négligence :
+- par le titulaire de l'assurance habitation, ses enfants mineurs, les parents dont il a la charge s'ils vivent sous son toit, et le plus souvent son conjoint,
+- par ses employés (baby-sitter ou femme de ménage par exemple),
+- par ses animaux ou ceux dont il a la garde,
+- par ses objets ou ceux qu'il a empruntés ou loués.
+
+Bon à savoir : les enfants majeurs célibataires peuvent être couverts par la responsabilité civile de leurs parents même s'ils ne vivent pas à leur domicile. Pour le vérifier, consultez votre contrat d’assurance habitation.
+
+MMA indemnise à votre place les dommages causés à autrui, dont vous êtes responsable lorsque vous échangez, prêtez, empruntez ou louez dans le cadre de votre vie privée :
+- du matériel de bricolage et de jardinage,
+- un appareil électroménager,
+- ou encore du mobilier et matériel de jardin
+            </div>
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 TF-IDF</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>125</td>
+                    <td>0.3703</td>
+
+                    <td>
+                        L'assurance responsabilité civile pour les étudiants
+                    </td>
+
+                    <td>
+                        L'assurance responsabilité civile pour les étudiants
+La garantie RC comprise dans votre assurance habitation étudiant vous protège en cas de dommages corporels, matériels et immatériels que vous pouvez causer à un tiers ou aux objets qu’il possède, par imprudence ou par négligence.
+
+Avec MMA, l’assurance responsabilité civile étudiant couvre également les sinistres provoqués :
+
+- par votre animal de compagnie (ou de celui dont vous avez la garde) ;
+- mais aussi dans le cadre de vos activités sportives et de loisirs (sauf cas particuliers).
+
+En pratique, votre assurance responsabilité civile prend en charge les frais liés à la réparation du sinistre.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>63</td>
+                    <td>0.3154</td>
+
+                    <td>
+                        L'assurance du propriétaire bailleur est-elle obligatoire ?
+                    </td>
+
+                    <td>
+                        - Logement hors copropriété : en tant que propriétaire bailleur vous n’êtes pas obligé de souscrire une assurance habitation, contrairement à votre locataire. Toutefois il est recommandé de souscrire une assurance habitation, au moins pour couvrir les dommages engageant votre responsabilité civile.
+ 
+- Logement en copropriété : vous avez en tant que propriétaire bailleur l'obligation, de souscrire une assurance responsabilité civile (RC).
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>55</td>
+                    <td>0.3147</td>
+
+                    <td>
+                        L’assurance habitation pour un appartement meublé est-elle obligatoire pour un propriétaire ?
+                    </td>
+
+                    <td>
+                        Vous êtes propriétaire ? Vous devez souscrire une assurance « propriétaire non occupant » (PNO), qui couvre votre responsabilité civile en qualité de propriétaire.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>85</td>
+                    <td>0.3129</td>
+
+                    <td>
+                        L’Assurance Habitation MMA si vous louez une location par une plateforme
+                    </td>
+
+                    <td>
+                        Vous êtes voyageur : la garantie villégiature est généralement incluse dans votre assurance habitation. C’est une responsabilité civile  qui couvre les dommages que vous êtes susceptibles de causer à des tiers dans le cadre de votre vie privée sur votre lieu de vacances : dégâts des eaux, incendie, explosion, causés au bâtiment ainsi qu’au mobilier s’y trouvant. Avec MMA, si vous souscrivez la garantie « Responsabilité civile Vie privée », cette garantie villégiature est automatiquement incluse dans votre assurance habitation.
+
+Le plus MMA : Avec l’assurance habitation MMA, les détériorations que vous causez accidentellement aux biens mobiliers et immobiliers (la télévision, le lave-linge...) de votre location de vacances sont pris en charge.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>134</td>
+                    <td>0.2738</td>
+
+                    <td>
+                        L’assurance garage ou parking d'un locataire est-elle obligatoire ?
+                    </td>
+
+                    <td>
+                        En tant que locataire, vous avez l'obligation de disposer d’une assurance pour votre garage auto ou votre box. Le plus souvent, il s'agit d'une garantie incluse ou optionnelle de votre contrat d'assurance habitation.
+
+A minima, vous devez être assuré au titre de votre responsabilité civile. La garantie de responsabilité civile de l’assurance habitation vise à couvrir les dommages involontaires que vous pourriez causer à des tiers, notamment si :
+
+un incendie se déclare dans votre garage et endommage les biens aux alentours ;
+un dégât des eaux provenant de votre garage cause des dommages à des tiers.
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+        <div class="method">
+
+            <h3>Top-5 Embeddings</h3>
+
+            <table>
+
+                <tr>
+                    <th>Rang</th>
+                    <th>Index</th>
+                    <th>Score</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                </tr>
+    
+                <tr class="">
+
+                    <td>1</td>
+                    <td>128</td>
+                    <td>0.8285</td>
+
+                    <td>
+                        Quelle assurance pour les logements en copropriété ?
+                    </td>
+
+                    <td>
+                        Plusieurs assurances doivent être souscrites pour un logement en copropriété :
+
+Pour les parties communes ou collectives, le syndic de copropriété à l’obligation de souscrire une responsabilité civile pour couvrir les dégâts causés par le bâtiment lui-même ou encore les employés de la copropriété.
+Pour chaque logement, le copropriétaire occupant ou non-occupant a l’obligation de souscrire au minimum une responsabilité civile pour indemniser les dommages causés au tiers. Si vous êtes l’occupant du logement, MMA vous propose une assurance plus complète pour vous protéger.
+A savoir : certaines copropriétés souscrivent une assurance multirisque collective pour les parties communes mais également pour les parties privatives c’est à dire les logements de chaque propriétaire. Renseignez-vous auprès de votre syndic.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>2</td>
+                    <td>64</td>
+                    <td>0.8247</td>
+
+                    <td>
+                        Pourquoi s’assurer en tant que propriétaire bailleur ?
+                    </td>
+
+                    <td>
+                        l'assurance Responsabilité civile est obligatoire pour le propriétaire d'un logement en copropriété. Mais en dehors de cette obligation légale, il y a plusieurs raisons de signer un contrat d’assurance habitation en tant que propriétaire bailleur, aussi appelé propriétaire non-occupant ou PNO, même dans le cas d'un bien hors copropriété. Les voici :
+
+- Protéger votre bien, en couvrant les dommages qui pourraient ne pas être inclus dans l'assurance habitation du locataire (cambriolage ; vandalisme...). Il est fréquent en effet que le locataire souscrive une assurance habitation à moindre coût, dont les garanties sont limitées. Protéger également votre bien quand le logement est vacant, entre deux locations il reste assurer.
+ 
+- Protéger votre statut, par le biais de l'assurance responsabilité civile du propriétaire. Elle vous protègera en cas, par exemple, d'un trouble de jouissance.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>3</td>
+                    <td>114</td>
+                    <td>0.7885</td>
+
+                    <td>
+                        L’assurance responsabilité civile partielle
+                    </td>
+
+                    <td>
+                        Plusieurs types d'assurances fournissent une responsabilité civile partielle, complémentaire de la garantie procurée par votre assurance multirisques habitation :
+ - l'assurance scolaire, protégeant vos enfants pendant les trajets, les cours et les activités, au sein de l'établissement ou en dehors,
+- une licence délivrée par une fédération, indispensable pour la pratique de certains sports,
+- les garanties neige ou sports d'hiver, incluant les frais de secours et de recherche.
+- les assurances pour les véhicules à moteur,
+- la responsabilité civile professionnelle, obligatoire pour tous les libéraux.
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>4</td>
+                    <td>60</td>
+                    <td>0.7848</td>
+
+                    <td>
+                        L’assurance PNO est-elle obligatoire ?
+                    </td>
+
+                    <td>
+                        Votre bien est en copropriété: 
+Si vous êtes propriétaire d'un logement en copropriété, vous avez l'obligation d'être assuré à minima au titre de votre responsabilité civile.
+
+L’assurance de responsabilité civile habitation vise à couvrir les dommages que votre logement pourrait causer à des tiers, notamment si :
+
+- un dégât des eaux, survenant dans votre appartement, provoque des dommages chez le voisin du dessous,
+- un court-circuit déclenche un incendie qui se propage à l’immeuble voisin,
+- un volet se détache et blesse un passant.
+
+Vous avez deux possibilités pour répondre à cette obligation :
+
+- Souscrire une assurance de responsabilité civile : ce choix ne vous accorde toutefois qu'une protection limitée. De plus, si vous louez votre logement, le locataire devra obligatoirement souscrire une assurance habitation.
+- Souscrire une assurance PNO : en plus de couvrir votre responsabilité civile, ce contrat vous fait bénéficier de garanties additionnelles pour être mieux protégé (ince
+                    </td>
+
+                </tr>
+        
+                <tr class="">
+
+                    <td>5</td>
+                    <td>63</td>
+                    <td>0.7797</td>
+
+                    <td>
+                        L'assurance du propriétaire bailleur est-elle obligatoire ?
+                    </td>
+
+                    <td>
+                        - Logement hors copropriété : en tant que propriétaire bailleur vous n’êtes pas obligé de souscrire une assurance habitation, contrairement à votre locataire. Toutefois il est recommandé de souscrire une assurance habitation, au moins pour couvrir les dommages engageant votre responsabilité civile.
+ 
+- Logement en copropriété : vous avez en tant que propriétaire bailleur l'obligation, de souscrire une assurance responsabilité civile (RC).
+                    </td>
+
+                </tr>
+        
+            </table>
+
+        </div>
+
+    </section>
+    
+
+</body>
+
+</html>
