@@ -1,0 +1,48 @@
+{
+  "titres": {
+    "cosinus_tfidf": {
+      "recall@1": 0.2985,
+      "recall@3": 0.5224,
+      "recall@5": 0.6219,
+      "mrr@5": 0.4186,
+      "questions": 201
+    },
+    "lexical_seul": {
+      "recall@1": 0.9254,
+      "recall@3": 0.9801,
+      "recall@5": 0.995,
+      "mrr@5": 0.9554,
+      "questions": 201
+    },
+    "hybride_production": {
+      "recall@1": 0.5274,
+      "recall@3": 0.791,
+      "recall@5": 0.8955,
+      "mrr@5": 0.6667,
+      "questions": 201
+    }
+  },
+  "reformulations": {
+    "cosinus_tfidf": {
+      "recall@1": 0.2,
+      "recall@3": 0.25,
+      "recall@5": 0.3,
+      "mrr@5": 0.2279,
+      "questions": 40
+    },
+    "lexical_seul": {
+      "recall@1": 0.15,
+      "recall@3": 0.3,
+      "recall@5": 0.425,
+      "mrr@5": 0.2496,
+      "questions": 40
+    },
+    "hybride_production": {
+      "recall@1": 0.15,
+      "recall@3": 0.375,
+      "recall@5": 0.4,
+      "mrr@5": 0.2562,
+      "questions": 40
+    }
+  }
+}
