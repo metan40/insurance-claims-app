@@ -1,0 +1,40 @@
+# Journal des versions
+
+Les journaux détaillés des versions 4 à 18 sont conservés dans
+`docs/historique/changelogs/`.
+
+## 19.0.0 — nettoyage, tests et documentation d'examen
+
+### Organisation du dépôt
+- Suppression des copies en double à la racine (scripts, données, rapports,
+  ancien `app.py` 7.5.0 divergent, `retrieval.py` vide, fichiers « (2) », « (3) »).
+- Rangement par rôle : `src/` (application), `evaluation/`, `experiments/`
+  (archives), `docs/` (guide examinateur, cadrage, historique).
+- Le fichier nommé `download` contenait les règles d'exclusion Docker ; il est
+  renommé `.dockerignore` et complété.
+- Version unique dans `VERSION` (auparavant 18.0 dans VERSION.txt, 7.6.0 dans
+  le code et 7.5.0 dans les tests).
+
+### Application
+- Recherche extraite dans `src/retrieval.py` (`HybridRetriever`), avec un
+  classement identique à la 7.6.0 vérifié sur 244 questions.
+- Libellés corrigés : le pipeline n'utilise plus d'embeddings ni de
+  CrossEncoder ; les champs `score`/`reranker_score`/`embedding_similarity`
+  sont remplacés par `tfidf_cosine_similarity`.
+- Rapidité : `num_predict` (400) borne la longueur des réponses,
+  `keep_alive` (30 min) évite de recharger le modèle, et le modèle est
+  préchargé au démarrage du conteneur.
+- `/ready` compare exactement le modèle installé (`llama3.2:1b` n'est plus
+  confondu avec `llama3.2:3b`).
+- L'interface affiche le message d'erreur du serveur (ex. Ollama indisponible).
+- Image Docker allégée : `sentence-transformers`/PyTorch retirés des
+  dépendances d'exécution ; seuls `src/`, `static/` et `Data/` sont copiés.
+
+### Qualité
+- Suite de tests réorganisée en 5 fichiers (recherche, génération, API,
+  sinistres, cohérence du projet), dont des tests HTTP de bout en bout.
+- Évaluation reproductible `evaluation/evaluate_pipeline.py` sur les 201
+  titres et sur 40 questions reformulées.
+- GitHub Actions : tests à chaque push ; synchronisation Hugging Face depuis
+  `main` uniquement si les tests réussissent.
+- Guide de vérification pas à pas pour l'examinateur.
