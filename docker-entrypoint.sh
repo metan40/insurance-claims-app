@@ -35,6 +35,11 @@ fi
 (
     echo "Préparation du modèle Ollama ${OLLAMA_MODEL}..."
     ollama pull "$OLLAMA_MODEL"
+    # Préchargement : la première question de l'utilisateur ne paie pas le
+    # temps de chargement du modèle en mémoire.
+    curl --silent --fail http://127.0.0.1:11434/api/generate \
+        -d "{\"model\": \"${OLLAMA_MODEL}\", \"prompt\": \"\", \"keep_alive\": \"${OLLAMA_KEEP_ALIVE:-30m}\"}" \
+        >/dev/null || echo "Préchargement du modèle ignoré."
     echo "Modèle Ollama prêt : ${OLLAMA_MODEL}"
 ) &
 

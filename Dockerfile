@@ -1,3 +1,5 @@
+# Image du Space Hugging Face « Insurance Claims Assistance ».
+# Un seul conteneur exécute Ollama (LLM local) et l'API FastAPI.
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -9,15 +11,20 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# curl sert au script de démarrage ; zstd peut être exigé par l'installateur Ollama.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      ca-certificates curl libgomp1 \
+      ca-certificates curl libgomp1 zstd \
     && rm -rf /var/lib/apt/lists/* \
     && curl -fsSL https://ollama.com/install.sh | sh
 
+# Dépendances Python installées avant le code pour profiter du cache Docker.
 COPY requirements.txt ./requirements.txt
 RUN python -m pip install --upgrade pip && pip install -r requirements.txt
 
-COPY . .
+COPY VERSION docker-entrypoint.sh ./
+COPY src ./src
+COPY static ./static
+COPY Data ./Data
 RUN chmod +x /app/docker-entrypoint.sh
 
 EXPOSE 7860

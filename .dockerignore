@@ -1,0 +1,19 @@
+# Fichiers exclus de l'image Docker : seuls src/, static/, Data/ et les
+# fichiers de démarrage sont nécessaires à l'exécution.
+.git
+.git/**
+.github
+.venv
+venv
+__pycache__
+**/__pycache__
+*.py[cod]
+.pytest_cache
+.env
+.env.*
+!.env.example
+docs
+experiments
+evaluation
+tests
+*.docx

@@ -1,0 +1,4 @@
+# Scripts d'expérimentation archivés (experiments/scripts) : comparaisons
+# avec les embeddings et le CrossEncoder. Non installés dans l'image Docker.
+-r requirements.txt
+sentence-transformers>=2.7

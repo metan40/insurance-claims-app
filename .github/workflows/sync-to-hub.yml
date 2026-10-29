@@ -1,20 +1,44 @@
+name: Tests et synchronisation Hugging Face
 
-name: Sync GitHub to Hugging Face
-
+# 1. Les tests s'exécutent à chaque push et pull request.
+# 2. La synchronisation vers le Space n'a lieu que sur main, et seulement si
+#    les tests ont réussi : une version cassée n'est jamais déployée.
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
-  sync:
+  tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
 
-      - name: Sync to Hugging Face Space
+      - name: Installer Python 3.11 (version de l'image Docker)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: pip install -r requirements-dev.txt
+
+      - name: Lancer les tests
+        run: python -m pytest -v
+
+      - name: Mesurer la recherche documentaire
+        run: python evaluation/evaluate_pipeline.py
+
+  sync:
+    needs: tests
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Synchroniser le Space Hugging Face
         uses: huggingface/hub-sync@v0.3.0
         with:
           github_repo_id: ${{ github.repository }}
