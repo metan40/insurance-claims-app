@@ -1,6 +1,6 @@
 ---
 title: Insurance Claims Assistance
-emoji: 🛡️
+emoji: 📄
 colorFrom: blue
 colorTo: green
 sdk: docker

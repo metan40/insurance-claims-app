@@ -21,11 +21,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt ./requirements.txt
 RUN python -m pip install --upgrade pip && pip install -r requirements.txt
 
-COPY VERSION docker-entrypoint.sh ./
-COPY src ./src
-COPY static ./static
-COPY Data ./Data
+# Hugging Face exécute les Spaces Docker avec l'utilisateur 1000 :
+# on crée cet utilisateur et on lui donne les fichiers de l'application.
+RUN useradd -m -u 1000 user
+
+COPY --chown=user VERSION docker-entrypoint.sh ./
+COPY --chown=user src ./src
+COPY --chown=user static ./static
+COPY --chown=user Data ./Data
 RUN chmod +x /app/docker-entrypoint.sh
 
+# Les poids du modèle sont conservés dans /data (stockage persistant du
+# Space) lorsqu'il existe ; sinon le script se replie sur le dossier personnel.
+ENV HOME=/home/user \
+    PATH="/home/user/.local/bin:$PATH" \
+    OLLAMA_MODELS=/data/ollama/models
+
+USER user
 EXPOSE 7860
 CMD ["/app/docker-entrypoint.sh"]

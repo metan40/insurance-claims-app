@@ -6,6 +6,16 @@ export OLLAMA_HOST="${OLLAMA_HOST:-127.0.0.1:11434}"
 export OLLAMA_URL="${OLLAMA_URL:-http://127.0.0.1:11434/api/generate}"
 export OLLAMA_MODEL="${OLLAMA_MODEL:-llama3.2:3b}"
 export OLLAMA_TIMEOUT_SECONDS="${OLLAMA_TIMEOUT_SECONDS:-180}"
+export OLLAMA_KEEP_ALIVE="${OLLAMA_KEEP_ALIVE:-30m}"
+
+# Dossier des poids du modèle : /data si le stockage persistant est disponible
+# (les poids survivent aux redémarrages), sinon le dossier personnel.
+export OLLAMA_MODELS="${OLLAMA_MODELS:-/data/ollama/models}"
+if ! mkdir -p "$OLLAMA_MODELS" 2>/dev/null; then
+    export OLLAMA_MODELS="${HOME:-/tmp}/.ollama/models"
+    mkdir -p "$OLLAMA_MODELS"
+fi
+echo "Dossier des modèles Ollama : ${OLLAMA_MODELS}"
 
 printf '%s\n' "Démarrage d'Ollama sur ${OLLAMA_HOST}..."
 ollama serve &

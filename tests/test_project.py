@@ -23,7 +23,9 @@ def test_runtime_dependencies_exclude_heavy_unused_packages(project_root):
 
 def test_docker_image_only_copies_runtime_files(project_root):
     dockerfile = read(project_root, "Dockerfile")
-    for needed in ("COPY src", "COPY static", "COPY Data", "VERSION", "docker-entrypoint.sh"):
+    for folder in ("src", "static", "Data"):
+        assert re.search(rf"^COPY (--chown=\S+ )?{folder} ", dockerfile, re.MULTILINE)
+    for needed in ("VERSION", "docker-entrypoint.sh", "USER user"):
         assert needed in dockerfile
     dockerignore = read(project_root, ".dockerignore")
     for excluded in (".git", "docs", "experiments", "tests"):
