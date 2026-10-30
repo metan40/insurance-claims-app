@@ -187,7 +187,14 @@ def decide_status(typed: TypedAnswer | None, checked: list[dict]) -> str | None:
     return "answered" if typed.complete_answer_found else "partial"
 
 
-def build_fallback_text(results) -> str:
+NOT_FOUND_MESSAGE = (
+    "Le modèle n’a pas trouvé de réponse justifiée dans les documents consultés. "
+    "L’application n’affiche donc pas de synthèse : voici les extraits des sources "
+    "les plus proches de votre question, à lire pour juger vous-même."
+)
+
+
+def build_fallback_text(results, message: str | None = None) -> str:
     """Repli : extraits des premières sources, sans synthèse non justifiée."""
     excerpts = []
     for result in results[:FALLBACK_SOURCES]:
@@ -200,7 +207,7 @@ def build_fallback_text(results) -> str:
             content = content[:FALLBACK_EXCERPT_CHARACTERS].rsplit(" ", 1)[0] + "…"
         excerpts.append(f"- **{title}** [{source_id}] : {content}")
 
-    message = (
+    message = message or (
         "Je ne peux pas formuler une synthèse suffisamment "
         "traçable : le modèle n’a pas fourni d’extraits "
         "vérifiables dans les sources. Pour éviter d’affirmer un élément sans "
@@ -280,16 +287,23 @@ def generate_typed_answer(
         # une réponse partielle ou « non trouvée » peut être complétée par les
         # sources suivantes.
         if status == "answered" or (is_last and status is not None):
+            # « Non trouvé » : le texte éventuel du modèle n'est appuyé par aucun
+            # extrait vérifié ; l'application ne l'affiche pas et montre les
+            # sources les plus proches.
             text = (
                 display_text(typed, checked)
                 if status != "not_found"
-                else typed.answer.strip()
-                or "Les documents consultés ne permettent pas de répondre à cette question."
+                else build_fallback_text(results, NOT_FOUND_MESSAGE)
             )
             typed_dump = typed.model_dump(exclude={"evidence"})
             typed_dump["answer"] = html.unescape(typed_dump["answer"])
             typed_dump["caveats"] = html.unescape(typed_dump["caveats"])
             typed_dump["model_indicators_inconsistent"] = is_inconsistent(typed, checked)
+            if status == "not_found":
+                # Conservé pour l'audit, mais retiré des champs affichés.
+                typed_dump["model_unverified_text"] = typed_dump["answer"]
+                typed_dump["answer"] = ""
+                typed_dump["caveats"] = ""
             return {
                 "status": status,
                 "answer": html.unescape(text),

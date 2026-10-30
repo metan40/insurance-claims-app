@@ -114,7 +114,19 @@ def test_not_found_at_top1_is_checked_against_three_sources():
     result = generation.generate_typed_answer("Cours de l'action Apple ?", THREE_SOURCES, call)
     assert result["status"] == "not_found"
     assert len(prompts) == 2
-    assert "ne permettent pas" in result["answer"]
+    assert "pas trouvé de réponse justifiée" in result["answer"]
+    assert "Garantie vol** [S1]" in result["answer"]
+
+
+def test_unverified_text_of_a_not_found_answer_is_never_displayed():
+    not_found = model_output(answer_found=False, complete=False, evidence=[], confidence=0.5,
+                             answer="Affirmation non justifiée par une citation.")
+    call, _ = scripted([not_found, not_found])
+    result = generation.generate_typed_answer("Q ?", THREE_SOURCES, call)
+    assert result["status"] == "not_found"
+    assert "Affirmation non justifiée" not in result["answer"]
+    assert result["typed_answer"]["caveats"] == ""
+    assert result["typed_answer"]["model_unverified_text"] == "Affirmation non justifiée par une citation."
 
 
 def test_single_source_needs_a_single_call():
