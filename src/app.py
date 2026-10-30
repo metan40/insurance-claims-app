@@ -78,8 +78,11 @@ OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:3b").strip()
 OLLAMA_TIMEOUT_SECONDS = read_int_setting(os.getenv("OLLAMA_TIMEOUT_SECONDS"), default=120, minimum=5)
 # Rapidité : borne la longueur des réponses et garde le modèle chargé en
 # mémoire entre deux questions (évite un rechargement de plusieurs secondes).
-OLLAMA_NUM_PREDICT = read_int_setting(os.getenv("OLLAMA_NUM_PREDICT"), default=500, minimum=50)
+OLLAMA_NUM_PREDICT = read_int_setting(os.getenv("OLLAMA_NUM_PREDICT"), default=350, minimum=50)
 OLLAMA_KEEP_ALIVE = os.getenv("OLLAMA_KEEP_ALIVE", "30m").strip()
+# Fenêtre de contexte : la plus grande étape (3 sources de 900 caractères et la
+# consigne) tient dans 2 048 jetons ; une fenêtre plus petite accélère le CPU.
+OLLAMA_NUM_CTX = read_int_setting(os.getenv("OLLAMA_NUM_CTX"), default=2048, minimum=512)
 CONTEXT_CHARACTERS_PER_SOURCE = 1500
 
 logger.info("Insurance Claims Assistance — version %s", APP_VERSION)
@@ -329,7 +332,11 @@ def call_ollama(prompt: str, attempt_label: str) -> str:
             "stream": False,
             "format": ANSWER_SCHEMA,
             "keep_alive": OLLAMA_KEEP_ALIVE,
-            "options": {"temperature": 0.1, "num_predict": OLLAMA_NUM_PREDICT},
+            "options": {
+                "temperature": 0.1,
+                "num_predict": OLLAMA_NUM_PREDICT,
+                "num_ctx": OLLAMA_NUM_CTX,
+            },
         },
         timeout=OLLAMA_TIMEOUT_SECONDS,
     )
@@ -445,6 +452,7 @@ def search(data: Question):
         "answer": generation["answer"],
         "typed_answer": generation["typed_answer"],
         "generation_attempts": generation["attempts"],
+        "sources_read_by_model": generation.get("sources_read"),
         "results": results,
         "citation_audit": audit_citations(generation["answer"], results),
         "pipeline_metrics": {

@@ -13,12 +13,23 @@ elle-même que chaque extrait existe bien dans la source citée. La décision de
 livrer la réponse repose sur cette vérification, pas sur la confiance
 déclarée par le modèle (un score que les petits modèles calibrent mal).
 
+Boucle top-1 puis top-3 (« loop engineering ») : sur un processeur sans GPU,
+la lecture du contexte par le modèle domine le temps de réponse (mesure du
+Space en version 7.6 : 228 s pour cinq sources de 1 500 caractères et deux
+appels). La génération procède donc par étapes :
+
+1. la meilleure source seule, courte : si la réponse est complète et
+   appuyée par un extrait vérifié, on s'arrête ;
+2. sinon, les trois meilleures sources : ce second appel sert aussi de
+   révision lorsque la première sortie était invalide.
+
 Statuts possibles :
 
 * ``answered``    réponse trouvée, complète, appuyée par au moins un extrait vérifié ;
 * ``partial``     réponse partielle, appuyée par au moins un extrait vérifié ;
-* ``not_found``   le modèle déclare que les sources ne contiennent pas la réponse ;
-* ``fallback``    après une révision, aucun extrait vérifiable : l'application
+* ``not_found``   avec les trois sources, le modèle déclare qu'elles ne contiennent
+                  pas la réponse ;
+* ``fallback``    aucun extrait vérifiable après les deux étapes : l'application
                   affiche les sources au lieu d'une réponse non justifiée.
 """
 from __future__ import annotations
@@ -35,6 +46,8 @@ MIN_QUOTE_TOKENS = 3
 QUOTE_MATCH_RATIO = 0.8
 FALLBACK_EXCERPT_CHARACTERS = 700
 FALLBACK_SOURCES = 3
+# Étapes de la boucle : (nombre de sources, caractères par source).
+GENERATION_STAGES = ((1, 1200), (3, 900))
 
 
 class Evidence(BaseModel):
@@ -45,8 +58,8 @@ class Evidence(BaseModel):
 class TypedAnswer(BaseModel):
     answer_found: bool = Field(description="Les sources contiennent-elles la réponse ?")
     complete_answer_found: bool = Field(description="La réponse est-elle complète ?")
-    answer: str = Field(description="Réponse en français, claire et concise")
-    evidence: list[Evidence] = Field(default_factory=list)
+    answer: str = Field(description="Réponse en français, trois phrases au plus")
+    evidence: list[Evidence] = Field(default_factory=list, max_length=3)
     confidence: float = Field(ge=0.0, le=1.0)
     caveats: str = Field(default="", description="Réserves ou limites, chaîne vide sinon")
 
@@ -84,11 +97,11 @@ Règles :
   answer explique brièvement que les documents ne permettent pas de répondre,
   et evidence est une liste vide. N'invente jamais de réponse.
 - complete_answer_found : false si les documents ne répondent qu'en partie.
-- answer : réponse en français, claire et concise, sans information absente
-  des documents.
-- evidence : pour chaque information importante, recopie MOT POUR MOT une
-  phrase courte du document qui la justifie, avec l'identifiant exact de sa
-  source (S1, S2...). N'invente jamais d'identifiant.
+- answer : réponse en français, trois phrases au plus, sans information
+  absente des documents.
+- evidence : une ou deux phrases courtes recopiées MOT POUR MOT du document
+  qui justifient la réponse, avec l'identifiant exact de leur source (S1,
+  S2...). N'invente jamais d'identifiant.
 - confidence : nombre entre 0 et 1.
 - caveats : réserves utiles (conditions, exclusions), ou chaîne vide.
 
@@ -97,32 +110,6 @@ QUESTION :
 
 DOCUMENTS FOURNIS :
 {context}
-"""
-
-
-def build_revision_prompt(question: str, context: str, previous: str, available_ids) -> str:
-    """Seconde tentative quand aucun extrait de la première n'a pu être vérifié."""
-    allowed = ", ".join(available_ids) or "(aucune source disponible)"
-    return f"""
-Ta réponse précédente n'a pas pu être vérifiée : ses extraits ne figurent pas
-mot pour mot dans les sources citées. Corrige-la en respectant le même schéma
-JSON. La question et les documents sont reproduits car chaque appel est
-indépendant.
-
-QUESTION ORIGINALE :
-{question}
-
-DOCUMENTS DE RÉFÉRENCE :
-{context}
-
-RÈGLES DE RÉVISION :
-- Chaque extrait de evidence doit être COPIÉ EXACTEMENT depuis le CONTENU de la
-  source indiquée, sans reformulation.
-- Les seuls identifiants autorisés sont : {allowed}.
-- Si les documents ne permettent pas de répondre, mets answer_found à false.
-
-RÉPONSE PRÉCÉDENTE À CORRIGER :
-{previous}
 """
 
 
@@ -228,36 +215,56 @@ def display_text(typed: TypedAnswer, checked: list[dict]) -> str:
 # Orchestration
 # ------------------------------------------------------------------
 
+def stage_sources(results, count: int, characters: int) -> list[dict]:
+    """Sources transmises à une étape : les ``count`` premières, tronquées."""
+    selected = []
+    for result in results[:count]:
+        content = str(result.get("content", ""))
+        if len(content) > characters:
+            content = content[:characters].rsplit(" ", 1)[0] + "…"
+        selected.append({**result, "content": content})
+    return selected
+
+
 def generate_typed_answer(
     question: str,
     results,
     call_model: Callable[[str, str], str],
     log: Callable[[str], None] = lambda message: None,
+    stages=GENERATION_STAGES,
 ) -> dict:
-    """Une tentative, une révision si nécessaire, puis repli.
+    """Boucle top-1 puis top-3, puis repli.
 
     ``call_model(prompt, label)`` renvoie le texte brut du modèle ; les erreurs
     réseau qu'il lève sont propagées à l'appelant.
     """
-    context = build_context(results)
-    available_ids = [str(r["source_id"]) for r in results if r.get("source_id")]
-    prompts = [("tentative 1", build_prompt(question, context))]
-    attempts = 0
-    raw = ""
+    # On ne garde que les étapes qui apportent des sources supplémentaires.
+    effective, seen = [], 0
+    for count, characters in stages:
+        available = min(count, len(results))
+        if available > seen:
+            effective.append((available, characters))
+            seen = available
 
-    while prompts:
-        label, prompt = prompts.pop(0)
+    attempts = 0
+    for position, (count, characters) in enumerate(effective, start=1):
+        sources = stage_sources(results, count, characters)
+        label = f"tentative {position} (top-{len(sources)})"
         attempts += 1
-        raw = call_model(prompt, label)
+        raw = call_model(build_prompt(question, build_context(sources)), label)
         typed = parse_typed_answer(raw)
-        checked = verify_answer(typed, results) if typed else []
+        checked = verify_answer(typed, sources) if typed else []
         status = decide_status(typed, checked)
+        is_last = position == len(effective)
         log(
             f"{label} — audit : json_valide={typed is not None}, "
             f"extraits_verifies={sum(c['verified'] for c in checked)}/{len(checked)}, "
             f"statut={status}"
         )
-        if status is not None:
+        # À l'étape 1, seule une réponse complète et justifiée arrête la boucle :
+        # une réponse partielle ou « non trouvée » peut être complétée par les
+        # sources suivantes.
+        if status == "answered" or (is_last and status is not None):
             text = (
                 display_text(typed, checked)
                 if status != "not_found"
@@ -269,16 +276,13 @@ def generate_typed_answer(
                 "answer": text,
                 "typed_answer": {**typed.model_dump(exclude={"evidence"}), "evidence": checked},
                 "attempts": attempts,
+                "sources_read": len(sources),
             }
-        if attempts == 1:
-            prompts.append((
-                "tentative 2 / révision",
-                build_revision_prompt(question, context, raw, available_ids),
-            ))
 
     return {
         "status": "fallback",
         "answer": build_fallback_text(results),
         "typed_answer": None,
         "attempts": attempts,
+        "sources_read": seen,
     }

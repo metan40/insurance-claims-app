@@ -396,6 +396,10 @@ async function search() {
             if (typed.caveats) {
                 metaText += " | Réserves : " + typed.caveats;
             }
+            if (data.sources_read_by_model) {
+                metaText += " | Sources lues par le modèle : " + data.sources_read_by_model +
+                    " (appels : " + (data.generation_attempts || 1) + ")";
+            }
             meta.textContent = metaText;
             answerBlock.appendChild(meta);
         }

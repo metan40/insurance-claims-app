@@ -73,50 +73,73 @@ def test_invalid_model_output_is_rejected(raw):
 
 # ---------- Décision du statut ----------
 
-def test_complete_verified_answer_is_answered():
+THREE_SOURCES = SOURCES + [
+    {"rank": 2, "source_id": "S2", "title": "Exclusions", "content": "Le vol sans effraction ni violence n'est pas garanti par le contrat."},
+    {"rank": 3, "source_id": "S3", "title": "Plafonds", "content": "Les bijoux sont indemnisés dans la limite du plafond prévu aux conditions particulières."},
+]
+
+
+def test_complete_verified_answer_at_top1_stops_the_loop():
     call, prompts = scripted([model_output()])
-    result = generation.generate_typed_answer("Le vol est-il couvert ?", SOURCES, call)
+    result = generation.generate_typed_answer("Le vol est-il couvert ?", THREE_SOURCES, call)
     assert result["status"] == "answered"
-    assert result["attempts"] == 1
+    assert result["attempts"] == 1 and result["sources_read"] == 1
+    assert "SOURCE [S1]" in prompts[0] and "SOURCE [S2]" not in prompts[0]
     assert result["answer"].endswith("[S1]")
     assert result["typed_answer"]["evidence"][0]["verified"] is True
 
 
-def test_partial_answer_is_flagged():
-    call, _ = scripted([model_output(complete=False)])
-    assert generation.generate_typed_answer("Q ?", SOURCES, call)["status"] == "partial"
+def test_partial_answer_at_top1_reads_three_sources():
+    second = model_output(evidence=[
+        {"source_id": "S1", "quote": "couvre les biens mobiliers dérobés lors d'une effraction"},
+        {"source_id": "S2", "quote": "le vol sans effraction ni violence n'est pas garanti"},
+    ])
+    call, prompts = scripted([model_output(complete=False), second])
+    result = generation.generate_typed_answer("Le vol est-il couvert ?", THREE_SOURCES, call)
+    assert result["status"] == "answered"
+    assert result["attempts"] == 2 and result["sources_read"] == 3
+    assert "SOURCE [S3]" in prompts[1]
+    assert result["answer"].endswith("[S1] [S2]")
 
 
-def test_not_found_is_a_valid_answer_without_retry():
-    call, prompts = scripted([model_output(
-        answer_found=False, complete=False, evidence=[], confidence=0.0,
-        answer="Les documents ne permettent pas de répondre.")])
-    result = generation.generate_typed_answer("Cours de l'action Apple ?", SOURCES, call)
+def test_partial_answer_is_kept_when_three_sources_do_not_complete_it():
+    call, _ = scripted([model_output(complete=False), model_output(complete=False)])
+    assert generation.generate_typed_answer("Q ?", THREE_SOURCES, call)["status"] == "partial"
+
+
+def test_not_found_at_top1_is_checked_against_three_sources():
+    not_found = model_output(answer_found=False, complete=False, evidence=[], confidence=0.0,
+                             answer="Les documents ne permettent pas de répondre.")
+    call, prompts = scripted([not_found, not_found])
+    result = generation.generate_typed_answer("Cours de l'action Apple ?", THREE_SOURCES, call)
     assert result["status"] == "not_found"
-    assert len(prompts) == 1
+    assert len(prompts) == 2
     assert "ne permettent pas" in result["answer"]
 
 
-def test_unverifiable_quote_triggers_revision_then_succeeds():
+def test_single_source_needs_a_single_call():
+    call, prompts = scripted([model_output(complete=False)])
+    result = generation.generate_typed_answer("Q ?", SOURCES, call)
+    assert result["status"] == "partial" and len(prompts) == 1
+
+
+def test_unverifiable_quote_at_top1_is_retried_with_three_sources():
     bad = model_output(evidence=[{"source_id": "S1", "quote": "texte inventé qui n'existe nulle part"}])
     call, prompts = scripted([bad, model_output()])
-    result = generation.generate_typed_answer("Q ?", SOURCES, call)
-    assert result["status"] == "answered"
-    assert result["attempts"] == 2
-    assert "RÉPONSE PRÉCÉDENTE À CORRIGER" in prompts[1]
-    assert "S1" in prompts[1] and "QUESTION ORIGINALE" in prompts[1]
+    result = generation.generate_typed_answer("Q ?", THREE_SOURCES, call)
+    assert result["status"] == "answered" and result["attempts"] == 2
 
 
-def test_invalid_json_triggers_revision():
+def test_invalid_json_at_top1_is_retried():
     call, prompts = scripted(["réponse en texte libre", model_output()])
-    assert generation.generate_typed_answer("Q ?", SOURCES, call)["status"] == "answered"
+    assert generation.generate_typed_answer("Q ?", THREE_SOURCES, call)["status"] == "answered"
     assert len(prompts) == 2
 
 
 def test_fallback_after_two_unverifiable_answers():
     bad = model_output(evidence=[])
     call, prompts = scripted([bad, bad])
-    result = generation.generate_typed_answer("Q ?", SOURCES, call)
+    result = generation.generate_typed_answer("Q ?", THREE_SOURCES, call)
     assert result["status"] == "fallback"
     assert result["typed_answer"] is None
     assert "suffisamment traçable" in result["answer"]
@@ -127,7 +150,15 @@ def test_fallback_after_two_unverifiable_answers():
 def test_declared_confidence_does_not_override_verification():
     bad = model_output(confidence=1.0, evidence=[{"source_id": "S1", "quote": "réponse sûre mais inventée de toutes pièces"}])
     call, _ = scripted([bad, bad])
-    assert generation.generate_typed_answer("Q ?", SOURCES, call)["status"] == "fallback"
+    assert generation.generate_typed_answer("Q ?", THREE_SOURCES, call)["status"] == "fallback"
+
+
+def test_stage_sources_are_truncated_for_speed():
+    long_sources = [{"source_id": f"S{i}", "title": "T", "content": "mot " * 1000} for i in range(1, 6)]
+    stage = generation.stage_sources(long_sources, 3, 900)
+    assert len(stage) == 3
+    assert all(len(source["content"]) <= 901 for source in stage)
+    assert len(long_sources[0]["content"]) == 4000  # l'original n'est pas modifié
 
 
 def test_fallback_truncates_long_excerpts():
@@ -168,6 +199,7 @@ def test_api_sends_schema_and_speed_settings(app_module, monkeypatch):
     assert captured["stream"] is False
     assert captured["keep_alive"] == app_module.OLLAMA_KEEP_ALIVE
     assert captured["options"]["num_predict"] == app_module.OLLAMA_NUM_PREDICT
+    assert captured["options"]["num_ctx"] == app_module.OLLAMA_NUM_CTX
     assert captured["options"]["temperature"] == pytest.approx(0.1)
 
 
@@ -197,11 +229,11 @@ def test_diagnostic_mode_logs_raw_outputs_audits_and_durations(app_module, monke
     outputs = ["première sortie illisible", "seconde sortie illisible"]
     monkeypatch.setattr(app_module.requests, "post",
                         lambda *a, **k: FakeResponse({"response": outputs.pop(0)}))
-    result = app_module.generate_answer("Q ?", SOURCES)
+    result = app_module.generate_answer("Q ?", THREE_SOURCES)
     output = capsys.readouterr().out
     assert result["status"] == "fallback"
-    assert "tentative 1 — durée Ollama" in output
-    assert "tentative 2 / révision — durée Ollama" in output
+    assert "tentative 1 (top-1) — durée Ollama" in output
+    assert "tentative 2 (top-3) — durée Ollama" in output
     assert "première sortie illisible" in output
     assert output.count("audit :") == 2
 

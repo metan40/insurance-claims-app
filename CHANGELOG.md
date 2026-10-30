@@ -25,6 +25,11 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
   `confidence`, `caveats`). L'application vérifie chaque extrait dans la
   source citée et décide du statut : `answered`, `partial`, `not_found`,
   `fallback`. Une réponse « absente des documents » est un résultat valide.
+- **Boucle top-1 puis top-3** : la meilleure source seule (1 200 caractères),
+  puis les trois meilleures (900 caractères) seulement si la réponse est
+  incomplète ou non vérifiée. Texte lu par le modèle : − 64 % quand la
+  première source suffit, − 50 % dans le pire cas (mesure de référence sur le
+  Space en 7.6 : 228 s de génération). `num_predict` 350, `num_ctx` 2048.
 
 ### Application
 - Recherche extraite dans `src/retrieval.py` (`HybridRetriever`), avec un

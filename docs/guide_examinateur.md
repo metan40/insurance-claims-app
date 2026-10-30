@@ -48,7 +48,9 @@ Pour chaque réponse, vérifier :
    inconnus éventuels, sources disponibles mais non citées. Ce contrôle vérifie
    les identifiants `[S1]`…`[S5]`, pas la véracité du contenu.
 4. **Durées observées** : vectorisation TF-IDF, classement hybride, génération,
-   total. La génération représente l'essentiel du temps.
+   total. La génération représente l'essentiel du temps ; la ligne de
+   confiance indique aussi combien de sources le modèle a lues (1 si la
+   meilleure source suffisait, 3 sinon) et le nombre d'appels.
 5. **Sources** : pour chaque source, la similarité cosinus TF-IDF, le score
    lexical et le score de fusion des rangs (aucun n'est une probabilité), puis
    l'extrait du document. L'examinateur peut lire l'extrait pour juger si la
