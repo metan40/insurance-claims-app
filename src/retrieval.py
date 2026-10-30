@@ -148,8 +148,12 @@ class HybridRetriever:
         self.fusion_constant = fusion_constant
         self.lexical_quota = lexical_quota
         self.use_synonyms = use_synonyms
-        # Titres et contenus normalisés une seule fois (gain de temps par requête).
-        self._title_tokens_count = [len(normalize_tokens(title)) for title in self.titles]
+                # Nombre de termes significatifs du titre (mots outils exclus) : à score
+        # lexical égal, le titre qui contient le moins de termes en plus de ceux
+        # de la question est le plus centré sur elle.
+        self._title_tokens_count = [
+            len(parse_question(title, use_synonyms=False).leading_terms) for title in self.titles
+        ]
 
         self.vectorizer = TfidfVectorizer(
             strip_accents="unicode",
@@ -201,8 +205,10 @@ class HybridRetriever:
         cosine_order = [int(index) for index in np.asarray(cosine).argsort()[::-1]]
         lexical_order = sorted(
             range(count),
-            key=lambda i: (lexical[i], self._title_tokens_count[i]),
-            reverse=True,
+            # À score lexical égal, le titre le plus court l'emporte : il est
+            # plus centré sur les termes de la question (« Qu'est-ce que
+            # l'assurance responsabilité civile ? » avant « … des enfants »).
+            key=lambda i: (-lexical[i], self._title_tokens_count[i]),
         )
         cosine_rank = {index: rank for rank, index in enumerate(cosine_order, start=1)}
         lexical_rank = {index: rank for rank, index in enumerate(lexical_order, start=1)}
@@ -250,7 +256,11 @@ class HybridRetriever:
 
         pool_by_cosine = sorted(candidates, key=lambda i: float(cosine[i]), reverse=True)
         pool_rank = {index: rank for rank, index in enumerate(pool_by_cosine, start=1)}
-        lexical_order = sorted(range(count), key=lambda i: lexical[i], reverse=True)
+        # Même ordre lexical qu'à l'étape A (titre le plus court à égalité),
+        # pour que les deux étapes appliquent une seule et même règle.
+        lexical_order = sorted(
+            range(count), key=lambda i: (-lexical[i], self._title_tokens_count[i])
+        )
         lexical_rank = {index: rank for rank, index in enumerate(lexical_order, start=1)}
         fusion = {
             index: rank_fusion_score(

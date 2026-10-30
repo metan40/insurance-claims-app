@@ -82,7 +82,7 @@ OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:3b").strip()
 OLLAMA_TIMEOUT_SECONDS = read_int_setting(os.getenv("OLLAMA_TIMEOUT_SECONDS"), default=120, minimum=5)
 # Rapidité : borne la longueur des réponses et garde le modèle chargé en
 # mémoire entre deux questions (évite un rechargement de plusieurs secondes).
-OLLAMA_NUM_PREDICT = read_int_setting(os.getenv("OLLAMA_NUM_PREDICT"), default=350, minimum=50)
+OLLAMA_NUM_PREDICT = read_int_setting(os.getenv("OLLAMA_NUM_PREDICT"), default=280, minimum=50)
 OLLAMA_KEEP_ALIVE = os.getenv("OLLAMA_KEEP_ALIVE", "30m").strip()
 # Fenêtre de contexte : la plus grande étape (3 sources de 900 caractères et la
 # consigne) tient dans 2 048 jetons ; une fenêtre plus petite accélère le CPU.

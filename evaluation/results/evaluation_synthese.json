@@ -8,24 +8,24 @@
       "questions": 201
     },
     "lexical_seul": {
-      "recall@1": 0.9254,
+      "recall@1": 0.9204,
       "recall@3": 0.9801,
       "recall@5": 0.995,
-      "mrr@5": 0.9554,
+      "mrr@5": 0.9529,
       "questions": 201
     },
     "hybride_sans_synonymes": {
-      "recall@1": 0.5274,
-      "recall@3": 0.791,
-      "recall@5": 0.8955,
-      "mrr@5": 0.6667,
+      "recall@1": 0.5174,
+      "recall@3": 0.8109,
+      "recall@5": 0.9055,
+      "mrr@5": 0.6648,
       "questions": 201
     },
     "hybride_production": {
-      "recall@1": 0.5323,
-      "recall@3": 0.801,
-      "recall@5": 0.8955,
-      "mrr@5": 0.6722,
+      "recall@1": 0.5224,
+      "recall@3": 0.8209,
+      "recall@5": 0.9005,
+      "mrr@5": 0.6697,
       "questions": 201
     }
   },
@@ -40,22 +40,22 @@
     "lexical_seul": {
       "recall@1": 0.15,
       "recall@3": 0.3,
-      "recall@5": 0.425,
-      "mrr@5": 0.2496,
+      "recall@5": 0.45,
+      "mrr@5": 0.2571,
       "questions": 40
     },
     "hybride_sans_synonymes": {
-      "recall@1": 0.15,
-      "recall@3": 0.375,
-      "recall@5": 0.4,
-      "mrr@5": 0.2562,
+      "recall@1": 0.2,
+      "recall@3": 0.4,
+      "recall@5": 0.45,
+      "mrr@5": 0.3042,
       "questions": 40
     },
     "hybride_production": {
-      "recall@1": 0.275,
-      "recall@3": 0.55,
-      "recall@5": 0.675,
-      "mrr@5": 0.4246,
+      "recall@1": 0.3,
+      "recall@3": 0.5,
+      "recall@5": 0.625,
+      "mrr@5": 0.4188,
       "questions": 40
     }
   },
@@ -75,17 +75,17 @@
       "questions": 30
     },
     "hybride_sans_synonymes": {
-      "recall@1": 0.2333,
+      "recall@1": 0.2667,
       "recall@3": 0.3,
-      "recall@5": 0.3667,
-      "mrr@5": 0.2744,
+      "recall@5": 0.4,
+      "mrr@5": 0.305,
       "questions": 30
     },
     "hybride_production": {
-      "recall@1": 0.3333,
-      "recall@3": 0.4,
-      "recall@5": 0.4667,
-      "mrr@5": 0.3706,
+      "recall@1": 0.3667,
+      "recall@3": 0.4333,
+      "recall@5": 0.5333,
+      "mrr@5": 0.4178,
       "questions": 30
     }
   }

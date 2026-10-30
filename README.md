@@ -111,7 +111,7 @@ exemple dans `.env.example`) :
 | `OLLAMA_MODEL` | `llama3.2:3b` | modèle utilisé pour la génération |
 | `OLLAMA_TIMEOUT_SECONDS` | `120` (180 dans le conteneur) | délai maximal d'un appel |
 | `OLLAMA_NUM_CTX` | `2048` | taille de la fenêtre de contexte (plus petite = plus rapide) |
-| `OLLAMA_NUM_PREDICT` | `350` | longueur maximale d'une réponse (en jetons) |
+| `OLLAMA_NUM_PREDICT` | `280` | longueur maximale d'une réponse (en jetons) |
 | `OLLAMA_KEEP_ALIVE` | `30m` | durée pendant laquelle le modèle reste chargé en mémoire |
 | `RAG_DIAGNOSTICS` | `0` | `1` pour journaliser les sorties brutes du modèle (diagnostic local uniquement) |
 
@@ -120,10 +120,11 @@ protection et ne placez aucun jeton dans le code.
 
 ## Limites
 
+- Le Space gratuit n'a pas de GPU : une réponse prend environ 2 à 4 minutes.
 - Les dossiers de sinistres sont **fictifs** : les performances du modèle ne
   décrivent aucun portefeuille réel et aucune décision ne doit en découler.
 - La vérification confirme qu'un extrait existe dans la source, pas qu'il
   justifie entièrement la réponse : la lecture reste nécessaire.
 - La recherche reste sensible au vocabulaire : sur 30 questions reformulées
-  tenues à part, la bonne fiche figure dans les 5 premières dans 47 % des cas
-  (37 % sans les synonymes). Voir le rapport et `evaluation/`.
+  tenues à part, la bonne fiche figure dans les 5 premières dans 53 % des cas
+  (40 % sans les synonymes). Voir le rapport et `evaluation/`.

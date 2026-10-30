@@ -40,6 +40,12 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
   signalement des trous du corpus (incendie, bris de glace) et orientation
   pour le gestionnaire. Chaque clause ouvre l'assistant RAG.
 
+- **Correction après essai réel** : à score lexical égal, le départage
+  retient le titre le plus centré sur la question (au lieu du plus long) ;
+  la fiche de définition de la responsabilité civile revient dans le top 3.
+  Recall@5 sur le jeu tenu à part : 53,3 %. Temps mesuré sur le Space :
+  225 s (deux appels) ; sortie réduite à 280 jetons et deux extraits.
+
 ### Application
 - Recherche extraite dans `src/retrieval.py` (`HybridRetriever`), avec un
   classement identique à la 7.6.0 vérifié sur 244 questions.

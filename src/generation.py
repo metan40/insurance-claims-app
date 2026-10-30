@@ -59,7 +59,7 @@ class TypedAnswer(BaseModel):
     answer_found: bool = Field(description="Les sources contiennent-elles la réponse ?")
     complete_answer_found: bool = Field(description="La réponse est-elle complète ?")
     answer: str = Field(description="Réponse en français, trois phrases au plus")
-    evidence: list[Evidence] = Field(default_factory=list, max_length=3)
+    evidence: list[Evidence] = Field(default_factory=list, max_length=2)
     confidence: float = Field(ge=0.0, le=1.0)
     caveats: str = Field(default="", description="Réserves ou limites, chaîne vide sinon")
 

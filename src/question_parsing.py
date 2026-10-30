@@ -28,6 +28,7 @@ FRENCH_QUERY_STOPWORDS = frozenset({
     "mais", "mon", "ou", "par", "pas", "pour", "qu", "que", "quel",
     "quelle", "quelles", "quels", "qui", "sa", "se", "ses", "son",
     "sur", "un", "une", "vos", "votre", "vous", "comment", "fonctionne",
+    "quoi", "ceci", "cela", "faut", "peut", "dois", "doit",
     "assurance", "assurances", "habitation", "contrat", "contrats",
 })
 

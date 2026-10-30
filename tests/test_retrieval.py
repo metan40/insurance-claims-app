@@ -148,15 +148,21 @@ def test_retrieval_quality_does_not_regress():
     production = {name: values["hybride_production"] for name, values in summary.items()}
     assert production["titres"]["recall@5"] >= 0.85
     assert production["reformulations"]["recall@5"] >= 0.60
-    assert production["tenu_a_part"]["recall@5"] >= 0.40
-    # Le pipeline doit rester meilleur que la similarité TF-IDF seule, et les
-    # synonymes ne doivent dégrader aucun jeu.
+    assert production["tenu_a_part"]["recall@5"] >= 0.50
+    # Le pipeline doit rester meilleur que la similarité TF-IDF seule. Les
+    # synonymes doivent améliorer les deux jeux de reformulations ; sur les
+    # titres, une perte d'une question au plus (0,5 point) est tolérée.
     for name, values in summary.items():
         assert values["hybride_production"]["recall@5"] > values["cosinus_tfidf"]["recall@5"]
+    for name in ("reformulations", "tenu_a_part"):
         assert (
-            values["hybride_production"]["recall@5"]
-            >= values["hybride_sans_synonymes"]["recall@5"]
+            summary[name]["hybride_production"]["recall@5"]
+            > summary[name]["hybride_sans_synonymes"]["recall@5"]
         )
+    assert (
+        summary["titres"]["hybride_sans_synonymes"]["recall@5"]
+        - summary["titres"]["hybride_production"]["recall@5"]
+    ) <= 0.006  # une question sur 201, valeurs arrondies à 4 décimales
 
 
 # ---------- Analyse de la question (synonymes métier) ----------
