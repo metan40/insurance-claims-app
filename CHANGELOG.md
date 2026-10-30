@@ -15,6 +15,17 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
 - Version unique dans `VERSION` (auparavant 18.0 dans VERSION.txt, 7.6.0 dans
   le code et 7.5.0 dans les tests).
 
+### Alignement sur les recommandations du Groupe Foyer
+- **Analyse de la question** (`src/question_parsing.py`) : dictionnaire de
+  synonymes métier ; la question devient une liste de concepts. Recall@5 sur
+  30 reformulations tenues à part : 36,7 % → 46,7 % ; sur le jeu de
+  développement (40) : 40,0 % → 67,5 % ; titres : inchangé (89,6 %).
+- **Réponse typée** (`src/generation.py`) : sortie JSON contrainte par schéma
+  (`answer_found`, `complete_answer_found`, `answer`, `evidence`,
+  `confidence`, `caveats`). L'application vérifie chaque extrait dans la
+  source citée et décide du statut : `answered`, `partial`, `not_found`,
+  `fallback`. Une réponse « absente des documents » est un résultat valide.
+
 ### Application
 - Recherche extraite dans `src/retrieval.py` (`HybridRetriever`), avec un
   classement identique à la 7.6.0 vérifié sur 244 questions.

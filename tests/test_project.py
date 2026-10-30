@@ -60,6 +60,10 @@ def test_frontend_explains_scores_and_citation_audit(project_root):
         "pipeline_metrics",
         "Durées observées (ms)",
         'href="/claims"',
+        "answer_status",
+        "verified",
+        "Termes métier ajoutés",
+        "non calibrée",
     ):
         assert expected in html
     assert "reranker" not in html.lower()

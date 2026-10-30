@@ -14,11 +14,18 @@
       "mrr@5": 0.9554,
       "questions": 201
     },
-    "hybride_production": {
+    "hybride_sans_synonymes": {
       "recall@1": 0.5274,
       "recall@3": 0.791,
       "recall@5": 0.8955,
       "mrr@5": 0.6667,
+      "questions": 201
+    },
+    "hybride_production": {
+      "recall@1": 0.5323,
+      "recall@3": 0.801,
+      "recall@5": 0.8955,
+      "mrr@5": 0.6722,
       "questions": 201
     }
   },
@@ -37,12 +44,49 @@
       "mrr@5": 0.2496,
       "questions": 40
     },
-    "hybride_production": {
+    "hybride_sans_synonymes": {
       "recall@1": 0.15,
       "recall@3": 0.375,
       "recall@5": 0.4,
       "mrr@5": 0.2562,
       "questions": 40
+    },
+    "hybride_production": {
+      "recall@1": 0.275,
+      "recall@3": 0.55,
+      "recall@5": 0.675,
+      "mrr@5": 0.4246,
+      "questions": 40
+    }
+  },
+  "tenu_a_part": {
+    "cosinus_tfidf": {
+      "recall@1": 0.1333,
+      "recall@3": 0.2333,
+      "recall@5": 0.2333,
+      "mrr@5": 0.1778,
+      "questions": 30
+    },
+    "lexical_seul": {
+      "recall@1": 0.3,
+      "recall@3": 0.4333,
+      "recall@5": 0.5,
+      "mrr@5": 0.3689,
+      "questions": 30
+    },
+    "hybride_sans_synonymes": {
+      "recall@1": 0.2333,
+      "recall@3": 0.3,
+      "recall@5": 0.3667,
+      "mrr@5": 0.2744,
+      "questions": 30
+    },
+    "hybride_production": {
+      "recall@1": 0.3333,
+      "recall@3": 0.4,
+      "recall@5": 0.4667,
+      "mrr@5": 0.3706,
+      "questions": 30
     }
   }
 }

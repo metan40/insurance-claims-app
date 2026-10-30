@@ -31,24 +31,32 @@ Ouvrir `<URL>/`, saisir chaque question, puis cliquer sur **Rechercher**.
 | Qui doit payer le serrurier, le propriétaire ou le locataire ? | S1 « Propriétaire ou locataire : qui doit payer le serrurier ? » | répartition propriétaire / locataire |
 | Les panneaux solaires sont-ils couverts ? | S1 « Les panneaux solaires sont-ils couverts ? » | réponse appuyée sur la source |
 | Quelle est la limite de garantie des surconsommations d'eau ? | S1 « Quelle est la limite de garantie des surconsommations d’eau » | montant ou plafond cité |
+| Mes capteurs photovoltaïques sont-ils protégés ? | S1 « Les panneaux solaires sont-ils couverts ? » | « Termes métier ajoutés : panneaux solaires » : le synonyme a permis de retrouver la fiche |
 | Mon aquarium s'est cassé, suis-je couvert ? | « Mon aquarium s'est cassé. Suis-je couvert ? » en S3 | exemple d'un cas où la bonne source n'est pas première |
-| Quel est le cours de l'action Apple ? | aucune source pertinente | le modèle doit dire que les documents ne permettent pas de répondre |
+| Quel est le cours de l'action Apple ? | aucune source pertinente | statut « Réponse absente des documents » : l'application refuse d'inventer |
 
-Pour chaque réponse, vérifier sous le texte :
+Pour chaque réponse, vérifier :
 
-1. **Contrôle des références** : liste des sources citées, identifiants
+1. **Statut** (pastille au-dessus de la réponse) : *réponse trouvée et
+   justifiée*, *réponse partielle*, *réponse absente des documents*, ou
+   *non vérifiable* (extraits affichés à la place). Ce statut est décidé par
+   l'application, pas par le modèle.
+2. **Extraits justificatifs** : chaque phrase citée par le modèle est marquée
+   ✔ si l'application l'a retrouvée dans la source indiquée, ✘ sinon. La
+   confiance affichée est celle déclarée par le modèle (non calibrée).
+3. **Contrôle des références** : liste des sources citées, identifiants
    inconnus éventuels, sources disponibles mais non citées. Ce contrôle vérifie
    les identifiants `[S1]`…`[S5]`, pas la véracité du contenu.
-2. **Durées observées** : vectorisation TF-IDF, classement hybride, génération,
+4. **Durées observées** : vectorisation TF-IDF, classement hybride, génération,
    total. La génération représente l'essentiel du temps.
-3. **Sources** : pour chaque source, la similarité cosinus TF-IDF, le score
+5. **Sources** : pour chaque source, la similarité cosinus TF-IDF, le score
    lexical et le score de fusion des rangs (aucun n'est une probabilité), puis
    l'extrait du document. L'examinateur peut lire l'extrait pour juger si la
    réponse est fidèle à la source.
 
-Si le modèle ne cite pas correctement ses sources après deux tentatives,
-l'application affiche volontairement les extraits des sources au lieu d'une
-réponse non vérifiable.
+Si aucun extrait du modèle n'est retrouvé dans les sources après deux
+tentatives, l'application affiche volontairement les extraits des sources au
+lieu d'une réponse non vérifiable.
 
 ## 3. Tableau de bord des sinistres (2 minutes)
 

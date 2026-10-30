@@ -16,12 +16,14 @@ informations utiles et les sources qui permettent de les vérifier.
 
 Deux briques complémentaires :
 
-1. **Assistant documentaire RAG** (`/`) : une question en langage naturel est
-   rapprochée d'un corpus de 201 fiches d'assurance par une recherche hybride
-   (TF-IDF + score lexical, fusion des rangs RRF). Les cinq meilleures fiches
-   sont transmises à un LLM local (`llama3.2:3b` via Ollama) qui doit répondre
-   uniquement à partir de ces sources et les citer (`[S1]`…`[S5]`). Les
-   citations sont contrôlées automatiquement.
+1. **Assistant documentaire RAG** (`/`) : la question est d'abord analysée
+   (termes significatifs et **synonymes métier** : « nounou » → « baby-sitter »),
+   puis rapprochée d'un corpus de 201 fiches d'assurance par une recherche
+   hybride (TF-IDF + score lexical, fusion des rangs RRF). Les cinq meilleures
+   fiches sont transmises à un LLM local (`llama3.2:3b` via Ollama) qui renvoie
+   une **réponse typée** : réponse trouvée ou non, complète ou non, extraits
+   justificatifs, confiance, réserves. L'application **vérifie elle-même** que
+   chaque extrait figure dans la source citée et décide du statut affiché.
 2. **Tableau de bord sinistres** (`/claims`) : 120 dossiers **fictifs**,
    indicateurs descriptifs (les dossiers *Pending* sont exclus du taux
    d'acceptation) et régression logistique donnant une probabilité indicative
@@ -38,7 +40,7 @@ Deux briques complémentaires :
 | `GET /version` | version et modèle configuré |
 | `GET /ready` | fichiers, index de recherche, Ollama et modèle disponibles (503 sinon) |
 | `GET /docs` | documentation interactive |
-| `POST /search` | question → réponse citée, sources, contrôle des citations, durées |
+| `POST /search` | question → statut, réponse typée et extraits vérifiés, sources, durées |
 | `GET /claims` | tableau de bord des sinistres fictifs |
 | `GET /api/claims/summary`, `/api/claims/model`, `/api/claims/{id}/analysis` | données du tableau de bord |
 
@@ -49,8 +51,10 @@ que `/ready` indique `status: ready` (téléchargement du modèle).
 
 ```
 src/                 code de l'application
-  app.py             API FastAPI : routes, génération Ollama, contrôle des citations
+  app.py             API FastAPI : routes, appel à Ollama
+  question_parsing.py  analyse de la question, dictionnaire de synonymes métier
   retrieval.py       recherche hybride TF-IDF + lexicale (RRF)
+  generation.py      réponse typée, vérification des extraits, statut
   claims_analytics.py  indicateurs et modèle des sinistres fictifs
 static/              interface web (index.html, claims.html)
 Data/                corpus documentaire et sinistres fictifs
@@ -100,7 +104,7 @@ exemple dans `.env.example`) :
 | `OLLAMA_URL` | `http://127.0.0.1:11434/api/generate` | serveur Ollama (celui du conteneur par défaut) |
 | `OLLAMA_MODEL` | `llama3.2:3b` | modèle utilisé pour la génération |
 | `OLLAMA_TIMEOUT_SECONDS` | `120` (180 dans le conteneur) | délai maximal d'un appel |
-| `OLLAMA_NUM_PREDICT` | `400` | longueur maximale d'une réponse (en jetons) |
+| `OLLAMA_NUM_PREDICT` | `500` | longueur maximale d'une réponse (en jetons) |
 | `OLLAMA_KEEP_ALIVE` | `30m` | durée pendant laquelle le modèle reste chargé en mémoire |
 | `RAG_DIAGNOSTICS` | `0` | `1` pour journaliser les sorties brutes du modèle (diagnostic local uniquement) |
 
@@ -111,8 +115,8 @@ protection et ne placez aucun jeton dans le code.
 
 - Les dossiers de sinistres sont **fictifs** : les performances du modèle ne
   décrivent aucun portefeuille réel et aucune décision ne doit en découler.
-- Le contrôle des citations vérifie les identifiants de source, pas la
-  fidélité du contenu : la lecture des extraits reste nécessaire.
-- La recherche TF-IDF est sensible au vocabulaire : sur 40 questions
-  reformulées, la bonne fiche figure dans les 5 premières dans 40 % des cas
-  (voir le rapport et `evaluation/`).
+- La vérification confirme qu'un extrait existe dans la source, pas qu'il
+  justifie entièrement la réponse : la lecture reste nécessaire.
+- La recherche reste sensible au vocabulaire : sur 30 questions reformulées
+  tenues à part, la bonne fiche figure dans les 5 premières dans 47 % des cas
+  (37 % sans les synonymes). Voir le rapport et `evaluation/`.

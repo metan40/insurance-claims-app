@@ -15,7 +15,14 @@ from tests.conftest import FakeResponse
 @pytest.fixture
 def cited_generation(app_module, monkeypatch):
     monkeypatch.setattr(
-        app_module, "generate_answer", lambda question, results: "Réponse de test [S1]."
+        app_module,
+        "generate_answer",
+        lambda question, results: {
+            "status": "answered",
+            "answer": "Réponse de test [S1]",
+            "typed_answer": {"answer_found": True, "evidence": []},
+            "attempts": 1,
+        },
     )
 
 
@@ -109,7 +116,10 @@ def test_not_ready_while_model_is_still_downloading(app_module, monkeypatch):
 def test_search_response_structure(app_module, cited_generation):
     response = app_module.search(app_module.Question(question="Que couvre la garantie vol ?"))
     assert response["app_version"] == app_module.APP_VERSION
-    assert response["answer"].endswith("[S1].")
+    assert response["answer"].endswith("[S1]")
+    assert response["answer_status"] == "answered"
+    assert response["generation_attempts"] == 1
+    assert "typed_answer" in response
     assert [r["source_id"] for r in response["results"]] == ["S1", "S2", "S3", "S4", "S5"]
     assert response["citation_audit"]["valid_source_ids"] == ["S1"]
     first = response["results"][0]
@@ -139,17 +149,13 @@ def test_search_pipeline_metrics(app_module, cited_generation):
     assert "varient" in metrics["note"]
 
 
-def test_ollama_payload_is_tuned_for_speed(app_module, monkeypatch):
-    captured = {}
-
-    def fake_post(url, json, timeout):
-        captured.update(json)
-        return FakeResponse({"response": "Oui [S1]."})
-
-    monkeypatch.setattr(app_module.requests, "post", fake_post)
-    app_module.generate_answer("Q ?", [{"source_id": "S1", "title": "T", "content": "C"}])
-    assert captured["keep_alive"] == app_module.OLLAMA_KEEP_ALIVE
-    assert captured["options"]["num_predict"] == app_module.OLLAMA_NUM_PREDICT
+def test_search_reports_question_analysis(app_module, cited_generation):
+    response = app_module.search(
+        app_module.Question(question="La nounou qui garde mes enfants est-elle couverte ?")
+    )
+    assert "baby sitter" in response["question_analysis"]["added_business_terms"]
+    titles = [r["title"].lower() for r in response["results"]]
+    assert any("baby-sitter" in title for title in titles)
 
 
 # ---------- Chemins et pages ----------

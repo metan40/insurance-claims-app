@@ -28,8 +28,6 @@ probabilités ni des mesures de véracité.
 """
 from __future__ import annotations
 
-import re
-import unicodedata
 from dataclasses import dataclass
 from typing import Sequence
 
@@ -42,50 +40,53 @@ DEFAULT_CANDIDATE_LIMIT = 20
 DEFAULT_TOP_K = 5
 DEFAULT_LEXICAL_QUOTA = 5
 
-# Mots outils et termes trop génériques pour ce corpus (presque tous les
-# documents parlent d'« assurance habitation »).
-FRENCH_QUERY_STOPWORDS = frozenset({
-    "a", "au", "aux", "avec", "ce", "ces", "dans", "de", "des", "du",
-    "elle", "en", "et", "est", "la", "le", "les", "leur", "leurs",
-    "mais", "mon", "ou", "par", "pas", "pour", "qu", "que", "quel",
-    "quelle", "quelles", "quels", "qui", "sa", "se", "ses", "son",
-    "sur", "un", "une", "vos", "votre", "vous", "comment", "fonctionne",
-    "assurance", "assurances", "habitation", "contrat", "contrats",
-})
-
-
-def normalize_tokens(value: object) -> list[str]:
-    """Met en minuscules, retire les accents et découpe en tokens alphanumériques."""
-    normalized = unicodedata.normalize("NFKD", str(value or ""))
-    without_accents = "".join(
-        character for character in normalized if not unicodedata.combining(character)
-    )
-    return re.findall(r"[a-z0-9]+", without_accents.lower())
+from src.question_parsing import (  # noqa: E402  (réexportés pour les tests)
+    FRENCH_QUERY_STOPWORDS,
+    ParsedQuestion,
+    contains_phrase,
+    normalize_text,
+    normalize_tokens,
+    parse_question,
+)
 
 
 def query_terms(question: str) -> list[str]:
     """Termes significatifs et uniques de la question, dans leur ordre d'apparition."""
-    tokens = [
-        token
-        for token in normalize_tokens(question)
-        if token not in FRENCH_QUERY_STOPWORDS and len(token) > 2
-    ]
-    return list(dict.fromkeys(tokens))
+    return parse_question(question, use_synonyms=False).leading_terms
 
 
-def lexical_relevance_score(question: str, title: str, content: str) -> float:
-    """Score lexical indicatif (couverture pondérée + bonus de bigrammes)."""
-    terms = query_terms(question)
-    if not terms:
+def _concept_in(concept: list[str], tokens: set[str], normalized: str) -> bool:
+    return any(
+        (form in tokens) if " " not in form else contains_phrase(normalized, form)
+        for form in concept
+    )
+
+
+def lexical_relevance_score(
+    question: str, title: str, content: str, parsed: ParsedQuestion | None = None
+) -> float:
+    """Score lexical indicatif (couverture pondérée des concepts + bonus de bigrammes).
+
+    Un concept est couvert si l'une de ses formes (terme de la question ou
+    synonyme métier) apparaît. Sans ``parsed``, la question est analysée sans
+    dictionnaire de synonymes.
+    """
+    parsed = parsed or parse_question(question, use_synonyms=False)
+    if not parsed.concepts:
         return 0.0
 
-    title_tokens = set(normalize_tokens(title))
-    content_tokens = set(normalize_tokens(content))
-    title_matches = sum(term in title_tokens for term in terms)
-    content_matches = sum(term in content_tokens for term in terms)
+    normalized_title = normalize_text(title)
+    normalized_content = normalize_text(content)
+    title_tokens = set(normalized_title.split())
+    content_tokens = set(normalized_content.split())
+    title_matches = sum(
+        _concept_in(concept, title_tokens, normalized_title) for concept in parsed.concepts
+    )
+    content_matches = sum(
+        _concept_in(concept, content_tokens, normalized_content) for concept in parsed.concepts
+    )
 
-    normalized_title = " ".join(normalize_tokens(title))
-    normalized_content = " ".join(normalize_tokens(content))
+    terms = parsed.leading_terms
     phrase_bonus = 0.0
     for position in range(len(terms) - 1):
         phrase = " ".join(terms[position:position + 2])
@@ -94,7 +95,7 @@ def lexical_relevance_score(question: str, title: str, content: str) -> float:
         elif phrase in normalized_content:
             phrase_bonus += 1.0
 
-    coverage = (title_matches * 3.0 + content_matches) / len(terms)
+    coverage = (title_matches * 3.0 + content_matches) / len(parsed.concepts)
     return round(coverage + phrase_bonus, 6)
 
 
@@ -135,6 +136,7 @@ class HybridRetriever:
         *,
         fusion_constant: float = RRF_CONSTANT,
         lexical_quota: int = DEFAULT_LEXICAL_QUOTA,
+        use_synonyms: bool = True,
     ) -> None:
         if len(titles) != len(documents):
             raise ValueError("titles et documents doivent avoir la même longueur.")
@@ -145,6 +147,9 @@ class HybridRetriever:
         self.documents = [str(document) for document in documents]
         self.fusion_constant = fusion_constant
         self.lexical_quota = lexical_quota
+        self.use_synonyms = use_synonyms
+        # Titres et contenus normalisés une seule fois (gain de temps par requête).
+        self._title_tokens_count = [len(normalize_tokens(title)) for title in self.titles]
 
         self.vectorizer = TfidfVectorizer(
             strip_accents="unicode",
@@ -161,13 +166,21 @@ class HybridRetriever:
     def vocabulary_size(self) -> int:
         return len(self.vectorizer.vocabulary_)
 
-    def cosine_scores(self, question: str) -> np.ndarray:
-        """Similarité cosinus TF-IDF entre la question et chaque document."""
-        return cosine_similarity(self.vectorizer.transform([question]), self.matrix)[0]
+    def parse(self, question: str) -> ParsedQuestion:
+        """Analyse la question (avec ou sans dictionnaire de synonymes)."""
+        return parse_question(question, use_synonyms=self.use_synonyms)
 
-    def lexical_scores(self, question: str) -> list[float]:
+    def cosine_scores(self, question: str, parsed: ParsedQuestion | None = None) -> np.ndarray:
+        """Similarité cosinus TF-IDF entre la question (enrichie) et chaque document."""
+        parsed = parsed or self.parse(question)
+        return cosine_similarity(
+            self.vectorizer.transform([parsed.expanded_text]), self.matrix
+        )[0]
+
+    def lexical_scores(self, question: str, parsed: ParsedQuestion | None = None) -> list[float]:
+        parsed = parsed or self.parse(question)
         return [
-            lexical_relevance_score(question, title, document)
+            lexical_relevance_score(question, title, document, parsed)
             for title, document in zip(self.titles, self.documents)
         ]
 
@@ -188,7 +201,7 @@ class HybridRetriever:
         cosine_order = [int(index) for index in np.asarray(cosine).argsort()[::-1]]
         lexical_order = sorted(
             range(count),
-            key=lambda i: (lexical[i], len(normalize_tokens(self.titles[i]))),
+            key=lambda i: (lexical[i], self._title_tokens_count[i]),
             reverse=True,
         )
         cosine_rank = {index: rank for rank, index in enumerate(cosine_order, start=1)}
@@ -216,6 +229,7 @@ class HybridRetriever:
         *,
         candidate_limit: int = DEFAULT_CANDIDATE_LIMIT,
         cosine: np.ndarray | None = None,
+        parsed: ParsedQuestion | None = None,
     ) -> list[RankedDocument]:
         """Retourne le pool de candidats dans l'ordre final de classement.
 
@@ -225,10 +239,13 @@ class HybridRetriever:
         cosinus départage.
         """
         count = len(self.documents)
+        parsed = parsed or self.parse(question)
         cosine = (
-            self.cosine_scores(question) if cosine is None else np.asarray(cosine, dtype=float)
+            self.cosine_scores(question, parsed)
+            if cosine is None
+            else np.asarray(cosine, dtype=float)
         )
-        lexical = self.lexical_scores(question)
+        lexical = self.lexical_scores(question, parsed)
         candidates = self.select_candidates(question, cosine, lexical, candidate_limit)
 
         pool_by_cosine = sorted(candidates, key=lambda i: float(cosine[i]), reverse=True)

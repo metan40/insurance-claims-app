@@ -14,8 +14,13 @@ Deux jeux de questions sont mesurés :
   changement de vocabulaire. Ce jeu a été rédigé pour le projet et n'a pas été
   validé par un expert métier ; une seule cible est retenue par question.
 
-Trois classements sont comparés : similarité cosinus TF-IDF seule, score
-lexical seul et pipeline hybride de production (``HybridRetriever.rank``).
+* ``tenu_a_part`` : 30 autres reformulations, figées *avant* la rédaction du
+  dictionnaire de synonymes (``src/question_parsing.py``) et jamais utilisées
+  pour l'ajuster. C'est la mesure la plus honnête de l'apport des synonymes.
+
+Quatre classements sont comparés : similarité cosinus TF-IDF seule, score
+lexical seul, pipeline hybride sans synonymes (version 7.6) et pipeline de
+production avec analyse de la question (``HybridRetriever.rank``).
 Les sorties sont écrites dans ``evaluation/results/``.
 """
 from __future__ import annotations
@@ -34,35 +39,48 @@ from src.retrieval import DEFAULT_TOP_K, HybridRetriever  # noqa: E402
 
 CORPUS_FILE = PROJECT_ROOT / "Data" / "insurance-fr.csv"
 PARAPHRASE_FILE = PROJECT_ROOT / "evaluation" / "paraphrase_questions.csv"
+HELDOUT_FILE = PROJECT_ROOT / "evaluation" / "heldout_questions.csv"
 RESULTS_DIR = PROJECT_ROOT / "evaluation" / "results"
 CUTOFFS = (1, 3, 5)
 
 
-def load_question_sets(titles: list[str]) -> dict[str, list[tuple[str, int]]]:
-    paraphrases = pd.read_csv(PARAPHRASE_FILE)
-    for row in paraphrases.itertuples():
+def _load_reformulations(path: Path, titles: list[str]) -> list[tuple[str, int]]:
+    frame = pd.read_csv(path)
+    for row in frame.itertuples():
         if titles[row.expected_index] != row.expected_title:
             raise ValueError(f"Cible incohérente pour la question : {row.question}")
+    return list(zip(frame["question"], frame["expected_index"].astype(int)))
+
+
+def load_question_sets(titles: list[str]) -> dict[str, list[tuple[str, int]]]:
     return {
         "titres": [(title, index) for index, title in enumerate(titles)],
-        "reformulations": list(
-            zip(paraphrases["question"], paraphrases["expected_index"].astype(int))
-        ),
+        "reformulations": _load_reformulations(PARAPHRASE_FILE, titles),
+        "tenu_a_part": _load_reformulations(HELDOUT_FILE, titles),
     }
 
 
-def ranking_methods(retriever: HybridRetriever):
+def ranking_methods(retriever: HybridRetriever, baseline: HybridRetriever):
+    """Méthodes comparées ; ``baseline`` est le même pipeline sans synonymes."""
     def cosine_only(question: str) -> list[int]:
-        return [int(i) for i in np.argsort(-retriever.cosine_scores(question), kind="stable")]
+        return [int(i) for i in np.argsort(-baseline.cosine_scores(question), kind="stable")]
 
     def lexical_only(question: str) -> list[int]:
-        scores = retriever.lexical_scores(question)
+        scores = baseline.lexical_scores(question)
         return sorted(range(len(scores)), key=lambda i: -scores[i])
+
+    def hybrid_without_synonyms(question: str) -> list[int]:
+        return [item.index for item in baseline.rank(question)]
 
     def hybrid(question: str) -> list[int]:
         return [item.index for item in retriever.rank(question)]
 
-    return {"cosinus_tfidf": cosine_only, "lexical_seul": lexical_only, "hybride_production": hybrid}
+    return {
+        "cosinus_tfidf": cosine_only,
+        "lexical_seul": lexical_only,
+        "hybride_sans_synonymes": hybrid_without_synonyms,
+        "hybride_production": hybrid,
+    }
 
 
 def summarize(ranks: list[int | None]) -> dict[str, float]:
@@ -83,11 +101,12 @@ def main(write_results: bool = True, verbose: bool = True) -> dict:
     titles = corpus["title"].fillna("").astype(str).tolist()
     documents = corpus["content"].fillna("").astype(str).tolist()
     retriever = HybridRetriever(titles, documents)
+    baseline = HybridRetriever(titles, documents, use_synonyms=False)
 
     rows, summary = [], {}
     for set_name, questions in load_question_sets(titles).items():
         summary[set_name] = {}
-        for method_name, method in ranking_methods(retriever).items():
+        for method_name, method in ranking_methods(retriever, baseline).items():
             ranks = []
             for question, target in questions:
                 order = method(question)

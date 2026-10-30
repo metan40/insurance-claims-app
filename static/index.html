@@ -95,6 +95,30 @@
             margin-top: 30px;
         }
 
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .status-answered { background: #dff3e4; color: #1d6b34; }
+        .status-partial { background: #fff1d6; color: #8a5a00; }
+        .status-not_found { background: #e8edf3; color: #34495e; }
+        .status-fallback { background: #fde2e1; color: #9b2c2c; }
+
+        .evidence {
+            margin-top: 12px;
+            padding-left: 18px;
+        }
+
+        .evidence li {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
         .answer {
             background: white;
             border-left: 5px solid #17365d;
@@ -333,6 +357,56 @@ async function search() {
         answerBlock.appendChild(answerTitle);
 
         answerBlock.appendChild(answerText);
+
+        // Réponse typée : statut décidé par l'application, extraits vérifiés,
+        // confiance déclarée par le modèle et réserves.
+        const STATUS_LABELS = {
+            answered: "Réponse trouvée et justifiée",
+            partial: "Réponse partielle",
+            not_found: "Réponse absente des documents",
+            fallback: "Réponse non vérifiable : extraits affichés"
+        };
+        if (data.answer_status) {
+            const badge = document.createElement("div");
+            badge.className = "status-badge status-" + data.answer_status;
+            badge.textContent = STATUS_LABELS[data.answer_status] || data.answer_status;
+            answerBlock.insertBefore(badge, answerText);
+        }
+        const typed = data.typed_answer;
+        if (typed && Array.isArray(typed.evidence) && typed.evidence.length) {
+            const evidenceTitle = document.createElement("div");
+            evidenceTitle.className = "score";
+            evidenceTitle.textContent = "Extraits justificatifs (vérifiés par l'application dans la source citée) :";
+            const list = document.createElement("ul");
+            list.className = "evidence";
+            typed.evidence.forEach(function(item) {
+                const li = document.createElement("li");
+                li.textContent = (item.verified ? "✔ " : "✘ non retrouvé — ") +
+                    "[" + item.source_id + "] « " + item.quote + " »";
+                list.appendChild(li);
+            });
+            answerBlock.appendChild(evidenceTitle);
+            answerBlock.appendChild(list);
+        }
+        if (typed) {
+            const meta = document.createElement("div");
+            meta.className = "score";
+            let metaText = "Confiance déclarée par le modèle (non calibrée) : " +
+                Math.round(Number(typed.confidence || 0) * 100) + " %";
+            if (typed.caveats) {
+                metaText += " | Réserves : " + typed.caveats;
+            }
+            meta.textContent = metaText;
+            answerBlock.appendChild(meta);
+        }
+        if (data.question_analysis && data.question_analysis.added_business_terms &&
+            data.question_analysis.added_business_terms.length) {
+            const analysis = document.createElement("div");
+            analysis.className = "score";
+            analysis.textContent = "Termes métier ajoutés à la recherche : " +
+                data.question_analysis.added_business_terms.join(", ");
+            answerBlock.appendChild(analysis);
+        }
 
 
         results.innerHTML = "";

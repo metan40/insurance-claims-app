@@ -145,10 +145,61 @@ def test_retrieval_quality_does_not_regress():
     from evaluation.evaluate_pipeline import main
 
     summary = main(write_results=False, verbose=False)
-    assert summary["titres"]["hybride_production"]["recall@5"] >= 0.85
-    assert summary["reformulations"]["hybride_production"]["recall@5"] >= 0.35
-    # Le pipeline hybride doit rester meilleur que la similarité TF-IDF seule.
-    assert (
-        summary["titres"]["hybride_production"]["recall@5"]
-        > summary["titres"]["cosinus_tfidf"]["recall@5"]
-    )
+    production = {name: values["hybride_production"] for name, values in summary.items()}
+    assert production["titres"]["recall@5"] >= 0.85
+    assert production["reformulations"]["recall@5"] >= 0.60
+    assert production["tenu_a_part"]["recall@5"] >= 0.40
+    # Le pipeline doit rester meilleur que la similarité TF-IDF seule, et les
+    # synonymes ne doivent dégrader aucun jeu.
+    for name, values in summary.items():
+        assert values["hybride_production"]["recall@5"] > values["cosinus_tfidf"]["recall@5"]
+        assert (
+            values["hybride_production"]["recall@5"]
+            >= values["hybride_sans_synonymes"]["recall@5"]
+        )
+
+
+# ---------- Analyse de la question (synonymes métier) ----------
+
+def test_parser_maps_everyday_words_to_business_terms():
+    from src.question_parsing import parse_question
+
+    parsed = parse_question("La nounou qui garde mes enfants est-elle couverte ?")
+    assert "baby sitter" in parsed.expansions
+    assert ["nounou", "baby sitter"] in parsed.concepts
+
+
+def test_parser_merges_multiword_variant_into_one_concept():
+    from src.question_parsing import parse_question
+
+    parsed = parse_question("Mon bac à poissons est fissuré")
+    concept = next(c for c in parsed.concepts if "aquarium" in c)
+    assert "bac" in concept and "poissons" in concept
+    assert not any(c == ["poissons"] for c in parsed.concepts)
+
+
+def test_parser_does_not_expand_terms_already_used_by_the_corpus():
+    from src.question_parsing import parse_question
+
+    assert parse_question("Comment fonctionne la franchise ?").expansions == []
+
+
+def test_parser_can_be_disabled():
+    from src.question_parsing import parse_question
+
+    assert parse_question("La nounou est-elle couverte ?", use_synonyms=False).expansions == []
+
+
+def test_synonym_concept_counts_once_in_lexical_score():
+    from src.question_parsing import parse_question
+
+    parsed = parse_question("nounou")
+    with_variant = lexical_relevance_score("nounou", "Garde par une baby-sitter", "", parsed)
+    assert with_variant == pytest.approx(3.0)
+
+
+def test_synonyms_bring_the_right_document_for_everyday_wording(app_module):
+    question = "Mes capteurs photovoltaïques sont-ils protégés ?"
+    target = next(i for i, t in enumerate(app_module.titles) if "panneaux solaires" in t.lower())
+    with_synonyms = [item.index for item in app_module.retriever.rank(question)[:5]]
+    assert target in with_synonyms
