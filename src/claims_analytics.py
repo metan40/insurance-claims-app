@@ -163,3 +163,72 @@ def get_claim_analysis(claim_id: str) -> dict[str, Any] | None:
         "human_review_required": True,
         "warning": "Score exploratoire issu de données fictives ; il ne constitue ni une décision ni une recommandation d'indemnisation.",
     }
+
+
+# ----------------------------------------------------------------------
+# Explication du score et données utiles à l'aide à la décision
+# ----------------------------------------------------------------------
+
+FEATURE_LABELS = {
+    "type_sinistre": "Type de sinistre",
+    "garantie": "Garantie",
+    "canal_declaration": "Canal de déclaration",
+    "dossier_complet": "Dossier complet",
+    "montant_demande": "Montant demandé",
+    "anciennete_client_mois": "Ancienneté du client",
+    "nb_sinistres_precedents": "Sinistres précédents",
+}
+
+
+def _readable_feature(name: str) -> str:
+    """'categorical__garantie_Oui' -> 'Garantie = Oui' ; 'numeric__montant_demande' -> 'Montant demandé'."""
+    _, _, raw = name.partition("__")
+    for column, label in FEATURE_LABELS.items():
+        if raw == column:
+            return label
+        if raw.startswith(column + "_"):
+            return f"{label} = {raw[len(column) + 1:]}"
+    return raw
+
+
+def get_claim_record(claim_id: str) -> dict[str, Any] | None:
+    """Ligne brute d'un dossier (avec l'âge calculé), ou None."""
+    frame = _load_claims()
+    matched = frame[frame["claim_id"].astype(str) == str(claim_id)]
+    if matched.empty:
+        return None
+    return matched.iloc[0].to_dict()
+
+
+def explain_claim(claim_id: str, top: int = 3) -> list[dict[str, Any]]:
+    """Facteurs qui font monter ou baisser le score d'un dossier.
+
+    La régression logistique est additive sur l'échelle du logit : chaque
+    variable contribue coef × valeur transformée. On renvoie les ``top``
+    contributions positives et négatives les plus fortes.
+    """
+    record = get_claim_record(claim_id)
+    if record is None:
+        return []
+    preprocessor = _MODEL.named_steps["preprocessor"]
+    classifier = _MODEL.named_steps["classifier"]
+    features = pd.DataFrame([record])[FEATURE_COLUMNS]
+    transformed = preprocessor.transform(features)
+    values = transformed.toarray()[0] if hasattr(transformed, "toarray") else transformed[0]
+    contributions = values * classifier.coef_[0]
+    names = preprocessor.get_feature_names_out()
+
+    factors = [
+        {"factor": _readable_feature(name), "contribution": round(float(value), 3),
+         "effect": "augmente" if value > 0 else "diminue"}
+        for name, value in zip(names, contributions)
+        if abs(value) > 1e-6
+    ]
+    positives = sorted((f for f in factors if f["contribution"] > 0), key=lambda f: -f["contribution"])
+    negatives = sorted((f for f in factors if f["contribution"] < 0), key=lambda f: f["contribution"])
+    return positives[:top] + negatives[:top]
+
+
+def high_amount_threshold(quantile: float = 0.90) -> float:
+    """Montant au-dessus duquel un dossier fait partie des 10 % les plus élevés."""
+    return float(_load_claims()["montant_demande"].quantile(quantile))

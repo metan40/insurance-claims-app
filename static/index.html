@@ -258,7 +258,7 @@ async function search() {
 
 
     results.innerHTML =
-        "<div class='loading'>Recherche des documents pertinents...</div>";
+        "<div class='loading'>Recherche des documents pertinents, puis rédaction de la réponse par le modèle local. Sur le serveur gratuit (sans GPU), la rédaction peut prendre une à deux minutes…</div>";
 
 
     try {
@@ -572,6 +572,17 @@ async function search() {
 
 }
 
+
+
+// Question transmise par le tableau de bord des sinistres (?q=...) :
+// elle est préremplie et la recherche est lancée automatiquement.
+(function prefillFromUrl() {
+    const prefilled = new URLSearchParams(window.location.search).get("q");
+    if (prefilled) {
+        document.getElementById("question").value = prefilled;
+        search();
+    }
+})();
 
 </script>
 

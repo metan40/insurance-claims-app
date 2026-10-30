@@ -24,10 +24,14 @@ Deux briques complémentaires :
    une **réponse typée** : réponse trouvée ou non, complète ou non, extraits
    justificatifs, confiance, réserves. L'application **vérifie elle-même** que
    chaque extrait figure dans la source citée et décide du statut affiché.
-2. **Tableau de bord sinistres** (`/claims`) : 120 dossiers **fictifs**,
-   indicateurs descriptifs (les dossiers *Pending* sont exclus du taux
-   d'acceptation) et régression logistique donnant une probabilité indicative
-   d'acceptation, évaluée sur un jeu de test tenu à part.
+2. **Aide à la décision sur un dossier** (`/claims`) : 120 dossiers
+   **fictifs**. Pour un dossier, l'application réunit en une vue le **score
+   expliqué** (régression logistique et facteurs qui le font monter ou
+   baisser), les **points à vérifier** (règles métier explicites), les
+   **clauses du contrat** correspondant au type de sinistre et une
+   **orientation** pour le gestionnaire (« compléter le dossier », « examiner
+   les exclusions »…), jamais une décision automatique. Chaque clause renvoie
+   à l'assistant RAG.
 
 - Application en ligne : https://huggingface.co/spaces/metan40/insurance_claims_assistance
 - **Examinateur : suivre [`docs/guide_examinateur.md`](docs/guide_examinateur.md)** (10 minutes).
@@ -42,6 +46,7 @@ Deux briques complémentaires :
 | `GET /docs` | documentation interactive |
 | `POST /search` | question → statut, réponse typée et extraits vérifiés, sources, durées |
 | `GET /claims` | tableau de bord des sinistres fictifs |
+| `GET /api/claims/{id}/decision-support` | aide à la décision d'un dossier |
 | `GET /api/claims/summary`, `/api/claims/model`, `/api/claims/{id}/analysis` | données du tableau de bord |
 
 `/health` ne garantit pas qu'Ollama est prêt : au premier démarrage, attendre
@@ -54,7 +59,8 @@ src/                 code de l'application
   app.py             API FastAPI : routes, appel à Ollama
   question_parsing.py  analyse de la question, dictionnaire de synonymes métier
   retrieval.py       recherche hybride TF-IDF + lexicale (RRF)
-  generation.py      réponse typée, vérification des extraits, statut
+  generation.py      réponse typée, vérification des extraits, boucle top-1 / top-3
+  claim_decision.py  aide à la décision : règles métier, clauses, orientation
   claims_analytics.py  indicateurs et modèle des sinistres fictifs
 static/              interface web (index.html, claims.html)
 Data/                corpus documentaire et sinistres fictifs

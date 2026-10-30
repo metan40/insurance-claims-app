@@ -30,8 +30,12 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, StringConstraints
 
+from src.claim_decision import build_decision_support
 from src.claims_analytics import (
     CLAIMS_FILE,
+    explain_claim,
+    get_claim_record,
+    high_amount_threshold,
     get_claim_analysis,
     get_claims_cases,
     get_claims_model_info,
@@ -274,6 +278,21 @@ def claim_analysis(claim_id: str):
     return result
 
 
+@app.get("/api/claims/{claim_id}/decision-support")
+def claim_decision_support(claim_id: str):
+    """Vue d'aide à la décision : score expliqué, points à vérifier, clauses, orientation."""
+    analysis = get_claim_analysis(claim_id)
+    record = get_claim_record(claim_id)
+    if analysis is None or record is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Aucun dossier de démonstration ne correspond à cet identifiant.",
+        )
+    return build_decision_support(
+        analysis, record, explain_claim(claim_id), high_amount_threshold(), titles, documents
+    )
+
+
 # ============================================================
 # CONTRÔLE DES RÉFÉRENCES AUX SOURCES
 # ============================================================
@@ -454,7 +473,10 @@ def search(data: Question):
         "generation_attempts": generation["attempts"],
         "sources_read_by_model": generation.get("sources_read"),
         "results": results,
-        "citation_audit": audit_citations(generation["answer"], results),
+        # L'audit porte sur les sources réellement lues par le modèle.
+        "citation_audit": audit_citations(
+            generation["answer"], results[: generation.get("sources_read") or len(results)]
+        ),
         "pipeline_metrics": {
             "document_count": len(documents),
             "candidate_count": len(ranked),

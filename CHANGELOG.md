@@ -31,6 +31,15 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
   première source suffit, − 50 % dans le pire cas (mesure de référence sur le
   Space en 7.6 : 228 s de génération). `num_predict` 350, `num_ctx` 2048.
 
+- **Aide à la décision sur un dossier** (`src/claim_decision.py`,
+  `GET /api/claims/{id}/decision-support`) : score expliqué par les
+  contributions de la régression logistique, règles métier explicites
+  (dossier incomplet, garantie à vérifier, montant au-delà du 90e centile,
+  historique chargé, Pending de plus de 30 ou 90 jours), clauses du contrat
+  par type de sinistre (table de correspondance validable par un expert),
+  signalement des trous du corpus (incendie, bris de glace) et orientation
+  pour le gestionnaire. Chaque clause ouvre l'assistant RAG.
+
 ### Application
 - Recherche extraite dans `src/retrieval.py` (`HybridRetriever`), avec un
   classement identique à la 7.6.0 vérifié sur 244 questions.

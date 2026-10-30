@@ -69,11 +69,14 @@ Ouvrir `<URL>/claims`.
 | Bandeau d'avertissement | « tous les dossiers affichés sont fictifs » |
 | Indicateurs | 120 dossiers : 72 acceptés, 27 refusés, 21 en attente ; taux d'acceptation 72,73 % calculé sur les 99 dossiers clos (les Pending sont exclus) |
 | Métriques du modèle | régression logistique évaluée sur 25 dossiers de test : exactitude 68 %, exactitude équilibrée 60,3 %, F1 77,8 %, ROC AUC 75,4 % |
-| Bouton **Analyser** du dossier C00001 | probabilité indicative d'environ 85 %, facteurs observables, mention « validation humaine » |
+| Bouton **Analyser** du dossier C00020 (catastrophe naturelle, en attente) | orientation « Compléter le dossier avant décision » ; point bloquant « garantie à vérifier » ; alerte d'ancienneté du dossier ; facteurs du score (la garantie à vérifier fait baisser le score) ; clauses couverture, qualification, indemnisation, franchise |
+| Bouton **Analyser** du dossier C00001 (bris de glace) | probabilité ≈ 85 % ; orientation « Vérifier le contrat » car le corpus n'a pas de fiche générale sur le bris de glace ; alerte montant élevé |
+| Lien « Poser cette question à l'assistant » sous une clause | ouvre l'assistant avec la question préremplie et lance la recherche |
 
 Les mêmes informations sont disponibles en JSON :
 `<URL>/api/claims/summary`, `<URL>/api/claims/model`,
-`<URL>/api/claims/C00001/analysis`.
+`<URL>/api/claims/C00001/analysis`,
+`<URL>/api/claims/C00020/decision-support`.
 
 ## 4. Vérifier avec la ligne de commande (facultatif)
 

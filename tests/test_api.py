@@ -176,7 +176,8 @@ def test_all_routes_are_registered(app_module):
     paths = {route.path for route in app_module.app.routes}
     for expected in ("/", "/health", "/ready", "/version", "/search", "/claims",
                      "/api/claims/summary", "/api/claims/cases", "/api/claims/model",
-                     "/api/claims/{claim_id}/analysis"):
+                     "/api/claims/{claim_id}/analysis",
+                     "/api/claims/{claim_id}/decision-support"):
         assert expected in paths
 
 
@@ -228,3 +229,5 @@ def test_http_claims_routes(client):
     assert client.get("/api/claims/cases?limit=0").status_code == 422
     assert client.get("/api/claims/C00001/analysis").status_code == 200
     assert client.get("/api/claims/INCONNU/analysis").status_code == 404
+    assert client.get("/api/claims/C00020/decision-support").status_code == 200
+    assert client.get("/api/claims/INCONNU/decision-support").status_code == 404

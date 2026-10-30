@@ -72,6 +72,7 @@ def test_frontend_explains_scores_and_citation_audit(project_root):
 def test_claims_dashboard_marks_data_as_synthetic(project_root):
     html = read(project_root, "static/claims.html")
     assert "tous les dossiers affichés sont fictifs" in html
+    assert "decision-support" in html and "Ce que dit le contrat" in html
     assert "décision" in html.lower()
 
 
