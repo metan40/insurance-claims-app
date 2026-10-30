@@ -46,6 +46,13 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
   Recall@5 sur le jeu tenu à part : 53,3 %. Temps mesuré sur le Space :
   225 s (deux appels) ; sortie réduite à 280 jetons et deux extraits.
 
+- **Choix du modèle par la mesure** (même question, sur le Space) :
+  `llama3.2:3b` 260 s, réponse partielle cohérente ; `llama3.2:1b` 115 s,
+  réponse correcte mais indicateurs contradictoires (« non trouvé » avec des
+  extraits vérifiés). Modèle par défaut : `llama3.2:1b`. L'application
+  tranche désormais : un « non trouvé » accompagné d'extraits vérifiés devient
+  « partielle » et l'incohérence est affichée. Entités HTML décodées.
+
 ### Application
 - Recherche extraite dans `src/retrieval.py` (`HybridRetriever`), avec un
   classement identique à la 7.6.0 vérifié sur 244 questions.

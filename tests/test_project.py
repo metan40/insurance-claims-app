@@ -64,6 +64,7 @@ def test_frontend_explains_scores_and_citation_audit(project_root):
         "verified",
         "Termes métier ajoutés",
         "non calibrée",
+        "Indicateurs du modèle incohérents",
     ):
         assert expected in html
     assert "reranker" not in html.lower()

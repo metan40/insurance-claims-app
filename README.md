@@ -20,7 +20,7 @@ Deux briques complémentaires :
    (termes significatifs et **synonymes métier** : « nounou » → « baby-sitter »),
    puis rapprochée d'un corpus de 201 fiches d'assurance par une recherche
    hybride (TF-IDF + score lexical, fusion des rangs RRF). Les cinq meilleures
-   fiches sont transmises à un LLM local (`llama3.2:3b` via Ollama) qui renvoie
+   fiches sont transmises à un LLM local (`llama3.2:1b` via Ollama) qui renvoie
    une **réponse typée** : réponse trouvée ou non, complète ou non, extraits
    justificatifs, confiance, réserves. L'application **vérifie elle-même** que
    chaque extrait figure dans la source citée et décide du statut affiché.
@@ -96,7 +96,7 @@ Sans Docker (Ollama installé et lancé séparément) :
 
 ```bash
 pip install -r requirements.txt
-ollama pull llama3.2:3b
+ollama pull llama3.2:1b
 uvicorn src.app:app --host 0.0.0.0 --port 7860
 ```
 
@@ -108,7 +108,7 @@ exemple dans `.env.example`) :
 | Variable | Défaut | Rôle |
 |---|---|---|
 | `OLLAMA_URL` | `http://127.0.0.1:11434/api/generate` | serveur Ollama (celui du conteneur par défaut) |
-| `OLLAMA_MODEL` | `llama3.2:3b` | modèle utilisé pour la génération |
+| `OLLAMA_MODEL` | `llama3.2:1b` | modèle de génération ; `llama3.2:3b` rédige mieux mais deux fois plus lentement sur CPU |
 | `OLLAMA_TIMEOUT_SECONDS` | `120` (180 dans le conteneur) | délai maximal d'un appel |
 | `OLLAMA_NUM_CTX` | `2048` | taille de la fenêtre de contexte (plus petite = plus rapide) |
 | `OLLAMA_NUM_PREDICT` | `280` | longueur maximale d'une réponse (en jetons) |
@@ -120,7 +120,8 @@ protection et ne placez aucun jeton dans le code.
 
 ## Limites
 
-- Le Space gratuit n'a pas de GPU : une réponse prend environ 2 à 4 minutes.
+- Le Space gratuit n'a pas de GPU : une réponse prend environ 2 minutes
+  avec `llama3.2:1b` (environ 4 minutes avec `llama3.2:3b`).
 - Les dossiers de sinistres sont **fictifs** : les performances du modèle ne
   décrivent aucun portefeuille réel et aucune décision ne doit en découler.
 - La vérification confirme qu'un extrait existe dans la source, pas qu'il

@@ -34,6 +34,7 @@ Statuts possibles :
 """
 from __future__ import annotations
 
+import html
 import json
 from difflib import SequenceMatcher
 from typing import Callable
@@ -152,19 +153,33 @@ def verify_answer(typed: TypedAnswer, results) -> list[dict]:
     checked = []
     for item in typed.evidence:
         source_known = item.source_id in contents
+        quote = html.unescape(item.quote)  # « L&#39;assurance » -> « L'assurance »
         checked.append({
             "source_id": item.source_id,
-            "quote": item.quote,
+            "quote": quote,
             "source_known": source_known,
-            "verified": source_known and quote_is_in_source(item.quote, contents[item.source_id]),
+            "verified": source_known and quote_is_in_source(quote, contents[item.source_id]),
         })
     return checked
 
 
+def is_inconsistent(typed: TypedAnswer | None, checked: list[dict]) -> bool:
+    """Le modèle déclare « non trouvé » tout en fournissant des extraits vérifiés."""
+    return bool(typed) and not typed.answer_found and any(item["verified"] for item in checked)
+
+
 def decide_status(typed: TypedAnswer | None, checked: list[dict]) -> str | None:
-    """Statut livrable, ou None si une révision est nécessaire."""
+    """Statut livrable, ou None si une nouvelle étape est nécessaire.
+
+    C'est l'application qui tranche : si le modèle déclare « non trouvé » alors
+    que des extraits ont été retrouvés dans les sources (incohérence observée
+    avec llama3.2:1b), la réponse est traitée comme partielle, et
+    l'incohérence est signalée à l'utilisateur.
+    """
     if typed is None:
         return None
+    if is_inconsistent(typed, checked):
+        return "partial"
     if not typed.answer_found:
         return "not_found"
     if not any(item["verified"] for item in checked):
@@ -271,10 +286,14 @@ def generate_typed_answer(
                 else typed.answer.strip()
                 or "Les documents consultés ne permettent pas de répondre à cette question."
             )
+            typed_dump = typed.model_dump(exclude={"evidence"})
+            typed_dump["answer"] = html.unescape(typed_dump["answer"])
+            typed_dump["caveats"] = html.unescape(typed_dump["caveats"])
+            typed_dump["model_indicators_inconsistent"] = is_inconsistent(typed, checked)
             return {
                 "status": status,
-                "answer": text,
-                "typed_answer": {**typed.model_dump(exclude={"evidence"}), "evidence": checked},
+                "answer": html.unescape(text),
+                "typed_answer": {**typed_dump, "evidence": checked},
                 "attempts": attempts,
                 "sources_read": len(sources),
             }

@@ -78,7 +78,7 @@ def read_int_setting(raw_value: str | None, default: int, minimum: int) -> int:
 
 APP_VERSION = read_app_version()
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate").strip()
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:3b").strip()
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:1b").strip()
 OLLAMA_TIMEOUT_SECONDS = read_int_setting(os.getenv("OLLAMA_TIMEOUT_SECONDS"), default=120, minimum=5)
 # Rapidité : borne la longueur des réponses et garde le modèle chargé en
 # mémoire entre deux questions (évite un rechargement de plusieurs secondes).
@@ -172,7 +172,7 @@ def model_is_installed(configured_model: str, installed_names: set[str]) -> bool
     """Compare le modèle configuré aux modèles installés.
 
     Ollama ajoute l'étiquette ``:latest`` lorsqu'aucune n'est précisée ; une
-    autre étiquette (par exemple ``llama3.2:1b`` au lieu de ``llama3.2:3b``)
+    autre étiquette (par exemple ``llama3.2:1b`` au lieu de ``llama3.2:1b``)
     n'est pas considérée comme équivalente.
     """
     def canonical(name: str) -> str:

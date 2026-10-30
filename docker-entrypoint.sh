@@ -4,7 +4,7 @@ set -eu
 # Dans ce conteneur, l'API FastAPI et Ollama partagent le même localhost.
 export OLLAMA_HOST="${OLLAMA_HOST:-127.0.0.1:11434}"
 export OLLAMA_URL="${OLLAMA_URL:-http://127.0.0.1:11434/api/generate}"
-export OLLAMA_MODEL="${OLLAMA_MODEL:-llama3.2:3b}"
+export OLLAMA_MODEL="${OLLAMA_MODEL:-llama3.2:1b}"
 export OLLAMA_TIMEOUT_SECONDS="${OLLAMA_TIMEOUT_SECONDS:-180}"
 export OLLAMA_KEEP_ALIVE="${OLLAMA_KEEP_ALIVE:-30m}"
 

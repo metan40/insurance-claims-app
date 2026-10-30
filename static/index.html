@@ -393,6 +393,10 @@ async function search() {
             meta.className = "score";
             let metaText = "Confiance déclarée par le modèle (non calibrée) : " +
                 Math.round(Number(typed.confidence || 0) * 100) + " %";
+            if (typed.model_indicators_inconsistent) {
+                metaText += " | ⚠ Indicateurs du modèle incohérents : il déclarait la réponse absente, " +
+                    "mais des extraits ont été retrouvés dans les sources ; statut fixé par l'application";
+            }
             if (typed.caveats) {
                 metaText += " | Réserves : " + typed.caveats;
             }

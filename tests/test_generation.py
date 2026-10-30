@@ -264,3 +264,32 @@ def test_audit_flags_unknown_and_missing_citations(app_module):
 def test_audit_sorts_ids_numerically(app_module):
     result = app_module.audit_citations("[S10] puis [S2]", [{"source_id": "S2"}, {"source_id": "S10"}])
     assert result["valid_source_ids"] == ["S2", "S10"]
+
+
+# ---------- Incohérences du modèle (observées avec llama3.2:1b) ----------
+
+def test_not_found_with_verified_quote_is_downgraded_to_partial():
+    contradictory = model_output(answer_found=False, complete=False, confidence=0.5)
+    call, _ = scripted([contradictory, contradictory])
+    result = generation.generate_typed_answer("Q ?", THREE_SOURCES, call)
+    assert result["status"] == "partial"
+    assert result["typed_answer"]["model_indicators_inconsistent"] is True
+    assert result["answer"].endswith("[S1]")
+
+
+def test_consistent_answer_is_not_flagged():
+    call, _ = scripted([model_output()])
+    result = generation.generate_typed_answer("Q ?", THREE_SOURCES, call)
+    assert result["typed_answer"]["model_indicators_inconsistent"] is False
+
+
+def test_html_entities_from_the_model_are_decoded():
+    escaped = model_output(
+        answer="L&#39;effraction est couverte.",
+        evidence=[{"source_id": "S1", "quote": "couvre les biens mobiliers dérobés lors d&#39;une effraction"}],
+    )
+    call, _ = scripted([escaped])
+    result = generation.generate_typed_answer("Q ?", THREE_SOURCES, call)
+    assert result["status"] == "answered"
+    assert "&#39;" not in result["answer"] and "L'effraction" in result["answer"]
+    assert "&#39;" not in result["typed_answer"]["evidence"][0]["quote"]

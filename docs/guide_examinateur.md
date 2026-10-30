@@ -17,7 +17,7 @@ lire le code. Chaque étape indique **quoi faire** et **le résultat attendu**.
 | Étape | Action | Résultat attendu |
 |---|---|---|
 | 1 | Ouvrir `<URL>/health` | `{"status": "ok", "app_version": "19.0.0"}` |
-| 2 | Ouvrir `<URL>/version` | version `19.0.0` et modèle `llama3.2:3b` |
+| 2 | Ouvrir `<URL>/version` | version `19.0.0` et modèle `llama3.2:1b` |
 | 3 | Ouvrir `<URL>/ready` | `"status": "ready"` et toutes les vérifications à `true`. Une réponse 503 avec `ollama_model_available: false` signifie que le modèle est encore en cours de téléchargement : patienter puis recharger. |
 | 4 | Ouvrir `<URL>/docs` | documentation interactive listant `/search`, `/health`, `/ready`, `/version`, `/claims` et `/api/claims/...` |
 
@@ -121,4 +121,4 @@ docker run -p 7860:7860 insurance-claims
 # puis ouvrir http://localhost:7860
 ```
 
-Le premier démarrage télécharge le modèle `llama3.2:3b` (environ 2 Go).
+Le premier démarrage télécharge le modèle `llama3.2:1b` (environ 2 Go).
