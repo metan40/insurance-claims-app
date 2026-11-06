@@ -332,3 +332,46 @@ def test_quote_copied_from_instructions_is_rejected_and_flagged():
 def test_prompt_no_longer_shouts_the_copy_instruction():
     prompt = generation.build_prompt("Q ?", "C")
     assert "MOT POUR MOT" not in prompt
+
+
+def test_partial_answer_from_top1_is_kept_when_top3_output_is_cut():
+    """Mesure du 6/11 : l'étape 1 donnait une réponse partielle vérifiée, l'étape 2
+    une sortie coupée par la limite de jetons ; l'application affichait un repli."""
+    cut_output = model_output()[:120]  # JSON interrompu en plein texte
+    call, _ = scripted([model_output(complete=False), cut_output])
+    result = generation.generate_typed_answer("Le vol est-il couvert ?", THREE_SOURCES, call)
+    assert result["status"] == "partial"
+    assert result["attempts"] == 2 and result["sources_read"] == 1
+    assert result["typed_answer"]["evidence"][0]["verified"] is True
+
+
+def test_partial_answer_from_top1_is_kept_when_top3_says_not_found():
+    not_found = model_output(answer_found=False, complete=False, evidence=[], confidence=0.0,
+                             answer="Les documents ne permettent pas de répondre.")
+    call, _ = scripted([model_output(complete=False), not_found])
+    result = generation.generate_typed_answer("Le vol est-il couvert ?", THREE_SOURCES, call)
+    assert result["status"] == "partial"
+
+
+def test_contradictory_model_shows_only_verified_extracts():
+    """Le modèle dit « non trouvé » et répond « Non » tout en citant un passage vrai :
+    sa conclusion n'est pas affichée, seuls les extraits vérifiés le sont."""
+    contradictory = model_output(answer_found=False, complete=False, answer="Non, je suis pas couvert",
+                                 confidence=0.5)
+    call, _ = scripted([contradictory, contradictory])
+    result = generation.generate_typed_answer("Le vol est-il couvert ?", THREE_SOURCES, call)
+    assert result["status"] == "partial"
+    assert "Non, je suis pas couvert" not in result["answer"]
+    assert "couvre les biens mobiliers dérobés" in result["answer"]
+    assert result["typed_answer"]["answer"] == ""
+    assert result["typed_answer"]["model_unverified_text"] == "Non, je suis pas couvert"
+
+
+def test_schema_caps_text_lengths_so_the_json_always_ends():
+    schema = generation.ANSWER_SCHEMA
+    assert schema["$defs"]["Evidence"]["properties"]["quote"]["maxLength"] == generation.QUOTE_MAX_CHARACTERS
+    assert schema["properties"]["answer"]["maxLength"] == generation.ANSWER_MAX_CHARACTERS
+    assert schema["properties"]["caveats"]["maxLength"] == generation.CAVEATS_MAX_CHARACTERS
+    # Une sortie plus longue reste lisible : la limite guide Ollama, elle ne rejette rien.
+    long_answer = model_output(answer="x " * 400)
+    assert generation.parse_typed_answer(long_answer) is not None

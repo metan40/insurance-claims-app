@@ -50,6 +50,14 @@ from pydantic import BaseModel, Field, ValidationError
 from src.question_parsing import normalize_text
 
 MIN_QUOTE_TOKENS = 3
+# Longueurs maximales transmises à Ollama dans le schéma (sa grammaire les
+# respecte ; elles ne servent pas de règle de validation à la lecture) :
+# la sortie entière tient ainsi sous la limite de jetons OLLAMA_NUM_PREDICT et
+# le JSON se termine toujours. Sans elles, 5 appels sur 10 étaient coupés en
+# plein texte (mesure locale du 6/11, limite de 280 jetons).
+QUOTE_MAX_CHARACTERS = 240
+ANSWER_MAX_CHARACTERS = 400
+CAVEATS_MAX_CHARACTERS = 200
 QUOTE_MATCH_RATIO = 0.8
 FALLBACK_EXCERPT_CHARACTERS = 700
 FALLBACK_SOURCES = 3
@@ -59,7 +67,8 @@ GENERATION_STAGES = ((1, 1200), (3, 900))
 
 class Evidence(BaseModel):
     source_id: str = Field(description="Identifiant de la source, par exemple S1")
-    quote: str = Field(description="Phrase copiée telle quelle depuis le document cité")
+    quote: str = Field(json_schema_extra={"maxLength": QUOTE_MAX_CHARACTERS},
+                       description="Phrase copiée telle quelle depuis le document cité")
 
 
 class TypedAnswer(BaseModel):
@@ -67,9 +76,11 @@ class TypedAnswer(BaseModel):
     # car un champ facultatif est relégué en fin de sortie par la grammaire
     # JSON d'Ollama, quel que soit son rang dans le schéma.
     evidence: list[Evidence] = Field(
-        max_length=2, description="Une ou deux phrases recopiées mot pour mot ; liste vide si rien ne s'applique")
-    answer: str = Field(description="Réponse en français, trois phrases au plus")
-    caveats: str = Field(description="Réserves ou limites, chaîne vide sinon")
+        max_length=2, description="Une ou deux phrases copiées telles quelles depuis les documents ; liste vide si rien ne s'applique")
+    answer: str = Field(json_schema_extra={"maxLength": ANSWER_MAX_CHARACTERS},
+                        description="Réponse en français, trois phrases au plus")
+    caveats: str = Field(json_schema_extra={"maxLength": CAVEATS_MAX_CHARACTERS},
+                         description="Réserves ou limites, chaîne vide sinon")
     answer_found: bool = Field(description="Les sources contiennent-elles la réponse, même en partie ?")
     complete_answer_found: bool = Field(description="La réponse est-elle complète, sans condition manquante ?")
     confidence: float = Field(ge=0.0, le=1.0)
@@ -276,6 +287,52 @@ def stage_sources(results, count: int, characters: int) -> list[dict]:
     return selected
 
 
+INCONSISTENT_MESSAGE = (
+    "Le modèle a déclaré ne pas avoir trouvé de réponse, tout en citant des "
+    "passages qui figurent bien dans les sources. Sa conclusion n’étant pas "
+    "fiable, l’application n’affiche pas sa synthèse : voici les extraits "
+    "vérifiés, à lire pour juger vous-même."
+)
+
+
+def inconsistent_text(checked: list[dict]) -> str:
+    """Texte affiché quand le modèle se contredit : seulement les extraits vérifiés."""
+    lines = [INCONSISTENT_MESSAGE, ""]
+    for item in checked:
+        if item["verified"]:
+            lines.append(f"- « {item['quote'].strip()} » [{item['source_id']}]")
+    return "\n".join(lines)
+
+
+def _deliver(status, typed, checked, results, attempts, sources_read) -> dict:
+    """Assemble la réponse livrée pour un statut donné."""
+    inconsistent = is_inconsistent(typed, checked)
+    if status == "not_found":
+        # Le texte éventuel du modèle n'est appuyé par aucun extrait vérifié ;
+        # l'application ne l'affiche pas et montre les sources les plus proches.
+        text = build_fallback_text(results, NOT_FOUND_MESSAGE)
+    elif inconsistent:
+        text = inconsistent_text(checked)
+    else:
+        text = display_text(typed, checked)
+    typed_dump = typed.model_dump(exclude={"evidence"})
+    typed_dump["answer"] = html.unescape(typed_dump["answer"])
+    typed_dump["caveats"] = html.unescape(typed_dump["caveats"])
+    typed_dump["model_indicators_inconsistent"] = inconsistent
+    if status == "not_found" or inconsistent:
+        # Conservé pour l'audit, mais retiré des champs affichés.
+        typed_dump["model_unverified_text"] = typed_dump["answer"]
+        typed_dump["answer"] = ""
+        typed_dump["caveats"] = ""
+    return {
+        "status": status,
+        "answer": html.unescape(text),
+        "typed_answer": {**typed_dump, "evidence": checked},
+        "attempts": attempts,
+        "sources_read": sources_read,
+    }
+
+
 def generate_typed_answer(
     question: str,
     results,
@@ -297,6 +354,7 @@ def generate_typed_answer(
             seen = available
 
     attempts = 0
+    best_partial = None  # réponse partielle vérifiée d'une étape précédente
     for position, (count, characters) in enumerate(effective, start=1):
         sources = stage_sources(results, count, characters)
         label = f"tentative {position} (top-{len(sources)})"
@@ -315,31 +373,20 @@ def generate_typed_answer(
         # À l'étape 1, seule une réponse complète et justifiée arrête la boucle :
         # une réponse partielle ou « non trouvée » peut être complétée par les
         # sources suivantes.
-        if status == "answered" or (is_last and status is not None):
-            # « Non trouvé » : le texte éventuel du modèle n'est appuyé par aucun
-            # extrait vérifié ; l'application ne l'affiche pas et montre les
-            # sources les plus proches.
-            text = (
-                display_text(typed, checked)
-                if status != "not_found"
-                else build_fallback_text(results, NOT_FOUND_MESSAGE)
-            )
-            typed_dump = typed.model_dump(exclude={"evidence"})
-            typed_dump["answer"] = html.unescape(typed_dump["answer"])
-            typed_dump["caveats"] = html.unescape(typed_dump["caveats"])
-            typed_dump["model_indicators_inconsistent"] = is_inconsistent(typed, checked)
-            if status == "not_found":
-                # Conservé pour l'audit, mais retiré des champs affichés.
-                typed_dump["model_unverified_text"] = typed_dump["answer"]
-                typed_dump["answer"] = ""
-                typed_dump["caveats"] = ""
-            return {
-                "status": status,
-                "answer": html.unescape(text),
-                "typed_answer": {**typed_dump, "evidence": checked},
-                "attempts": attempts,
-                "sources_read": len(sources),
-            }
+        if status == "answered":
+            return _deliver(status, typed, checked, results, attempts, len(sources))
+        if status == "partial" and best_partial is None:
+            best_partial = (typed, checked, attempts, len(sources))
+        if is_last:
+            # Une réponse partielle vérifiée obtenue plus tôt vaut mieux qu'une
+            # dernière sortie illisible ou « non trouvée » (mesure du 6/11 :
+            # sorties de l'étape 2 coupées par la limite de longueur).
+            if status in (None, "not_found") and best_partial is not None:
+                typed_b, checked_b, _, read_b = best_partial
+                log(f"{label} — on garde la réponse partielle vérifiée de l'étape précédente")
+                return _deliver("partial", typed_b, checked_b, results, attempts, read_b)
+            if status is not None:
+                return _deliver(status, typed, checked, results, attempts, len(sources))
 
     return {
         "status": "fallback",

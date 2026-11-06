@@ -111,7 +111,7 @@ exemple dans `.env.example`) :
 | `OLLAMA_MODEL` | `llama3.2:1b` | modèle de génération ; `llama3.2:3b` rédige mieux mais deux fois plus lentement sur CPU |
 | `OLLAMA_TIMEOUT_SECONDS` | `120` (180 dans le conteneur) | délai maximal d'un appel |
 | `OLLAMA_NUM_CTX` | `2048` | taille de la fenêtre de contexte (plus petite = plus rapide) |
-| `OLLAMA_NUM_PREDICT` | `280` | longueur maximale d'une réponse (en jetons) |
+| `OLLAMA_NUM_PREDICT` | `400` | longueur maximale d'une réponse (en jetons) |
 | `OLLAMA_KEEP_ALIVE` | `30m` | durée pendant laquelle le modèle reste chargé en mémoire |
 | `RAG_DIAGNOSTICS` | `0` | `1` pour journaliser les sorties brutes du modèle (diagnostic local uniquement) |
 

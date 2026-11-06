@@ -27,6 +27,16 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
   le document » et interdit de copier une phrase des consignes ; un extrait
   repris de la consigne est signalé (`copied_from_instructions`) et compté
   dans le journal de diagnostic.
+- Sorties coupées : la même mesure montre 5 appels sur 10 interrompus en plein
+  texte par la limite de 280 jetons, donc un JSON illisible. Le schéma transmis
+  à Ollama borne désormais la longueur des champs (extrait 240 caractères,
+  réponse 400, réserves 200) et `OLLAMA_NUM_PREDICT` passe à 400 par défaut.
+- Boucle top-1 / top-3 : une réponse partielle vérifiée obtenue à l'étape 1
+  est conservée si l'étape 2 renvoie une sortie illisible ou « non trouvé »
+  (3 questions sur 5 perdaient ainsi une réponse justifiée).
+- Modèle contradictoire (« non trouvé » avec des extraits vérifiés) : sa
+  synthèse n'est plus affichée, seulement les extraits vérifiés ; elle restait
+  parfois fausse (« Non, je ne suis pas couvert » alors que la source dit oui).
 - La vérification des extraits et la décision du statut par l'application
   sont inchangées.
 
