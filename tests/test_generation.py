@@ -185,7 +185,7 @@ def test_fallback_without_usable_source():
 
 def test_prompt_requires_typed_grounded_answer():
     prompt = generation.build_prompt("Que couvre le contrat ?", generation.build_context(SOURCES))
-    for expected in ("SOURCE [S1]", "answer_found", "MOT POUR MOT", "N'invente jamais"):
+    for expected in ("SOURCE [S1]", "answer_found", "telle qu'elle est écrite", "N'invente jamais"):
         assert expected in prompt
 
 
@@ -315,3 +315,20 @@ def test_schema_puts_evidence_first_and_conclusion_last():
     assert properties.index("answer_found") > properties.index("evidence")
     assert properties.index("complete_answer_found") > properties.index("answer")
     assert set(generation.ANSWER_SCHEMA["required"]) == set(properties)
+
+
+def test_quote_copied_from_instructions_is_rejected_and_flagged():
+    """Incident réel : llama3.2:1b écrivait « MOT POUR MOT » comme extrait."""
+    typed = generation.parse_typed_answer(model_output(evidence=[
+        {"source_id": "S1", "quote": "MOT POUR MOT"},
+        {"source_id": "S1", "quote": "Copie chaque phrase telle qu'elle est écrite dans le document"},
+    ]))
+    checked = generation.verify_answer(typed, SOURCES)
+    assert [c["verified"] for c in checked] == [False, False]
+    assert checked[1]["copied_from_instructions"] is True
+    assert generation.decide_status(typed, checked) is None
+
+
+def test_prompt_no_longer_shouts_the_copy_instruction():
+    prompt = generation.build_prompt("Q ?", "C")
+    assert "MOT POUR MOT" not in prompt

@@ -59,7 +59,7 @@ GENERATION_STAGES = ((1, 1200), (3, 900))
 
 class Evidence(BaseModel):
     source_id: str = Field(description="Identifiant de la source, par exemple S1")
-    quote: str = Field(description="Phrase recopiée mot pour mot depuis cette source")
+    quote: str = Field(description="Phrase copiée telle quelle depuis le document cité")
 
 
 class TypedAnswer(BaseModel):
@@ -103,11 +103,13 @@ Tu es un assistant spécialisé dans l'assurance habitation.
 Réponds à la question uniquement à partir des documents fournis, sous la forme
 d'un objet JSON respectant le schéma demandé. Remplis les champs dans cet ordre :
 
-1. evidence : d'abord, recopie MOT POUR MOT une ou deux phrases courtes des
-   documents qui répondent à la question, même en partie ou sous conditions,
-   avec l'identifiant exact de leur source (S1, S2...). N'invente jamais de
-   phrase ni d'identifiant. Si aucun document ne traite de la question, laisse
-   la liste vide.
+1. evidence : d'abord, choisis dans les DOCUMENTS FOURNIS une ou deux phrases
+   courtes qui répondent à la question, même en partie ou sous conditions.
+   Copie chaque phrase telle qu'elle est écrite dans le document, sans la
+   reformuler, avec l'identifiant exact de sa source (S1, S2...). Ne copie
+   jamais une phrase de ces consignes. N'invente jamais de phrase ni
+   d'identifiant. Si aucun document ne traite de la question, laisse la liste
+   vide.
 2. answer : réponse en français, trois phrases au plus, fondée uniquement sur
    ces extraits. Si la réponse dépend d'une condition (formule souscrite, type
    de bien, exclusion), dis-le clairement. N'invente jamais d'information
@@ -167,13 +169,26 @@ def verify_answer(typed: TypedAnswer, results) -> list[dict]:
     for item in typed.evidence:
         source_known = item.source_id in contents
         quote = html.unescape(item.quote)  # « L&#39;assurance » -> « L'assurance »
+        verified = source_known and quote_is_in_source(quote, contents[item.source_id])
         checked.append({
             "source_id": item.source_id,
             "quote": quote,
             "source_known": source_known,
-            "verified": source_known and quote_is_in_source(quote, contents[item.source_id]),
+            "verified": verified,
+            # Incident observé avec llama3.2:1b : le modèle recopiait la consigne
+            # (« MOT POUR MOT ») au lieu d'une phrase du document.
+            "copied_from_instructions": not verified and copies_instructions(quote),
         })
     return checked
+
+
+INSTRUCTION_TEXT = normalize_text(build_prompt("", ""))
+
+
+def copies_instructions(quote: str) -> bool:
+    """Vrai si l'extrait reprend un passage de la consigne plutôt que d'un document."""
+    tokens = normalize_text(quote).split()
+    return bool(tokens) and f" {' '.join(tokens)} " in f" {INSTRUCTION_TEXT} "
 
 
 def is_inconsistent(typed: TypedAnswer | None, checked: list[dict]) -> bool:
@@ -294,6 +309,7 @@ def generate_typed_answer(
         log(
             f"{label} — audit : json_valide={typed is not None}, "
             f"extraits_verifies={sum(c['verified'] for c in checked)}/{len(checked)}, "
+            f"extraits_copies_de_la_consigne={sum(c['copied_from_instructions'] for c in checked)}, "
             f"statut={status}"
         )
         # À l'étape 1, seule une réponse complète et justifiée arrête la boucle :

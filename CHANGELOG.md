@@ -20,6 +20,13 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
 - Consigne réécrite dans le même ordre. Une réponse qui dépend d'une
   condition (formule, type de bien, exclusion) est une réponse partielle
   dont les conditions sont données, et non une réponse absente.
+- Consigne de citation réécrite : mesuré sur un poste local, llama3.2:1b
+  renvoyait littéralement « MOT POUR MOT » comme extrait, recopiant la
+  consigne au lieu d'une phrase du document (0 extrait vérifié sur 2). La
+  consigne dit désormais « copie chaque phrase telle qu'elle est écrite dans
+  le document » et interdit de copier une phrase des consignes ; un extrait
+  repris de la consigne est signalé (`copied_from_instructions`) et compté
+  dans le journal de diagnostic.
 - La vérification des extraits et la décision du statut par l'application
   sont inchangées.
 
