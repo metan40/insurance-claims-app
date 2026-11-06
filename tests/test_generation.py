@@ -384,3 +384,11 @@ def test_unverified_caveats_are_kept_for_audit_but_not_delivered():
     assert result["typed_answer"]["caveats"] == ""
     assert "ne sont pas couverts" in result["typed_answer"]["model_unverified_caveats"]
     assert "ne sont pas couverts" not in result["answer"]
+
+
+def test_answer_cut_by_length_limit_ends_on_a_complete_sentence():
+    cut = ("La responsabilité civile couvre les dommages causés à un tiers. Elle ne prend pas en "
+           "charge les blessures de votre enfant. Il est donc recommandé de vérifier votre contrat pour déterm")
+    assert generation.complete_sentences(cut).endswith("les blessures de votre enfant.")
+    assert generation.complete_sentences("Oui, le vol est couvert.") == "Oui, le vol est couvert."
+    assert generation.complete_sentences("Une seule phrase coupée sans point") == "Une seule phrase coupée sans point…"

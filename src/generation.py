@@ -269,7 +269,17 @@ def display_text(typed: TypedAnswer, checked: list[dict]) -> str:
         key=lambda value: int(value[1:]) if value[1:].isdigit() else 0,
     )
     suffix = "".join(f" [{source_id}]" for source_id in verified_ids)
-    return typed.answer.strip() + suffix
+    return complete_sentences(typed.answer) + suffix
+
+
+def complete_sentences(text: str) -> str:
+    """Coupe un texte interrompu par la limite de longueur à sa dernière phrase
+    complète (« … pour déterm » devient « … suite à une chute. »)."""
+    text = text.strip()
+    if not text or text[-1] in ".!?»)":
+        return text
+    cut = max(text.rfind(mark) for mark in (". ", "! ", "? "))
+    return text[: cut + 1] if cut > 0 else text + "…"
 
 
 # ------------------------------------------------------------------
