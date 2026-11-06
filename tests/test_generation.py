@@ -375,3 +375,12 @@ def test_schema_caps_text_lengths_so_the_json_always_ends():
     # Une sortie plus longue reste lisible : la limite guide Ollama, elle ne rejette rien.
     long_answer = model_output(answer="x " * 400)
     assert generation.parse_typed_answer(long_answer) is not None
+
+
+def test_unverified_caveats_are_kept_for_audit_but_not_delivered():
+    output = model_output(caveats="Exclusion : les dommages causés par les enfants ne sont pas couverts")
+    call, _ = scripted([output])
+    result = generation.generate_typed_answer("Le vol est-il couvert ?", THREE_SOURCES, call)
+    assert result["typed_answer"]["caveats"] == ""
+    assert "ne sont pas couverts" in result["typed_answer"]["model_unverified_caveats"]
+    assert "ne sont pas couverts" not in result["answer"]

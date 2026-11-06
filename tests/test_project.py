@@ -82,3 +82,9 @@ def test_examiner_documentation_lists_checks(project_root, document):
     text = read(project_root, document)
     for endpoint in ("/health", "/ready", "/version", "/search", "/claims"):
         assert endpoint in text
+
+
+def test_page_does_not_display_unverified_caveats():
+    from pathlib import Path
+    page = (Path(__file__).resolve().parents[1] / "static" / "index.html").read_text(encoding="utf-8")
+    assert "Réserves : \" + typed.caveats" not in page

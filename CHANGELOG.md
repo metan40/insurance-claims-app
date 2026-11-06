@@ -37,6 +37,14 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
 - Modèle contradictoire (« non trouvé » avec des extraits vérifiés) : sa
   synthèse n'est plus affichée, seulement les extraits vérifiés ; elle restait
   parfois fausse (« Non, je ne suis pas couvert » alors que la source dit oui).
+- Réserves (`caveats`) rédigées par le modèle : non vérifiées, elles ne sont
+  plus affichées ni livrées comme information sûre ; elles restent dans
+  l'audit (`model_unverified_caveats`). Mesure du 6/11 : « les dommages
+  causés par les enfants ne sont pas couverts », contraire à la source.
+- Résultat sur les 5 questions de démonstration (poste local, llama3.2:1b) :
+  avant, 0 réponse justifiée, 3 « absentes », 2 replis, 4 JSON illisibles sur
+  10 appels ; après, 5 réponses appuyées par des extraits vérifiés, 0 JSON
+  illisible, 28 s en moyenne au lieu de 19 s.
 - La vérification des extraits et la décision du statut par l'application
   sont inchangées.
 

@@ -319,6 +319,12 @@ def _deliver(status, typed, checked, results, attempts, sources_read) -> dict:
     typed_dump["answer"] = html.unescape(typed_dump["answer"])
     typed_dump["caveats"] = html.unescape(typed_dump["caveats"])
     typed_dump["model_indicators_inconsistent"] = inconsistent
+    # Les réserves sont rédigées par le modèle et ne sont pas vérifiées : elles
+    # restent dans l'audit mais ne sont pas livrées comme une information sûre
+    # (mesure du 6/11 : « les dommages causés par les enfants ne sont pas
+    # couverts », alors que la source dit l'inverse).
+    typed_dump["model_unverified_caveats"] = typed_dump["caveats"]
+    typed_dump["caveats"] = ""
     if status == "not_found" or inconsistent:
         # Conservé pour l'audit, mais retiré des champs affichés.
         typed_dump["model_unverified_text"] = typed_dump["answer"]
