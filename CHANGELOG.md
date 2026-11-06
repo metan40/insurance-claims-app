@@ -3,6 +3,32 @@
 Les journaux détaillés des versions 4 à 18 sont conservés dans
 `docs/historique/changelogs/`.
 
+## 19.1.0 — l'assistant cite avant de conclure
+
+### Constat
+- L'assistant affichait souvent « réponse absente des documents » alors que la
+  bonne source était lue. Le modèle (llama3.2:1b) écrit le JSON dans l'ordre
+  du schéma : `answer_found` venait en premier, si bien qu'il tranchait
+  « trouvé / non trouvé » avant d'avoir recopié le moindre extrait. Les champs
+  facultatifs (`evidence`, `caveats`) étaient en outre relégués en fin de
+  sortie par la grammaire JSON d'Ollama.
+
+### Changements (`src/generation.py`)
+- Nouvel ordre du schéma `TypedAnswer` : `evidence`, `answer`, `caveats`,
+  `answer_found`, `complete_answer_found`, `confidence` ; tous les champs
+  sont requis pour que cet ordre soit respecté.
+- Consigne réécrite dans le même ordre. Une réponse qui dépend d'une
+  condition (formule, type de bien, exclusion) est une réponse partielle
+  dont les conditions sont données, et non une réponse absente.
+- La vérification des extraits et la décision du statut par l'application
+  sont inchangées.
+
+### Mesure
+- Nouveau script `evaluation/mesurer_statuts.py` : statut de chaque question
+  et, pour chaque appel, JSON valide, `answer_found`, extraits cités et
+  vérifiés ; indique si la bonne source faisait partie des documents lus.
+  À lancer avant et après le changement, sur les mêmes questions.
+
 ## 19.0.0 — nettoyage, tests et documentation d'examen
 
 ### Organisation du dépôt

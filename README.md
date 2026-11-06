@@ -8,7 +8,7 @@ app_port: 7860
 pinned: false
 ---
 
-# Insurance Claims Assistance — version 19.0.0
+# Insurance Claims Assistance — version 19.1.0
 
 Application d'**aide à l'analyse des sinistres** en assurance habitation. Elle
 n'automatise aucune décision : elle rassemble pour le gestionnaire les

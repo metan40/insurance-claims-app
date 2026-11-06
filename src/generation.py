@@ -3,10 +3,16 @@
 Le modèle ne renvoie pas un texte libre mais un objet JSON conforme au
 schéma ``TypedAnswer`` (sortie structurée d'Ollama, paramètre ``format``) :
 
-* ``answer_found`` / ``complete_answer_found`` : indicateurs de suffisance ;
-* ``answer`` : la réponse rédigée ;
 * ``evidence`` : les extraits recopiés des sources qui la justifient ;
-* ``confidence`` et ``caveats`` : confiance déclarée et réserves.
+* ``answer`` : la réponse rédigée à partir de ces extraits ;
+* ``caveats`` : les réserves (conditions, exclusions) ;
+* ``answer_found`` / ``complete_answer_found`` : indicateurs de suffisance ;
+* ``confidence`` : confiance déclarée.
+
+L'ordre des champs compte : le modèle écrit le JSON dans l'ordre du schéma.
+Il cite donc d'abord, rédige ensuite, et ne conclut (trouvé ou non) qu'après
+avoir recopié ses extraits. Avec l'ordre inverse, un petit modèle tranchait
+« non trouvé » avant d'avoir lu la source (version 19.1).
 
 L'application ne fait pas confiance à ces déclarations : elle **vérifie**
 elle-même que chaque extrait existe bien dans la source citée. La décision de
@@ -57,12 +63,16 @@ class Evidence(BaseModel):
 
 
 class TypedAnswer(BaseModel):
-    answer_found: bool = Field(description="Les sources contiennent-elles la réponse ?")
-    complete_answer_found: bool = Field(description="La réponse est-elle complète ?")
+    # Ordre voulu : citer, rédiger, puis conclure. Tous les champs sont requis,
+    # car un champ facultatif est relégué en fin de sortie par la grammaire
+    # JSON d'Ollama, quel que soit son rang dans le schéma.
+    evidence: list[Evidence] = Field(
+        max_length=2, description="Une ou deux phrases recopiées mot pour mot ; liste vide si rien ne s'applique")
     answer: str = Field(description="Réponse en français, trois phrases au plus")
-    evidence: list[Evidence] = Field(default_factory=list, max_length=2)
+    caveats: str = Field(description="Réserves ou limites, chaîne vide sinon")
+    answer_found: bool = Field(description="Les sources contiennent-elles la réponse, même en partie ?")
+    complete_answer_found: bool = Field(description="La réponse est-elle complète, sans condition manquante ?")
     confidence: float = Field(ge=0.0, le=1.0)
-    caveats: str = Field(default="", description="Réserves ou limites, chaîne vide sinon")
 
 
 ANSWER_SCHEMA = TypedAnswer.model_json_schema()
@@ -91,20 +101,23 @@ def build_prompt(question: str, context: str) -> str:
 Tu es un assistant spécialisé dans l'assurance habitation.
 
 Réponds à la question uniquement à partir des documents fournis, sous la forme
-d'un objet JSON respectant le schéma demandé.
+d'un objet JSON respectant le schéma demandé. Remplis les champs dans cet ordre :
 
-Règles :
-- answer_found : false si aucun document ne contient la réponse. Dans ce cas,
-  answer explique brièvement que les documents ne permettent pas de répondre,
-  et evidence est une liste vide. N'invente jamais de réponse.
-- complete_answer_found : false si les documents ne répondent qu'en partie.
-- answer : réponse en français, trois phrases au plus, sans information
-  absente des documents.
-- evidence : une ou deux phrases courtes recopiées MOT POUR MOT du document
-  qui justifient la réponse, avec l'identifiant exact de leur source (S1,
-  S2...). N'invente jamais d'identifiant.
-- confidence : nombre entre 0 et 1.
-- caveats : réserves utiles (conditions, exclusions), ou chaîne vide.
+1. evidence : d'abord, recopie MOT POUR MOT une ou deux phrases courtes des
+   documents qui répondent à la question, même en partie ou sous conditions,
+   avec l'identifiant exact de leur source (S1, S2...). N'invente jamais de
+   phrase ni d'identifiant. Si aucun document ne traite de la question, laisse
+   la liste vide.
+2. answer : réponse en français, trois phrases au plus, fondée uniquement sur
+   ces extraits. Si la réponse dépend d'une condition (formule souscrite, type
+   de bien, exclusion), dis-le clairement. N'invente jamais d'information
+   absente des documents.
+3. caveats : réserves utiles (conditions, exclusions), ou chaîne vide.
+4. answer_found : true si au moins un extrait recopié répond à la question,
+   même en partie ou sous conditions ; false seulement si evidence est vide.
+5. complete_answer_found : true si les extraits répondent entièrement ; false
+   si la réponse dépend de conditions ou d'informations absentes des documents.
+6. confidence : nombre entre 0 et 1.
 
 QUESTION :
 {question}

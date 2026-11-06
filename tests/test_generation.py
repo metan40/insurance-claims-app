@@ -305,3 +305,13 @@ def test_html_entities_from_the_model_are_decoded():
     assert result["status"] == "answered"
     assert "&#39;" not in result["answer"] and "L'effraction" in result["answer"]
     assert "&#39;" not in result["typed_answer"]["evidence"][0]["quote"]
+
+
+def test_schema_puts_evidence_first_and_conclusion_last():
+    """Le modèle écrit le JSON dans l'ordre du schéma : citer, rédiger, puis conclure.
+    Tous les champs sont requis, sinon la grammaire d'Ollama les repousse en fin de sortie."""
+    properties = list(generation.ANSWER_SCHEMA["properties"])
+    assert properties[:2] == ["evidence", "answer"]
+    assert properties.index("answer_found") > properties.index("evidence")
+    assert properties.index("complete_answer_found") > properties.index("answer")
+    assert set(generation.ANSWER_SCHEMA["required"]) == set(properties)
