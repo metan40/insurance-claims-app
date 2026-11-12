@@ -14,6 +14,9 @@ on:
       jeux:
         description: "Jeux de questions (demo, heldout, dev), séparés par des virgules"
         default: "demo,heldout"
+      repetitions:
+        description: "Passages par question (variabilité du modèle)"
+        default: "3"
 
 jobs:
   preparer:
@@ -60,7 +63,7 @@ jobs:
         run: |
           etiquette=$(echo "$OLLAMA_MODEL" | tr ':./' '---')
           for jeu in $(echo "${{ inputs.jeux }}" | tr ',' ' '); do
-            python evaluation/mesurer_statuts.py --jeu "$jeu" --etiquette "$etiquette"
+            python evaluation/mesurer_statuts.py --jeu "$jeu" --etiquette "$etiquette" --repetitions "${{ inputs.repetitions }}"
           done
 
       - name: Nom de l'artefact

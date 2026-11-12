@@ -49,11 +49,39 @@ DEMO_QUESTIONS = [
 ]
 
 RESULTS_DIR = ROOT / "evaluation" / "results"
+REFERENCE_FILE = ROOT / "evaluation" / "reponses_reference.csv"
+
+
+def load_references() -> dict[str, list[list[str]]]:
+    """Faits obligatoires par question : groupes séparés par « ; », variantes par « | »."""
+    from src.question_parsing import normalize_text
+    if not REFERENCE_FILE.exists():
+        return {}
+    with REFERENCE_FILE.open(encoding="utf-8") as handle:
+        return {
+            normalize_text(row["question"]): [
+                [normalize_text(v) for v in group.split("|") if v.strip()]
+                for group in row["faits_obligatoires"].split(";") if group.strip()
+            ]
+            for row in csv.DictReader(handle)
+        }
+
+
+def facts_present(answer: str, groups: list[list[str]]) -> tuple[int, int]:
+    """(groupes de faits retrouvés dans la réponse affichée, groupes attendus)."""
+    from src.question_parsing import normalize_text
+    text = f" {normalize_text(answer)} "
+    found = sum(1 for group in groups if any(f" {variant}" in text for variant in group))
+    return found, len(groups)
 
 
 def load_questions(jeu: str) -> list[dict]:
     if jeu == "demo":
-        return [{"question": q, "expected_title": ""} for q in DEMO_QUESTIONS]
+        sources = {}
+        if REFERENCE_FILE.exists():
+            with REFERENCE_FILE.open(encoding="utf-8") as handle:
+                sources = {row["question"]: row["source_attendue"] for row in csv.DictReader(handle)}
+        return [{"question": q, "expected_title": sources.get(q, "")} for q in DEMO_QUESTIONS]
     path = ROOT / "evaluation" / ("heldout_questions.csv" if jeu == "heldout" else "paraphrase_questions.csv")
     with path.open(encoding="utf-8") as handle:
         return [{"question": row["question"], "expected_title": row["expected_title"]} for row in csv.DictReader(handle)]
@@ -64,11 +92,15 @@ def main() -> None:
     parser.add_argument("--jeu", choices=["demo", "heldout", "dev"], default="demo")
     parser.add_argument("--etiquette", default="avant", help="nom de la mesure, par exemple avant ou apres")
     parser.add_argument("--limite", type=int, default=0, help="ne traiter que les N premières questions")
+    parser.add_argument("--repetitions", type=int, default=1, help="passages par question (variabilité du modèle)")
     args = parser.parse_args()
 
     questions = load_questions(args.jeu)
     if args.limite:
         questions = questions[: args.limite]
+    questions = [dict(item, passage=k) for item in questions for k in range(1, args.repetitions + 1)]
+    references = load_references()
+    from src.question_parsing import normalize_text as _norm
 
     # On enregistre chaque appel au modèle sans changer son comportement.
     calls: list[dict] = []
@@ -114,7 +146,13 @@ def main() -> None:
             "phrases_non_etayees_masquees": len(typed.get("unsupported_sentences") or []),
             "conditions_ajoutees_depuis_les_sources": len(typed.get("conditions_added_from_sources") or []),
             "reponse_affichee": str(response.get("answer", "")).replace("\n", " ")[:500],
+            "passage": item.get("passage", 1),
         }
+        groups = references.get(_norm(item["question"]))
+        if groups:
+            found, expected = facts_present(str(response.get("answer", "")), groups)
+            row["faits_retrouves"] = f"{found}/{expected}"
+            row["reponse_conforme"] = found == expected
         for index, call in enumerate(calls, start=1):
             parsed = parse_typed_answer(call["raw"])
             row[f"appel{index}_json_valide"] = parsed is not None
@@ -161,7 +199,14 @@ def main() -> None:
         "reponses_avec_phrases_masquees": sum(1 for r in done if r.get("phrases_non_etayees_masquees")),
         "reponses_avec_condition_ajoutee": sum(1 for r in done if r.get("conditions_ajoutees_depuis_les_sources")),
         "erreurs": len(rows) - len(done),
+        "avec_reference": sum(1 for r in done if "reponse_conforme" in r),
+        "reponses_conformes": sum(1 for r in done if r.get("reponse_conforme") is True),
+        "bonne_source_citee_et_verifiee_n": sum(1 for r in done if r.get("bonne_source_citee_et_verifiee") is True),
+        "avec_source_attendue": sum(1 for r in done if r.get("bonne_source_attendue")),
+        "repetitions": args.repetitions,
     }
+    summary["part_reponses_conformes"] = (
+        round(summary["reponses_conformes"] / summary["avec_reference"], 3) if summary["avec_reference"] else None)
     (RESULTS_DIR / f"statuts_{args.jeu}_{args.etiquette}.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     print("\nSYNTHÈSE")
