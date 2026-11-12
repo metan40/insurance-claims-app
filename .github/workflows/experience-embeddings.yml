@@ -1,0 +1,26 @@
+name: Expérience embeddings (recherche documentaire)
+
+# Lancement manuel uniquement ; ne modifie ni ne déploie l'application.
+on:
+  workflow_dispatch:
+
+jobs:
+  experience:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Installer les dépendances
+        run: |
+          pip install -r requirements.txt
+          pip install --index-url https://download.pytorch.org/whl/cpu torch
+          pip install "sentence-transformers>=2.7" tabulate
+      - name: Lancer l'expérience
+        run: python evaluation/experience_embeddings.py | tee sortie.md
+      - name: Rapport
+        if: always()
+        run: sed -n '/^## Expérience/,$p' sortie.md >> "$GITHUB_STEP_SUMMARY"
