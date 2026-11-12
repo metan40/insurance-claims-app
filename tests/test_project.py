@@ -12,13 +12,17 @@ def test_version_file_is_semantic(project_root):
     assert re.fullmatch(r"\d+\.\d+\.\d+", read(project_root, "VERSION").strip())
 
 
-def test_runtime_dependencies_exclude_heavy_unused_packages(project_root):
-    packages = [
+def test_heavy_runtime_dependencies_are_used_and_cpu_only(project_root):
+    """Depuis la version 19.5.0, sentence-transformers et PyTorch servent la
+    recherche bge-m3 ; PyTorch doit venir de l'index CPU (image plus légère)."""
+    lines = [
         line.split("#", 1)[0].strip().lower()
         for line in read(project_root, "requirements.txt").splitlines()
     ]
-    packages = [line for line in packages if line]
-    assert not any(line.startswith(("sentence-transformers", "torch")) for line in packages)
+    lines = [line for line in lines if line]
+    if any(line.startswith(("sentence-transformers", "torch")) for line in lines):
+        assert (project_root / "src" / "embedding_retrieval.py").is_file()
+        assert "--extra-index-url https://download.pytorch.org/whl/cpu" in lines
 
 
 def test_docker_image_only_copies_runtime_files(project_root):
