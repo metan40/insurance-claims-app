@@ -3,6 +3,23 @@
 Les journaux détaillés des versions 4 à 18 sont conservés dans
 `docs/historique/changelogs/`.
 
+## 19.3.0 — la définition est jointe aux sources qui y renvoient
+
+### Constat (Space, 12/11/2026, version 19.2.0)
+- Vélo volé dans la cave : aucune phrase inventée n'est plus affichée, mais la
+  réponse dépend de la définition des « objets à risque de vol » (un vélo en
+  fait-il partie ?). Les sources lues y renvoyaient par « (voir définition) »
+  sans que la fiche de définition soit parmi elles.
+
+### Changements
+- Nouveau module `src/definitions.py` : quand une source contient
+  « <terme> (voir définition) » et qu'une fiche du corpus définit ce terme
+  (« Que sont les… », « Qu'est-ce qu'un… »), son texte est joint à la fin de la
+  source, sous la mention « Définition jointe automatiquement ». Le classement
+  n'est pas modifié.
+- `src/app.py` : jonction appliquée aux sources avant la génération.
+- Tests : `tests/test_definitions.py` (index des fiches, renvois du corpus réel).
+
 ## 19.2.0 — aucune phrase non étayée n'est affichée
 
 ### Constat (Space, 12/11/2026)
