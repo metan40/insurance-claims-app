@@ -42,11 +42,13 @@ from __future__ import annotations
 
 import html
 import json
+import re
 from difflib import SequenceMatcher
 from typing import Callable
 
 from pydantic import BaseModel, Field, ValidationError
 
+from src.grounding import check_grounding
 from src.question_parsing import normalize_text
 
 MIN_QUOTE_TOKENS = 3
@@ -314,7 +316,64 @@ def inconsistent_text(checked: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def _deliver(status, typed, checked, results, attempts, sources_read) -> dict:
+UNGROUNDED_MESSAGE = (
+    "La synthèse rédigée par le modèle contenait des affirmations qui ne "
+    "figurent pas dans les sources qu’il a citées. Pour ne rien affirmer sans "
+    "preuve, l’application ne l’affiche pas : voici les extraits vérifiés, à "
+    "lire pour juger vous-même."
+)
+MASKED_NOTE = (
+    "{count} phrase(s) de la synthèse du modèle ne figurai(en)t pas dans les "
+    "sources citées et n’a (ont) pas été affichée(s)."
+)
+
+
+def ungrounded_text(checked: list[dict]) -> str:
+    """Texte affiché quand aucune phrase de la synthèse n'est étayée."""
+    lines = [UNGROUNDED_MESSAGE, ""]
+    for item in checked:
+        if item["verified"]:
+            lines.append(f"- « {item['quote'].strip()} » [{item['source_id']}]")
+    return "\n".join(lines)
+
+
+def grounded_display_text(grounding: dict, checked: list[dict]) -> str:
+    """Seulement les phrases étayées, suivies des identifiants vérifiés."""
+    kept = " ".join(_CITATION_IN_TEXT.sub("", s).strip() for s in grounding["supported"])
+    text = display_text_from(kept, checked)
+    if grounding["unsupported"]:
+        text += "\n\n" + MASKED_NOTE.format(count=len(grounding["unsupported"]))
+    return text
+
+
+_CITATION_IN_TEXT = re.compile(r"\s*\[S\d+\]")
+
+
+def display_text_from(answer: str, checked: list[dict]) -> str:
+    verified_ids = sorted(
+        {item["source_id"] for item in checked if item["verified"]},
+        key=lambda value: int(value[1:]) if value[1:].isdigit() else 0,
+    )
+    return complete_sentences(answer) + "".join(f" [{source_id}]" for source_id in verified_ids)
+
+
+def apply_grounding(status, typed, checked, question, sources):
+    """Contrôle d'ancrage d'une réponse livrable.
+
+    Renvoie (statut, rapport). Le statut devient ``None`` (nouvelle étape) si
+    aucune phrase n'est étayée, ``partial`` si une partie a été masquée.
+    """
+    if status not in ("answered", "partial") or typed is None or is_inconsistent(typed, checked):
+        return status, None
+    grounding = check_grounding(typed.answer, question, checked, sources)
+    if not grounding["unsupported"]:
+        return status, grounding
+    if not grounding["supported"]:
+        return None, grounding
+    return "partial", grounding
+
+
+def _deliver(status, typed, checked, results, attempts, sources_read, grounding=None) -> dict:
     """Assemble la réponse livrée pour un statut donné."""
     inconsistent = is_inconsistent(typed, checked)
     if status == "not_found":
@@ -323,6 +382,10 @@ def _deliver(status, typed, checked, results, attempts, sources_read) -> dict:
         text = build_fallback_text(results, NOT_FOUND_MESSAGE)
     elif inconsistent:
         text = inconsistent_text(checked)
+    elif grounding is not None and not grounding["supported"]:
+        text = ungrounded_text(checked)
+    elif grounding is not None and grounding["unsupported"]:
+        text = grounded_display_text(grounding, checked)
     else:
         text = display_text(typed, checked)
     typed_dump = typed.model_dump(exclude={"evidence"})
@@ -335,10 +398,14 @@ def _deliver(status, typed, checked, results, attempts, sources_read) -> dict:
     # couverts », alors que la source dit l'inverse).
     typed_dump["model_unverified_caveats"] = typed_dump["caveats"]
     typed_dump["caveats"] = ""
-    if status == "not_found" or inconsistent:
+    typed_dump["unsupported_sentences"] = grounding["unsupported"] if grounding else []
+    if status == "not_found" or inconsistent or (grounding is not None and grounding["unsupported"]):
         # Conservé pour l'audit, mais retiré des champs affichés.
         typed_dump["model_unverified_text"] = typed_dump["answer"]
-        typed_dump["answer"] = ""
+        typed_dump["answer"] = (
+            " ".join(grounding["supported"])
+            if grounding is not None and not (status == "not_found" or inconsistent) else ""
+        )
         typed_dump["caveats"] = ""
     return {
         "status": status,
@@ -371,6 +438,7 @@ def generate_typed_answer(
 
     attempts = 0
     best_partial = None  # réponse partielle vérifiée d'une étape précédente
+    ungrounded = None    # dernière synthèse entièrement non étayée (extraits vérifiés)
     for position, (count, characters) in enumerate(effective, start=1):
         sources = stage_sources(results, count, characters)
         label = f"tentative {position} (top-{len(sources)})"
@@ -379,30 +447,44 @@ def generate_typed_answer(
         typed = parse_typed_answer(raw)
         checked = verify_answer(typed, sources) if typed else []
         status = decide_status(typed, checked)
+        # Contrôle d'ancrage (src/grounding.py) : une synthèse dont aucune
+        # phrase ne vient des sources vérifiées est traitée comme invalide.
+        status, grounding = apply_grounding(status, typed, checked, question, sources)
+        if grounding is not None and not grounding["supported"]:
+            ungrounded = (typed, checked, grounding, len(sources))
         is_last = position == len(effective)
         log(
             f"{label} — audit : json_valide={typed is not None}, "
             f"extraits_verifies={sum(c['verified'] for c in checked)}/{len(checked)}, "
             f"extraits_copies_de_la_consigne={sum(c['copied_from_instructions'] for c in checked)}, "
+            f"phrases_non_etayees={len(grounding['unsupported']) if grounding else 0}, "
             f"statut={status}"
         )
         # À l'étape 1, seule une réponse complète et justifiée arrête la boucle :
         # une réponse partielle ou « non trouvée » peut être complétée par les
         # sources suivantes.
         if status == "answered":
-            return _deliver(status, typed, checked, results, attempts, len(sources))
+            return _deliver(status, typed, checked, results, attempts, len(sources), grounding)
         if status == "partial" and best_partial is None:
-            best_partial = (typed, checked, attempts, len(sources))
+            best_partial = (typed, checked, attempts, len(sources), grounding)
         if is_last:
             # Une réponse partielle vérifiée obtenue plus tôt vaut mieux qu'une
             # dernière sortie illisible ou « non trouvée » (mesure du 6/11 :
             # sorties de l'étape 2 coupées par la limite de longueur).
             if status in (None, "not_found") and best_partial is not None:
-                typed_b, checked_b, _, read_b = best_partial
+                typed_b, checked_b, _, read_b, grounding_b = best_partial
                 log(f"{label} — on garde la réponse partielle vérifiée de l'étape précédente")
-                return _deliver("partial", typed_b, checked_b, results, attempts, read_b)
+                return _deliver("partial", typed_b, checked_b, results, attempts, read_b, grounding_b)
             if status is not None:
-                return _deliver(status, typed, checked, results, attempts, len(sources))
+                return _deliver(status, typed, checked, results, attempts, len(sources), grounding)
+
+    if ungrounded is not None:
+        # Des extraits ont été vérifiés, mais la synthèse n'en découlait pas :
+        # on montre les extraits vérifiés, jamais la synthèse.
+        typed_u, checked_u, grounding_u, read_u = ungrounded
+        delivered = _deliver("partial", typed_u, checked_u, results, attempts, read_u, grounding_u)
+        delivered["status"] = "fallback"
+        return delivered
 
     return {
         "status": "fallback",

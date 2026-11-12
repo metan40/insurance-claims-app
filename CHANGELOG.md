@@ -3,6 +3,36 @@
 Les journaux détaillés des versions 4 à 18 sont conservés dans
 `docs/historique/changelogs/`.
 
+## 19.2.0 — aucune phrase non étayée n'est affichée
+
+### Constat (Space, 12/11/2026)
+- Question : vélo volé dans la cave. Réponse affichée : « Je suis couvert, car
+  je transportais mon vélo dans un véhicule assuré. [S2] ». L'extrait cité de
+  S2 était bien vérifié, mais « transportais » et « véhicule » venaient de S3
+  (déménagement), une source que le modèle n'avait pas citée. La vérification
+  des extraits prouvait que la citation existait, pas que la réponse en
+  découlait.
+
+### Changements
+- Nouveau module `src/grounding.py` : contrôle d'ancrage de chaque phrase de
+  la réponse. Un mot significatif doit venir de la question, d'une source dont
+  un extrait est vérifié, ou d'un petit vocabulaire de rédaction (comparaison
+  sur les 5 premières lettres, sans accents). Une phrase qui apporte au moins
+  deux mots nouveaux est jugée non étayée.
+- `src/generation.py` : une réponse dont aucune phrase n'est étayée est traitée
+  comme invalide (étape suivante de la boucle) ; à la dernière étape,
+  l'application affiche les extraits vérifiés, jamais la synthèse (statut
+  `fallback`). Une réponse en partie étayée passe en `partial` : seules ses
+  phrases étayées sont affichées, avec le nombre de phrases masquées. Les
+  phrases masquées restent dans l'audit (`unsupported_sentences`,
+  `model_unverified_text`).
+- Tests : `tests/test_grounding.py` (cas réel du vélo, réponse fidèle conservée,
+  masquage partiel).
+
+### Limite
+- Contrôle lexical : il détecte une information apportée d'ailleurs, pas une
+  négation inversée construite avec les mêmes mots.
+
 ## 19.1.0 — l'assistant cite avant de conclure
 
 ### Constat
