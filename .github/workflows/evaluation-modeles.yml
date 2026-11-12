@@ -14,6 +14,9 @@ on:
       jeux:
         description: "Jeux de questions (demo, heldout, dev), séparés par des virgules"
         default: "demo,heldout"
+      moteur:
+        description: "Moteur de recherche : hybrid ou embeddings"
+        default: "hybrid"
       repetitions:
         description: "Passages par question (variabilité du modèle)"
         default: "3"
@@ -41,6 +44,7 @@ jobs:
     env:
       OLLAMA_MODEL: ${{ matrix.modele }}
       OLLAMA_TIMEOUT_SECONDS: "400"
+      RETRIEVAL_ENGINE: ${{ inputs.moteur }}
     steps:
       - uses: actions/checkout@v4
 
@@ -61,14 +65,14 @@ jobs:
 
       - name: Mesurer
         run: |
-          etiquette=$(echo "$OLLAMA_MODEL" | tr ':./' '---')
+          etiquette=$(echo "$OLLAMA_MODEL-$RETRIEVAL_ENGINE" | tr ':./' '---')
           for jeu in $(echo "${{ inputs.jeux }}" | tr ',' ' '); do
             python evaluation/mesurer_statuts.py --jeu "$jeu" --etiquette "$etiquette" --repetitions "${{ inputs.repetitions }}"
           done
 
       - name: Nom de l'artefact
         id: nom
-        run: echo "nom=resultats-$(echo "$OLLAMA_MODEL" | tr ':./' '---')" >> "$GITHUB_OUTPUT"
+        run: echo "nom=resultats-$(echo "$OLLAMA_MODEL-$RETRIEVAL_ENGINE" | tr ':./' '---')" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@v4
         with:

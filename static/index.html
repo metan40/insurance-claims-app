@@ -505,6 +505,14 @@ async function search() {
             score.textContent = "Similarité cosinus TF-IDF (pas une probabilité) : " +
                 (Number.isFinite(cosineSimilarity) ? cosineSimilarity.toFixed(4) : "indisponible");
 
+            // Classement par embeddings (bge-m3) : similarité de sens, qui sert au
+            // classement lorsque ce moteur est actif.
+            const embeddingSimilarity = Number(result.embedding_similarity);
+            if (result.embedding_similarity !== undefined && Number.isFinite(embeddingSimilarity)) {
+                score.textContent = "Similarité sémantique bge-m3 (classement, pas une probabilité) : " +
+                    embeddingSimilarity.toFixed(4) + " | " + score.textContent;
+            }
+
             // Le score lexical expose les termes partagés, sans prétendre mesurer
             // une probabilité ni garantir que le document répond à la question.
             const lexicalScore = Number(result.lexical_relevance_score);

@@ -17,6 +17,15 @@ if ! mkdir -p "$OLLAMA_MODELS" 2>/dev/null; then
 fi
 echo "Dossier des modèles Ollama : ${OLLAMA_MODELS}"
 
+# Modèle d'embeddings (bge-m3) et index des fiches : même logique de stockage.
+export HF_HOME="${HF_HOME:-/data/huggingface}"
+if ! mkdir -p "$HF_HOME" 2>/dev/null; then
+    export HF_HOME="${HOME:-/tmp}/.cache/huggingface"
+    mkdir -p "$HF_HOME"
+fi
+export EMBEDDING_CACHE_DIR="${EMBEDDING_CACHE_DIR:-${HF_HOME}/index}"
+echo "Dossier des embeddings : ${HF_HOME}"
+
 printf '%s\n' "Démarrage d'Ollama sur ${OLLAMA_HOST}..."
 ollama serve &
 OLLAMA_PID=$!

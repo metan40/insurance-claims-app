@@ -40,6 +40,12 @@ sys.path.insert(0, str(ROOT))
 import src.app as application  # noqa: E402  (charge le corpus et l'index, comme au démarrage)
 from src.generation import parse_typed_answer  # noqa: E402
 
+if application.embedding_retriever is not None:
+    # Moteur « embeddings » : on attend l'index avant de mesurer.
+    print("Préparation de la recherche par embeddings…", flush=True)
+    if not application.embedding_retriever.wait(3600):
+        raise SystemExit(f"Embeddings indisponibles : {application.embedding_retriever.error}")
+
 DEMO_QUESTIONS = [
     "Ma bague a été dérobée, comment suis-je indemnisé ?",
     "Mon fils a cassé la télévision d'un ami, suis-je couvert ?",
@@ -183,6 +189,7 @@ def main() -> None:
         "jeu": args.jeu,
         "etiquette": args.etiquette,
         "modele": application.OLLAMA_MODEL,
+        "moteur_recherche": application.active_retrieval_engine(),
         "questions": len(rows),
         "statuts": dict(counts),
         "part_reponse_absente": round(len(refused) / len(done), 3) if done else None,

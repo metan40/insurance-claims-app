@@ -8,3 +8,7 @@ pandas>=2.1,<3.0
 numpy>=1.26,<3.0
 requests>=2.31,<3.0
 scikit-learn>=1.4,<2.0
+# Recherche par embeddings (bge-m3) : PyTorch en version CPU, plus légère.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.2
+sentence-transformers>=2.7,<6

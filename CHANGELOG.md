@@ -3,6 +3,33 @@
 Les journaux détaillés des versions 4 à 18 sont conservés dans
 `docs/historique/changelogs/`.
 
+## 19.5.0 — recherche par embeddings multilingues (bge-m3)
+
+### Constat mesuré (12/11/2026)
+- Évaluation de bout en bout (3 modèles de langage, 30 questions tenues à
+  part) : la bonne fiche n'était parmi les 3 sources lues par le modèle que
+  12 à 13 fois sur 30, quel que soit le modèle. La recherche limitait tout.
+- Expérience `evaluation/experience_embeddings.py` (configuration choisie sur
+  les 40 reformulations de développement, testée une seule fois sur les 30
+  questions tenues à part) : Recall@3 de 13/30 (43 %) avec la recherche
+  hybride à 26/30 (87 %, IC de Wilson 95 % [70 % ; 95 %]) avec bge-m3 seul ;
+  McNemar exact apparié : 14 contre 1, p = 0,001. La fusion avec TF-IDF
+  faisait moins bien que bge-m3 seul (70 %).
+
+### Changements
+- `src/embedding_retrieval.py` : classement par similarité cosinus des
+  embeddings bge-m3 (titre + 1 000 premiers caractères), index mis en cache
+  sur disque, chargement en arrière-plan.
+- `src/app.py` : moteur choisi par `RETRIEVAL_ENGINE` (`embeddings` dans
+  l'image Docker, `hybrid` par défaut ailleurs) ; tant que l'index n'est pas
+  prêt, repli sur la recherche hybride, signalé dans la réponse
+  (`retrieval_engine`) et dans `/ready` (`embedding_search_loaded`).
+- Interface : affichage de la similarité sémantique bge-m3.
+- `requirements.txt` : PyTorch CPU et sentence-transformers.
+- Évaluation : `mesurer_statuts.py` attend l'index ; le workflow d'évaluation
+  accepte le moteur en paramètre.
+- Tests : `tests/test_embedding_retrieval.py` (encodeur factice).
+
 ## 19.4.0 — une conclusion n'est jamais affichée sans sa condition
 
 ### Constat (Space, 12/11/2026, version 19.3.0)

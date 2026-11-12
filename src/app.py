@@ -42,6 +42,7 @@ from src.claims_analytics import (
     get_claims_summary,
 )
 from src.definitions import attach_definitions, build_definition_index
+from src.embedding_retrieval import DEFAULT_MODEL as DEFAULT_EMBEDDING_MODEL, EmbeddingRetriever
 from src.generation import ANSWER_SCHEMA, generate_typed_answer
 from src.retrieval import DEFAULT_CANDIDATE_LIMIT, DEFAULT_TOP_K, HybridRetriever
 
@@ -113,6 +114,19 @@ titles = df["title"].fillna("").astype(str).tolist()
 
 retriever = HybridRetriever(titles, documents)
 definition_index = build_definition_index(titles)
+
+# Moteur de recherche : « embeddings » (bge-m3, voir src/embedding_retrieval.py)
+# ou « hybrid » (TF-IDF + lexical). L'image Docker active les embeddings ; les
+# tests et le développement local gardent la recherche hybride par défaut.
+RETRIEVAL_ENGINE = os.getenv("RETRIEVAL_ENGINE", "hybrid").strip().lower()
+embedding_retriever = None
+if RETRIEVAL_ENGINE == "embeddings":
+    embedding_retriever = EmbeddingRetriever(
+        titles, documents,
+        model_id=os.getenv("EMBEDDING_MODEL", DEFAULT_EMBEDDING_MODEL).strip(),
+        cache_dir=os.getenv("EMBEDDING_CACHE_DIR") or None,
+    )
+    embedding_retriever.start()
 logger.info(
     "Recherche prête : %s documents, %s termes TF-IDF.",
     len(retriever),
@@ -197,6 +211,8 @@ def readiness():
         "ollama_reachable": False,
         "ollama_model_available": False,
     }
+    if embedding_retriever is not None:
+        checks["embedding_search_loaded"] = embedding_retriever.ready
 
     try:
         response = requests.get(
@@ -221,6 +237,7 @@ def readiness():
         "status": "ready" if all_ready else "not_ready",
         "app_version": APP_VERSION,
         "ollama_model": OLLAMA_MODEL,
+        "retrieval_engine": active_retrieval_engine(),
         "checks": checks,
         "note": (
             "Ce contrôle vérifie la disponibilité technique ; "
@@ -415,11 +432,25 @@ SCORE_EXPLANATION = {
         "synonymes métier) présents dans le titre et le contenu ; ce n'est pas "
         "une probabilité."
     ),
+    "embedding_similarity": (
+        "Similarité cosinus entre les embeddings bge-m3 de la question et de la "
+        "fiche (sens des mots, au-delà des mots exacts) ; ce n'est pas une "
+        "probabilité ni une mesure de vérité."
+    ),
     "hybrid_rank_score": (
         "Score de fusion des rangs (RRF) textuel et lexical ; il sert au "
         "classement final et ne mesure ni une probabilité ni la véracité."
     ),
 }
+
+
+def active_retrieval_engine() -> str:
+    """Moteur réellement utilisé : les embeddings seulement quand leur index est prêt."""
+    if embedding_retriever is not None and embedding_retriever.ready:
+        return "embeddings"
+    if embedding_retriever is not None:
+        return "hybrid (embeddings en préparation)" if embedding_retriever.error is None else "hybrid (embeddings indisponibles)"
+    return "hybrid"
 
 
 def _elapsed_ms(started: float) -> float:
@@ -440,23 +471,37 @@ def search(data: Question):
     vectorization_ms = _elapsed_ms(vectorization_started)
 
     ranking_started = time.perf_counter()
-    ranked = retriever.rank(
-        question, candidate_limit=DEFAULT_CANDIDATE_LIMIT, cosine=cosine, parsed=parsed
-    )
+    engine = active_retrieval_engine()
+    if engine == "embeddings":
+        ranked = embedding_retriever.rank(question, DEFAULT_TOP_K)
+        results = [
+            {
+                "rank": position,
+                "source_id": f"S{position}",
+                "title": titles[index],
+                "embedding_similarity": round(similarity, 4),
+                "tfidf_cosine_similarity": round(float(cosine[index]), 4),
+                "content": documents[index][:CONTEXT_CHARACTERS_PER_SOURCE],
+            }
+            for position, (index, similarity) in enumerate(ranked, start=1)
+        ]
+    else:
+        ranked = retriever.rank(
+            question, candidate_limit=DEFAULT_CANDIDATE_LIMIT, cosine=cosine, parsed=parsed
+        )
+        results = [
+            {
+                "rank": item.rank,
+                "source_id": f"S{item.rank}",
+                "title": titles[item.index],
+                "tfidf_cosine_similarity": item.cosine_similarity,
+                "lexical_relevance_score": item.lexical_score,
+                "hybrid_rank_score": item.fusion_score,
+                "content": documents[item.index][:CONTEXT_CHARACTERS_PER_SOURCE],
+            }
+            for item in ranked[:DEFAULT_TOP_K]
+        ]
     ranking_ms = _elapsed_ms(ranking_started)
-
-    results = [
-        {
-            "rank": item.rank,
-            "source_id": f"S{item.rank}",
-            "title": titles[item.index],
-            "tfidf_cosine_similarity": item.cosine_similarity,
-            "lexical_relevance_score": item.lexical_score,
-            "hybrid_rank_score": item.fusion_score,
-            "content": documents[item.index][:CONTEXT_CHARACTERS_PER_SOURCE],
-        }
-        for item in ranked[:DEFAULT_TOP_K]
-    ]
     # Renvois « (voir définition) » : la fiche de définition est jointe à la
     # source qui y renvoie (src/definitions.py).
     results = attach_definitions(results, titles, documents, definition_index)
@@ -468,6 +513,7 @@ def search(data: Question):
     return {
         "app_version": APP_VERSION,
         "question": question,
+        "retrieval_engine": engine,
         "question_analysis": {
             "terms": parsed.leading_terms,
             "added_business_terms": parsed.expansions,
@@ -485,6 +531,7 @@ def search(data: Question):
         "pipeline_metrics": {
             "document_count": len(documents),
             "candidate_count": len(ranked),
+            "retrieval_engine": engine,
             "returned_count": len(results),
             "vectorization_ms": vectorization_ms,
             "ranking_ms": ranking_ms,
