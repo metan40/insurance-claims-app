@@ -97,6 +97,8 @@ def main() -> None:
         titles_read = [source["title"] for source in response["results"]][: response.get("sources_read_by_model") or 5]
         typed = response.get("typed_answer") or {}
         evidence = typed.get("evidence") or []
+        expected_ids = {source["source_id"] for source in response["results"]
+                        if item["expected_title"] and source["title"] == item["expected_title"]}
         row = {
             "question": item["question"],
             "statut": response["answer_status"],
@@ -105,6 +107,13 @@ def main() -> None:
             "bonne_source_attendue": item["expected_title"],
             "bonne_source_lue": (item["expected_title"] in titles_read) if item["expected_title"] else "",
             "extraits_verifies_final": sum(1 for e in evidence if e.get("verified")),
+            # Qualité : la réponse affichée s'appuie-t-elle sur la bonne source ?
+            "bonne_source_citee_et_verifiee": (
+                any(e.get("verified") and e.get("source_id") in expected_ids for e in evidence)
+                if item["expected_title"] else ""),
+            "phrases_non_etayees_masquees": len(typed.get("unsupported_sentences") or []),
+            "conditions_ajoutees_depuis_les_sources": len(typed.get("conditions_added_from_sources") or []),
+            "reponse_affichee": str(response.get("answer", "")).replace("\n", " ")[:500],
         }
         for index, call in enumerate(calls, start=1):
             parsed = parse_typed_answer(call["raw"])
@@ -145,6 +154,13 @@ def main() -> None:
         "appels_avec_json_invalide": sum(
             1 for r in done for k, v in r.items() if k.endswith("_json_valide") and v is False),
         "temps_moyen_secondes": round(sum(r["secondes"] for r in done) / len(done), 1) if done else None,
+        "temps_max_secondes": max((r["secondes"] for r in done), default=None),
+        "part_bonne_source_citee_et_verifiee": (
+            round(sum(1 for r in done if r.get("bonne_source_citee_et_verifiee") is True)
+                  / max(1, sum(1 for r in done if r.get("bonne_source_attendue"))), 3)),
+        "reponses_avec_phrases_masquees": sum(1 for r in done if r.get("phrases_non_etayees_masquees")),
+        "reponses_avec_condition_ajoutee": sum(1 for r in done if r.get("conditions_ajoutees_depuis_les_sources")),
+        "erreurs": len(rows) - len(done),
     }
     (RESULTS_DIR / f"statuts_{args.jeu}_{args.etiquette}.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")

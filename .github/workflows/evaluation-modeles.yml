@@ -1,0 +1,89 @@
+name: Évaluation de l'assistant par modèle
+
+# Lancement manuel (onglet Actions, ou « gh workflow run ») : chaque modèle de la
+# liste passe le même jeu de questions, sur la même machine, avec le même code.
+# Le rapport compare les statuts, la part de réponses appuyées par la bonne
+# source, les phrases masquées, les conditions ajoutées et le temps de réponse.
+# Ce workflow ne déploie rien.
+on:
+  workflow_dispatch:
+    inputs:
+      modeles:
+        description: "Modèles Ollama, séparés par des virgules"
+        default: "llama3.2:1b,llama3.2:3b,qwen2.5:3b"
+      jeux:
+        description: "Jeux de questions (demo, heldout, dev), séparés par des virgules"
+        default: "demo,heldout"
+
+jobs:
+  preparer:
+    runs-on: ubuntu-latest
+    outputs:
+      modeles: ${{ steps.liste.outputs.modeles }}
+    steps:
+      - id: liste
+        run: |
+          python3 -c "import json,os; print('modeles=' + json.dumps([m.strip() for m in os.environ['M'].split(',') if m.strip()]))" >> "$GITHUB_OUTPUT"
+        env:
+          M: ${{ inputs.modeles }}
+
+  mesurer:
+    needs: preparer
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        modele: ${{ fromJSON(needs.preparer.outputs.modeles) }}
+    env:
+      OLLAMA_MODEL: ${{ matrix.modele }}
+      OLLAMA_TIMEOUT_SECONDS: "400"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Installer Ollama et le modèle
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          (ollama serve > ollama.log 2>&1 &)
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:11434/api/tags >/dev/null && break; sleep 2; done
+          ollama pull "$OLLAMA_MODEL"
+
+      - name: Mesurer
+        run: |
+          etiquette=$(echo "$OLLAMA_MODEL" | tr ':./' '---')
+          for jeu in $(echo "${{ inputs.jeux }}" | tr ',' ' '); do
+            python evaluation/mesurer_statuts.py --jeu "$jeu" --etiquette "$etiquette"
+          done
+
+      - name: Nom de l'artefact
+        id: nom
+        run: echo "nom=resultats-$(echo "$OLLAMA_MODEL" | tr ':./' '---')" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.nom.outputs.nom }}
+          path: evaluation/results/statuts_*
+
+  rapport:
+    needs: mesurer
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: resultats
+      - name: Tableau comparatif
+        run: python evaluation/comparer_modeles.py resultats >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rapport-comparatif
+          path: resultats
