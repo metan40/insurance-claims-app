@@ -96,10 +96,14 @@ def test_partial_answer_at_top1_reads_three_sources():
     ])
     call, prompts = scripted([model_output(complete=False), second])
     result = generation.generate_typed_answer("Le vol est-il couvert ?", THREE_SOURCES, call)
-    assert result["status"] == "answered"
+    # La boucle s'arrête à l'étape 2 (réponse complète et vérifiée) ; la
+    # restriction de S2 (« n'est pas garanti ») absente de la réponse est
+    # ajoutée depuis la source (version 19.4.0), d'où le statut « partial ».
     assert result["attempts"] == 2 and result["sources_read"] == 3
     assert "SOURCE [S3]" in prompts[1]
-    assert result["answer"].endswith("[S1] [S2]")
+    assert result["status"] == "partial"
+    assert "[S1] [S2]" in result["answer"]
+    assert result["answer"].endswith("« le vol sans effraction ni violence n'est pas garanti » [S2]")
 
 
 def test_partial_answer_is_kept_when_three_sources_do_not_complete_it():

@@ -91,3 +91,22 @@ def test_grounded_answer_is_delivered_unchanged():
     assert result["status"] == "answered"
     assert result["answer"].startswith(answer)
     assert result["typed_answer"]["unsupported_sentences"] == []
+
+
+def test_condition_omitted_by_the_model_is_shown_from_the_source():
+    # Cas réel 19.3.0 : « Si mon vélo a été volé, je suis couvert. [S2] »
+    answer = "Si mon vélo a été volé, je suis couvert."
+    result = generation.generate_typed_answer(
+        QUESTION, SOURCES[1:2], scripted([output(answer)]))
+    assert result["status"] == "partial"
+    assert result["answer"].startswith(answer)
+    assert "Condition indiquée par la source : « " + S2_CONTENT in result["answer"]
+    assert result["typed_answer"]["conditions_added_from_sources"] == ["S2"]
+
+
+def test_answer_that_states_the_condition_is_left_alone():
+    answer = "Le vol est couvert dans les formules n°2 et 3, mais pas dans la formule 1."
+    result = generation.generate_typed_answer(
+        QUESTION, SOURCES[1:2], scripted([output(answer)]))
+    assert "Condition indiquée" not in result["answer"]
+    assert result["typed_answer"]["conditions_added_from_sources"] == []

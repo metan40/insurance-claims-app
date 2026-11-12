@@ -114,3 +114,45 @@ def check_grounding(answer: str, question: str, checked: list[dict], sources) ->
         else:
             supported.append(sentence)
     return {"supported": supported, "unsupported": unsupported}
+
+
+# ------------------------------------------------------------------
+# Conditions omises
+# ------------------------------------------------------------------
+# Cas réel (Space, 12/11/2026, version 19.3.0) : « Si mon vélo a été volé, je
+# suis couvert. [S2] », alors que l'extrait vérifié de S2 précise « dans le
+# cadre des formules n°2 et 3 (voir conditions), mais pas n°1 ». Chaque mot
+# venait de la question ou de la source : le contrôle d'ancrage laissait
+# passer une conclusion sans sa condition. L'application ajoute donc, sous la
+# réponse, la condition telle qu'elle est écrite dans la source.
+
+RESTRICTION_MARKERS = (
+    "mais pas", "sauf", "uniquement", "seulement", "limite", "exclu", "exclus",
+    "ne sont pas", "n est pas", "ne sont plus", "pas assure", "pas couvert",
+    "a condition", "sous reserve", "si vous", "dans le cadre", "formule",
+)
+
+
+def _restrictions(text: str) -> set[str]:
+    normalized = f" {normalize_text(text)} "
+    return {marker for marker in RESTRICTION_MARKERS if f" {marker}" in normalized}
+
+
+def _numbers(text: str) -> set[str]:
+    return set(re.findall(r"\d+", normalize_text(text)))
+
+
+def missing_conditions(answer: str, checked: list[dict]) -> list[dict]:
+    """Extraits vérifiés dont la condition (restriction ou chiffre) manque dans la réponse."""
+    answer_restrictions = _restrictions(answer)
+    answer_numbers = _numbers(answer)
+    missing = []
+    for item in checked:
+        if not item.get("verified"):
+            continue
+        quote = item["quote"]
+        lacks_restriction = bool(_restrictions(quote)) and not answer_restrictions
+        lacks_numbers = bool(_numbers(quote)) and not (_numbers(quote) & answer_numbers)
+        if lacks_restriction or lacks_numbers:
+            missing.append(item)
+    return missing

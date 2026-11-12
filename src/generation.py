@@ -48,7 +48,7 @@ from typing import Callable
 
 from pydantic import BaseModel, Field, ValidationError
 
-from src.grounding import check_grounding
+from src.grounding import check_grounding, missing_conditions
 from src.question_parsing import normalize_text
 
 MIN_QUOTE_TOKENS = 3
@@ -328,6 +328,9 @@ MASKED_NOTE = (
 )
 
 
+CONDITION_LINE = "Condition indiquée par la source : « {quote} » [{source_id}]"
+
+
 def ungrounded_text(checked: list[dict]) -> str:
     """Texte affiché quand aucune phrase de la synthèse n'est étayée."""
     lines = [UNGROUNDED_MESSAGE, ""]
@@ -388,6 +391,19 @@ def _deliver(status, typed, checked, results, attempts, sources_read, grounding=
         text = grounded_display_text(grounding, checked)
     else:
         text = display_text(typed, checked)
+    omitted = []
+    if status in ("answered", "partial") and not inconsistent and not (
+            grounding is not None and not grounding["supported"]):
+        shown = " ".join(grounding["supported"]) if grounding is not None else typed.answer
+        omitted = missing_conditions(shown, checked)
+        if omitted:
+            # La conclusion du modèle omet une condition écrite dans la source :
+            # on l'affiche telle quelle, et la réponse n'est plus « complète ».
+            text += "\n\n" + "\n".join(
+                CONDITION_LINE.format(quote=item["quote"].strip(), source_id=item["source_id"])
+                for item in omitted
+            )
+            status = "partial"
     typed_dump = typed.model_dump(exclude={"evidence"})
     typed_dump["answer"] = html.unescape(typed_dump["answer"])
     typed_dump["caveats"] = html.unescape(typed_dump["caveats"])
@@ -399,6 +415,7 @@ def _deliver(status, typed, checked, results, attempts, sources_read, grounding=
     typed_dump["model_unverified_caveats"] = typed_dump["caveats"]
     typed_dump["caveats"] = ""
     typed_dump["unsupported_sentences"] = grounding["unsupported"] if grounding else []
+    typed_dump["conditions_added_from_sources"] = [item["source_id"] for item in omitted]
     if status == "not_found" or inconsistent or (grounding is not None and grounding["unsupported"]):
         # Conservé pour l'audit, mais retiré des champs affichés.
         typed_dump["model_unverified_text"] = typed_dump["answer"]

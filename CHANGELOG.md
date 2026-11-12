@@ -3,6 +3,26 @@
 Les journaux détaillés des versions 4 à 18 sont conservés dans
 `docs/historique/changelogs/`.
 
+## 19.4.0 — une conclusion n'est jamais affichée sans sa condition
+
+### Constat (Space, 12/11/2026, version 19.3.0)
+- Vélo volé dans la cave : « Si mon vélo a été volé, je suis couvert. [S2] »,
+  alors que l'extrait vérifié de S2 précise « dans le cadre des formules n°2
+  et 3 (voir conditions), mais pas n°1 ». Tous les mots venaient de la
+  question ou de la source : le contrôle d'ancrage acceptait la phrase, mais la
+  condition avait disparu.
+
+### Changements
+- `src/grounding.py` : `missing_conditions` repère les extraits vérifiés qui
+  contiennent une restriction (« mais pas », « sauf », « ne sont pas »,
+  « formule »…) ou des chiffres absents de la réponse affichée.
+- `src/generation.py` : la condition est alors affichée sous la réponse, telle
+  qu'elle est écrite dans la source (« Condition indiquée par la source : … »),
+  et le statut passe à `partial`. Audit : `conditions_added_from_sources`.
+- Tests : deux cas dans `tests/test_grounding.py` ; le test
+  `test_partial_answer_at_top1_reads_three_sources` attend désormais la
+  restriction de S2 sous la réponse (statut `partial`).
+
 ## 19.3.0 — la définition est jointe aux sources qui y renvoient
 
 ### Constat (Space, 12/11/2026, version 19.2.0)
