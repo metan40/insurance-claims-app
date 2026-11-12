@@ -41,6 +41,7 @@ from src.claims_analytics import (
     get_claims_model_info,
     get_claims_summary,
 )
+from src.definitions import attach_definitions, build_definition_index
 from src.generation import ANSWER_SCHEMA, generate_typed_answer
 from src.retrieval import DEFAULT_CANDIDATE_LIMIT, DEFAULT_TOP_K, HybridRetriever
 
@@ -111,6 +112,7 @@ documents = df["content"].fillna("").astype(str).tolist()
 titles = df["title"].fillna("").astype(str).tolist()
 
 retriever = HybridRetriever(titles, documents)
+definition_index = build_definition_index(titles)
 logger.info(
     "Recherche prête : %s documents, %s termes TF-IDF.",
     len(retriever),
@@ -455,6 +457,9 @@ def search(data: Question):
         }
         for item in ranked[:DEFAULT_TOP_K]
     ]
+    # Renvois « (voir définition) » : la fiche de définition est jointe à la
+    # source qui y renvoie (src/definitions.py).
+    results = attach_definitions(results, titles, documents, definition_index)
 
     generation_started = time.perf_counter()
     generation = generate_answer(question, results)
