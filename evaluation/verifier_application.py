@@ -84,8 +84,10 @@ def main() -> None:
     args = parser.parse_args()
     url = args.url.rstrip("/")
 
-    print("Version :", get(f"{url}/version"))
+    # On attend d'abord : au démarrage, le conteneur refuse les connexions
+    # tant que le serveur web n'est pas lancé.
     ready = wait_until_ready(url, args.attente_minutes, not args.sans_embeddings)
+    print("Version :", get(f"{url}/version"))
     print("Prête :", json.dumps(ready, ensure_ascii=False))
 
     facts = load_facts()
