@@ -4,8 +4,15 @@ name: Vérification locale (image Docker)
 # construction de l'image Docker du dépôt, lancement du conteneur, puis
 # questions posées par l'API HTTP comme le ferait un utilisateur.
 # Preuve que l'application fonctionne sans le serveur distant.
-# Lancement manuel ; ce workflow ne déploie rien.
+# Lancement manuel, ou automatique quand ce workflow ou les questions changent
+# sur une branche de travail ; ce workflow ne déploie rien.
 on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - .github/workflows/verification-locale.yml
+      - evaluation/questions_jury.csv
+      - evaluation/verifier_application.py
   workflow_dispatch:
     inputs:
       modele:
@@ -27,9 +34,9 @@ jobs:
         run: |
           docker volume create donnees
           docker run -d --name app -p 7860:7860 -v donnees:/data \
-            -e OLLAMA_MODEL="${{ inputs.modele }}" -e OLLAMA_TIMEOUT_SECONDS=400 insurance-claims
+            -e OLLAMA_MODEL="${{ inputs.modele || 'llama3.2:3b' }}" -e OLLAMA_TIMEOUT_SECONDS=400 insurance-claims
       - name: Poser les questions par l'API HTTP
-        run: python3 evaluation/verifier_application.py --url http://localhost:7860 --repetitions "${{ inputs.repetitions }}"
+        run: python3 evaluation/verifier_application.py --url http://localhost:7860 --repetitions "${{ inputs.repetitions || '5' }}"
       - name: Journal du conteneur
         if: always()
         run: docker logs app 2>&1 | tail -80
