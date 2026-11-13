@@ -231,3 +231,9 @@ def test_http_claims_routes(client):
     assert client.get("/api/claims/INCONNU/analysis").status_code == 404
     assert client.get("/api/claims/C00020/decision-support").status_code == 200
     assert client.get("/api/claims/INCONNU/decision-support").status_code == 404
+
+
+def test_model_name_typo_is_tolerated(app_module):
+    """Incident réel : « llama3.2:3b. » saisi dans les variables du Space."""
+    assert app_module.normalize_model_name(" llama3.2:3b. ") == "llama3.2:3b"
+    assert app_module.normalize_model_name("llama3.2:1b") == "llama3.2:1b"

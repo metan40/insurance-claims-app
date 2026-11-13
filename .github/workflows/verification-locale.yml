@@ -1,0 +1,35 @@
+name: Vérification locale (image Docker)
+
+# Reproduit, sur une machine vierge, le démarrage local de l'application :
+# construction de l'image Docker du dépôt, lancement du conteneur, puis
+# questions posées par l'API HTTP comme le ferait un utilisateur.
+# Preuve que l'application fonctionne sans le serveur distant.
+# Lancement manuel ; ce workflow ne déploie rien.
+on:
+  workflow_dispatch:
+    inputs:
+      modele:
+        description: "Modèle Ollama"
+        default: "llama3.2:3b"
+      repetitions:
+        description: "Passages par question"
+        default: "5"
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construire l'image (comme en local)
+        run: docker build -t insurance-claims .
+      - name: Lancer le conteneur (comme en local)
+        run: |
+          docker volume create donnees
+          docker run -d --name app -p 7860:7860 -v donnees:/data \
+            -e OLLAMA_MODEL="${{ inputs.modele }}" -e OLLAMA_TIMEOUT_SECONDS=400 insurance-claims
+      - name: Poser les questions par l'API HTTP
+        run: python3 evaluation/verifier_application.py --url http://localhost:7860 --repetitions "${{ inputs.repetitions }}"
+      - name: Journal du conteneur
+        if: always()
+        run: docker logs app 2>&1 | tail -80

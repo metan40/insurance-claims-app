@@ -1,0 +1,11 @@
+comportement_attendu,question,source_attendue
+complete,"Mon appartement fait partie d'un immeuble en copropriété, quelle assurance ?",Quelle assurance pour les logements en copropriété ?
+complete,Que signifie louer un logement équipé de mobilier ?,Qu’est-ce qu’une location meublée ?
+complete,Quelle protection pour un bailleur dont le locataire cause des dégâts ?,Quels sont les principaux risques pour un propriétaire bailleur ?
+partielle,Le court-circuit d'un appareil est-il couvert ?,Qu'est-ce que la garantie dommagez éléctriques
+partielle,La moisissure sur mes murs est-elle prise en charge ?,Est-ce que les dommages dûs à l'humidité sont couverts ?
+partielle,Mon emplacement de stationnement doit-il être assuré ?,L’assurance d’une place de stationnement
+absente,"Le pare-brise de ma voiture est fissuré, mon assurance paie-t-elle son remplacement ?",
+absente,Quel est le délai de carence de mon assurance décès ?,
+absente,"Pendant mes vacances, une bougie laissée sur la table de jardin a fondu et abîmé la table : suis-je couvert ?",
+absente,"Mon vélo a été volé dans le local commun de mon immeuble, qui n'était pas fermé à clé : suis-je couvert ?",

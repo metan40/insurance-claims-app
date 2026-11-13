@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
     PORT=7860 \
     OLLAMA_HOST=127.0.0.1:11434 \
-    OLLAMA_MODEL=llama3.2:1b \
+    OLLAMA_MODEL=llama3.2:3b \
     RETRIEVAL_ENGINE=embeddings
 
 WORKDIR /app
@@ -24,7 +24,8 @@ RUN python -m pip install --upgrade pip && pip install -r requirements.txt
 
 # Hugging Face exécute les Spaces Docker avec l'utilisateur 1000 :
 # on crée cet utilisateur et on lui donne les fichiers de l'application.
-RUN useradd -m -u 1000 user
+RUN useradd -m -u 1000 user \
+    && mkdir -p /data && chown user /data
 
 COPY --chown=user VERSION docker-entrypoint.sh ./
 COPY --chown=user src ./src

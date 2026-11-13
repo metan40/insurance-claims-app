@@ -5,6 +5,23 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
 
 ## 19.5.0 — recherche par embeddings multilingues (bge-m3)
 
+### Choix du modèle et fonctionnement local (13/11/2026)
+- Évaluation de bout en bout avec bge-m3 (30 questions tenues à part, 3
+  passages) : réponses conformes à la référence 32 % avec `llama3.2:1b`,
+  33 % avec `qwen2.5:3b`, 46 % avec `llama3.2:3b`. Le conteneur utilise
+  désormais `llama3.2:3b` par défaut.
+- Le dossier `/data` de l'image appartient à l'utilisateur de l'application :
+  un volume Docker local conserve les modèles et l'index entre deux démarrages.
+- Nom de modèle tolérant aux espaces et points finaux (incident réel :
+  « llama3.2:3b. » saisi dans les variables du Space rendait `/ready` négatif).
+- `evaluation/verifier_application.py` interroge une application en marche
+  par son API HTTP (locale ou distante) ; `evaluation/questions_jury.csv`
+  contient les questions candidates pour la démonstration (réponse complète,
+  partielle, absente des documents).
+- Workflow « Vérification locale » : construit l'image et la lance sur une
+  machine vierge, puis pose ces questions, pour prouver que l'application
+  fonctionne sans le serveur distant.
+
 ### Constat mesuré (12/11/2026)
 - Évaluation de bout en bout (3 modèles de langage, 30 questions tenues à
   part) : la bonne fiche n'était parmi les 3 sources lues par le modèle que

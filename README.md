@@ -89,8 +89,21 @@ Avec Docker (identique au Space) :
 
 ```bash
 docker build -t insurance-claims .
-docker run -p 7860:7860 insurance-claims
+docker volume create donnees
+docker run -p 7860:7860 -v donnees:/data insurance-claims
 ```
+
+Le volume `donnees` garde les modèles téléchargés (llama3.2:3b, bge-m3) et
+l'index : seul le premier démarrage les télécharge. L'application est prête
+quand <http://localhost:7860/ready> répond `ready`. Pour vérifier qu'elle
+fonctionne de bout en bout, sans le serveur distant :
+
+```bash
+python evaluation/verifier_application.py --url http://localhost:7860
+```
+
+Le workflow GitHub « Vérification locale » refait exactement ces étapes sur
+une machine vierge.
 
 Sans Docker (Ollama installé et lancé séparément) :
 
@@ -108,7 +121,7 @@ exemple dans `.env.example`) :
 | Variable | Défaut | Rôle |
 |---|---|---|
 | `OLLAMA_URL` | `http://127.0.0.1:11434/api/generate` | serveur Ollama (celui du conteneur par défaut) |
-| `OLLAMA_MODEL` | `llama3.2:1b` | modèle de génération ; `llama3.2:3b` rédige mieux mais deux fois plus lentement sur CPU |
+| `OLLAMA_MODEL` | `llama3.2:3b` dans le conteneur | modèle de génération ; choisi sur mesure (évaluation de bout en bout avec bge-m3) |
 | `OLLAMA_TIMEOUT_SECONDS` | `120` (180 dans le conteneur) | délai maximal d'un appel |
 | `OLLAMA_NUM_CTX` | `2048` | taille de la fenêtre de contexte (plus petite = plus rapide) |
 | `OLLAMA_NUM_PREDICT` | `400` | longueur maximale d'une réponse (en jetons) |
