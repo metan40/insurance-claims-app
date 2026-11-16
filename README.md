@@ -105,6 +105,27 @@ python evaluation/verifier_application.py --url http://localhost:7860
 Le workflow GitHub « Vérification locale » refait exactement ces étapes sur
 une machine vierge.
 
+### Secours si le serveur distant est indisponible
+
+1. Démarrer l'application en local (commandes ci-dessus) et attendre que
+   <http://localhost:7860/ready> réponde `ready`.
+2. Donner une adresse publique temporaire à l'application locale, sans
+   ouvrir de port sur la box, avec Cloudflare Tunnel (gratuit, sans compte) :
+
+   ```bash
+   cloudflared tunnel --url http://localhost:7860
+   ```
+
+   La commande affiche une adresse `https://….trycloudflare.com`, ouvrable
+   depuis n'importe quel ordinateur tant que la machine locale reste allumée.
+3. Vérifier par cette adresse publique :
+
+   ```bash
+   python evaluation/verifier_application.py --url https://….trycloudflare.com --repetitions 1
+   ```
+
+Mémoire nécessaire : environ 8 Go libres (llama3.2:3b et bge-m3).
+
 Sans Docker (Ollama installé et lancé séparément) :
 
 ```bash
