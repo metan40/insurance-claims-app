@@ -1,0 +1,64 @@
+name: Mesure de la justification des réponses
+
+# 1) L'assistant (llama3.2:3b + bge-m3) répond aux questions hors des documents
+#    et au jeu tenu à part ; chaque réponse complète est enregistrée.
+# 2) Un modèle d'inférence textuelle mesure si chaque phrase affichée découle
+#    de l'extrait cité ; seuil choisi sur « dev », appliqué une fois sur « test ».
+# Ce workflow ne modifie ni ne déploie l'application.
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - .github/workflows/mesure-justification.yml
+  workflow_dispatch:
+
+jobs:
+  repondre:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      OLLAMA_MODEL: llama3.2:3b
+      OLLAMA_TIMEOUT_SECONDS: "400"
+      RETRIEVAL_ENGINE: embeddings
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Installer Ollama et le modèle
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          (ollama serve > ollama.log 2>&1 &)
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:11434/api/tags >/dev/null && break; sleep 2; done
+          ollama pull "$OLLAMA_MODEL"
+      - name: Répondre
+        run: |
+          for jeu in hors_documents heldout; do
+            python evaluation/mesurer_statuts.py --jeu "$jeu" --etiquette justification --repetitions 2 \
+              --enregistrements enregistrements.jsonl
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: enregistrements
+          path: enregistrements.jsonl
+
+  analyser:
+    needs: repondre
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt sentencepiece protobuf tiktoken
+      - uses: actions/download-artifact@v4
+        with:
+          name: enregistrements
+      - name: Analyse
+        run: python evaluation/analyser_justification.py enregistrements.jsonl | tee analyse.md
+      - name: Rapport
+        if: always()
+        run: cat analyse.md >> "$GITHUB_STEP_SUMMARY"

@@ -88,6 +88,12 @@ def load_questions(jeu: str) -> list[dict]:
             with REFERENCE_FILE.open(encoding="utf-8") as handle:
                 sources = {row["question"]: row["source_attendue"] for row in csv.DictReader(handle)}
         return [{"question": q, "expected_title": sources.get(q, "")} for q in DEMO_QUESTIONS]
+    if jeu == "hors_documents":
+        # Questions dont la réponse n'est pas dans les documents (vérifié par
+        # recherche dans le corpus) : la seule bonne conduite est de ne pas conclure.
+        with (ROOT / "evaluation" / "questions_hors_documents.csv").open(encoding="utf-8") as handle:
+            return [{"question": row["question"], "expected_title": "", "partie": row["jeu"],
+                     "categorie": row["categorie"]} for row in csv.DictReader(handle)]
     path = ROOT / "evaluation" / ("heldout_questions.csv" if jeu == "heldout" else "paraphrase_questions.csv")
     with path.open(encoding="utf-8") as handle:
         return [{"question": row["question"], "expected_title": row["expected_title"]} for row in csv.DictReader(handle)]
@@ -95,7 +101,9 @@ def load_questions(jeu: str) -> list[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument("--jeu", choices=["demo", "heldout", "dev"], default="demo")
+    parser.add_argument("--jeu", choices=["demo", "heldout", "dev", "hors_documents"], default="demo")
+    parser.add_argument("--enregistrements", default="",
+                        help="fichier JSONL où écrire chaque réponse complète (pour l'analyse de justification)")
     parser.add_argument("--etiquette", default="avant", help="nom de la mesure, par exemple avant ou apres")
     parser.add_argument("--limite", type=int, default=0, help="ne traiter que les N premières questions")
     parser.add_argument("--repetitions", type=int, default=1, help="passages par question (variabilité du modèle)")
@@ -104,7 +112,8 @@ def main() -> None:
     questions = load_questions(args.jeu)
     if args.limite:
         questions = questions[: args.limite]
-    questions = [dict(item, passage=k) for item in questions for k in range(1, args.repetitions + 1)]
+    questions = [dict(item, passage=k, indice=i) for i, item in enumerate(questions)
+                 for k in range(1, args.repetitions + 1)]
     references = load_references()
     from src.question_parsing import normalize_text as _norm
 
@@ -166,6 +175,24 @@ def main() -> None:
             row[f"appel{index}_extraits_cites"] = len(parsed.evidence) if parsed else ""
             row[f"appel{index}_secondes"] = call["seconds"]
             row[f"appel{index}_sortie_brute"] = call["raw"].replace("\n", " ")[:600]
+        if args.jeu == "hors_documents":
+            # Bonne conduite : aucune conclusion (réponse non trouvée ou extraits seuls).
+            row["refus_correct"] = response["answer_status"] in ("not_found", "fallback")
+            row["categorie"] = item.get("categorie", "")
+            row["partie"] = item.get("partie", "")
+        if args.enregistrements:
+            record = {
+                "jeu": args.jeu, "indice_question": item.get("indice", 0), "passage": item.get("passage", 1),
+                "partie": item.get("partie", ""), "categorie": item.get("categorie", ""),
+                "question": item["question"], "statut": response["answer_status"],
+                "reponse_affichee": str(response.get("answer", "")),
+                "texte_du_modele_affiche": typed.get("answer", "") if response["answer_status"] in ("answered", "partial") else "",
+                "extraits_verifies": [e.get("quote", "") for e in evidence if e.get("verified")],
+                "reponse_conforme": row.get("reponse_conforme"),
+                "bonne_source_citee_et_verifiee": row["bonne_source_citee_et_verifiee"],
+            }
+            with open(args.enregistrements, "a", encoding="utf-8") as handle:
+                handle.write(json.dumps(record, ensure_ascii=False) + "\n")
         rows.append(row)
         print(f"[{number}/{len(questions)}] {row['statut']:<9} appels={row['appels']} "
               f"{total:>6} s  bonne source lue={row['bonne_source_lue']}  {item['question'][:60]}")
@@ -212,6 +239,12 @@ def main() -> None:
         "avec_source_attendue": sum(1 for r in done if r.get("bonne_source_attendue")),
         "repetitions": args.repetitions,
     }
+    if args.jeu == "hors_documents":
+        summary["refus_corrects"] = sum(1 for r in done if r.get("refus_correct") is True)
+        summary["refus_corrects_par_categorie"] = {
+            c: f"{sum(1 for r in done if r.get('categorie') == c and r.get('refus_correct'))}/"
+               f"{sum(1 for r in done if r.get('categorie') == c)}"
+            for c in sorted({r.get("categorie", "") for r in done})}
     summary["part_reponses_conformes"] = (
         round(summary["reponses_conformes"] / summary["avec_reference"], 3) if summary["avec_reference"] else None)
     (RESULTS_DIR / f"statuts_{args.jeu}_{args.etiquette}.json").write_text(

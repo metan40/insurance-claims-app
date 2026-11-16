@@ -1,0 +1,31 @@
+jeu,categorie,question
+dev,autre_branche,"Le pare-brise de ma voiture est fissuré, mon assurance paie-t-elle son remplacement ?"
+test,autre_branche,Comment fonctionne le bonus-malus de mon assurance auto ?
+dev,autre_branche,Quel est le délai de carence de mon assurance décès ?
+test,autre_branche,Ma mutuelle rembourse-t-elle mes lunettes ?
+dev,autre_branche,Mon assurance voyage rembourse-t-elle l'annulation de mon vol ?
+test,autre_branche,Les frais de rapatriement sont-ils couverts si je tombe malade à l'étranger ?
+dev,autre_branche,L'assurance emprunteur de mon crédit immobilier est-elle obligatoire ?
+test,autre_branche,Puis-je racheter mon contrat d'assurance vie avant huit ans ?
+dev,autre_branche,Comment sont imposés les gains de mon assurance vie ?
+test,autre_branche,Mon plan d'épargne retraite est-il garanti en cas de faillite de l'assureur ?
+dev,autre_branche,Mes cryptomonnaies volées sur une plateforme en ligne sont-elles remboursées ?
+test,autre_branche,Mon cheval s'est blessé au pré : les frais de soins sont-ils pris en charge ?
+dev,habitation_absent,Ma trottinette électrique a été volée devant la boulangerie : suis-je remboursé ?
+test,habitation_absent,Des fouines ont rongé l'isolation de mes combles : suis-je couvert ?
+dev,habitation_absent,Des termites ont abîmé la charpente de ma maison : suis-je couvert ?
+test,habitation_absent,Des squatteurs occupent ma résidence secondaire : mon assurance m'aide-t-elle ?
+dev,habitation_absent,Ma serrure connectée a été piratée et on m'a volé des données : suis-je indemnisé ?
+test,habitation_absent,Mon camping-car garé sur un parking a été cambriolé : suis-je remboursé ?
+dev,habitation_absent,La cabane construite dans les arbres de mon jardin est-elle assurée ?
+test,habitation_absent,Mes ruches installées au fond du jardin ont été volées : suis-je couvert ?
+dev,habitation_absent,Les fissures apparues sur mes murs après des travaux du voisin sont-elles prises en charge ?
+test,habitation_absent,Le désamiantage de ma maison est-il pris en charge par mon assurance ?
+dev,hors_assurance,Quelle est la meilleure banque en ligne au Luxembourg ?
+test,hors_assurance,Comment déclarer mes revenus fonciers aux impôts ?
+dev,hors_assurance,Combien de temps faut-il pour obtenir un permis de construire ?
+test,hors_assurance,Quel est le prix moyen du mètre carré à Luxembourg-ville ?
+dev,hors_assurance,Comment résilier mon abonnement téléphonique ?
+test,hors_assurance,Quelle est la durée légale d'un préavis de licenciement ?
+dev,officielle_nuancee,"Pendant mes vacances, une bougie laissée sur la table de jardin a fondu et abîmé la table : suis-je couvert ?"
+test,officielle_nuancee,"Mon vélo a été volé dans le local commun de mon immeuble, qui n'était pas fermé à clé : suis-je couvert ?"
