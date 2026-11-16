@@ -29,7 +29,17 @@ Protocole, fixé avant toute mesure :
 * il est appliqué une seule fois sur test ; comparaison appariée avant/après
   (McNemar exact sur les mêmes passages) et intervalles de Wilson.
 
-Usage : python evaluation/analyser_justification.py enregistrements.jsonl
+Variante « documents » (16/11/2026, définie après l'échec de la première) :
+avec les seuls extraits cités comme prémisses, les bonnes réponses obtenaient
+un score quasi nul (le modèle rédige à partir du document entier, pas de son
+court extrait) : le contrôle bloquait 11 bonnes réponses sur 15. Ici, les
+prémisses sont des fenêtres de 3 phrases des documents cités ([S1]…), ces
+documents étant retrouvés par la même recherche (déterministe) que lors de la
+réponse. Même protocole dev / test.
+
+Usage :
+    python evaluation/analyser_justification.py enregistrements.jsonl
+    python evaluation/analyser_justification.py enregistrements.jsonl --premisse documents
 """
 from __future__ import annotations
 
@@ -81,16 +91,55 @@ class Juge:
         self.entail = labels["entailment"]
 
     def implication(self, premisses: list[str], hypothese: str) -> float:
-        if not premisses:
-            return 0.0
-        batch = self.tokenizer(premisses, [hypothese] * len(premisses), truncation=True,
-                               max_length=512, padding=True, return_tensors="pt")
-        with self.torch.no_grad():
-            probs = self.torch.softmax(self.model(**batch).logits, dim=-1)[:, self.entail]
-        return float(probs.max())
+        best = 0.0
+        for start in range(0, len(premisses), 16):
+            chunk = premisses[start:start + 16]
+            batch = self.tokenizer(chunk, [hypothese] * len(chunk), truncation=True,
+                                   max_length=512, padding=True, return_tensors="pt")
+            with self.torch.no_grad():
+                probs = self.torch.softmax(self.model(**batch).logits, dim=-1)[:, self.entail]
+            best = max(best, float(probs.max()))
+        return best
 
 
-def score(juge: Juge, record: dict) -> float | None:
+def fenetres(texte: str, taille: int = 3) -> list[str]:
+    ps = [p.strip() for p in re.split(r"(?<=[.!?;:])\s+|\n+", texte) if p.strip()]
+    if len(ps) <= taille:
+        return [" ".join(ps)] if ps else []
+    return [" ".join(ps[i:i + taille]) for i in range(len(ps) - taille + 1)]
+
+
+class Documents:
+    """Retrouve les documents lus par le modèle : même recherche que l'application."""
+
+    def __init__(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        sys.path.insert(0, str(root))
+        import src.app as app
+        if app.embedding_retriever is not None and not app.embedding_retriever.wait(3600):
+            raise SystemExit(f"Embeddings indisponibles : {app.embedding_retriever.error}")
+        self.app = app
+        self.cache: dict[str, list[dict]] = {}
+
+    def sources(self, question: str) -> list[dict]:
+        if question not in self.cache:
+            captured = {}
+
+            def capture(q, results):
+                captured["results"] = results
+                return {"status": "not_found", "answer": "", "typed_answer": None, "attempts": 0}
+
+            original = self.app.generate_answer
+            self.app.generate_answer = capture
+            try:
+                self.app.search(self.app.Question(question=question))
+            finally:
+                self.app.generate_answer = original
+            self.cache[question] = captured["results"]
+        return self.cache[question]
+
+
+def score(juge: Juge, record: dict, documents: "Documents | None" = None) -> float | None:
     """None si l'application ne conclut pas déjà (rien à vérifier)."""
     if record["statut"] not in CONCLUT:
         return None
@@ -99,6 +148,11 @@ def score(juge: Juge, record: dict) -> float | None:
         return None
     quotes = [q for q in record.get("extraits_verifies", []) if q.strip()]
     premisses = quotes + ([" ".join(quotes)] if len(quotes) > 1 else [])
+    if documents is not None:
+        cites = set(re.findall(r"\[(S\d+)\]", record.get("texte_du_modele_affiche", "")))
+        sources = documents.sources(record["question"])
+        lus = [s for s in sources if s["source_id"] in cites] or sources[:3]
+        premisses = premisses + [f for s in lus for f in fenetres(s["content"])]
     return min(juge.implication(premisses, h) for h in hs)
 
 
@@ -115,11 +169,13 @@ def partie(record: dict) -> str:
     return "dev" if record["indice_question"] % 2 == 0 else "test"
 
 
-def main(path: str) -> None:
+def main(path: str, premisse: str = "extraits") -> None:
     records = [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
     juge = Juge()
+    documents = Documents() if premisse == "documents" else None
+    print(f"Prémisses : {premisse}\n")
     for r in records:
-        r["score"] = score(juge, r)
+        r["score"] = score(juge, r, documents)
 
     notees = [r for r in records if r.get("categorie") != "officielle_nuancee"
               and (r["jeu"] == "hors_documents" or r.get("reponse_conforme") is not None)]
@@ -173,4 +229,9 @@ def main(path: str) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("enregistrements")
+    parser.add_argument("--premisse", choices=["extraits", "documents"], default="extraits")
+    args = parser.parse_args()
+    main(args.enregistrements, args.premisse)

@@ -1,0 +1,38 @@
+name: Analyse de justification (prémisses = documents cités)
+
+# Réutilise les réponses enregistrées par la mesure du 16/11/2026 (run
+# 43862906077) : aucune nouvelle génération, seul le contrôle change.
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - .github/workflows/analyse-justification-documents.yml
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  analyser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      RETRIEVAL_ENGINE: embeddings
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt sentencepiece protobuf tiktoken
+      - uses: actions/download-artifact@v4
+        with:
+          name: enregistrements
+          run-id: 43862906077
+          github-token: ${{ github.token }}
+      - name: Analyse
+        run: python evaluation/analyser_justification.py enregistrements.jsonl --premisse documents | tee analyse.md
+      - name: Rapport
+        if: always()
+        run: cat analyse.md >> "$GITHUB_STEP_SUMMARY"
