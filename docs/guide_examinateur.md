@@ -8,32 +8,34 @@ lire le code. Chaque étape indique **quoi faire** et **le résultat attendu**.
 - Accès direct à l'API du Space : `https://metan40-insurance-claims-assistance.hf.space`
   (ci-dessous noté `<URL>`)
 
-> Le Space gratuit se met en veille après une période d'inactivité. Au premier
-> accès, le conteneur redémarre et télécharge le modèle de langage : comptez
-> quelques minutes avant que `/ready` réponde `ready`.
+> Le Space reste allumé en permanence. Après une mise à jour, le conteneur
+> redémarre et recharge les modèles : comptez quelques minutes avant que
+> `/ready` réponde `ready`. Une réponse prend de l'ordre d'une minute
+> (serveur sans GPU).
 
 ## 1. Contrôles techniques (2 minutes)
 
 | Étape | Action | Résultat attendu |
 |---|---|---|
-| 1 | Ouvrir `<URL>/health` | `{"status": "ok", "app_version": "19.0.0"}` |
-| 2 | Ouvrir `<URL>/version` | version `19.0.0` et modèle `llama3.2:1b` |
-| 3 | Ouvrir `<URL>/ready` | `"status": "ready"` et toutes les vérifications à `true`. Une réponse 503 avec `ollama_model_available: false` signifie que le modèle est encore en cours de téléchargement : patienter puis recharger. |
+| 1 | Ouvrir `<URL>/health` | `{"status": "ok", "app_version": "19.5.0"}` |
+| 2 | Ouvrir `<URL>/version` | version `19.5.0`, modèle `llama3.2:3b` |
+| 3 | Ouvrir `<URL>/ready` | `"status": "ready"`, `retrieval_engine: embeddings` et toutes les vérifications à `true`. Une réponse 503 signifie qu'un modèle est encore en cours de chargement : patienter puis recharger. |
 | 4 | Ouvrir `<URL>/docs` | documentation interactive listant `/search`, `/health`, `/ready`, `/version`, `/claims` et `/api/claims/...` |
 
 ## 2. Assistant documentaire RAG (5 minutes)
 
 Ouvrir `<URL>/`, saisir chaque question, puis cliquer sur **Rechercher**.
+Les taux indiqués ont été mesurés sur l'application en marche
+(`evaluation/verifier_application.py`, 5 passages par question ; détail dans
+`docs/decisions_mesurees.md`).
 
-| Question à saisir | Source attendue parmi les premières | Ce qu'il faut observer |
+| Question à saisir | Comportement attendu | Mesuré |
 |---|---|---|
-| Comment fonctionne la franchise en assurance habitation ? | S1 « Comment fonctionne la franchise d’une assurance habitation ? » | réponse en français citant `[S1]` |
-| Qui doit payer le serrurier, le propriétaire ou le locataire ? | S1 « Propriétaire ou locataire : qui doit payer le serrurier ? » | répartition propriétaire / locataire |
-| Les panneaux solaires sont-ils couverts ? | S1 « Les panneaux solaires sont-ils couverts ? » | réponse appuyée sur la source |
-| Quelle est la limite de garantie des surconsommations d'eau ? | S1 « Quelle est la limite de garantie des surconsommations d’eau » | montant ou plafond cité |
-| Mes capteurs photovoltaïques sont-ils protégés ? | S1 « Les panneaux solaires sont-ils couverts ? » | « Termes métier ajoutés : panneaux solaires » : le synonyme a permis de retrouver la fiche |
-| Mon aquarium s'est cassé, suis-je couvert ? | « Mon aquarium s'est cassé. Suis-je couvert ? » en S3 | exemple d'un cas où la bonne source n'est pas première |
-| Quel est le cours de l'action Apple ? | aucune source pertinente | statut « Réponse absente des documents » : l'application refuse d'inventer |
+| Que signifie louer un logement équipé de mobilier ? | réponse complète, document « Qu'est-ce qu'une location meublée ? » cité | 5/5 |
+| La moisissure sur mes murs est-elle prise en charge ? | réponse partielle : la restriction de la source est affichée sous la réponse | 5/5 |
+| Mon emplacement de stationnement doit-il être assuré ? | réponse partielle appuyée sur « L'assurance d'une place de stationnement » | 4/5 |
+| Quel est le délai de carence de mon assurance décès ? | **limite connue** : la réponse n'est pas dans les documents, mais le modèle conclut souvent à partir d'une source sans rapport | 0/5 |
+| Pendant mes vacances, une bougie laissée sur la table de jardin a fondu et abîmé la table : suis-je couvert ? | au mieux, statut « non vérifiable » : seuls les extraits vérifiés sont affichés | 2/5 |
 
 Pour chaque réponse, vérifier :
 
@@ -41,24 +43,19 @@ Pour chaque réponse, vérifier :
    justifiée*, *réponse partielle*, *réponse absente des documents*, ou
    *non vérifiable* (extraits affichés à la place). Ce statut est décidé par
    l'application, pas par le modèle.
-2. **Extraits justificatifs** : chaque phrase citée par le modèle est marquée
-   ✔ si l'application l'a retrouvée dans la source indiquée, ✘ sinon. La
-   confiance affichée est celle déclarée par le modèle (non calibrée).
-3. **Contrôle des références** : liste des sources citées, identifiants
-   inconnus éventuels, sources disponibles mais non citées. Ce contrôle vérifie
-   les identifiants `[S1]`…`[S5]`, pas la véracité du contenu.
-4. **Durées observées** : vectorisation TF-IDF, classement hybride, génération,
-   total. La génération représente l'essentiel du temps ; la ligne de
-   confiance indique aussi combien de sources le modèle a lues (1 si la
-   meilleure source suffisait, 3 sinon) et le nombre d'appels.
-5. **Sources** : pour chaque source, la similarité cosinus TF-IDF, le score
-   lexical et le score de fusion des rangs (aucun n'est une probabilité), puis
-   l'extrait du document. L'examinateur peut lire l'extrait pour juger si la
-   réponse est fidèle à la source.
+2. **Étiquettes [S1], [S2]…** : elles renvoient aux sources listées sous la
+   réponse ; chaque extrait cité est retrouvé mot pour mot dans sa source.
+3. **« Condition indiquée par la source »** : restriction recopiée de la
+   source quand la réponse l'avait omise.
+4. **Sources** : similarité sémantique (bge-m3) entre la question et le
+   document ; ce n'est pas une probabilité d'exactitude.
+5. **Durées** : recherche, génération, total.
 
-Si aucun extrait du modèle n'est retrouvé dans les sources après deux
-tentatives, l'application affiche volontairement les extraits des sources au
-lieu d'une réponse non vérifiable.
+Lecture des limites : sur 28 passages de questions dont la réponse n'est pas
+dans les documents, l'application ne s'abstient que 5 fois. Deux contrôles par
+inférence textuelle ont été testés ; ils bloquaient la plupart de ces
+conclusions mais aussi la moitié des bonnes réponses : ils n'ont pas été
+intégrés (`CHANGELOG.md`, 19.5.0).
 
 ## 3. Tableau de bord des sinistres (2 minutes)
 
@@ -70,7 +67,7 @@ Ouvrir `<URL>/claims`.
 | Indicateurs | 120 dossiers : 72 acceptés, 27 refusés, 21 en attente ; taux d'acceptation 72,73 % calculé sur les 99 dossiers clos (les Pending sont exclus) |
 | Métriques du modèle | régression logistique évaluée sur 25 dossiers de test : exactitude 68 %, exactitude équilibrée 60,3 %, F1 77,8 %, ROC AUC 75,4 % |
 | Bouton **Analyser** du dossier C00020 (catastrophe naturelle, en attente) | orientation « Compléter le dossier avant décision » ; point bloquant « garantie à vérifier » ; alerte d'ancienneté du dossier ; facteurs du score (la garantie à vérifier fait baisser le score) ; clauses couverture, qualification, indemnisation, franchise |
-| Bouton **Analyser** du dossier C00001 (bris de glace) | probabilité ≈ 85 % ; orientation « Vérifier le contrat » car le corpus n'a pas de fiche générale sur le bris de glace ; alerte montant élevé |
+| Bouton **Analyser** du dossier C00001 (bris de glace) | probabilité ≈ 85 % ; orientation « Vérifier le contrat » car le corpus n'a pas de document général sur le bris de glace ; alerte montant élevé |
 | Lien « Poser cette question à l'assistant » sous une clause | ouvre l'assistant avec la question préremplie et lance la recherche |
 
 Les mêmes informations sont disponibles en JSON :
@@ -105,7 +102,7 @@ cd insurance-claims-app
 python -m venv .venv && source .venv/bin/activate     # Windows : .venv\Scripts\activate
 pip install -r requirements-dev.txt
 python -m pytest -v                       # suite complète, sans Ollama
-python evaluation/evaluate_pipeline.py    # mesures Recall@k et MRR
+python evaluation/evaluate_pipeline.py    # mesures Recall@k et MRR (recherche hybride)
 ```
 
 Résultats attendus : tous les tests réussis (aucun ne nécessite Ollama ni
@@ -117,8 +114,12 @@ tests s'exécutent automatiquement sur GitHub à chaque modification (onglet
 
 ```bash
 docker build -t insurance-claims .
-docker run -p 7860:7860 insurance-claims
-# puis ouvrir http://localhost:7860
+docker volume create donnees
+docker run -p 7860:7860 -v donnees:/data insurance-claims
+# puis ouvrir http://localhost:7860 quand http://localhost:7860/ready répond « ready »
+python evaluation/verifier_application.py --url http://localhost:7860
 ```
 
-Le premier démarrage télécharge le modèle `llama3.2:1b` (environ 2 Go).
+Le premier démarrage télécharge `llama3.2:3b` et `bge-m3` ; le volume
+`donnees` les conserve pour les démarrages suivants. Mémoire nécessaire :
+environ 8 Go libres.

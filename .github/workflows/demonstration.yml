@@ -1,0 +1,49 @@
+name: Démonstration sur le Space en ligne
+
+# Pose les 5 questions de démonstration à l'application publiée et
+# interroge le tableau de bord des sinistres, sans rien redémarrer ni
+# déployer. Les réponses complètes (JSON) sont écrites dans le journal.
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - .github/workflows/demonstration.yml
+  workflow_dispatch:
+
+jobs:
+  demonstration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      URL: https://metan40-insurance-claims-assistance.hf.space
+    steps:
+      - name: État de l'application
+        run: curl -s -m 60 "$URL/ready"; echo
+      - name: Cinq questions
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.request
+          url = os.environ["URL"]
+          questions = [
+              "Que signifie louer un logement équipé de mobilier ?",
+              "La moisissure sur mes murs est-elle prise en charge ?",
+              "Mon emplacement de stationnement doit-il être assuré ?",
+              "Quel est le délai de carence de mon assurance décès ?",
+              "Pendant mes vacances, une bougie laissée sur la table de jardin a fondu et abîmé la table : suis-je couvert ?",
+          ]
+          for q in questions:
+              start = time.time()
+              req = urllib.request.Request(url + "/search", data=json.dumps({"question": q}).encode(),
+                                           headers={"Content-Type": "application/json"})
+              with urllib.request.urlopen(req, timeout=900) as r:
+                  body = json.loads(r.read())
+              print("=" * 100)
+              print("QUESTION :", q, f"({time.time() - start:.0f} s)")
+              print(json.dumps(body, ensure_ascii=False, indent=1)[:12000])
+          PY
+      - name: Tableau de bord des sinistres
+        run: |
+          for path in api/claims/summary api/claims/model api/claims/C00020/decision-support api/claims/C00001/analysis; do
+            echo "==================== $path"
+            curl -s -m 60 "$URL/$path" | python3 -m json.tool --no-ensure-ascii | head -150
+          done
