@@ -127,13 +127,24 @@ une machine vierge.
 
 Mémoire nécessaire : environ 8 Go libres (llama3.2:3b et bge-m3).
 
-Sans Docker (Ollama installé et lancé séparément) :
+Sans Docker (Ollama installé et lancé séparément), avec les réglages du Space :
 
 ```bash
 pip install -r requirements.txt
 ollama pull llama3.2:3b
-uvicorn src.app:app --host 0.0.0.0 --port 7860
+OLLAMA_MODEL=llama3.2:3b RETRIEVAL_ENGINE=embeddings uvicorn src.app:app --host 0.0.0.0 --port 7860
 ```
+
+Sous Windows (PowerShell, Ollama pour Windows lancé) : un script fait les
+mêmes étapes, environnement Python compris :
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\lancer_local_windows.ps1
+```
+
+Sans `RETRIEVAL_ENGINE=embeddings`, l'application utilise la recherche
+hybride TF-IDF de la version 19.4.0. Au premier démarrage, le modèle
+d'embeddings bge-m3 (environ 2 Go) est téléchargé depuis Hugging Face.
 
 ## Configuration
 
