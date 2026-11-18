@@ -1,0 +1,252 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}[Scale=0.92]
+\setsansfont{DejaVu Sans}[Scale=0.92]
+\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,tabularx}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist{itemsep=2pt,topsep=4pt}
+\definecolor{bleu}{HTML}{1F5FA8}
+\definecolor{vert}{HTML}{1D6B34}
+\definecolor{rouge}{HTML}{9B2C2C}
+\newtcolorbox{question}[1]{colback=blue!2,colframe=bleu!70,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{reponse}{colback=gray!5,colframe=gray!40,boxrule=0.4pt,breakable}
+\newfontfamily\symb{DejaVu Sans}
+\newcommand{\ok}{\textcolor{vert}{{\symb ✔}}}
+\newcommand{\ko}{\textcolor{rouge}{{\symb ✘}}}
+
+\title{\textbf{Insurance Claims Assistance 19.5.0}\\[4pt]\large Démonstration commentée : cinq questions et le score des sinistres}
+\date{Mesures effectuées le 18 novembre 2026 sur l'application en ligne}
+
+\begin{document}
+\sloppy
+\maketitle
+
+\section*{Ce que fait l'application}
+L'application aide un gestionnaire de sinistres habitation. Elle n'automatise aucune décision.
+\begin{enumerate}
+\item \textbf{Assistant documentaire} : une question est rapprochée, par similarité sémantique
+(embeddings bge-m3), des 201 documents d'assurance habitation. Les meilleurs documents sont lus
+par un modèle de langage local (\texttt{llama3.2:3b} via Ollama), qui rédige une réponse courte
+avec des extraits. \textbf{L'application vérifie elle-même} que chaque extrait figure mot pour mot
+dans la source citée, masque toute phrase non appuyée, ajoute les conditions omises et décide du
+statut affiché.
+\item \textbf{Score des sinistres} : sur 120 dossiers \emph{fictifs}, une régression logistique
+estime la probabilité d'acceptation d'un dossier et explique les facteurs qui la font monter ou
+baisser ; des règles métier signalent les points bloquants et proposent une orientation.
+\end{enumerate}
+
+\section*{Comment lire une réponse}
+\begin{tabularx}{\linewidth}{>{\bfseries}l X}
+\toprule
+Statut « réponse trouvée et justifiée » & le modèle conclut et ses extraits sont retrouvés dans les sources \\
+Statut « réponse partielle » & la source ne couvre qu'une partie de la question, une phrase a été masquée ou une condition ajoutée \\
+Statut « réponse absente des documents » & aucune source ne répond : rien n'est affirmé \\
+Statut « non vérifiable » & la synthèse contenait une affirmation sans appui : seuls les extraits vérifiés sont montrés \\
+{[S1], [S2]…} & renvoient aux sources listées sous la réponse \\
+\ok\ / \ko & extrait retrouvé / non retrouvé dans la source indiquée \\
+Similarité & proximité sémantique question–document (cosinus bge-m3), pas une probabilité d'exactitude \\
+\bottomrule
+\end{tabularx}
+
+\section{Les cinq questions}
+Chaque question a été posée une fois à l'application en ligne (réponses ci-dessous telles
+qu'affichées). Les taux « mesuré » proviennent de 5 passages par question
+(script \texttt{verifier\_application.py} du dossier \texttt{evaluation}).
+
+%------------------------------------------------------------
+\begin{question}{1. Réponse complète — « Que signifie louer un logement équipé de mobilier ? »}
+Statut : \textbf{réponse trouvée et justifiée} ; 39 s ; mesuré 5/5.
+\begin{reponse}
+Louer un logement équipé de mobilier signifie que le propriétaire doit fournir un logement avec les
+éléments indispensables pour y vivre normalement dès l'arrivée, tels que des sièges, des luminaires,
+des étagères de rangement, etc. Le propriétaire doit également tenir un inventaire des équipements et
+mobiliers mentionnant leur état d'usage. [S1]
+\end{reponse}
+Extraits : \ok\ « C'est un logement équipé d'éléments indispensables permettant d'y vivre
+normalement dès l'arrivée dans les lieux. » [S1] ; \ko\ « Le propriétaire d'un meublé doit fournir
+un logement habitable et paisible. » [S2].\\
+Sources : S1 « Qu'est-ce qu'une location meublée ? », S2 « Assurance location meublée »…
+
+\smallskip\textbf{Commentaire.} La question reformule le titre du document (« équipé de mobilier »
+pour « meublée ») : c'est la recherche sémantique qui le retrouve en premier, sans mot commun.
+Le modèle n'a lu que S1 (boucle « top-1 » : la meilleure source suffisait, réponse en 39 s au lieu
+de 80 s). L'extrait attribué à S2 est marqué \ko\ : S2 n'a pas été transmise au modèle, la
+citation est donc rejetée — la vérification fonctionne même quand la phrase est plausible.
+\end{question}
+
+%------------------------------------------------------------
+\begin{question}{2. Réponse partielle avec restriction — « La moisissure sur mes murs est-elle prise en charge ? »}
+Statut : \textbf{réponse partielle} ; 81 s ; mesuré 5/5.
+\begin{reponse}
+La moisissure sur les murs n'est pas prise en charge par l'assurance habitation MMA, car les
+dommages causés par des champignons ou des moisissures ne sont pas assurés dans le cadre de la
+garantie dégât des eaux. [S1] [S2]
+\end{reponse}
+Extraits : \ok\ « Dans le cadre de la garantie dégât des eaux, les dommages dus à l'humidité ou à la
+condensation, les dommages causés par des champignons ou des moisissures, ne sont pas assurés »
+[S2] ; \ok\ « Le contrat d'assurance habitation MMA propose le dépannage des installations de
+serrurerie. » [S1].\\
+Sources : S1 « … quelle prise en charge en cas de problème de serrure ? », S2 « Est-ce que les
+dommages dus à l'humidité sont couverts ? »
+
+\smallskip\textbf{Commentaire.} La conclusion est juste et appuyée mot pour mot par S2 : c'est
+une \emph{exclusion} correctement trouvée. Le second extrait (serrurerie) est réel, donc
+\ok, mais sans rapport : la vérification prouve qu'un extrait \emph{existe}, pas qu'il
+\emph{justifie} la phrase. C'est la limite documentée qui a motivé l'essai du contrôle par inférence
+textuelle (non retenu, voir l'addendum).
+\end{question}
+
+%------------------------------------------------------------
+\begin{question}{3. Réponse partielle — « Mon emplacement de stationnement doit-il être assuré ? »}
+Statut : \textbf{réponse partielle} ; 85 s ; mesuré 4/5.
+\begin{reponse}
+Si vous êtes propriétaire d'une copropriété, votre place de stationnement est souvent couverte par
+l'assurance de la copropriété. [S1]\\
+\emph{1 phrase de la synthèse du modèle ne figurait pas dans les sources citées et n'a pas été affichée.}
+\end{reponse}
+Extraits : \ok\ « Dans le cas d'une place de stationnement, tout particulièrement située au sein
+d'une copropriété, vous n'avez pas besoin de souscrire une assurance parking. » ; \ok\ « La place de
+stationnement est couverte par l'assurance de la copropriété, étant donné qu'elle est considérée
+comme une partie commune… ».\\
+Sources : S1 « L'assurance d'une place de stationnement », S2 « Faut-il assurer une place de parking ? »…
+
+\smallskip\textbf{Commentaire.} Une phrase rédigée par le modèle n'était pas appuyée : elle est
+\emph{masquée} et l'utilisateur en est informé. Le statut passe à « partielle » : la réponse est
+vraie dans le cas de la copropriété, la source ne traite pas les autres cas. C'est le comportement
+attendu : mieux vaut une réponse incomplète et sûre qu'une réponse complète inventée.
+\end{question}
+
+%------------------------------------------------------------
+\begin{question}{4. Limite connue — « Quel est le délai de carence de mon assurance décès ? »}
+Statut : \textbf{réponse partielle} (attendu : réponse absente) ; 82 s ; mesuré 0/5.
+\begin{reponse}
+Le délai de carence de votre assurance décès est de 90 jours après la prise d'effet de l'assurance
+MMA de votre nouvelle habitation, sous condition que votre précédente habitation ait été également
+assurée par MMA. [S1]
+\end{reponse}
+Extrait : \ok\ « les garanties souscrites pour la précédente habitation perdurent pendant 90 jours ».
+Sources : S1 « Que couvre la garantie déménagement ? »…
+
+\smallskip\textbf{Commentaire.} La question porte sur l'assurance décès, absente du corpus
+(habitation uniquement). La recherche renvoie toujours les documents \emph{les plus proches},
+même s'ils ne traitent pas le sujet ; le modèle a pris un vrai extrait sur le déménagement
+(« 90 jours ») et l'a plaqué sur la question. Chaque mot vient de la question ou de la source :
+le contrôle d'ancrage ne le voit pas. \textbf{C'est la limite mesurée} : sur 28 passages de
+questions hors des documents, l'application ne s'abstient que 5 fois (18\,\%). Deux correcteurs
+par inférence textuelle bloquaient 86\,\% de ces conclusions, mais aussi 7 bonnes réponses sur 15 :
+ils n'ont pas été intégrés. La correction de fond — vérifier que le \emph{sujet} de la question
+existe dans les documents avant de rédiger — est conçue dès le départ dans le projet suivant.
+\end{question}
+
+%------------------------------------------------------------
+\begin{question}{5. « Je ne sais pas » étayé — bougie fondue sur la table de jardin}
+Statut : \textbf{non vérifiable : extraits affichés} ; 59 s ; mesuré 2/5.
+\begin{reponse}
+La synthèse rédigée par le modèle contenait des affirmations qui ne figurent pas dans les sources
+qu'il a citées. Pour ne rien affirmer sans preuve, l'application ne l'affiche pas : voici les
+extraits vérifiés, à lire pour juger vous-même.
+« Le contenu des boîtes aux lettres n'est pas assuré » [S1] ; « Les objets à risque de vol (voir
+définition) appartenant à vos invités ne sont pas assurés » [S2].
+\end{reponse}
+Phrases bloquées : « Si vous avez acheté une assurance habitation, vous êtes couvert contre les
+dégâts causés par les objets à risque de vol… » (termes absents des sources : \emph{acheté, dégâts,
+causés}).
+
+\smallskip\textbf{Commentaire.} Aucun document ne traite d'un objet fondu par la chaleur. Le
+modèle a rédigé une conclusion sans rapport ; l'application l'a détectée (mots absents des
+sources) et a basculé en mode secours. C'est le garde-fou central : \emph{aucune affirmation sans
+preuve}. Sur 5 passages, ce garde-fou se déclenche 2 fois ; les 3 autres fois, le modèle conclut
+avec des mots présents dans les sources, ce qui rejoint la limite de la question 4.
+\end{question}
+
+\section{Le score des sinistres (tableau de bord \texttt{/claims})}
+
+\subsection{Indicateurs du portefeuille fictif}
+120 dossiers : 72 acceptés, 27 refusés, 21 en attente. Le taux d'acceptation est calculé sur les
+dossiers \emph{clos} seulement : $72/(72+27) = 72{,}73\,\%$ ; inclure les dossiers en attente le
+ferait baisser artificiellement ($72/120 = 60\,\%$). Durée moyenne de traitement des dossiers clos :
+22,1 jours (médiane 23).
+
+\subsection{Le modèle}
+Régression logistique sur 7 variables (type de sinistre, garantie, canal de déclaration, dossier
+complet, montant demandé, ancienneté du client, sinistres précédents) ; variables catégorielles en
+indicatrices, variables numériques standardisées. Pour le dossier $i$ :
+\[
+\operatorname{logit}(p_i)=\ln\frac{p_i}{1-p_i}=\beta_0+\sum_{f}\beta_f\,x_{i,f},
+\qquad p_i=\frac{1}{1+e^{-(\beta_0+\sum_f\beta_f x_{i,f})}} ,
+\]
+où $p_i$ est la probabilité d'acceptation, $x_{i,f}$ la valeur (standardisée ou indicatrice) de la
+variable $f$ et $\beta_f$ son coefficient. La \emph{contribution} affichée d'un facteur est
+$\beta_f\,x_{i,f}$ : positive, elle fait monter le score ; négative, elle le fait baisser.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{lr X}
+\toprule
+Mesure (25 dossiers de test) & Valeur & Signification \\
+\midrule
+Exactitude & 68\,\% (17/25) & IC de Wilson 95\,\% [48\,\% ; 83\,\%] \\
+Exactitude équilibrée & 60,3\,\% & moyenne des rappels des deux classes (corrige le déséquilibre 73/27) \\
+F1 (classe « acceptée ») & 77,8\,\% & $2PR/(P+R)$, précision $P$ et rappel $R$ \\
+ROC AUC & 75,4\,\% & probabilité qu'un dossier accepté ait un score supérieur à un refusé \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{À dire :} avec 25 dossiers de test, l'intervalle de l'exactitude va de 48\,\% à 83\,\% ;
+sur des données fictives, ces chiffres prouvent que la chaîne fonctionne, pas que le modèle est
+bon. L'exactitude équilibrée (60\,\%) montre que les refus sont mal reconnus : un modèle qui
+accepterait tout aurait déjà 73\,\% d'exactitude. D'où la règle : \emph{aucune décision
+automatique}.
+
+\subsection{Un dossier expliqué : C00020 (catastrophe naturelle, en attente)}
+Probabilité estimée : 21,3\,\%, soit $\operatorname{logit}=\ln(0{,}213/0{,}787)=-1{,}31$.
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Facteur & Contribution $\beta_f x_{i,f}$ \\
+\midrule
+Type de sinistre = Catastrophe naturelle & $+0{,}771$ \\
+Dossier complet = Oui & $+0{,}643$ \\
+Ancienneté du client & $+0{,}195$ \\
+Garantie = À vérifier & $-1{,}235$ \\
+Canal de déclaration = Courtier & $-0{,}363$ \\
+Sinistres précédents & $-0{,}189$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+La somme des six facteurs affichés vaut $-0{,}18$ ; la constante $\beta_0$ et les autres variables
+apportent le reste, jusqu'à $-1{,}31$. Le facteur dominant est « garantie à vérifier ».
+
+\textbf{Règles métier} (indépendantes du score) : point \emph{bloquant} « garantie à vérifier » ;
+alerte « en attente depuis 318 jours : anomalie probable, à escalader ». \textbf{Orientation} :
+« compléter le dossier avant décision », car un point bloquant rend le score inexploitable seul.
+Les clauses du contrat correspondant au type de sinistre sont proposées, chacune avec un lien vers
+l'assistant documentaire : les deux briques de l'application se rejoignent ici.
+
+Pour comparaison, C00001 (bris de glace, accepté) : probabilité 85,4\,\%, garantie « Oui », dossier
+complet ; validation humaine toujours requise.
+
+\section{Questions probables et réponses courtes}
+\begin{description}
+\item[Pourquoi un modèle local ?] Les données de sinistres ne quittent pas l'infrastructure ;
+coût fixe ; même modèle en ligne et en local.
+\item[Comment savez-vous que la nouvelle recherche est meilleure ?] Bon document parmi les 3
+premiers : 26/30 contre 13/30 sur des questions tenues à part (McNemar, $p=0{,}001$).
+\item[Et de bout en bout ?] 41/90 réponses conformes contre 28/90 ; 8 questions améliorées, 2 en
+recul ; $p=0{,}11$ : gain net, pas encore significatif avec 30 questions.
+\item[Que se passe-t-il si le serveur tombe ?] Même image Docker en local (trois commandes), avec
+adresse publique temporaire par Cloudflare Tunnel ; procédure vérifiée sur une machine vierge.
+\item[Quelle est la principale limite ?] Les questions hors du périmètre (question 4) ; elle est
+mesurée, et la correction testée a été écartée parce qu'elle faisait perdre de bonnes réponses.
+\end{description}
+
+\end{document}
