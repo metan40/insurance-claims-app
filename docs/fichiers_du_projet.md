@@ -16,6 +16,40 @@ service et n'est pas détaillé ici.
 | `Data/insurance-fr.csv` | 201 documents d'information sur l'assurance habitation, en français, sur deux colonnes : `title` (titre, souvent formulé comme une question) et `content` (texte). C'est le corpus de l'assistant documentaire. | Jeu de données public `zelros/insurance-fr`, publié sur Hugging Face par la société Zelros (dernière mise à jour le 21/10/2023). Il a été téléchargé par le script `experiments/scripts/download_dataset.py` depuis `https://huggingface.co/datasets/zelros/insurance-fr/resolve/main/data.csv`. Beaucoup de textes citent l'assureur MMA. La fiche du jeu de données n'indique aucune licence. |
 | `Data/synthetic_claims.csv` | 120 dossiers de sinistres : type, garantie, montant demandé, ancienneté du client, sinistres précédents, canal de déclaration, dossier complet, statut (72 acceptés, 27 refusés, 21 en attente), date de déclaration, délai de traitement. Ce fichier alimente le tableau de bord `/claims`. | Données fictives créées pour la démonstration, sans source externe. Chaque ligne porte la mention `FICTIF_DEMONSTRATION` dans la colonne `jeu_de_donnees`. Le tableau 3 du rapport v19 décrit chaque variable. |
 
+## 1 bis. Modèles utilisés et leur origine
+
+Les deux modèles ne sont pas dans le dépôt. Ils sont téléchargés au premier
+lancement, depuis la source indiquée ci-dessous.
+
+| Modèle | Rôle dans l'application | Origine | Licence |
+|---|---|---|---|
+| `BAAI/bge-m3` | Transforme la question et chaque document en un vecteur de 1 024 nombres. Le document dont le vecteur est le plus proche de celui de la question (similarité cosinus) est le plus pertinent. | Publié sur Hugging Face (<https://huggingface.co/BAAI/bge-m3>) par le BAAI (Beijing Academy of Artificial Intelligence), un institut public de recherche en intelligence artificielle de Pékin. Article de référence : J. Chen et al., « BGE M3-Embedding: Multi-Lingual, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation », 2024, arXiv:2402.03216. | MIT |
+| `llama3.2:3b` | Rédige la réponse à partir des documents retrouvés, au format JSON imposé. | Modèle Llama 3.2 3B Instruct de Meta, distribué par la bibliothèque de modèles d'Ollama (<https://ollama.com/library/llama3.2>) dans une version compressée de 2,0 Go. | Llama 3.2 Community License (Meta) |
+
+**Ce que veut dire le nom bge-m3.** BGE signifie *BAAI General Embedding*.
+Les trois « M » désignent trois propriétés décrites dans l'article :
+*multi-lingual* (plus de 100 langues, dont le français),
+*multi-functionality* (le même modèle sait produire trois représentations :
+un vecteur dense, des poids par mot comparables à TF-IDF, et un vecteur par
+token) et *multi-granularity* (des textes de quelques mots jusqu'à
+8 192 tokens). L'application n'utilise que le vecteur dense, de dimension
+1 024, par la bibliothèque `sentence-transformers`. Le modèle compte environ
+568 millions de paramètres, d'où ses 2,3 Go en précision de 32 bits.
+
+**Le document qui a justifié l'abandon de TF-IDF.** Ce document est une
+mesure faite dans ce projet. Le script `evaluation/experience_embeddings.py`,
+exécuté par le workflow `experience-embeddings.yml`, a comparé les moteurs
+de recherche, d'abord sur un jeu de développement, puis une seule fois sur
+les 30 questions reformulées tenues à part (`evaluation/heldout_questions.csv`).
+Le bon document se trouvait parmi les 3 premiers dans 13 cas sur 30 avec la
+recherche hybride TF-IDF de la version 19.4.0, et dans 26 cas sur 30 avec
+bge-m3 seul (87 %, intervalle de Wilson à 95 % [70 % ; 95 %]). Le test de
+McNemar exact donne p = 0,001 : 14 questions gagnées contre 1 perdue. La
+fusion de bge-m3 avec TF-IDF faisait moins bien que bge-m3 seul (70 %). Les
+résultats sont consignés dans `CHANGELOG.md` (version 19.5.0) et dans
+`docs/decisions_mesurees.md` (décision 1). TF-IDF n'a pas disparu pour autant :
+il reste le moteur de repli si bge-m3 ne peut pas être chargé.
+
 ## 2. Code de l'application (`src/`)
 
 | Fichier | Rôle |
