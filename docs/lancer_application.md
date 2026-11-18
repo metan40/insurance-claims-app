@@ -13,8 +13,9 @@ embeddings bge-m3, modèle `llama3.2:3b` exécuté par Ollama.
 | E. Depuis un autre appareil du même réseau | téléphone, autre PC | B, C ou D lancé | immédiat |
 | F. Depuis Internet, en secours | n'importe qui | B, C ou D lancé, `cloudflared` | 1 min |
 
-Dans tous les cas, l'application est prête quand l'adresse `…/ready`
-répond `"status": "ready"`.
+Dans tous les cas, l'application est prête quand la page d'état répond
+`"status": "ready"` : <https://metan40-insurance-claims-assistance.hf.space/ready>
+en ligne, <http://localhost:7860/ready> en local.
 
 ## A. En ligne
 
@@ -116,7 +117,7 @@ statut, la source citée et la durée.
 
 | Symptôme | Cause probable | Que faire |
 |---|---|---|
-| `/ready` répond 503 | un modèle est encore en cours de téléchargement ou de chargement | attendre quelques minutes, puis recharger la page |
+| la page d'état (`/ready`) répond 503 | un modèle est encore en cours de téléchargement ou de chargement | attendre quelques minutes, puis recharger la page |
 | « Ollama ne répond pas » | Ollama n'est pas lancé | lancer Ollama, puis relancer |
 | `retrieval_engine: hybrid` | `RETRIEVAL_ENGINE=embeddings` manquant | relancer avec ce réglage (D) ou utiliser B ou C |
 | réponse très lente ou délai dépassé | poste peu puissant ou mémoire insuffisante | fermer les autres programmes ; prévoir environ 8 Go libres |
@@ -142,10 +143,21 @@ statut, la source citée et la durée.
 | Vérifier une installation | `python evaluation/verifier_application.py --url http://localhost:7860 --repetitions 1` |
 | Lancer les tests automatisés | `pip install -r requirements-dev.txt` puis `python -m pytest -q` |
 
-| Adresse | Rôle |
-|---|---|
-| `…/` | interface (assistant documentaire) |
-| `…/claims` | tableau de bord des sinistres fictifs |
-| `…/ready` | état de l'application (prête ou non) |
-| `…/version` | version et modèle |
-| `…/docs` | documentation interactive de l'API |
+### Adresses complètes
+
+| Rôle | En ligne (Space) | En local |
+|---|---|---|
+| Interface (assistant documentaire) | <https://metan40-insurance-claims-assistance.hf.space/> | <http://localhost:7860/> |
+| Tableau de bord des sinistres fictifs | <https://metan40-insurance-claims-assistance.hf.space/claims> | <http://localhost:7860/claims> |
+| État de l'application (prête ou non) | <https://metan40-insurance-claims-assistance.hf.space/ready> | <http://localhost:7860/ready> |
+| Version et modèle | <https://metan40-insurance-claims-assistance.hf.space/version> | <http://localhost:7860/version> |
+| L'API répond | <https://metan40-insurance-claims-assistance.hf.space/health> | <http://localhost:7860/health> |
+| Documentation interactive de l'API | <https://metan40-insurance-claims-assistance.hf.space/docs> | <http://localhost:7860/docs> |
+| Aide à la décision d'un dossier (exemple C00020) | <https://metan40-insurance-claims-assistance.hf.space/api/claims/C00020/decision-support> | <http://localhost:7860/api/claims/C00020/decision-support> |
+| Page du Space sur Hugging Face (réglages, redémarrage) | <https://huggingface.co/spaces/metan40/insurance_claims_assistance> | — |
+| Code source | <https://github.com/metan40/insurance-claims-app> | — |
+
+Depuis un autre appareil du réseau (E), remplacer `localhost` par l'adresse
+IP du poste, par exemple <http://192.168.1.25:7860/>. Depuis Internet (F),
+utiliser l'adresse `https://….trycloudflare.com` affichée par
+`cloudflared`, suivie des mêmes chemins (`/`, `/claims`, `/ready`…).
