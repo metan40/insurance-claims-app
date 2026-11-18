@@ -5,6 +5,15 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
 
 ## 19.5.0 — recherche par embeddings multilingues (bge-m3)
 
+### Comparaison de bout en bout avec 19.4.0 (18/11/2026)
+- Même modèle `llama3.2:3b`, mêmes 30 questions tenues à part, 3 passages :
+  réponses conformes 28/90 (31 %) avec la recherche hybride de 19.4.0, 41/90
+  (46 %) avec bge-m3. Par question (`evaluation/comparer_versions.py`) :
+  meilleure sur 8, moins bonne sur 2 (portail et haies 3/3 → 0/3,
+  court-circuit 1/3 → 0/3) ; test du signe exact p = 0,11.
+- Questions hors des documents (2 passages, hors catégorie officielle) :
+  refus corrects 7/56 avec la recherche hybride, 9/56 avec bge-m3.
+
 ### Questions hors des documents : limite mesurée, contrôle non retenu (16/11/2026)
 - Jeu `evaluation/questions_hors_documents.csv` : 30 questions dont la réponse
   ne figure pas dans le corpus (autres branches d'assurance, sujets
