@@ -1,0 +1,37 @@
+name: Comparaison appariée 19.4.0 / 19.5.0
+
+# Réutilise les résultats déjà mesurés (aucun appel au modèle) :
+# - 19.4.0 : recherche hybride + llama3.2:3b (run 44228273958)
+# - 19.5.0 : bge-m3 + llama3.2:3b (run 43310166862)
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - .github/workflows/comparer-versions.yml
+      - evaluation/comparer_versions.py
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  comparer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: resultats-llama3-2-3b-hybrid
+          path: hybride
+          run-id: 44228273958
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: resultats-llama3-2-3b-embeddings
+          path: embeddings
+          run-id: 43310166862
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Comparer
+        run: |
+          ls -R hybride embeddings
+          python evaluation/comparer_versions.py hybride/statuts_heldout_*.csv embeddings/statuts_heldout_*.csv --noms "19.4.0 (hybride)" "19.5.0 (bge-m3)" | tee -a "$GITHUB_STEP_SUMMARY"
