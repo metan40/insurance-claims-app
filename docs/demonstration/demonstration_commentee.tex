@@ -167,73 +167,177 @@ preuve}. Sur 5 passages, ce garde-fou se déclenche 2 fois ; les 3 autres fois, 
 avec des mots présents dans les sources, ce qui rejoint la limite de la question 4.
 \end{question}
 
-\section{Le score des sinistres (tableau de bord \texttt{/claims})}
-
-\subsection{Indicateurs du portefeuille fictif}
-120 dossiers : 72 acceptés, 27 refusés, 21 en attente. Le taux d'acceptation est calculé sur les
-dossiers \emph{clos} seulement : $72/(72+27) = 72{,}73\,\%$ ; inclure les dossiers en attente le
-ferait baisser artificiellement ($72/120 = 60\,\%$). Durée moyenne de traitement des dossiers clos :
-22,1 jours (médiane 23).
-
-\subsection{Le modèle}
-Régression logistique sur 7 variables (type de sinistre, garantie, canal de déclaration, dossier
-complet, montant demandé, ancienneté du client, sinistres précédents) ; variables catégorielles en
-indicatrices, variables numériques standardisées. Pour le dossier $i$ :
-\[
-\operatorname{logit}(p_i)=\ln\frac{p_i}{1-p_i}=\beta_0+\sum_{f}\beta_f\,x_{i,f},
-\qquad p_i=\frac{1}{1+e^{-(\beta_0+\sum_f\beta_f x_{i,f})}} ,
-\]
-où $p_i$ est la probabilité d'acceptation, $x_{i,f}$ la valeur (standardisée ou indicatrice) de la
-variable $f$ et $\beta_f$ son coefficient. La \emph{contribution} affichée d'un facteur est
-$\beta_f\,x_{i,f}$ : positive, elle fait monter le score ; négative, elle le fait baisser.
+\section{Test en local et à distance (18 novembre 2026)}
+Les mêmes questions ont été posées, une fois chacune, à deux installations de la version 19.5.0 :
+\begin{itemize}
+\item \textbf{À distance} : l'application en ligne (Space Hugging Face, lien de démonstration) ;
+\item \textbf{En local} : l'image Docker construite et lancée sur une machine vierge
+(workflow « Vérification locale »), exactement comme sur un poste de travail, sans le serveur
+distant.
+\end{itemize}
+Dans les deux cas, \texttt{/ready} répond « ready », version 19.5.0, moteur \texttt{embeddings},
+modèle \texttt{llama3.2:3b}, et toutes les questions reçoivent une réponse.
 
 \begin{center}
-\begin{tabularx}{\linewidth}{lr X}
+\small
+\begin{tabular}{p{3.2cm}p{5.4cm}p{5.4cm}}
 \toprule
-Mesure (25 dossiers de test) & Valeur & Signification \\
+Question & À distance & En local \\
 \midrule
-Exactitude & 68\,\% (17/25) & IC de Wilson 95\,\% [48\,\% ; 83\,\%] \\
-Exactitude équilibrée & 60,3\,\% & moyenne des rappels des deux classes (corrige le déséquilibre 73/27) \\
-F1 (classe « acceptée ») & 77,8\,\% & $2PR/(P+R)$, précision $P$ et rappel $R$ \\
-ROC AUC & 75,4\,\% & probabilité qu'un dossier accepté ait un score supérieur à un refusé \\
-\bottomrule
-\end{tabularx}
-\end{center}
-
-\textbf{À dire :} avec 25 dossiers de test, l'intervalle de l'exactitude va de 48\,\% à 83\,\% ;
-sur des données fictives, ces chiffres prouvent que la chaîne fonctionne, pas que le modèle est
-bon. L'exactitude équilibrée (60\,\%) montre que les refus sont mal reconnus : un modèle qui
-accepterait tout aurait déjà 73\,\% d'exactitude. D'où la règle : \emph{aucune décision
-automatique}.
-
-\subsection{Un dossier expliqué : C00020 (catastrophe naturelle, en attente)}
-Probabilité estimée : 21,3\,\%, soit $\operatorname{logit}=\ln(0{,}213/0{,}787)=-1{,}31$.
-
-\begin{center}
-\begin{tabular}{lr}
-\toprule
-Facteur & Contribution $\beta_f x_{i,f}$ \\
-\midrule
-Type de sinistre = Catastrophe naturelle & $+0{,}771$ \\
-Dossier complet = Oui & $+0{,}643$ \\
-Ancienneté du client & $+0{,}195$ \\
-Garantie = À vérifier & $-1{,}235$ \\
-Canal de déclaration = Courtier & $-0{,}363$ \\
-Sinistres précédents & $-0{,}189$ \\
+1. Location meublée & trouvée et justifiée, 37 s : conforme & partielle, une phrase masquée, 56 s : conforme \\
+2. Moisissure & partielle, exclusion citée, 74 s : conforme & partielle, exclusion citée, 46 s : conforme \\
+3. Stationnement & non vérifiable (2 phrases masquées), extraits seuls, 75 s & partielle, une phrase masquée, 46 s : conforme \\
+4. Délai de carence décès & conclut à tort « 30 jours » & conclut à tort « 90 jours » \\
+5. Bougie & conclut « non couverte », une phrase masquée & conclut « non couvert » avec une justification fausse (« la table n'est pas un objet à risque de vol ») \\
 \bottomrule
 \end{tabular}
 \end{center}
-La somme des six facteurs affichés vaut $-0{,}18$ ; la constante $\beta_0$ et les autres variables
-apportent le reste, jusqu'à $-1{,}31$. Le facteur dominant est « garantie à vérifier ».
 
-\textbf{Règles métier} (indépendantes du score) : point \emph{bloquant} « garantie à vérifier » ;
-alerte « en attente depuis 318 jours : anomalie probable, à escalader ». \textbf{Orientation} :
-« compléter le dossier avant décision », car un point bloquant rend le score inexploitable seul.
-Les clauses du contrat correspondant au type de sinistre sont proposées, chacune avec un lien vers
-l'assistant documentaire : les deux briques de l'application se rejoignent ici.
+\textbf{Lecture.}
+\begin{itemize}
+\item \textbf{Fonctionnement} : les deux installations sont identiques et opérationnelles ; le
+lancement local est donc un secours réel en cas de panne du serveur distant.
+\item \textbf{Variabilité} : pour une même question, la réponse peut changer d'un passage à
+l'autre (question 3 : « non vérifiable » à distance, « partielle » en local). Le modèle de langage
+n'est pas parfaitement reproductible d'une machine à l'autre ; c'est pourquoi chaque question est
+mesurée sur 5 passages et non jugée sur un seul essai.
+\item \textbf{Questions 1 à 3} : conformes ou prudentes dans les deux installations. Le pire
+résultat observé est « non vérifiable » : l'application se tait plutôt que d'affirmer.
+\item \textbf{Questions 4 et 5} : la limite mesurée apparaît dans les deux installations. Pour la
+bougie, la conclusion « non couvert » peut être juste selon le contrat, mais la raison donnée est
+fausse : une bonne conclusion appuyée sur une mauvaise raison n'est pas une bonne réponse. C'est
+le cas qui justifie l'instruction clause par clause du projet suivant.
+\end{itemize}
 
-Pour comparaison, C00001 (bris de glace, accepté) : probabilité 85,4\,\%, garantie « Oui », dossier
-complet ; validation humaine toujours requise.
+\section{Le score des sinistres (tableau de bord \texttt{/claims})}
+
+\subsection{Taux d'acceptation}
+Le portefeuille fictif compte $N=120$ dossiers : $A=72$ acceptés, $R=27$ refusés, $E=21$ en
+attente. Le taux d'acceptation se calcule sur les dossiers \emph{clos} :
+\[
+\tau = \frac{A}{A+R} = \frac{72}{72+27} = \frac{72}{99} = 72{,}73\,\% .
+\]
+\textbf{Pourquoi exclure les dossiers en attente ?} Leur issue n'est pas connue. Les compter au
+dénominateur ($72/120 = 60\,\%$) reviendrait à les traiter comme des refus et ferait baisser le
+taux à tort ; les compter comme acceptés le ferait monter à tort. Durée moyenne de traitement des
+dossiers clos : 22,1 jours (médiane 23). Montant moyen demandé : 2\,661 € pour les acceptés,
+3\,458 € pour les refusés, 2\,853 € pour les dossiers en attente.
+
+\subsection{Probabilité d'acceptation : la formule}
+Le modèle est une régression logistique. Pour le dossier $i$, on note $x_{i,f}$ la valeur de la
+variable $f$ après préparation :
+\begin{itemize}
+\item variable \emph{catégorielle} (type de sinistre, garantie, canal, dossier complet) :
+indicatrice, $x_{i,f}=1$ si le dossier a cette modalité, 0 sinon ;
+\item variable \emph{numérique} (montant, ancienneté, sinistres précédents) : standardisée,
+$x_{i,f} = (v_{i,f}-\mu_f)/\sigma_f$, où $v_{i,f}$ est la valeur brute, $\mu_f$ et $\sigma_f$ la
+moyenne et l'écart-type sur les dossiers clos ; $x=0$ correspond donc à un dossier « moyen ».
+\end{itemize}
+\[
+\text{logit}_i = \beta_0 + \sum_f \beta_f\,x_{i,f},
+\qquad
+p_i = \frac{1}{1+e^{-\text{logit}_i}} .
+\]
+$\beta_0$ est la constante, $\beta_f$ le coefficient appris pour la variable $f$, $p_i$ la
+probabilité estimée d'acceptation. La \emph{contribution} d'une variable est $\beta_f x_{i,f}$.
+Les coefficients sont appris sur les 99 dossiers clos en maximisant la vraisemblance, avec une
+pondération des classes (\texttt{class\_weight="balanced"}) pour que les 27 refus pèsent autant
+que les 72 acceptations.
+
+\textbf{Coefficients les plus forts} (constante $\beta_0=-1{,}166$) :
+garantie « Oui » $+1{,}235$ / « À vérifier » $-1{,}235$ ; dégâts des eaux $-1{,}059$ ;
+bris de glace $+0{,}953$ ; catastrophe naturelle $+0{,}771$ ; sinistres précédents $-0{,}720$
+par écart-type ; responsabilité civile $-0{,}715$ ; dossier complet « Oui » $+0{,}643$ / « Non »
+$-0{,}644$ ; portail web $+0{,}462$ ; courtier $-0{,}363$ ; montant $-0{,}245$ par écart-type.
+
+\subsection{Calcul complet pour le dossier C00020}
+Catastrophe naturelle, garantie « À vérifier », courtier, dossier complet, 2\,344,53 €, client depuis
+221 mois, 1 sinistre précédent.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Terme & $x_{i,f}$ & $\beta_f$ & $\beta_f x_{i,f}$ \\
+\midrule
+Constante $\beta_0$ & & & $-1{,}166$ \\
+Type = Catastrophe naturelle & 1 & $+0{,}771$ & $+0{,}771$ \\
+Garantie = À vérifier & 1 & $-1{,}235$ & $-1{,}235$ \\
+Canal = Courtier & 1 & $-0{,}363$ & $-0{,}363$ \\
+Dossier complet = Oui & 1 & $+0{,}643$ & $+0{,}643$ \\
+Montant (standardisé) & $-0{,}146$ & $-0{,}245$ & $+0{,}036$ \\
+Ancienneté (standardisée) & $+1{,}472$ & $+0{,}133$ & $+0{,}195$ \\
+Sinistres précédents (standardisés) & $+0{,}262$ & $-0{,}720$ & $-0{,}189$ \\
+\midrule
+\textbf{Logit} & & & $\mathbf{-1{,}309}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\[
+p = \frac{1}{1+e^{1{,}309}} = \frac{1}{1+3{,}70} = 0{,}213 = 21{,}3\,\% .
+\]
+\textbf{Lecture :} le montant, un peu inférieur à la moyenne ($x=-0{,}146$), relève très légèrement
+le score ; l'ancienneté élevée (1,47 écart-type au-dessus de la moyenne) le relève ; la garantie
+« à vérifier » est le facteur décisif ($-1{,}235$). Si la garantie était confirmée (« Oui »), le
+logit gagnerait $2\times1{,}235 = 2{,}47$ et passerait à $+1{,}16$, soit $p = 76\,\%$.
+
+\textbf{Règles métier, indépendantes du score :} point bloquant « garantie à vérifier » ;
+alerte « en attente depuis 318 jours ». \textbf{Orientation :} « Compléter le dossier avant
+décision ». Le score ne décide pas : il signale.
+
+\subsection{Classement des dossiers en attente}
+Classement des 21 dossiers en attente par probabilité estimée, calculé avec le modèle de
+l'application (score de chaque dossier, puis tri décroissant ; la page \texttt{/claims} donne le
+score dossier par dossier). Il sert à ordonner le travail : les dossiers simples à clore d'abord,
+sans perdre de vue les dossiers difficiles.
+
+\begin{center}
+\small
+\begin{tabular}{llllr}
+\toprule
+Rang & Dossier & Type & Garantie / complet & $p$ \\
+\midrule
+1 & C00116 & Bris de glace & Oui / Oui & 84 \% \\
+2 & C00120 & Bris de glace & Oui / Oui & 84 \% \\
+3 & C00045 & Bris de glace & Oui / Oui & 79 \% \\
+5 & C00105 & Vol & Oui / Oui & 78 \% \\
+8 & C00114 & Catastrophe naturelle & Oui / Oui & 64 \% \\
+15 & C00020 & Catastrophe naturelle & À vérifier / Oui & 21 \% \\
+18 & C00056 & Incendie & Oui / Non & 18 \% \\
+20 & C00040 & Incendie & Oui / Non & 7 \% \\
+21 & C00067 & Responsabilité civile & À vérifier / Oui & 6 \% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Lecture :} en tête, des bris de glace avec garantie confirmée et dossier complet ; en queue,
+des dossiers incomplets ou à garantie non confirmée. C00114 et C00020 sont deux catastrophes
+naturelles : 64 \% contre 21 \%, l'écart vient presque entièrement de la garantie.
+
+\subsection{Qualité du modèle}
+Le modèle est évalué sur 25 dossiers clos tenus à part (découpage stratifié 75/25), avant d'être
+réentraîné sur les 99 dossiers clos.
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+ & prédit refusé & prédit accepté \\
+\midrule
+réellement refusé (7) & 3 & 4 \\
+réellement accepté (18) & 4 & 14 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{itemize}
+\item Exactitude $=(3+14)/25 = 68\,\%$, intervalle de Wilson à 95 \% $[48\,\% ;\ 83\,\%]$.
+\item Rappel des acceptés $=14/18=77{,}8\,\%$ ; rappel des refus $=3/7=42{,}9\,\%$ ;
+exactitude équilibrée $=(77{,}8+42{,}9)/2 = 60{,}3\,\%$.
+\item Précision des acceptés $=14/18=77{,}8\,\%$ ; F1 $=2PR/(P+R)=77{,}8\,\%$.
+\item ROC AUC $=0{,}754$ : en tirant au hasard un dossier accepté et un dossier refusé, le premier a
+un score plus élevé dans 75 \% des cas (0,5 = hasard, 1 = parfait).
+\end{itemize}
+\textbf{À dire :} « Le modèle reconnaît mal les refus : 3 sur 7. Avec 25 dossiers, l'exactitude est
+comprise entre 48 et 83 \%. Sur des données fictives, cela prouve que la chaîne fonctionne et
+s'explique ; pas que le modèle serait bon sur un vrai portefeuille. C'est pourquoi il n'y a aucune
+décision automatique : le score classe et explique, le gestionnaire décide. »
 
 \section{Questions probables et réponses courtes}
 \begin{description}
