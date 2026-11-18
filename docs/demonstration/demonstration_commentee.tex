@@ -29,18 +29,24 @@
 \sloppy
 \maketitle
 
-\section*{Ce que fait l'application}
-L'application aide un gestionnaire de sinistres habitation. Elle n'automatise aucune décision.
+\section*{Ce que fait l'application pour le gestionnaire de sinistres}
+Un gestionnaire de sinistres habitation reçoit une déclaration, vérifie le contrat et la garantie,
+lit les conditions pour savoir si l'événement est couvert, exclu ou soumis à condition, contrôle le
+délai et les pièces, calcule l'indemnité, puis décide et explique. L'étape la plus longue et la
+plus risquée est la lecture : retrouver la bonne clause sans en oublier une, surtout une exclusion.
+L'application l'aide de deux façons, sans jamais décider à sa place :
 \begin{enumerate}
-\item \textbf{Assistant documentaire} : une question est rapprochée, par similarité sémantique
-(embeddings bge-m3), des 201 documents d'assurance habitation. Les meilleurs documents sont lus
-par un modèle de langage local (\texttt{llama3.2:3b} via Ollama), qui rédige une réponse courte
-avec des extraits. \textbf{L'application vérifie elle-même} que chaque extrait figure mot pour mot
-dans la source citée, masque toute phrase non appuyée, ajoute les conditions omises et décide du
-statut affiché.
+\item \textbf{Assistant documentaire} : une question en langage courant (« la moisissure est-elle
+prise en charge ? ») reçoit une réponse courte et les extraits qui la prouvent, retrouvés parmi 201
+documents d'assurance habitation par similarité sémantique (embeddings bge-m3). La réponse est
+rédigée par un modèle de langage local (\texttt{llama3.2:3b} via Ollama) ; \textbf{l'application
+vérifie elle-même} que chaque extrait figure mot pour mot dans la source citée, masque toute
+phrase non appuyée, ajoute les conditions omises et décide du statut affiché. Gain : le temps de
+recherche, avec une preuve vérifiable pour chaque phrase.
 \item \textbf{Score des sinistres} : sur 120 dossiers \emph{fictifs}, une régression logistique
 estime la probabilité d'acceptation d'un dossier et explique les facteurs qui la font monter ou
-baisser ; des règles métier signalent les points bloquants et proposent une orientation.
+baisser ; des règles métier signalent les points bloquants et proposent une orientation
+(« compléter le dossier »). Gain : savoir par où commencer et ce qui manque.
 \end{enumerate}
 
 \section*{Comment lire une réponse}
@@ -338,6 +344,25 @@ un score plus élevé dans 75 \% des cas (0,5 = hasard, 1 = parfait).
 comprise entre 48 et 83 \%. Sur des données fictives, cela prouve que la chaîne fonctionne et
 s'explique ; pas que le modèle serait bon sur un vrai portefeuille. C'est pourquoi il n'y a aucune
 décision automatique : le score classe et explique, le gestionnaire décide. »
+
+\section{Lien avec les trois articles de référence}
+La page de recrutement renvoie à trois articles de la série \emph{Enterprise Document Intelligence}
+(Towards Data Science). Leur problème, et ce que l'application en couvre :
+\begin{itemize}
+\item \textbf{« Parse the Folder, Not Just the PDFs »} : un dossier de sinistre est un ensemble de
+pièces ; « rien trouvé » peut être la bonne réponse, et une pièce manquante doit être signalée avec
+sa raison. \emph{Ici} : le statut « réponse absente des documents » et les points bloquants du score
+(dossier incomplet, garantie à vérifier) vont dans ce sens ; mais la recherche renvoie toujours les
+documents les plus proches, d'où la limite mesurée de la question 4.
+\item \textbf{« Retrieve One Row from a Table, Not the Whole Table »} : l'unité utile est la plus
+petite qui répond (une ligne). \emph{Ici} : chaque document du corpus est court et constitue
+l'unité de recherche ; les tableaux ne sont pas traités.
+\item \textbf{« One Document Type, a Million Files »} : extraire une fois les champs dans une table
+SQL, puis filtrer d'abord et chercher ensuite. \emph{Ici} : aucun filtre structuré avant la
+recherche ; un filtre « branche = habitation » aurait répondu « absent » à la question sur
+l'assurance décès. C'est l'architecture retenue pour le projet suivant (police → contrat →
+version → garantie en SQL, puis recherche dans les seules clauses du contrat).
+\end{itemize}
 
 \section{Questions probables et réponses courtes}
 \begin{description}
