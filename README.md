@@ -8,7 +8,7 @@ app_port: 7860
 pinned: false
 ---
 
-# Insurance Claims Assistance — version 19.1.0
+# Insurance Claims Assistance — version 19.5.0
 
 Application d'**aide à l'analyse des sinistres** en assurance habitation. Elle
 n'automatise aucune décision : elle rassemble pour le gestionnaire les
@@ -18,9 +18,10 @@ Deux briques complémentaires :
 
 1. **Assistant documentaire RAG** (`/`) : la question est d'abord analysée
    (termes significatifs et **synonymes métier** : « nounou » → « baby-sitter »),
-   puis rapprochée d'un corpus de 201 fiches d'assurance par une recherche
-   hybride (TF-IDF + score lexical, fusion des rangs RRF). Les cinq meilleures
-   fiches sont transmises à un LLM local (`llama3.2:1b` via Ollama) qui renvoie
+   puis rapprochée d'un corpus de 201 documents d'assurance par une recherche
+   sémantique (embeddings multilingues bge-m3 ; recherche hybride TF-IDF +
+   lexicale en repli). Les meilleurs documents sont transmis à un LLM local
+   (`llama3.2:3b` via Ollama) qui renvoie
    une **réponse typée** : réponse trouvée ou non, complète ou non, extraits
    justificatifs, confiance, réserves. L'application **vérifie elle-même** que
    chaque extrait figure dans la source citée et décide du statut affiché.
@@ -130,7 +131,7 @@ Sans Docker (Ollama installé et lancé séparément) :
 
 ```bash
 pip install -r requirements.txt
-ollama pull llama3.2:1b
+ollama pull llama3.2:3b
 uvicorn src.app:app --host 0.0.0.0 --port 7860
 ```
 
@@ -154,12 +155,20 @@ protection et ne placez aucun jeton dans le code.
 
 ## Limites
 
-- Le Space gratuit n'a pas de GPU : une réponse prend environ 2 minutes
-  avec `llama3.2:1b` (environ 4 minutes avec `llama3.2:3b`).
+- Le Space n'a pas de GPU : une réponse prend de l'ordre de la minute ; la
+  durée de chaque étape est renvoyée par `POST /search`.
 - Les dossiers de sinistres sont **fictifs** : les performances du modèle ne
   décrivent aucun portefeuille réel et aucune décision ne doit en découler.
 - La vérification confirme qu'un extrait existe dans la source, pas qu'il
   justifie entièrement la réponse : la lecture reste nécessaire.
-- La recherche reste sensible au vocabulaire : sur 30 questions reformulées
-  tenues à part, la bonne fiche figure dans les 5 premières dans 53 % des cas
-  (40 % sans les synonymes). Voir le rapport et `evaluation/`.
+- **Questions dont la réponse n'est pas dans les documents** : sur 28
+  passages de test, l'application ne s'abstient que 5 fois (18 %) ; sinon
+  elle cite un vrai extrait sur un autre sujet et conclut. Un contrôle par
+  inférence textuelle bloquait 86 % de ces conclusions mais aussi 7 bonnes
+  réponses sur 15 : il n'a pas été intégré (détail et chiffres dans le
+  CHANGELOG, 19.5.0).
+- Recherche : sur 30 questions reformulées tenues à part, le bon document
+  figure parmi les 3 premiers dans 26 cas (87 %, IC de Wilson 95 %
+  [70 % ; 95 %]) avec bge-m3, contre 13 (43 %) avec la recherche hybride.
+  La qualité de la réponse reste limitée par le modèle de langage : 46 % de
+  réponses conformes à la référence avec `llama3.2:3b`. Voir `evaluation/`.

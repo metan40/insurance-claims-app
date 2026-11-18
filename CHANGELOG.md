@@ -5,6 +5,31 @@ Les journaux détaillés des versions 4 à 18 sont conservés dans
 
 ## 19.5.0 — recherche par embeddings multilingues (bge-m3)
 
+### Questions hors des documents : limite mesurée, contrôle non retenu (16/11/2026)
+- Jeu `evaluation/questions_hors_documents.csv` : 30 questions dont la réponse
+  ne figure pas dans le corpus (autres branches d'assurance, sujets
+  habitation absents, questions hors assurance), réparties à l'avance en
+  dev / test. Avec `llama3.2:3b` et bge-m3, l'application ne conclut pas
+  (bonne conduite) dans 5 cas sur 28 sur test (18 %, IC de Wilson 95 %
+  [8 % ; 36 %]) : le modèle cite un vrai extrait sur un autre sujet puis
+  conclut avec les mots de la question.
+- Contrôle testé (`evaluation/analyser_justification.py`) : un modèle
+  d'inférence textuelle multilingue (mDeBERTa-v3 XNLI) estime pour chaque
+  phrase affichée la probabilité d'être impliquée par les sources ; la réponse
+  est bloquée si la phrase la moins justifiée est sous un seuil choisi sur dev
+  seulement, puis appliqué une fois sur test.
+  - Prémisses = extraits cités, seuil 0,7 : refus corrects 5/28 → 25/28
+    (p < 0,0001), mais réponses conformes 15/30 → 4/30 (11 perdues,
+    McNemar exact p = 0,001).
+  - Prémisses = documents cités (fenêtres de 3 phrases), seuil 0,95 : refus
+    corrects 5/28 → 24/28 (86 %, [69 % ; 94 %], 19 gagnés, 0 perdu,
+    p < 0,0001), mais réponses conformes 15/30 → 8/30 (7 perdues, p = 0,016).
+    Sur dev, même le seuil le plus bas (0,05) perd déjà une bonne réponse.
+- Décision : contrôle **non intégré**, car il fait perdre des réponses
+  correctes de façon significative. La limite est documentée dans le README ;
+  la vérification que le sujet de la question existe dans les documents,
+  avant toute rédaction, est conçue dès le départ dans le projet suivant.
+
 ### Choix du modèle et fonctionnement local (13/11/2026)
 - Évaluation de bout en bout avec bge-m3 (30 questions tenues à part, 3
   passages) : réponses conformes à la référence 32 % avec `llama3.2:1b`,
