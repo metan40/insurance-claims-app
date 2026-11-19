@@ -9,13 +9,15 @@ script Windows. Le dossier `experiments/` contient les scripts des versions
 précédentes, conservés comme archives. Il ne sert pas à l'application en
 service et n'est pas détaillé ici.
 
-## 1. Données (`Data/`)
+## 1. Les données : documents sur l'assurance habitation et dossiers de sinistres (`Data/`)
 
-Le dépôt contient deux fichiers de données. Le tableau ci-dessous donne,
-pour chacun, sa provenance exacte, la manière dont il a été obtenu, ce qui a
+Le dépôt contient deux fichiers de données : les documents d'information
+sur l'assurance habitation, dans lesquels l'assistant cherche ses réponses,
+et les dossiers de sinistres, sur lesquels le tableau de bord calcule ses
+indicateurs et son score. Le tableau ci-dessous donne, pour chacun, sa provenance exacte, la manière dont il a été obtenu, ce qui a
 été vérifié et l'usage qu'il permet.
 
-| Point | `Data/insurance-fr.csv` (corpus de l'assistant) | `Data/synthetic_claims.csv` (tableau de bord `/claims`) |
+| Point | Documents d'information sur l'assurance habitation, lus par l'assistant (`Data/insurance-fr.csv`) | Dossiers de sinistres habitation fictifs, analysés par le tableau de bord `/claims` (`Data/synthetic_claims.csv`) |
 |---|---|---|
 | Contenu | 201 documents d'information sur l'assurance habitation, en français ; deux colonnes : `title` (titre, souvent une question) et `content` (texte) | 120 dossiers de sinistres : type, garantie, montant demandé, ancienneté du client, sinistres précédents, canal, dossier complet, statut (72 acceptés, 27 refusés, 21 en attente), date de déclaration, délai de traitement |
 | Nature | données réelles : textes publiés sur Internet | données fictives |
