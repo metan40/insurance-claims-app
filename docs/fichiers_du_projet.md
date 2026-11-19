@@ -17,13 +17,13 @@ et les dossiers de sinistres, sur lesquels le tableau de bord calcule ses
 indicateurs et son score. Le tableau ci-dessous donne, pour chacun, sa provenance exacte, la manière dont il a été obtenu, ce qui a
 été vérifié et l'usage qu'il permet.
 
-| Point | Documents d'information sur l'assurance habitation, lus par l'assistant (`Data/insurance-fr.csv`) | Dossiers de sinistres habitation fictifs, analysés par le tableau de bord `/claims` (`Data/synthetic_claims.csv`) |
+| | Fichier 1 : `Data/insurance-fr.csv` | Fichier 2 : `Data/synthetic_claims.csv` |
 |---|---|---|
-| Contenu | documents en français, chacun avec un titre (souvent une question) et un texte | dossiers décrits par 12 colonnes : type de sinistre (6 types), garantie, montant demandé, ancienneté du client, sinistres précédents, canal, dossier complet, statut, date de déclaration, délai de traitement |
-| Volume | 201 documents ; 19 892 mots (126 723 caractères) ; un texte compte de 50 à 2 372 caractères, 630 en moyenne ; fichier de 146 Ko | 120 dossiers (72 acceptés, 27 refusés, 21 en attente) ; déclarations du 12/10/2025 au 05/10/2026 ; montants de 205 € à 26 162 € ; fichier de 12 Ko |
-| Nature et provenance | textes réels : jeu public `zelros/insurance-fr` de la société Zelros sur Hugging Face (<https://huggingface.co/datasets/zelros/insurance-fr>), qui reprend des pages d'information des assureurs MMA (66 documents sur 201 le citent) et Luko (vérification par échantillon du 18/11/2026) | données fictives, marquées `FICTIF_DEMONSTRATION` sur chaque ligne, conçues pour le projet comme le prévoit le document de cadrage `docs/cadrage/Projet python.docx` ; ajoutées en version 7.5.0 |
-| Obtention | téléchargés par `experiments/scripts/download_dataset.py` depuis <https://huggingface.co/datasets/zelros/insurance-fr/resolve/main/data.csv> | écrites pour le projet ; aucun téléchargement |
-| Licence et usage | aucune licence indiquée ; droits vraisemblablement détenus par MMA et Luko : démonstration non commerciale uniquement | aucune restriction ; les mesures du modèle ne décrivent aucun portefeuille réel |
+| Titre | Documents d'information sur l'assurance habitation, lus par l'assistant pour répondre aux questions | Dossiers de sinistres habitation fictifs, analysés par le tableau de bord `/claims` |
+| Volume | 201 documents ; 19 892 mots ; fichier de 146 Ko | 120 dossiers (72 acceptés, 27 refusés, 21 en attente) ; fichier de 12 Ko |
+| Champs | 2 champs : `title` (titre du document, souvent une question) et `content` (texte, de 50 à 2 372 caractères) | 12 champs : `claim_id`, `type_sinistre` (6 types), `garantie`, `montant_demande` (205 € à 26 162 €), `anciennete_client_mois`, `nb_sinistres_precedents`, `canal_declaration`, `dossier_complet`, `statut`, `date_declaration`, `delai_traitement_jours`, `jeu_de_donnees` |
+| Date | dernière mise à jour par Zelros : 21/10/2023 ; entrée dans le dépôt : 14/10/2026 | créés en version 7.5.0 du projet, avant le 14/10/2026 (entrée dans le dépôt) ; déclarations fictives datées du 12/10/2025 au 05/10/2026 |
+| Source | textes réels : jeu public `zelros/insurance-fr` de la société Zelros, téléchargé depuis <https://huggingface.co/datasets/zelros/insurance-fr/resolve/main/data.csv> ; pages d'information des assureurs MMA (66 documents sur 201 le citent) et Luko ; aucune licence indiquée, donc démonstration non commerciale uniquement | données fictives conçues pour le projet (document de cadrage `docs/cadrage/Projet python.docx`), marquées `FICTIF_DEMONSTRATION` sur chaque ligne ; aucun téléchargement |
 
 ## 1 bis. Modèles utilisés et leur origine
 
