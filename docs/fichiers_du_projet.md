@@ -19,18 +19,11 @@ indicateurs et son score. Le tableau ci-dessous donne, pour chacun, sa provenanc
 
 | Point | Documents d'information sur l'assurance habitation, lus par l'assistant (`Data/insurance-fr.csv`) | Dossiers de sinistres habitation fictifs, analysés par le tableau de bord `/claims` (`Data/synthetic_claims.csv`) |
 |---|---|---|
-| Contenu | 201 documents d'information sur l'assurance habitation, en français ; deux colonnes : `title` (titre, souvent une question) et `content` (texte) | 120 dossiers de sinistres : type, garantie, montant demandé, ancienneté du client, sinistres précédents, canal, dossier complet, statut (72 acceptés, 27 refusés, 21 en attente), date de déclaration, délai de traitement |
-| Nature | données réelles : textes publiés sur Internet | données fictives |
-| Source | jeu de données public `zelros/insurance-fr` sur Hugging Face : <https://huggingface.co/datasets/zelros/insurance-fr> | aucune source externe : fichier conçu pour le projet |
-| Éditeur | Zelros, société française de logiciels pour l'assurance ; mises à jour du jeu par un membre de Zelros en octobre 2023 | le projet lui-même |
-| Origine des contenus | non indiquée par Zelros. Vérification par échantillon (18/11/2026) : pages d'information grand public de deux assureurs français. **MMA** (groupe Covéa) : 66 documents sur 201 citent MMA et reprennent ses noms de garanties (« renfort installations extérieures », « renfort valeur à neuf »). **Luko** : plusieurs titres correspondent à ses guides en ligne (« L'attestation télétravail de l'assurance habitation », assurance d'une location saisonnière). | conception décrite dans le document de cadrage `docs/cadrage/Projet python.docx` : « avant de coder, nous allons concevoir le jeu de données fictif […] une cinquantaine ou une centaine de sinistres fictifs avec des variables réalistes, des Pending, des acceptés, des refusés et quelques cas volontairement ambigus » |
-| Comment il a été obtenu | téléchargé par le script `experiments/scripts/download_dataset.py`, depuis <https://huggingface.co/datasets/zelros/insurance-fr/resolve/main/data.csv> | écrit pour le projet et ajouté en version 7.5.0 (`docs/historique/changelogs/CHANGELOG_v10.md`) ; aucun script de génération n'est conservé |
-| Date d'entrée dans le dépôt GitHub | 14/10/2026 (commit `2e21bc7`, premier envoi du projet) | 14/10/2026 (même commit) |
-| Licence | **aucune licence indiquée** par Zelros ; droits sur les textes vraisemblablement détenus par MMA et Luko | sans objet (données créées pour le projet) |
-| Recherche du nom de fichier sur le web | une seule publication : le jeu `zelros/insurance-fr` | aucun jeu public de ce nom et de ces colonnes |
-| Marquage dans l'application | les sources affichées citent le titre du document | chaque ligne porte `FICTIF_DEMONSTRATION` (colonne `jeu_de_donnees`) ; l'interface et l'API affichent « dossiers fictifs » |
-| Usage permis | démonstration non commerciale ; un usage commercial exige des documents dont les droits sont établis (conditions générales publiées avec autorisation, textes juridiques publics, documents de l'assureur client) | démonstration de la méthode ; les mesures du modèle ne décrivent aucun portefeuille réel |
-| Description des variables | rapport v19, section 3.1 | rapport v19, section 3.2 et tableau 3 |
+| Contenu | 201 documents en français, chacun avec un titre (souvent une question) et un texte | 120 dossiers : type de sinistre, garantie, montant demandé, client, canal, dossier complet, statut (72 acceptés, 27 refusés, 21 en attente), dates |
+| Nature | textes réels, publiés sur Internet | données fictives, marquées `FICTIF_DEMONSTRATION` sur chaque ligne |
+| Provenance | jeu public `zelros/insurance-fr` de la société Zelros sur Hugging Face (<https://huggingface.co/datasets/zelros/insurance-fr>). Les textes sont des pages d'information des assureurs MMA (66 documents sur 201 le citent) et Luko (vérification par échantillon du 18/11/2026). | conçus pour le projet, comme le prévoit le document de cadrage `docs/cadrage/Projet python.docx` (« une cinquantaine ou une centaine de sinistres fictifs avec des variables réalistes […] et quelques cas volontairement ambigus ») ; ajoutés en version 7.5.0 |
+| Obtention | téléchargés par `experiments/scripts/download_dataset.py` depuis <https://huggingface.co/datasets/zelros/insurance-fr/resolve/main/data.csv> | écrits pour le projet ; aucun téléchargement |
+| Licence et usage | aucune licence indiquée ; les droits appartiennent vraisemblablement à MMA et Luko : démonstration non commerciale uniquement | aucune restriction ; les mesures du modèle ne décrivent aucun portefeuille réel |
 
 ## 1 bis. Modèles utilisés et leur origine
 
