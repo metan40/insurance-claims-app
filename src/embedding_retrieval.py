@@ -1,4 +1,12 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/embedding_retrieval.py
+# Auteur  : Thierry MBARGA
+# Rôle    : recherche sémantique : chaque document et la question deviennent
+#           des vecteurs (bge-m3, 1024 dimensions), comparés par similarité cosinus.
+# Entrée  : titres et textes du corpus, question.
+# Sortie  : les k documents les plus proches, avec leur score.
+# ---------------------------------------------------------------------------
 """Recherche par embeddings multilingues (bge-m3).
 
 Pourquoi ce module (expérience du 12/11/2026, ``evaluation/experience_embeddings.py``) :
@@ -31,10 +39,12 @@ import numpy as np
 
 logger = logging.getLogger(__name__)
 
+# Modèle bge-m3 (BAAI, licence MIT) ; 1 000 premiers caractères de chaque document encodés.
 DEFAULT_MODEL = "BAAI/bge-m3"
 DOCUMENT_CHARACTERS = 1000
 
 
+# Charge le modèle et les vecteurs des documents ; répond aux questions.
 class EmbeddingRetriever:
     def __init__(self, titles: Sequence[str], documents: Sequence[str], *,
                  model_id: str = DEFAULT_MODEL, cache_dir: str | os.PathLike | None = None) -> None:
@@ -44,6 +54,7 @@ class EmbeddingRetriever:
         self.model = None
         self.doc_vectors: np.ndarray | None = None
         self.error: str | None = None
+        # Événements : _ready = index prêt ; _done = chargement terminé (réussi ou non).
         self._ready = threading.Event()
         self._done = threading.Event()  # chargement terminé, réussi ou non
 
@@ -54,12 +65,14 @@ class EmbeddingRetriever:
     def _cache_file(self) -> Path | None:
         if not self.cache_dir:
             return None
+        # Nom du cache = empreinte du corpus et du modèle : un corpus modifié est réencodé.
         digest = hashlib.sha256(("\x00".join(self.passages) + self.model_id).encode("utf-8")).hexdigest()[:16]
         return self.cache_dir / f"embeddings_{digest}.npy"
 
     def load(self) -> None:
         """Charge le modèle et l'index (bloquant)."""
         try:
+            # Import ici : sentence_transformers n'est chargé que si ce moteur est utilisé.
             from sentence_transformers import SentenceTransformer
 
             self.model = SentenceTransformer(self.model_id)
@@ -67,6 +80,7 @@ class EmbeddingRetriever:
             if cache is not None and cache.is_file():
                 vectors = np.load(cache)
             else:
+                # normalize_embeddings=True : chaque vecteur a une longueur 1.
                 vectors = self.model.encode(self.passages, normalize_embeddings=True, batch_size=16)
                 if cache is not None:
                     try:
@@ -77,12 +91,14 @@ class EmbeddingRetriever:
             self.doc_vectors = np.asarray(vectors, dtype=np.float32)
             self._ready.set()
             logger.info("Recherche par embeddings prête : %s (%s fiches).", self.model_id, len(self.passages))
+        # En cas d'échec, l'application garde la recherche hybride (repli).
         except Exception as error:  # modèle indisponible, mémoire, réseau…
             self.error = f"{type(error).__name__}: {error}"
             logger.error("Recherche par embeddings indisponible : %s", self.error)
         finally:
             self._done.set()
 
+    # Chargement dans un fil séparé : le serveur répond pendant la préparation.
     def start(self) -> threading.Thread:
         thread = threading.Thread(target=self.load, name="embeddings", daemon=True)
         thread.start()
@@ -93,6 +109,8 @@ class EmbeddingRetriever:
         self._done.wait(timeout)
         return self.ready
 
+    # Vecteurs de longueur 1 : produit scalaire = cosinus.
+    # s_j = d_j · q pour chaque document j (une multiplication matrice × vecteur).
     def similarities(self, question: str) -> np.ndarray:
         query = self.model.encode([question], normalize_embeddings=True)[0]
         return self.doc_vectors @ query
@@ -100,5 +118,6 @@ class EmbeddingRetriever:
     def rank(self, question: str, k: int) -> list[tuple[int, float]]:
         """Les k fiches les plus proches : (indice, similarité cosinus)."""
         scores = self.similarities(question)
+        # Indices des k plus grands scores, du plus proche au moins proche.
         order = np.argsort(-scores)[:k]
         return [(int(i), float(scores[i])) for i in order]

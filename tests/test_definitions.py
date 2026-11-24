@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_definitions.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Renvois « (voir définition) » : la fiche de définition est
+#           jointe à la source
+# Lancer  : python -m pytest tests/test_definitions.py
+# ---------------------------------------------------------------------------
 """Renvois « (voir définition) » : la fiche de définition est jointe à la source."""
 from src.definitions import attach_definitions, build_definition_index, referenced_definitions
 

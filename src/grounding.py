@@ -1,4 +1,13 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/grounding.py
+# Auteur  : Thierry MBARGA
+# Rôle    : contrôles faits par l'application après la réponse du modèle :
+#           1) ancrage : retirer les phrases dont les mots ne viennent pas des sources ;
+#           2) conditions omises : rappeler une condition de l'extrait absente de la réponse.
+# Entrée  : réponse, question, extraits vérifiés, sources.
+# Sortie  : phrases étayées / non étayées ; extraits dont la condition manque.
+# ---------------------------------------------------------------------------
 """Contrôle d'ancrage : chaque phrase de la réponse doit venir des sources.
 
 La vérification des extraits (``generation.verify_answer``) prouve que les
@@ -33,6 +42,8 @@ import re
 
 from src.question_parsing import FRENCH_QUERY_STOPWORDS, normalize_text
 
+# Réglages : on compare les 5 premières lettres ; mots de 4 lettres au moins ;
+# une phrase est retirée dès 2 mots nouveaux.
 PREFIX_LENGTH = 5
 MIN_TERM_LENGTH = 4
 MAX_NOVEL_TERMS = 2
@@ -60,6 +71,7 @@ STOPWORDS = FRENCH_QUERY_STOPWORDS | {
     "plus", "tres", "sans", "entre", "chez", "vers", "apres", "avant",
 }
 
+# Préfixes des mots de rédaction ; fin de phrase ; citation [S1].
 _DRAFTING_PREFIXES = frozenset(term[:PREFIX_LENGTH] for term in DRAFTING_TERMS)
 _SENTENCE_END = re.compile(r"(?<=[.!?])\s+")
 _CITATION = re.compile(r"\[S\d+\]")
@@ -70,6 +82,7 @@ def significant_prefixes(text: str) -> list[str]:
     return [
         token[:PREFIX_LENGTH]
         for token in normalize_text(text).split()
+        # Les nombres sont ignorés (un montant n'est pas un « mot nouveau »).
         if len(token) >= MIN_TERM_LENGTH and token not in STOPWORDS and not token.isdigit()
     ]
 
@@ -82,6 +95,7 @@ def split_sentences(text: str) -> list[str]:
 def novel_terms(sentence: str, allowed: set[str]) -> list[str]:
     """Mots de la phrase absents des réservoirs autorisés (sous forme de préfixes)."""
     words = [
+        # Les citations [S1] sont retirées avant de compter les mots.
         token for token in normalize_text(_CITATION.sub(" ", sentence)).split()
         if len(token) >= MIN_TERM_LENGTH and token not in STOPWORDS and not token.isdigit()
     ]
@@ -97,6 +111,7 @@ def check_grounding(answer: str, question: str, checked: list[dict], sources) ->
     ``checked`` est la liste produite par ``verify_answer`` ; seules les
     sources dont au moins un extrait a été vérifié servent de référence.
     """
+    # Réservoir autorisé = question + extraits vérifiés + contenu des sources vérifiées.
     verified_ids = {item["source_id"] for item in checked if item.get("verified")}
     reference = [question]
     reference += [item["quote"] for item in checked if item.get("verified")]
@@ -110,6 +125,7 @@ def check_grounding(answer: str, question: str, checked: list[dict], sources) ->
     supported, unsupported = [], []
     for sentence in split_sentences(answer):
         novel = novel_terms(sentence, allowed)
+        # 2 mots nouveaux ou plus : la phrase n'est pas affichée (c'est l'application qui la retire).
         if len(novel) >= MAX_NOVEL_TERMS:
             unsupported.append({"sentence": sentence, "novel_terms": novel})
         else:
@@ -127,6 +143,7 @@ def check_grounding(answer: str, question: str, checked: list[dict], sources) ->
 # passer une conclusion sans sa condition. L'application ajoute donc, sous la
 # réponse, la condition telle qu'elle est écrite dans la source.
 
+# Mots qui signalent une restriction dans un extrait.
 RESTRICTION_MARKERS = (
     "mais pas", "sauf", "uniquement", "seulement", "limite", "exclu", "exclus",
     "ne sont pas", "n est pas", "ne sont plus", "pas assure", "pas couvert",
@@ -152,6 +169,8 @@ def missing_conditions(answer: str, checked: list[dict]) -> list[dict]:
         if not item.get("verified"):
             continue
         quote = item["quote"]
+        # Condition omise : l'extrait contient une restriction et la réponse aucune,
+        # ou l'extrait contient un chiffre que la réponse ne reprend pas.
         lacks_restriction = bool(_restrictions(quote)) and not answer_restrictions
         lacks_numbers = bool(_numbers(quote)) and not (_numbers(quote) & answer_numbers)
         if lacks_restriction or lacks_numbers:

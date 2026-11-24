@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_decision.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Tests de l'aide à la décision : score expliqué, règles métier,
+#           clauses, orientation
+# Lancer  : python -m pytest tests/test_decision.py
+# ---------------------------------------------------------------------------
 """Tests de l'aide à la décision : score expliqué, règles métier, clauses, orientation."""
 import pandas as pd
 import pytest

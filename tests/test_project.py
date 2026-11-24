@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_project.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Contrôles de cohérence du dépôt, du déploiement et de
+#           l'interface
+# Lancer  : python -m pytest tests/test_project.py
+# ---------------------------------------------------------------------------
 """Contrôles de cohérence du dépôt, du déploiement et de l'interface."""
 import re
 

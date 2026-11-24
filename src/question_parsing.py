@@ -1,4 +1,12 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/question_parsing.py
+# Auteur  : Thierry MBARGA
+# Rôle    : analyser la question avant la recherche : mots significatifs,
+#           puis ajout des termes métier (dictionnaire de synonymes).
+# Entrée  : question de l'utilisateur.
+# Sortie  : ParsedQuestion (concepts, termes ajoutés, texte enrichi).
+# ---------------------------------------------------------------------------
 """Analyse de la question avant la recherche (« question parsing »).
 
 Problème mesuré : TF-IDF et le score lexical ne reconnaissent que les mots
@@ -104,17 +112,20 @@ EXPERT_SYNONYMS: dict[str, tuple[str, ...]] = {
 
 def normalize_text(value: object) -> str:
     """Minuscules, sans accents, ponctuation remplacée par des espaces."""
+    # NFKD sépare la lettre de son accent ; on garde lettres et chiffres.
     normalized = unicodedata.normalize("NFKD", str(value or ""))
     without_accents = "".join(c for c in normalized if not unicodedata.combining(c))
     return " ".join(re.findall(r"[a-z0-9]+", without_accents.lower()))
 
 
+# Texte normalisé découpé en mots.
 def normalize_tokens(value: object) -> list[str]:
     return normalize_text(value).split()
 
 
 def contains_phrase(normalized_text: str, phrase: str) -> bool:
     """Vrai si la phrase normalisée apparaît en mots entiers."""
+    # Espaces ajoutés aux deux bouts : « vol » ne trouve pas « volume ».
     return f" {phrase} " in f" {normalized_text} "
 
 
@@ -136,6 +147,7 @@ class ParsedQuestion:
 def parse_question(question: str, use_synonyms: bool = True) -> ParsedQuestion:
     """Transforme la question en concepts, enrichis par le dictionnaire métier."""
     normalized = normalize_text(question)
+    # Mots significatifs : hors mots outils, plus de 2 lettres, sans doublon.
     terms = [
         token for token in normalized.split()
         if token not in FRENCH_QUERY_STOPWORDS and len(token) > 2
@@ -147,6 +159,8 @@ def parse_question(question: str, use_synonyms: bool = True) -> ParsedQuestion:
     if not use_synonyms:
         return parsed
 
+    # Pour chaque terme métier : si la question emploie une de ses variantes,
+    # on ajoute le terme métier à la recherche.
     for canonical, variants in EXPERT_SYNONYMS.items():
         if contains_phrase(normalized, canonical):
             continue  # la question emploie déjà le terme des fiches

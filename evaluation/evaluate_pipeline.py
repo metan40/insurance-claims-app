@@ -1,4 +1,10 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : evaluation/evaluate_pipeline.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Évaluation reproductible de la recherche documentaire déployée
+# Lancer  : python evaluation/evaluate_pipeline.py
+# ---------------------------------------------------------------------------
 """Évaluation reproductible de la recherche documentaire déployée.
 
 Usage, depuis la racine du projet :

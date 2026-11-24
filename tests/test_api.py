@@ -1,3 +1,10 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_api.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Tests des routes de l'API
+# Lancer  : python -m pytest tests/test_api.py
+# ---------------------------------------------------------------------------
 """Tests des routes de l'API.
 
 Les fonctions de route sont appelées directement ; un second groupe de tests

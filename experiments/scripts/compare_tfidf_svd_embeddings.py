@@ -1,3 +1,9 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : experiments/scripts/compare_tfidf_svd_embeddings.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Compare TF-IDF, TF-IDF+SVD (LSA), embeddings, and rank fusion
+# ---------------------------------------------------------------------------
 """Compare TF-IDF, TF-IDF+SVD (LSA), embeddings, and rank fusion.
 
 Usage from project root:

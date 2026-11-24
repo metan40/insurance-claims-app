@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_generation.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Tests de la génération typée (Ollama simulé), de la vérification
+#           des extraits et du contrôle des citations
+# Lancer  : python -m pytest tests/test_generation.py
+# ---------------------------------------------------------------------------
 """Tests de la génération typée (Ollama simulé), de la vérification des extraits
 et du contrôle des citations."""
 import json

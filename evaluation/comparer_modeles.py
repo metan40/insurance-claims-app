@@ -1,4 +1,12 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : evaluation/comparer_modeles.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Tableau comparatif des mesures de ``mesurer_statuts.py``, avec
+#           intervalles de confiance (Wilson, 95 %) et test de McNemar
+#           apparié entre modèles
+# Lancer  : python evaluation/comparer_modeles.py
+# ---------------------------------------------------------------------------
 """Tableau comparatif des mesures de ``mesurer_statuts.py``, avec intervalles de
 confiance (Wilson, 95 %) et test de McNemar apparié entre modèles.
 

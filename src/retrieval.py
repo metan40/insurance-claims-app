@@ -1,4 +1,12 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/retrieval.py
+# Auteur  : Thierry MBARGA
+# Rôle    : recherche hybride (moteur de repli quand bge-m3 n'est pas prêt) :
+#           TF-IDF + cosinus, score lexical, fusion des rangs (RRF, k = 60).
+# Entrée  : titres et textes du corpus, question.
+# Sortie  : documents classés, avec les signaux qui expliquent leur rang.
+# ---------------------------------------------------------------------------
 """Recherche documentaire hybride du RAG assurance.
 
 Ce module isole l'étape de *retrieval* de l'API afin de pouvoir la tester et
@@ -36,6 +44,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+# k = 60 dans la fusion ; 20 candidats ; 5 documents transmis ; 5 retenus d'office par le lexical.
 RRF_CONSTANT = 60.0
 DEFAULT_CANDIDATE_LIMIT = 20
 DEFAULT_TOP_K = 5
@@ -56,6 +65,7 @@ def query_terms(question: str) -> list[str]:
     return parse_question(question, use_synonyms=False).leading_terms
 
 
+# Un concept est présent si une de ses formes l'est (mot seul ou expression).
 def _concept_in(concept: list[str], tokens: set[str], normalized: str) -> bool:
     return any(
         (form in tokens) if " " not in form else contains_phrase(normalized, form)
@@ -89,6 +99,8 @@ def lexical_relevance_score(
 
     terms = parsed.leading_terms
     phrase_bonus = 0.0
+    # Bonus : deux termes consécutifs de la question trouvés ensemble
+    # (+2 dans le titre, +1 dans le contenu).
     for position in range(len(terms) - 1):
         phrase = " ".join(terms[position:position + 2])
         if phrase in normalized_title:
@@ -96,6 +108,7 @@ def lexical_relevance_score(
         elif phrase in normalized_content:
             phrase_bonus += 1.0
 
+    # Score = (3 × concepts dans le titre + concepts dans le contenu) / nombre de concepts + bonus.
     coverage = (title_matches * 3.0 + content_matches) / len(parsed.concepts)
     return round(coverage + phrase_bonus, 6)
 
@@ -107,6 +120,7 @@ def rank_fusion_score(
     fusion_constant: float = RRF_CONSTANT,
 ) -> float:
     """RRF à deux listes ; le rang lexical ne compte que si le score lexical est positif."""
+    # H(j) = 1/(k + r_cos(j)) + 1[s_lex(j) > 0] / (k + r_lex(j)) pour le document j.
     primary_contribution = 1.0 / (fusion_constant + primary_rank)
     lexical_contribution = (
         1.0 / (fusion_constant + lexical_rank) if lexical_score > 0 else 0.0
@@ -139,6 +153,7 @@ class HybridRetriever:
         lexical_quota: int = DEFAULT_LEXICAL_QUOTA,
         use_synonyms: bool = True,
     ) -> None:
+        # Contrôles d'entrée : un corpus vide ou incohérent est refusé.
         if len(titles) != len(documents):
             raise ValueError("titles et documents doivent avoir la même longueur.")
         if not documents or not any(str(doc).strip() for doc in documents):
@@ -149,13 +164,15 @@ class HybridRetriever:
         self.fusion_constant = fusion_constant
         self.lexical_quota = lexical_quota
         self.use_synonyms = use_synonyms
-                # Nombre de termes significatifs du titre (mots outils exclus) : à score
+        # Nombre de termes significatifs du titre (mots outils exclus) : à score
         # lexical égal, le titre qui contient le moins de termes en plus de ceux
         # de la question est le plus centré sur elle.
         self._title_tokens_count = [
             len(parse_question(title, use_synonyms=False).leading_terms) for title in self.titles
         ]
 
+        # TF-IDF sur mots et paires de mots, accents retirés, 20 000 termes au plus.
+        # Matrice X : une ligne par document j, une colonne par terme t.
         self.vectorizer = TfidfVectorizer(
             strip_accents="unicode",
             lowercase=True,
@@ -178,6 +195,7 @@ class HybridRetriever:
     def cosine_scores(self, question: str, parsed: ParsedQuestion | None = None) -> np.ndarray:
         """Similarité cosinus TF-IDF entre la question (enrichie) et chaque document."""
         parsed = parsed or self.parse(question)
+        # cos(q, d_j) = (q · d_j) / (‖q‖ · ‖d_j‖), pour chaque document j.
         return cosine_similarity(
             self.vectorizer.transform([parsed.expanded_text]), self.matrix
         )[0]
@@ -203,6 +221,7 @@ class HybridRetriever:
         rang lexical global).
         """
         count = len(self.documents)
+        # Documents du plus proche au moins proche (cosinus).
         cosine_order = [int(index) for index in np.asarray(cosine).argsort()[::-1]]
         lexical_order = sorted(
             range(count),
@@ -211,6 +230,7 @@ class HybridRetriever:
             # l'assurance responsabilité civile ? » avant « … des enfants »).
             key=lambda i: (-lexical[i], self._title_tokens_count[i]),
         )
+        # Rang de chaque document dans chacune des deux listes (1 = meilleur).
         cosine_rank = {index: rank for rank, index in enumerate(cosine_order, start=1)}
         lexical_rank = {index: rank for rank, index in enumerate(lexical_order, start=1)}
         fused_order = sorted(
@@ -226,6 +246,7 @@ class HybridRetriever:
 
         limit = min(candidate_limit, count)
         quota = min(self.lexical_quota, limit)
+        # D'abord les meilleurs documents lexicaux (quota), puis l'ordre de la fusion.
         selected = [index for index in lexical_order if lexical[index] > 0][:quota]
         selected.extend(index for index in fused_order if index not in selected)
         return selected[:limit]
@@ -255,6 +276,7 @@ class HybridRetriever:
         lexical = self.lexical_scores(question, parsed)
         candidates = self.select_candidates(question, cosine, lexical, candidate_limit)
 
+        # Rang cosinus recalculé à l'intérieur du pool de candidats.
         pool_by_cosine = sorted(candidates, key=lambda i: float(cosine[i]), reverse=True)
         pool_rank = {index: rank for rank, index in enumerate(pool_by_cosine, start=1)}
         # Même ordre lexical qu'à l'étape A (titre le plus court à égalité),

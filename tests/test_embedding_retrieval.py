@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_embedding_retrieval.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Recherche par embeddings : classement, repli sur la recherche
+#           hybride, API
+# Lancer  : python -m pytest tests/test_embedding_retrieval.py
+# ---------------------------------------------------------------------------
 """Recherche par embeddings : classement, repli sur la recherche hybride, API.
 
 Le vrai modèle (bge-m3, 2 Go) n'est jamais chargé ici : un encodeur factice

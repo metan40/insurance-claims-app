@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_claims.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Tests du module d'aide à l'analyse des sinistres (données
+#           fictives)
+# Lancer  : python -m pytest tests/test_claims.py
+# ---------------------------------------------------------------------------
 """Tests du module d'aide à l'analyse des sinistres (données fictives)."""
 import pandas as pd
 

@@ -1,4 +1,11 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : evaluation/analyser_justification.py
+# Auteur  : Thierry MBARGA
+# Rôle    : mesurer si un contrôle par inférence textuelle (NLI) repère les
+#           réponses non justifiées (contrôle mesuré, non intégré à l'application)
+# Lancer  : python evaluation/analyser_justification.py  (options : --help)
+# ---------------------------------------------------------------------------
 """Vérification de justification par inférence textuelle (NLI) : mesure.
 
 Problème mesuré le 13/11/2026 : sur des questions hors des documents, le modèle

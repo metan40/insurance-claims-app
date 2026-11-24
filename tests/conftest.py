@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/conftest.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Configuration commune : l'application est importée sans démarrer
+#           Ollama
+# Lancer  : python -m pytest tests/conftest.py
+# ---------------------------------------------------------------------------
 """Configuration commune : l'application est importée sans démarrer Ollama.
 
 Le chargement de ``src.app`` indexe le corpus (TF-IDF) et entraîne le modèle

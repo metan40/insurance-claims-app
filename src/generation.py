@@ -1,4 +1,13 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/generation.py
+# Auteur  : Thierry MBARGA
+# Rôle    : obtenir du modèle une réponse typée (JSON), vérifier ses extraits,
+#           appliquer les contrôles d'ancrage, puis choisir le statut affiché.
+# Méthode : boucle top-1 (1 source) puis top-3 (3 sources), repli sur les extraits.
+# Entrée  : question, sources classées, fonction d'appel au modèle.
+# Sortie  : statut (answered, partial, not_found, fallback), texte, audit.
+# ---------------------------------------------------------------------------
 """Génération typée et vérifiée de la réponse.
 
 Le modèle ne renvoie pas un texte libre mais un objet JSON conforme au
@@ -52,6 +61,7 @@ from pydantic import BaseModel, Field, ValidationError
 from src.grounding import check_grounding, missing_conditions
 from src.question_parsing import normalize_text
 
+# Un extrait doit compter au moins 3 mots pour servir de preuve.
 MIN_QUOTE_TOKENS = 3
 # Longueurs maximales transmises à Ollama dans le schéma (sa grammaire les
 # respecte ; elles ne servent pas de règle de validation à la lecture) :
@@ -61,6 +71,7 @@ MIN_QUOTE_TOKENS = 3
 QUOTE_MAX_CHARACTERS = 240
 ANSWER_MAX_CHARACTERS = 400
 CAVEATS_MAX_CHARACTERS = 200
+# 80 % des mots de l'extrait retrouvés dans l'ordre ; repli : 700 caractères de 3 sources.
 QUOTE_MATCH_RATIO = 0.8
 FALLBACK_EXCERPT_CHARACTERS = 700
 FALLBACK_SOURCES = 3
@@ -68,6 +79,7 @@ FALLBACK_SOURCES = 3
 GENERATION_STAGES = ((1, 1200), (3, 900))
 
 
+# Un extrait : identifiant de la source (S1...) et phrase recopiée.
 class Evidence(BaseModel):
     source_id: str = Field(description="Identifiant de la source, par exemple S1")
     quote: str = Field(json_schema_extra={"maxLength": QUOTE_MAX_CHARACTERS},
@@ -89,6 +101,7 @@ class TypedAnswer(BaseModel):
     confidence: float = Field(ge=0.0, le=1.0)
 
 
+# Schéma JSON transmis à Ollama : il contraint la sortie du modèle.
 ANSWER_SCHEMA = TypedAnswer.model_json_schema()
 
 
@@ -100,6 +113,7 @@ def build_context(results) -> str:
     """Assemble les sources numérotées transmises au LLM."""
     parts = []
     for position, result in enumerate(results, start=1):
+        # Chaque source est présentée avec son identifiant, son titre et son contenu.
         source_id = result.get("source_id", f"S{result.get('rank', position)}")
         parts.append(
             f"SOURCE [{source_id}]\n"
@@ -149,6 +163,7 @@ DOCUMENTS FOURNIS :
 
 def parse_typed_answer(raw_text: str) -> TypedAnswer | None:
     """Convertit la sortie du modèle en TypedAnswer ; None si elle est invalide."""
+    # JSON illisible ou non conforme au schéma : None (l'étape suivante est tentée).
     try:
         return TypedAnswer.model_validate(json.loads(raw_text))
     except (json.JSONDecodeError, ValidationError, TypeError):
@@ -164,8 +179,12 @@ def quote_is_in_source(quote: str, source_text: str) -> bool:
     source_tokens = normalize_text(source_text).split()
     if len(quote_tokens) < MIN_QUOTE_TOKENS or not source_tokens:
         return False
+    # Cas 1 : l'extrait est une suite exacte de mots de la source.
     if f" {' '.join(quote_tokens)} " in f" {' '.join(source_tokens)} ":
         return True
+    # Cas 2 : SequenceMatcher trouve les blocs de mots communs, dans l'ordre.
+    # Accepté si (mots communs / mots de l'extrait) >= 0,8 et si le plus long bloc
+    # couvre au moins 40 % de l'extrait (3 mots au minimum).
     matcher = SequenceMatcher(None, quote_tokens, source_tokens, autojunk=False)
     blocks = matcher.get_matching_blocks()
     matched = sum(block.size for block in blocks)
@@ -196,6 +215,7 @@ def verify_answer(typed: TypedAnswer, results) -> list[dict]:
     return checked
 
 
+# Texte des consignes, normalisé, pour repérer un extrait recopié des consignes.
 INSTRUCTION_TEXT = normalize_text(build_prompt("", ""))
 
 
@@ -218,6 +238,8 @@ def decide_status(typed: TypedAnswer | None, checked: list[dict]) -> str | None:
     avec llama3.2:1b), la réponse est traitée comme partielle, et
     l'incohérence est signalée à l'utilisateur.
     """
+    # Ordre des règles : sortie invalide, incohérence, « non trouvé »,
+    # aucun extrait vérifié, puis complet ou partiel.
     if typed is None:
         return None
     if is_inconsistent(typed, checked):
@@ -245,6 +267,7 @@ def build_fallback_text(results, message: str | None = None) -> str:
         content = str(result.get("content", "")).strip()
         if not source_id or not content:
             continue
+        # Extrait coupé à 700 caractères, sur un mot entier.
         if len(content) > FALLBACK_EXCERPT_CHARACTERS:
             content = content[:FALLBACK_EXCERPT_CHARACTERS].rsplit(" ", 1)[0] + "…"
         excerpts.append(f"- **{title}** [{source_id}] : {content}")
@@ -281,6 +304,7 @@ def complete_sentences(text: str) -> str:
     text = text.strip()
     if not text or text[-1] in ".!?»)":
         return text
+    # Dernière fin de phrase avant la coupure.
     cut = max(text.rfind(mark) for mark in (". ", "! ", "? "))
     return text[: cut + 1] if cut > 0 else text + "…"
 
@@ -294,6 +318,7 @@ def stage_sources(results, count: int, characters: int) -> list[dict]:
     selected = []
     for result in results[:count]:
         content = str(result.get("content", ""))
+        # Source coupée à la longueur de l'étape, sur un mot entier.
         if len(content) > characters:
             content = content[:characters].rsplit(" ", 1)[0] + "…"
         selected.append({**result, "content": content})
@@ -369,6 +394,7 @@ def apply_grounding(status, typed, checked, question, sources):
     """
     if status not in ("answered", "partial") or typed is None or is_inconsistent(typed, checked):
         return status, None
+    # Ancrage : phrases étayées et non étayées (src/grounding.py).
     grounding = check_grounding(typed.answer, question, checked, sources)
     if not grounding["unsupported"]:
         return status, grounding
@@ -447,6 +473,8 @@ def generate_typed_answer(
     réseau qu'il lève sont propagées à l'appelant.
     """
     # On ne garde que les étapes qui apportent des sources supplémentaires.
+    # Étapes utiles : avec 2 sources seulement, l'étape top-3 devient top-2 ;
+    # avec 1 source, une seule étape.
     effective, seen = [], 0
     for count, characters in stages:
         available = min(count, len(results))
@@ -461,6 +489,7 @@ def generate_typed_answer(
         sources = stage_sources(results, count, characters)
         label = f"tentative {position} (top-{len(sources)})"
         attempts += 1
+        # Un appel au modèle, puis lecture, vérification des extraits et statut.
         raw = call_model(build_prompt(question, build_context(sources)), label)
         typed = parse_typed_answer(raw)
         checked = verify_answer(typed, sources) if typed else []
@@ -496,6 +525,8 @@ def generate_typed_answer(
             if status is not None:
                 return _deliver(status, typed, checked, results, attempts, len(sources), grounding)
 
+    # Aucune étape n'a donné de réponse livrable : extraits vérifiés si possible,
+    # sinon extraits bruts des sources (statut fallback).
     if ungrounded is not None:
         # Des extraits ont été vérifiés, mais la synthèse n'en découlait pas :
         # on montre les extraits vérifiés, jamais la synthèse.

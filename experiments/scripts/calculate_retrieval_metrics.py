@@ -1,3 +1,10 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : experiments/scripts/calculate_retrieval_metrics.py
+# Auteur  : Thierry MBARGA
+# Rôle    : script d'expérience d'une version précédente (archive) ; non
+#           utilisé par l'application
+# ---------------------------------------------------------------------------
 import pandas as pd
 
 FILE = "Data/retrieval_optimization_detailed.csv"

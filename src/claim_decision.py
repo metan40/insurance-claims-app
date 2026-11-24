@@ -1,4 +1,12 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/claim_decision.py
+# Auteur  : Thierry MBARGA
+# Rôle    : vue d'aide à la décision d'un dossier (page /claims) : score expliqué,
+#           points à vérifier, clauses à lire, orientation pour le gestionnaire.
+# Entrée  : analyse du dossier, ligne du dossier, contributions du score, corpus.
+# Sortie  : dictionnaire JSON renvoyé par /api/claims/{id}/decision-support.
+# ---------------------------------------------------------------------------
 """Aide à la décision sur un dossier : relier le score, le dossier et le contrat.
 
 Pour un dossier, l'application rassemble en une seule vue ce dont le
@@ -54,19 +62,25 @@ CLAUSES_BY_CLAIM_TYPE: dict[str, list[tuple[str, str]]] = {
     ],
     "Incendie": [],
 }
+# Documents à lire pour tout type de sinistre.
 COMMON_CLAUSES = [
     ("Franchise", "Comment fonctionne la franchise d’une assurance habitation ?"),
     ("Exclusions générales", "Ce que le contrat ne garantit jamais"),
 ]
+# Types de sinistres sans document dédié dans le corpus : on le dit au gestionnaire.
 CORPUS_GAPS = {
     "Incendie": "Le corpus ne contient aucune fiche dédiée à la garantie incendie : "
                 "vérifier directement les conditions générales du contrat.",
     "Bris de glace": "Le corpus ne contient pas de fiche générale sur la garantie bris de "
                      "glace, seulement des cas particuliers : vérifier les conditions générales.",
 }
+# Longueur de l'extrait affiché pour chaque clause.
 EXCERPT_CHARACTERS = 320
 
 # Seuils des règles métier (explicites pour pouvoir être discutés et ajustés).
+# Lecture : montant au-dessus du 90e centile = élevé ; Pending de plus de 30 jours = à relancer,
+# de plus de 90 jours = à escalader ; 3 sinistres précédents ou plus = historique chargé ;
+# score >= 0,70 favorable, < 0,40 défavorable.
 HIGH_AMOUNT_QUANTILE = 0.90
 PENDING_WATCH_DAYS = 30
 PENDING_ALERT_DAYS = 90
@@ -75,6 +89,7 @@ FAVOURABLE_PROBABILITY = 0.70
 UNFAVOURABLE_PROBABILITY = 0.40
 
 
+# Extrait court : espaces normalisés, coupé à un mot entier, suivi de « … ».
 def excerpt(text: str, limit: int = EXCERPT_CHARACTERS) -> str:
     text = " ".join(str(text).split())
     return text if len(text) <= limit else text[:limit].rsplit(" ", 1)[0] + "…"
@@ -82,10 +97,12 @@ def excerpt(text: str, limit: int = EXCERPT_CHARACTERS) -> str:
 
 def contract_clauses(claim_type: str, titles: Sequence[str], documents: Sequence[str]) -> list[dict]:
     """Fiches contractuelles à lire pour ce type de sinistre."""
+    # Titre → position du document dans le corpus.
     index_by_title = {title: index for index, title in enumerate(titles)}
     clauses = []
     for heading, title in CLAUSES_BY_CLAIM_TYPE.get(claim_type, []) + COMMON_CLAUSES:
         index = index_by_title.get(title)
+        # Document absent du corpus : ignoré sans erreur.
         if index is None:
             continue
         clauses.append({
@@ -100,6 +117,7 @@ def contract_clauses(claim_type: str, titles: Sequence[str], documents: Sequence
 def checks_for_claim(claim: dict[str, Any], amount_threshold: float) -> list[dict]:
     """Points à vérifier, avec leur niveau : « bloquant » ou « attention »."""
     checks = []
+    # Règles bloquantes : sans dossier complet ni garantie confirmée, le score ne suffit pas.
     if str(claim["dossier_complet"]) != "Oui":
         checks.append({"level": "bloquant", "message":
                        "Dossier incomplet : demander les pièces manquantes avant toute décision."})
@@ -107,6 +125,7 @@ def checks_for_claim(claim: dict[str, Any], amount_threshold: float) -> list[dic
         checks.append({"level": "bloquant", "message":
                        "Garantie à vérifier : confirmer l’applicabilité dans le contrat "
                        "(voir les clauses de couverture et d’exclusion ci-dessous)."})
+    # Règles d'attention : montant, historique, ancienneté d'un dossier en attente.
     if float(claim["montant_demande"]) > amount_threshold:
         checks.append({"level": "attention", "message":
                        f"Montant élevé (au-dessus de {amount_threshold:,.0f} €, soit 90 % des "
@@ -128,6 +147,7 @@ def checks_for_claim(claim: dict[str, Any], amount_threshold: float) -> list[dic
 
 def orientation(probability: float, checks: list[dict], claim_type: str) -> dict:
     """Orientation proposée au gestionnaire (pas une décision)."""
+    # Ordre des règles : point bloquant d'abord, trou du corpus ensuite, puis le score.
     if any(check["level"] == "bloquant" for check in checks):
         return {"code": "completer", "label": "Compléter le dossier avant décision",
                 "reason": "Au moins un point bloquant doit être levé ; le score n’est pas exploitable seul."}
@@ -162,6 +182,7 @@ def build_decision_support(
         "contract_clauses": contract_clauses(claim_type, titles, documents),
         "corpus_gap": CORPUS_GAPS.get(claim_type),
         "orientation": orientation(analysis["estimated_acceptance_probability"], checks, claim_type),
+        # Toujours vrai : la décision reste humaine.
         "human_review_required": True,
         "warning": (
             "Aide à la décision sur données fictives : l’orientation résume les éléments "

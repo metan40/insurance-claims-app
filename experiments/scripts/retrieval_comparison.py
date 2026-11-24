@@ -1,3 +1,10 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : experiments/scripts/retrieval_comparison.py
+# Auteur  : Thierry MBARGA
+# Rôle    : script d'expérience d'une version précédente (archive) ; non
+#           utilisé par l'application
+# ---------------------------------------------------------------------------
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer

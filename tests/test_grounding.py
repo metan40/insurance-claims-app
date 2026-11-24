@@ -1,3 +1,12 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_grounding.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Contrôle d'ancrage : une phrase de la réponse qui ne vient pas
+#           des sources vérifiées n'est jamais affichée (cas réel du vélo
+#           volé dans la cave, 12/11/2026)
+# Lancer  : python -m pytest tests/test_grounding.py
+# ---------------------------------------------------------------------------
 """Contrôle d'ancrage : une phrase de la réponse qui ne vient pas des sources
 vérifiées n'est jamais affichée (cas réel du vélo volé dans la cave, 12/11/2026)."""
 import json

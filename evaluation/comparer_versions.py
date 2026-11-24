@@ -1,4 +1,11 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : evaluation/comparer_versions.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Comparaison appariée de deux configurations sur les mêmes
+#           questions
+# Lancer  : python evaluation/comparer_versions.py  (options : --help)
+# ---------------------------------------------------------------------------
 """Comparaison appariée de deux configurations sur les mêmes questions.
 
 Entrées : deux fichiers ``statuts_heldout_*.csv`` produits par

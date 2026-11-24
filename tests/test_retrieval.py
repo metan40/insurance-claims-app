@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : tests/test_retrieval.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Tests unitaires et de non-régression de la recherche
+#           documentaire
+# Lancer  : python -m pytest tests/test_retrieval.py
+# ---------------------------------------------------------------------------
 """Tests unitaires et de non-régression de la recherche documentaire."""
 import numpy as np
 import pytest

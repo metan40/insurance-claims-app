@@ -1,4 +1,13 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/claims_analytics.py
+# Auteur  : Thierry MBARGA
+# Rôle    : indicateurs et modèle de démonstration sur 120 sinistres fictifs
+#           (Data/synthetic_claims.csv) : taux d'acceptation, délais, score.
+# Méthode : régression logistique (OneHotEncoder + StandardScaler),
+#           classes équilibrées, découpage stratifié 75/25.
+# Sortie  : données des routes /api/claims/... (tableau de bord).
+# ---------------------------------------------------------------------------
 """Analytique de démonstration pour l'aide à l'analyse des sinistres.
 
 Le jeu de données livré est intégralement fictif. Le modèle illustre un flux
@@ -22,6 +31,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CLAIMS_FILE = PROJECT_ROOT / "Data" / "synthetic_claims.csv"
 DATASET_LABEL = "FICTIF_DEMONSTRATION"
 TARGET_COLUMN = "statut"
+# Variables explicatives : 4 catégorielles, 3 numériques. Cible : statut du dossier.
 CATEGORICAL_FEATURES = ["type_sinistre", "garantie", "canal_declaration", "dossier_complet"]
 NUMERIC_FEATURES = ["montant_demande", "anciennete_client_mois", "nb_sinistres_precedents"]
 FEATURE_COLUMNS = CATEGORICAL_FEATURES + NUMERIC_FEATURES
@@ -30,9 +40,11 @@ FEATURE_COLUMNS = CATEGORICAL_FEATURES + NUMERIC_FEATURES
 def _load_claims() -> pd.DataFrame:
     """Charge le corpus fictif et calcule l'âge des dossiers à la date du jour."""
     frame = pd.read_csv(CLAIMS_FILE, keep_default_na=False)
+    # Valeur numérique illisible → 0 (le fichier reste exploitable).
     for column in NUMERIC_FEATURES:
         frame[column] = pd.to_numeric(frame[column], errors="coerce").fillna(0)
     frame["date_declaration"] = pd.to_datetime(frame["date_declaration"], errors="coerce")
+    # Âge d'un dossier = date du jour − date de déclaration (en jours, jamais négatif).
     frame["age_sinistre_jours"] = (pd.Timestamp(date.today()) - frame["date_declaration"]).dt.days
     frame["age_sinistre_jours"] = frame["age_sinistre_jours"].fillna(0).clip(lower=0).astype(int)
     frame["delai_traitement_jours"] = pd.to_numeric(frame["delai_traitement_jours"], errors="coerce")
@@ -42,21 +54,28 @@ def _load_claims() -> pd.DataFrame:
 def _build_model() -> tuple[Pipeline, dict[str, Any], int]:
     """Évalue un modèle simple sur les seuls dossiers clos, puis l'entraîne sur eux."""
     frame = _load_claims()
+    # Seuls les dossiers clos (Accepted, Rejected) ont une réponse connue : Pending est exclu.
     closed = frame[frame[TARGET_COLUMN].isin(["Accepted", "Rejected"])].copy()
     if len(closed) < 20 or closed[TARGET_COLUMN].nunique() < 2:
         raise RuntimeError("Le jeu de démonstration ne contient pas assez de dossiers clos pour entraîner le modèle.")
 
     X = closed[FEATURE_COLUMNS]
+    # y = 1 si accepté, 0 si refusé.
     y = (closed[TARGET_COLUMN] == "Accepted").astype(int)
+    # 75 % pour l'entraînement, 25 % pour le test ; stratify garde la même part
+    # d'acceptés dans les deux parties ; random_state=42 rend le tirage reproductible.
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.25, random_state=42, stratify=y
     )
+    # Catégories → colonnes 0/1 (OneHotEncoder) ; nombres → (x − moyenne) / écart-type (StandardScaler).
     preprocessor = ColumnTransformer(
         transformers=[
             ("categorical", OneHotEncoder(handle_unknown="ignore"), CATEGORICAL_FEATURES),
             ("numeric", StandardScaler(), NUMERIC_FEATURES),
         ]
     )
+    # class_weight="balanced" : chaque classe pèse autant, même si les acceptés sont plus nombreux.
+    # P(accepté | x) = 1 / (1 + exp(−(b + Σ_k w_k·x_k))).
     evaluation_model = Pipeline([
         ("preprocessor", preprocessor),
         ("classifier", LogisticRegression(max_iter=1000, class_weight="balanced", random_state=42)),
@@ -64,6 +83,7 @@ def _build_model() -> tuple[Pipeline, dict[str, Any], int]:
     evaluation_model.fit(X_train, y_train)
     predicted = evaluation_model.predict(X_test)
     probabilities = evaluation_model.predict_proba(X_test)[:, 1]
+    # Métriques mesurées sur la partie test (jamais vue à l'entraînement).
     metrics = {
         "evaluation_method": "Découpage stratifié 75/25, random_state=42, dossiers clos uniquement",
         "closed_cases_count": int(len(closed)),
@@ -92,6 +112,7 @@ def _build_model() -> tuple[Pipeline, dict[str, Any], int]:
     return final_model, metrics, len(closed)
 
 
+# Modèle entraîné une seule fois, au chargement du module.
 _MODEL, _MODEL_METRICS, _CLOSED_CASES = _build_model()
 
 
@@ -101,6 +122,7 @@ def get_claims_summary() -> dict[str, Any]:
     accepted = int((frame["statut"] == "Accepted").sum())
     rejected = int((frame["statut"] == "Rejected").sum())
     pending = int((frame["statut"] == "Pending").sum())
+    # Taux d'acceptation = acceptés / (acceptés + refusés) : les Pending n'y entrent pas.
     closed_count = accepted + rejected
     acceptance_rate = accepted / closed_count if closed_count else None
     closed_delays = frame.loc[frame["statut"].isin(["Accepted", "Rejected"]), "delai_traitement_jours"].dropna()
@@ -126,6 +148,7 @@ def get_claims_cases(limit: int = 120) -> list[dict[str, Any]]:
     selected = frame.head(max(1, min(int(limit), 500)))
     records = selected.copy()
     records["date_declaration"] = records["date_declaration"].dt.strftime("%Y-%m-%d")
+    # Valeurs manquantes → None (null en JSON).
     records = records.astype(object).where(pd.notna(records), None)
     return records.to_dict(orient="records")
 
@@ -148,6 +171,7 @@ def get_claim_analysis(claim_id: str) -> dict[str, Any] | None:
     if matched.empty:
         return None
     row = matched.iloc[0]
+    # Une ligne → tableau d'une ligne, au format attendu par le modèle.
     features = row[FEATURE_COLUMNS].to_frame().T
     probability = float(_MODEL.predict_proba(features)[0, 1])
     return {
@@ -170,6 +194,7 @@ def get_claim_analysis(claim_id: str) -> dict[str, Any] | None:
 # Explication du score et données utiles à l'aide à la décision
 # ----------------------------------------------------------------------
 
+# Noms lisibles des variables, pour l'affichage des facteurs.
 FEATURE_LABELS = {
     "type_sinistre": "Type de sinistre",
     "garantie": "Garantie",
@@ -213,6 +238,7 @@ def explain_claim(claim_id: str, top: int = 3) -> list[dict[str, Any]]:
         return []
     preprocessor = _MODEL.named_steps["preprocessor"]
     classifier = _MODEL.named_steps["classifier"]
+    # Contribution de la variable k : w_k × x_k (x_k après encodage et standardisation).
     features = pd.DataFrame([record])[FEATURE_COLUMNS]
     transformed = preprocessor.transform(features)
     values = transformed.toarray()[0] if hasattr(transformed, "toarray") else transformed[0]
@@ -223,6 +249,7 @@ def explain_claim(claim_id: str, top: int = 3) -> list[dict[str, Any]]:
         {"factor": _readable_feature(name), "contribution": round(float(value), 3),
          "effect": "augmente" if value > 0 else "diminue"}
         for name, value in zip(names, contributions)
+        # Contributions quasi nulles ignorées.
         if abs(value) > 1e-6
     ]
     positives = sorted((f for f in factors if f["contribution"] > 0), key=lambda f: -f["contribution"])

@@ -1,4 +1,12 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/definitions.py
+# Auteur  : Thierry MBARGA
+# Rôle    : quand une source dit « (voir définition) », joindre le document
+#           qui définit ce terme, pour que le modèle puisse conclure.
+# Entrée  : sources retenues, titres et textes du corpus.
+# Sortie  : sources complétées par les définitions (classement inchangé).
+# ---------------------------------------------------------------------------
 """Renvois « (voir définition) » : la définition est jointe à la source.
 
 Cas réel (12/11/2026) : pour un vélo volé dans la cave, la source retenue dit
@@ -20,6 +28,8 @@ from typing import Sequence
 
 from src.question_parsing import normalize_text
 
+# REFERENCE : « <groupe nominal> (voir définition) » ou « (cf. définitions) ».
+# DEFINITION_TITLE : titre qui définit un terme (« Que sont... », « Qu'est-ce qu'un... »).
 REFERENCE = re.compile(r"([^.;:()\n]{3,80}?)\s*\(\s*(?:voir|cf\.?)\s+d[ée]finitions?\s*\)", re.IGNORECASE)
 DEFINITION_TITLE = re.compile(
     r"^\s*(que sont|qu.est.ce qu.(une|un|on|il|elle)?|quelle est la definition d.?)\s*",
@@ -34,6 +44,7 @@ def _term_key(text: str) -> str:
     for article in LEADING_ARTICLES:
         if key.startswith(article):
             key = key[len(article):]
+    # Pluriel simple retiré : « objets » → « objet » (mots de plus de 3 lettres).
     return " ".join(word[:-1] if len(word) > 3 and word.endswith("s") else word for word in key.split())
 
 
@@ -44,6 +55,7 @@ def build_definition_index(titles: Sequence[str]) -> dict[str, int]:
         normalized = normalize_text(title)
         match = DEFINITION_TITLE.match(normalized)
         if match:
+            # Le terme défini est ce qui suit « Que sont » dans le titre.
             term = _term_key(normalized[match.end():])
             if term:
                 index.setdefault(term, position)
@@ -76,6 +88,7 @@ def attach_definitions(results: list[dict], titles: Sequence[str], documents: Se
             if titles[position] == result.get("title"):
                 continue  # la source est elle-même la fiche de définition
             text = str(documents[position])
+            # Définition limitée à 900 caractères, coupée à un mot entier.
             if len(text) > characters:
                 text = text[:characters].rsplit(" ", 1)[0] + "…"
             additions.append(f"{DEFINITION_LABEL.format(title=titles[position].strip())} : {text}")

@@ -1,4 +1,11 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : evaluation/experience_embeddings.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Expérience : ajouter un classement par embeddings multilingues à
+#           la recherche
+# Lancer  : python evaluation/experience_embeddings.py
+# ---------------------------------------------------------------------------
 """Expérience : ajouter un classement par embeddings multilingues à la recherche.
 
 Question posée : un troisième classement (similarité d'embeddings entre la

@@ -1,4 +1,12 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : src/app.py
+# Auteur  : Thierry MBARGA
+# Rôle    : serveur web (FastAPI). Charge le corpus de 201 documents, construit
+#           les index de recherche, sert les pages web et répond aux questions.
+# Entrée  : requêtes HTTP de static/index.html et static/claims.html.
+# Sortie  : réponses JSON (réponse typée, sources, contrôles, durées).
+# ---------------------------------------------------------------------------
 """API FastAPI de l'assistant assurance (RAG) et du tableau de bord sinistres.
 
 Chaîne de traitement d'une question (``POST /search``) :
@@ -80,6 +88,7 @@ def read_int_setting(raw_value: str | None, default: int, minimum: int) -> int:
 
 
 APP_VERSION = read_app_version()
+# Adresse d'Ollama : par défaut le serveur local (port 11434).
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate").strip()
 def normalize_model_name(name: str) -> str:
     """Retire espaces et points finaux : une faute de frappe dans les variables
@@ -96,6 +105,7 @@ OLLAMA_KEEP_ALIVE = os.getenv("OLLAMA_KEEP_ALIVE", "30m").strip()
 # Fenêtre de contexte : la plus grande étape (3 sources de 900 caractères et la
 # consigne) tient dans 2 048 jetons ; une fenêtre plus petite accélère le CPU.
 OLLAMA_NUM_CTX = read_int_setting(os.getenv("OLLAMA_NUM_CTX"), default=2048, minimum=512)
+# Chaque source est coupée à 1 500 caractères avant d'être transmise.
 CONTEXT_CHARACTERS_PER_SOURCE = 1500
 
 logger.info("Insurance Claims Assistance — version %s", APP_VERSION)
@@ -106,6 +116,8 @@ logger.info("Modèle Ollama configuré : %s", OLLAMA_MODEL)
 # CHARGEMENT DU CORPUS ET INDEXATION
 # ============================================================
 
+# Démarrage refusé si le corpus est absent ou incomplet : mieux vaut une erreur claire
+# qu'une application qui répond sans documents.
 if not DATA_FILE.is_file():
     raise FileNotFoundError(f"Fichier de données introuvable : {DATA_FILE}")
 
@@ -119,6 +131,7 @@ if missing_columns:
 documents = df["content"].fillna("").astype(str).tolist()
 titles = df["title"].fillna("").astype(str).tolist()
 
+# Index hybride (toujours construit, sert de repli) et index des définitions.
 retriever = HybridRetriever(titles, documents)
 definition_index = build_definition_index(titles)
 
@@ -133,6 +146,7 @@ if RETRIEVAL_ENGINE == "embeddings":
         model_id=os.getenv("EMBEDDING_MODEL", DEFAULT_EMBEDDING_MODEL).strip(),
         cache_dir=os.getenv("EMBEDDING_CACHE_DIR") or None,
     )
+    # Chargement de bge-m3 en arrière-plan : le serveur répond pendant ce temps.
     embedding_retriever.start()
 logger.info(
     "Recherche prête : %s documents, %s termes TF-IDF.",
@@ -155,6 +169,7 @@ app = FastAPI(
     version=APP_VERSION,
 )
 
+# La question doit contenir de 1 à 2 000 caractères (espaces retirés).
 QuestionText = Annotated[
     str, StringConstraints(strip_whitespace=True, min_length=1, max_length=2000)
 ]
@@ -195,9 +210,10 @@ def model_is_installed(configured_model: str, installed_names: set[str]) -> bool
     """Compare le modèle configuré aux modèles installés.
 
     Ollama ajoute l'étiquette ``:latest`` lorsqu'aucune n'est précisée ; une
-    autre étiquette (par exemple ``llama3.2:1b`` au lieu de ``llama3.2:1b``)
+    autre étiquette (par exemple ``llama3.2:1b`` au lieu de ``llama3.2:3b``)
     n'est pas considérée comme équivalente.
     """
+    # Sans étiquette, Ollama ajoute « :latest » : « llama3.2 » = « llama3.2:latest ».
     def canonical(name: str) -> str:
         return name if ":" in name else f"{name}:latest"
 
@@ -221,6 +237,7 @@ def readiness():
     if embedding_retriever is not None:
         checks["embedding_search_loaded"] = embedding_retriever.ready
 
+    # Ollama répond-il, et le modèle configuré est-il téléchargé ?
     try:
         response = requests.get(
             ollama_tags_url(OLLAMA_URL), timeout=min(5, OLLAMA_TIMEOUT_SECONDS)
@@ -239,6 +256,7 @@ def readiness():
     except requests.exceptions.RequestException:
         pass
 
+    # Prêt seulement si toutes les vérifications sont vraies ; sinon code 503.
     all_ready = all(checks.values())
     result = {
         "status": "ready" if all_ready else "not_ready",
@@ -323,6 +341,7 @@ def claim_decision_support(claim_id: str):
 # CONTRÔLE DES RÉFÉRENCES AUX SOURCES
 # ============================================================
 
+# Repère les citations [S1], [S2]... dans le texte de la réponse.
 _SOURCE_CITATION_PATTERN = re.compile(r"\[(S\d+)\]")
 
 
@@ -336,6 +355,7 @@ def audit_citations(answer, results):
     available_ids = {
         str(result.get("source_id")) for result in results if result.get("source_id")
     }
+    # Comparaison d'ensembles : sources citées, sources disponibles, différences.
     cited_ids = set(_SOURCE_CITATION_PATTERN.findall(answer_text))
 
     return {
@@ -366,6 +386,7 @@ def _diagnostic(message: str) -> None:
         print(f"[RAG_DIAGNOSTICS] {message}", flush=True)
 
 
+# Un appel au modèle. Le schéma JSON (ANSWER_SCHEMA) impose la forme de la réponse.
 def call_ollama(prompt: str, attempt_label: str) -> str:
     """Appelle Ollama (non streamé, sortie JSON contrainte par le schéma)."""
     started = time.perf_counter()
@@ -378,6 +399,8 @@ def call_ollama(prompt: str, attempt_label: str) -> str:
             "format": ANSWER_SCHEMA,
             "keep_alive": OLLAMA_KEEP_ALIVE,
             "options": {
+                # temperature=0.1 : réponses quasi reproductibles ; num_predict : longueur maximale ;
+                # num_ctx : taille de la fenêtre lue par le modèle.
                 "temperature": 0.1,
                 "num_predict": OLLAMA_NUM_PREDICT,
                 "num_ctx": OLLAMA_NUM_CTX,
@@ -385,6 +408,7 @@ def call_ollama(prompt: str, attempt_label: str) -> str:
         },
         timeout=OLLAMA_TIMEOUT_SECONDS,
     )
+    # Erreur HTTP, JSON qui n'est pas un objet, réponse vide : refusés explicitement.
     response.raise_for_status()
     data = response.json()
     if not isinstance(data, dict):
@@ -406,6 +430,7 @@ def generate_answer(question, results) -> dict:
     Lève HTTPException(502) si Ollama est injoignable ou répond de façon
     inexploitable.
     """
+    # Erreurs d'Ollama traduites en code 502 avec un message lisible.
     try:
         return generate_typed_answer(question, results, call_ollama, _diagnostic)
     except requests.exceptions.RequestException as error:
@@ -429,6 +454,7 @@ def generate_answer(question, results) -> dict:
 # RECHERCHE + GÉNÉRATION
 # ============================================================
 
+# Texte renvoyé avec chaque réponse pour dire ce que mesure chaque score.
 SCORE_EXPLANATION = {
     "tfidf_cosine_similarity": (
         "Similarité cosinus TF-IDF entre la question et le document ; "
@@ -472,11 +498,13 @@ def search(data: Question):
     if not question:
         raise HTTPException(status_code=422, detail="La question ne peut pas être vide.")
 
+    # Étape 1 : analyse de la question (termes, synonymes) et cosinus TF-IDF.
     vectorization_started = time.perf_counter()
     parsed = retriever.parse(question)
     cosine = retriever.cosine_scores(question, parsed)
     vectorization_ms = _elapsed_ms(vectorization_started)
 
+    # Étape 2 : classement des documents par le moteur actif (bge-m3 ou hybride).
     ranking_started = time.perf_counter()
     engine = active_retrieval_engine()
     if engine == "embeddings":
@@ -511,12 +539,15 @@ def search(data: Question):
     ranking_ms = _elapsed_ms(ranking_started)
     # Renvois « (voir définition) » : la fiche de définition est jointe à la
     # source qui y renvoie (src/definitions.py).
+    # Étape 3 : définitions jointes aux sources qui y renvoient.
     results = attach_definitions(results, titles, documents, definition_index)
 
+    # Étape 4 : réponse typée et contrôlée (src/generation.py).
     generation_started = time.perf_counter()
     generation = generate_answer(question, results)
     generation_ms = _elapsed_ms(generation_started)
 
+    # Réponse complète : statut, réponse, sources, contrôles et durée de chaque étape.
     return {
         "app_version": APP_VERSION,
         "question": question,

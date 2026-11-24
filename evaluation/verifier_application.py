@@ -1,4 +1,11 @@
-# Auteur : Thierry MBARGA
+# ---------------------------------------------------------------------------
+# Projet  : Insurance Claims Assistance (assistant documentaire et aide à l'analyse des sinistres)
+# Fichier : evaluation/verifier_application.py
+# Auteur  : Thierry MBARGA
+# Rôle    : Vérifie une application en marche (locale ou distante) par son
+#           API HTTP
+# Lancer  : python evaluation/verifier_application.py  (options : --help)
+# ---------------------------------------------------------------------------
 """Vérifie une application en marche (locale ou distante) par son API HTTP.
 
 Le script pose les questions de ``questions_jury.csv`` comme le ferait un
