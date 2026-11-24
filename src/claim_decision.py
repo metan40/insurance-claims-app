@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Aide à la décision sur un dossier : relier le score, le dossier et le contrat.
 
 Pour un dossier, l'application rassemble en une seule vue ce dont le

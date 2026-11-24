@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Mesure des statuts de l'assistant RAG (étape 1 : état actuel, sans rien modifier).
 
 Pour chaque question, le script passe par la même fonction que l'application

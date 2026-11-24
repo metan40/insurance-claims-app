@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Tableau comparatif des mesures de ``mesurer_statuts.py``, avec intervalles de
 confiance (Wilson, 95 %) et test de McNemar apparié entre modèles.
 

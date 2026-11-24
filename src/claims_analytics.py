@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Analytique de démonstration pour l'aide à l'analyse des sinistres.
 
 Le jeu de données livré est intégralement fictif. Le modèle illustre un flux

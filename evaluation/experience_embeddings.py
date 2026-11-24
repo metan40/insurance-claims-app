@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Expérience : ajouter un classement par embeddings multilingues à la recherche.
 
 Question posée : un troisième classement (similarité d'embeddings entre la

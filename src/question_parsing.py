@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Analyse de la question avant la recherche (« question parsing »).
 
 Problème mesuré : TF-IDF et le score lexical ne reconnaissent que les mots

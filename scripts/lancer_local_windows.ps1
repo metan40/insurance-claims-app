@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 # Lance l'application en local sous Windows, sans Docker, avec les mêmes
 # réglages que le Space (19.5.0) : recherche bge-m3, modèle llama3.2:3b.
 # Prérequis : Python 3.10 ou plus, Ollama pour Windows installé et lancé.

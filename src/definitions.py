@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Renvois « (voir définition) » : la définition est jointe à la source.
 
 Cas réel (12/11/2026) : pour un vélo volé dans la cave, la source retenue dit

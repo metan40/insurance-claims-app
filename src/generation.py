@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Génération typée et vérifiée de la réponse.
 
 Le modèle ne renvoie pas un texte libre mais un objet JSON conforme au

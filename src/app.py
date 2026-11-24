@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """API FastAPI de l'assistant assurance (RAG) et du tableau de bord sinistres.
 
 Chaîne de traitement d'une question (``POST /search``) :

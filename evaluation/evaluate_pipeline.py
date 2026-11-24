@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Évaluation reproductible de la recherche documentaire déployée.
 
 Usage, depuis la racine du projet :

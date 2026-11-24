@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Contrôle d'ancrage : chaque phrase de la réponse doit venir des sources.
 
 La vérification des extraits (``generation.verify_answer``) prouve que les

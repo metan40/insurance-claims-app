@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Recherche documentaire hybride du RAG assurance.
 
 Ce module isole l'étape de *retrieval* de l'API afin de pouvoir la tester et

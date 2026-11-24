@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Recherche par embeddings multilingues (bge-m3).
 
 Pourquoi ce module (expérience du 12/11/2026, ``evaluation/experience_embeddings.py``) :

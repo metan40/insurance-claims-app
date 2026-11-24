@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Comparaison appariée de deux configurations sur les mêmes questions.
 
 Entrées : deux fichiers ``statuts_heldout_*.csv`` produits par

@@ -1,3 +1,4 @@
+# Auteur : Thierry MBARGA
 """Vérification de justification par inférence textuelle (NLI) : mesure.
 
 Problème mesuré le 13/11/2026 : sur des questions hors des documents, le modèle

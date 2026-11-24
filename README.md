@@ -10,6 +10,8 @@ pinned: false
 
 # Insurance Claims Assistance — version 19.5.0
 
+Auteur : Thierry MBARGA
+
 Application d'**aide à l'analyse des sinistres** en assurance habitation. Elle
 n'automatise aucune décision : elle rassemble pour le gestionnaire les
 informations utiles et les sources qui permettent de les vérifier.
